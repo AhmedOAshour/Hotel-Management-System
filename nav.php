@@ -32,22 +32,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Rooms</a>
+                  <a class="nav-link" href="Rooms.php">Rooms</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Reservation</a>
+                  <a class="nav-link" href="reservation.php">Reservation</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">CheckOut</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Malfunctions</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Edit Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Add account</a>
                 </li>
             </ul>
             </div>
