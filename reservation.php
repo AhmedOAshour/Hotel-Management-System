@@ -11,6 +11,7 @@
 
 <?php
 include "classes.php";
+
 $user=new Front_Office();
 if(isset($_POST["submit"])){
 $user->create_reservation(50,101,$_POST['guest_names'],$_POST['guest_count'],$_POST['arrival'],$_POST['departure'],$_POST['comments']);
