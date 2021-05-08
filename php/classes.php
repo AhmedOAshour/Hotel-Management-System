@@ -129,11 +129,14 @@ abstract class User
   public $id, $first_name , $last_name, $username, $password, $position;
   //abstract function change_password($password,$Cpassword,$Opassword);
   // abstract function login($username,$password);
-
+  public $conn;
+  function create_connection(){
+      $this->conn = new mysqli("localhost", "root", "", "hotel");
+  }
 
 }
 class admin extends User{
-  function insert($fields){
+  function create_employee($fields){
     $this->create_connection();
     $sql = "INSERT INTO user (username,first_name,last_name,password,position) VALUES ('$fields[username]','$fields[first_name]','$fields[last_name]','$fields[password]','$fields[position]')";
     $result=mysqli_query($this->conn,$sql);
@@ -144,7 +147,7 @@ class admin extends User{
       function display_employee(){
       $this->create_connection();
         $sql = "SELECT * FROM user";
-        $result=mysqli_query($conn,$sql);
+        $result=mysqli_query($this->conn,$sql);
         return $result;
 
 
@@ -199,13 +202,7 @@ class admin extends User{
     $this->close_connection();
   }
 
-  function by_id($id){
-    $this->create_connection();
-    $sql = "SELECT * FROM user WHERE id = $id";
-    $result=mysqli_query($this->conn,$sql);
-    $this->close_connection();
-    return $result;
-  }
+
 }
 
 class Front_Office extends User{
