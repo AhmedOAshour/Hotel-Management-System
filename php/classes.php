@@ -124,29 +124,60 @@ function by_id($id){
   }
 }
 
-abstract class User extends Database_Handler
+abstract class User
 {
   public $id, $first_name , $last_name, $username, $password, $position;
   //abstract function change_password($password,$Cpassword,$Opassword);
   // abstract function login($username,$password);
-
+  public $conn;
+  function create_connection(){
+      $this->conn = new mysqli("localhost", "root", "", "hotel");
+  }
 
 }
 class admin extends User{
-  function insert($fields){
+  function create_employee($fields){
     $this->create_connection();
     $sql = "INSERT INTO user (username,first_name,last_name,password,position) VALUES ('$fields[username]','$fields[first_name]','$fields[last_name]','$fields[password]','$fields[position]')";
     $result=mysqli_query($this->conn,$sql);
     $this->close_connection();
   }
 
-  function by_data($fields){
-     $this->first_name=$fields['first_name'];
-     $this->last_name=$fields['last_name'];
-     $this->username=$fields['username'];
-     $this->password=$fields['password'];
-     $this->position=$fields['position'];
-   }
+      function display_employee(){
+      $this->create_connection();
+        $sql = "SELECT * FROM user";
+        $result=mysqli_query($this->conn,$sql);
+        return $result;
+
+
+      }
+      function delete_employee($id){
+        $this->create_connection();
+        $sql = "DELETE FROM user WHERE ID = $id ";
+  $result = mysqli_query($this->conn,$sql);
+      }
+      function update_employee($fields){
+        $this->create_connection();
+        $sql = "UPDATE user SET first_name = " . "'$fields[first_name]'" . ", last_name = " . "'$fields[last_name]'" . ", password = " . "'$fields[password]'" . ", position = " . "'$fields[position]'" . ", username = " . "'$fields[username]'" . " WHERE ID = '$fields[id]'";
+        $result = mysqli_query($this->conn,$sql);
+
+
+
+      }
+      function by_id($id){
+        $this->create_connection();
+        $sql = "SELECT * FROM user WHERE id = $id";
+        $result=mysqli_query($this->conn,$sql);
+        return $result;
+
+      }
+      function login($username,$password){
+        $this->create_connection();
+        $sql="SELECT * from user where username='$username'and password='$password'";
+        $result=mysqli_query($this->conn,$sql);
+        return $result;
+      }
+
 
   function display(){
     $this->create_connection();
@@ -170,39 +201,17 @@ class admin extends User{
     $this->close_connection();
   }
 
-  function by_id($id){
-    $this->create_connection();
-    $sql = "SELECT * FROM user WHERE id = $id";
-    $result=mysqli_query($this->conn,$sql);
-    $this->close_connection();
-    return $result;
-  }
+
 }
 
 class Front_Office extends User{
-  function by_data($fields){
 
 
-  }
-  function insert($fields){
-
-
-  }
-  function display(){
-
-
-  }
-  function delete($fields){
-
-
-  }
-  function update($fields){
-
-
-  }
-  function by_id($id){
-
-
+  function login($username,$password){
+    $this->create_connection();
+    $sql="SELECT * from user where username='$username'and password='$password'";
+    $result=mysqli_query($conn,$sql);
+    return $result;
   }
   function create_reservation($client_id,$room_no,$guest_names,$guest_count,$arrival,$departure,$comments){
       $reservation=new reservation($guest_names,$guest_count,$arrival,$departure,$comments);
@@ -233,4 +242,20 @@ class Front_Office extends User{
   function create_water_followup_entry($reading,$photo){
   }
 }
+<<<<<<< HEAD
+=======
+
+class HK extends User{
+  function login($username,$password){
+    $this->create_connection();
+    $sql="SELECT * from user where username='$username'and password='$password'";
+    $result=mysqli_query($this->conn,$sql);
+    return $result;
+  }
+
+
+}
+
+
+>>>>>>> 5a0ff36e63939dc4426b94ff5961c330ac5d581e
 ?>

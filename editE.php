@@ -100,7 +100,7 @@ if (isset($_POST['submit']))
     
     
     ];
-    $GLOBALS['admin']->update($fields);
+    $GLOBALS['admin']->update_employee($fields);
     header("Location:ViewClients.php");
 }
 
