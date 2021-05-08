@@ -138,7 +138,6 @@ class admin extends User{
     $sql = "INSERT INTO user (username,first_name,last_name,password,position) VALUES ('$fields[username]','$fields[first_name]','$fields[last_name]','$fields[password]','$fields[position]')";
     $result=mysqli_query($this->conn,$sql);
     $this->close_connection();
-
   }
 
   function by_data($fields){
@@ -147,7 +146,6 @@ class admin extends User{
      $this->username=$fields['username'];
      $this->password=$fields['password'];
      $this->position=$fields['position'];
-
    }
 
   function display(){
@@ -235,6 +233,4 @@ class Front_Office extends User{
   function create_water_followup_entry($reading,$photo){
   }
 }
-
-
 ?>
