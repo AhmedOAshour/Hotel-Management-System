@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <script src="js/employees.js"></script>
   </head>
   <body>
 
@@ -31,6 +30,8 @@ echo "<form class='editE' action='' method='post'>
   </select> <br><br>
   <input type='submit' name='submit'>
 </form>";
+
+
 
 if (isset($_POST['submit'])) {
   $Fname = $_POST['Fname'];

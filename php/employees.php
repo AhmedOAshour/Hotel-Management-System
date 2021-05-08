@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
+<style>
+.color{
+  color:blue;
+}
+</style>
 <?php
 session_start();
 // include "dbhandler.php";
@@ -27,8 +25,8 @@ function viewE($con){
   elseif ($row['position'] == "front_clerk") {
     echo "<td>Front Office Clerk</td>";
   }
-  echo "<td align='center'><button type='button' name='edit' onclick='editEmployee(".$row['ID'].")'>Edit</button></td>";
-  echo "<td align='center'><button type='button' name='delete' onclick='deleteEmployee(".$row['ID'].")'>Delete</button></td>";
+  echo "<td align='center'><a class='color' type='button' name='edit' onclick='editEmployee(".$row['ID'].")'>Edit</a></td>";
+  echo "<td align='center'><a class='color' type='button' name='delete' onclick='deleteEmployee(".$row['ID'].")'>Delete</a></td>";
   echo "</tr>";
   }
 }
@@ -39,6 +37,7 @@ function editE($con){
 }
 
 function addE($con){
+
   $sql = "INSERT INTO user (username, password, first_name, last_name, position) VALUES ('$_POST[username]','$_POST[password]','$_POST[Fname]', '$_POST[Lname]', '$_POST[position]')";
   echo $sql;
   $result=mysqli_query($con,$sql);
@@ -70,5 +69,3 @@ switch ($_POST['q']) {
 }
 mysqli_close($con);
 ?>
-</body>
-</html>

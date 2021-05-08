@@ -38,6 +38,7 @@ function addEmployee(){
 
 function editEmployee(id){
   window.location = "php/editE.php?id=" + id;
+
 }
 
 function deleteEmployee(id){
