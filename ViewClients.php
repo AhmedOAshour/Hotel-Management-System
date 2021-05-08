@@ -4,7 +4,7 @@ include "nav.php"
 <html>
   <head>
     <meta charset="utf-8">
-    <script src="js/employees.js"></script>
+    <script src="JS/employees.js"></script>
   </head>
   <style>
 body{
@@ -60,12 +60,12 @@ h2{
   <div class="container">
     <h2>Employees</h2>
     <div id="addEmployees" style="display: none">
-      <form class="addE" action="" method="post">
-        <input type="text" name="Fname" id="Fname" class="form-control mb-4 border-0 py-4" placeholder="First Name"><br>
-        <input type="text" name="Lname" id="Lname" class="form-control mb-4 border-0 py-4" placeholder="Last Name"><br>
-        <input type="password" name="password" id="password" class="form-control mb-4 border-0 py-4"placeholder="Password"><br>
-        <input type="text" name="username" id="username" class="form-control mb-4 border-0 py-4" placeholder="UserName"><br>
-        <select id="position" name="position" class="form-control mb-4 border-0 py-4">
+      <form class="addE"  action="" method="post">
+        <input type="text" name="Fname" id="Fname" class="form form-control mb-4 border-0 py-4" placeholder="First Name"><br>
+        <input type="text" name="Lname" id="Lname" class="form form-control mb-4 border-0 py-4" placeholder="Last Name"><br>
+        <input type="password" name="password" id="password" class="form form-control mb-4 border-0 py-4"placeholder="Password"><br>
+        <input type="text" name="username" id="username" class="form form-control mb-4 border-0 py-4" placeholder="UserName"><br>
+        <select id="position" name="position" class="form form-control mb-4 border-0 py-4">
           <option hidden disabled selected value>Position</option>
           <option value='front_clerk'>Front Clerk</option>
           <option value='reservation_clerk'>Reservation Clerk</option>
