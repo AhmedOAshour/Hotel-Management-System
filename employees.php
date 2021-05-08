@@ -16,7 +16,7 @@ $GLOBALS['admin']=new admin();
 
 function viewE(){
 
-  $result=$GLOBALS['admin']->display();
+  $result=$GLOBALS['admin']->display_employee();
   
   while($row = mysqli_fetch_array($result)) {
   echo "<tr>";
@@ -52,9 +52,9 @@ function addE(){
     
     ];
     
-    $GLOBALS['admin']->by_data($fields);
+    
  
-    $GLOBALS['admin']->insert($fields);
+    $GLOBALS['admin']->create_employee($fields);
  
 
 }
@@ -62,7 +62,7 @@ function addE(){
 function deleteE(){
   $id = intval($_POST['ID']);
  
-  $GLOBALS['admin']->delete($id);
+  $GLOBALS['admin']->delete_employee($id);
 }
 
 switch ($_POST['q']) {

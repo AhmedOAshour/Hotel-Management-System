@@ -72,7 +72,7 @@ button:hover {
 <body>
     <button class="login"onclick="document.getElementById('id01').style.display='block'" >Login</button>
     <div id="id01" class="modal">
-        <form class="modal-content animate" action="/action_page.php" method="post">
+        <form class="modal-content animate" action="" method="post">
             <div class="CloseButton">
                 <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
             </div>
@@ -81,7 +81,7 @@ button:hover {
                 <input type="text" placeholder="Enter Username" name="uname" required>
                 <label for="psw"><b>Password</b></label>
                 <input type="password" placeholder="Enter Password" name="psw" required> 
-                <button type="submit">Login</button>
+                <button type="submit" name="submit">Login</button>
                 <label>
                 <input type="checkbox" checked="checked" name="remember"> Remember me
                 </label>
@@ -92,3 +92,49 @@ button:hover {
 
 </body>
 </html>
+
+<?php
+session_start();
+include "php/classes.php";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "hotel";
+$conn = new mysqli($servername, $username, $password, $dbname);
+if(isset($_POST["submit"]))
+{ 
+$username=$_POST['uname'];
+$password=$_POST['psw'];
+   $sql="SELECT * from user where username='$username'";
+   $result = mysqli_query($conn,$sql);	
+ 
+   if($row=mysqli_fetch_array($result)){
+   if($row[5]=="front_clerk"){
+$_SESSION["position"]=new Front_Office();
+$result=$_SESSION["position"]->login($username,$password);
+
+
+
+   }
+   else if($row[5]=="admin"){
+    $_SESSION["position"]=new admin();
+    $result=$_SESSION["position"]->login($username,$password);
+   }
+   else if($row[5]=="HK_employee"){
+    $_SESSION["position"]=new HK();
+    $result=$_SESSION["position"]->login($username,$password);
+
+   }
+   $_SESSION['username']=$row[3];
+   header("Location:ViewClients.php");
+
+
+
+
+   }
+   else echo "Wrong password";
+
+
+
+}
+?>
