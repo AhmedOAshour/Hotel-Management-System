@@ -11,7 +11,7 @@ function showEmployees() {
       document.getElementById("rTable").innerHTML=this.responseText;
     }
   }
-  xmlhttp.open("POST","php/employees.php",true);
+  xmlhttp.open("POST","employees.php",true);
   xmlhttp.send(formData);
 }
 
@@ -32,12 +32,12 @@ function addEmployee(){
       showEmployees();
     }
   }
-  xmlhttp.open("POST","php/employees.php",true);
+  xmlhttp.open("POST","employees.php",true);
   xmlhttp.send(formData);
 }
 
 function editEmployee(id){
-  window.location = "php/editE.php?id=" + id;
+  window.location = "editE.php?id=" + id;
 
 }
 
@@ -51,7 +51,7 @@ function deleteEmployee(id){
       showEmployees();
     }
   }
-  xmlhttp.open("POST","php/employees.php",true);
+  xmlhttp.open("POST","employees.php",true);
   xmlhttp.send(formData);
 }
 

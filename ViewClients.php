@@ -82,7 +82,7 @@ h2{
           <th><strong>First Name</strong></th>
           <th><strong>Last Name</strong></th>
           <th><strong>Username</strong></th>
-          <th><strong>position</strong></th>
+          <th><strong>Position</strong></th>
           <th><strong>Edit</strong></th>
           <th><strong>Delete</strong></th>
         </tr>
