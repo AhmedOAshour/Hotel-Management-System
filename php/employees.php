@@ -2,6 +2,10 @@
 .color{
   color:blue;
 }
+.color:hover{
+  color:red;
+  text-decoration:none;
+}
 </style>
 <?php
 session_start();

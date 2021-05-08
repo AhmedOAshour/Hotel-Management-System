@@ -9,6 +9,7 @@ include "nav.php"
   <style>
 body{
   overflow-x: hidden;
+  background-color:#DAE3EB;
 }
 table,th,td,tr{
   border:1px solid black;
@@ -50,18 +51,22 @@ h2{
   position: relative;
   left:470px;
 }
+.submitEmployee{
+  position: relative;
+  left:510px;
+}
   </style>
 <body onload="showEmployees()">
   <div class="container">
     <h2>Employees</h2>
     <div id="addEmployees" style="display: none">
       <form class="addE" action="" method="post">
-        <label for="Fname">First Name</label><input type="text" name="Fname" id="Fname" class="form"><br>
-        <label for="Lname">Last Name</label> <input type="text" name="Lname" id="Lname" class="form"><br>
-        <label for="password">Password</label> <input type="password" name="password" id="password"><br>
-        <label for="username">Username</label> <input type="text" name="username" id="username" class="form"><br>
-        <label for="position">position</label>
-        <select id="position" name="position" class="form">
+        <input type="text" name="Fname" id="Fname" class="form-control mb-4 border-0 py-4" placeholder="First Name"><br>
+        <input type="text" name="Lname" id="Lname" class="form-control mb-4 border-0 py-4" placeholder="Last Name"><br>
+        <input type="password" name="password" id="password" class="form-control mb-4 border-0 py-4"placeholder="Password"><br>
+        <input type="text" name="username" id="username" class="form-control mb-4 border-0 py-4" placeholder="UserName"><br>
+        <select id="position" name="position" class="form-control mb-4 border-0 py-4">
+          <option hidden disabled selected value>Position</option>
           <option value='front_clerk'>Front Clerk</option>
           <option value='reservation_clerk'>Reservation Clerk</option>
           <option value='HK_employee'>Housekeeping</option>
