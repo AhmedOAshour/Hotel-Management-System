@@ -11,9 +11,11 @@
 session_start();
 include "php/classes.php";
 $GLOBALS['admin']=new admin();
+
 // include "dbhandler.php";
-$con = mysqli_connect('localhost','root','','hotel');
+
 function viewE(){
+
   $result=$GLOBALS['admin']->display();
   
   while($row = mysqli_fetch_array($result)) {
@@ -23,7 +25,7 @@ function viewE(){
   echo "<td>" . $row['last_name'] . "</td>";
   echo "<td>" . $row['username'] . "</td>";
   if ($row['position'] == "HK_employee") {
-   echo "<td>Reservation Clerk</td>";
+   echo "<td>House Keeping Employee</td>";
   }
   elseif ($row['position'] == "reservation_clerk") {
    echo "<td>Reservation Clerk</td>";
@@ -59,6 +61,7 @@ function addE(){
 
 function deleteE(){
   $id = intval($_POST['ID']);
+ 
   $GLOBALS['admin']->delete($id);
 }
 
@@ -71,14 +74,10 @@ switch ($_POST['q']) {
     deleteE();
     break;
 
-  case 'edit':
-    editE($con);
-    break;
-
   case 'view':
     viewE();
     break;
 
 }
-mysqli_close($con);
+
 ?>

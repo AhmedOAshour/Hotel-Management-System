@@ -9,7 +9,7 @@ abstract class Database_Handler{
   abstract function insert($fields);
   abstract function update($fields);
  abstract function delete($fields);
-  //abstract function by_id($id);
+  abstract function by_id($id);
   abstract function by_data($fields);
   abstract function display();
   }
@@ -55,6 +55,10 @@ class reservation extends Database_Handler{
 
 
   }
+  function by_id($id){
+
+
+  }
 }
 
 class client extends Database_Handler{
@@ -84,6 +88,10 @@ function delete($fields){
 
 }
 function update($fields){
+
+    
+}
+function by_id($id){
 
     
 }
@@ -152,8 +160,18 @@ class admin extends User{
   $result = mysqli_query($conn,$sql);
       }
       function update($fields){
-        $sql = "UPDATE user SET username = '$fields[username]', password = '$fields[password]', position = '$fields[position]'";
-  $result = mysqli_query($con,$sql);
+        $conn=parent::create_connection();
+        $sql = "UPDATE user SET first_name = " . "'$fields[first_name]'" . ", last_name = " . "'$fields[last_name]'" . ", password = " . "'$fields[password]'" . ", position = " . "'$fields[position]'" . ", username = " . "'$fields[username]'" . " WHERE ID = '$fields[id]'";
+        $result = mysqli_query($conn,$sql);
+        
+        
+    
+      }
+      function by_id($id){
+        $conn=parent::create_connection();
+        $sql = "SELECT * FROM user WHERE id = $id";
+        $result=mysqli_query($conn,$sql);
+        return $result;
     
       }
 
@@ -178,6 +196,10 @@ class Front_Office extends User{
 
   }
   function update($fields){
+
+    
+  }
+  function by_id($id){
 
     
   }

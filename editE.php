@@ -66,10 +66,11 @@ h2{
 session_start();
 ob_start();
 // include 'dbhandler.php';
-$con = mysqli_connect('localhost','root','','hotel');
+include "php/classes.php";
+$GLOBALS['admin']=new admin();
 $id = $_GET['id'];
-$sql1 = "SELECT * FROM user WHERE id = $id";
-$result = mysqli_query($con,$sql1);
+
+$result = $GLOBALS['admin']->by_id($id);
 $row = mysqli_fetch_array($result);
 echo "<form class='editE' action='' method='post'>
   <label class='names' for='Fname'>First Name</label><input type='text' name='Fname' id='Fname' class='formE form-control border-0 ' value='' placeholder = '".$row['first_name']."''> <br><br>
@@ -89,17 +90,20 @@ echo "<form class='editE' action='' method='post'>
 
 if (isset($_POST['submit'])) 
 {
-  $Fname = $_POST['Fname'];
-  $Lname = $_POST['Lname'];
-  $username = $_POST['username'];
-  $password = $_POST['password'];
-  $position = $_POST['position'];
-  $sql2 = "UPDATE user SET first_name = " . "'$Fname'" . ", last_name = " . "'$Lname'" . ", password = " . "'$password'" . ", position = " . "'$position'" . ", username = " . "'$username'" . " WHERE ID = " . $id;
-  $result2 = mysqli_query($con,$sql2);
-  echo $sql2;
-  header('Location: ../ViewClients.php');
+  $fields=[
+    "id"=>$id,
+    "first_name"=>$_POST['Fname'],
+    "last_name"=>$_POST['Lname'],
+    "username"=>$_POST['username'],
+    "password"=>$_POST['password'],
+    "position"=>$_POST['position']
+    
+    
+    ];
+    $GLOBALS['admin']->update($fields);
+    header("Location:ViewClients.php");
 }
-mysqli_close($con);
+
 ob_end_flush();
 ?>
 </div>
