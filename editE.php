@@ -64,6 +64,7 @@ h2{
 
 <?php
 session_start();
+ob_start();
 // include 'dbhandler.php';
 $con = mysqli_connect('localhost','root','','hotel');
 $id = $_GET['id'];
@@ -99,6 +100,7 @@ if (isset($_POST['submit']))
   header('Location: ../ViewClients.php');
 }
 mysqli_close($con);
+ob_end_flush();
 ?>
 </div>
 </html>

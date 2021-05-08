@@ -13,6 +13,7 @@ function showEmployees() {
   }
   xmlhttp.open("POST","employees.php",true);
   xmlhttp.send(formData);
+  
 }
 
 function addEmployee(){
@@ -23,6 +24,7 @@ function addEmployee(){
   var formData = new FormData();
   for (var i = 0; i < elements.length; i++) {
     formData.append(elements[i].name, elements[i].value);
+    console.log(elements[i].name+" "+elements[i].value);
   }
   formData.append('q', 'add');
   var xmlhttp=new XMLHttpRequest();
@@ -30,10 +32,12 @@ function addEmployee(){
     if (this.readyState==4 && this.status==200) {
       view_add();
       showEmployees();
-    }
+    
+    } 
   }
   xmlhttp.open("POST","employees.php",true);
   xmlhttp.send(formData);
+  
 }
 
 function editEmployee(id){

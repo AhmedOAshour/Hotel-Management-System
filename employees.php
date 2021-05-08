@@ -9,11 +9,13 @@
 </style>
 <?php
 session_start();
+include "php/classes.php";
+$GLOBALS['admin']=new admin();
 // include "dbhandler.php";
 $con = mysqli_connect('localhost','root','','hotel');
-function viewE($con){
-  $sql = "SELECT * FROM user";
-  $result = mysqli_query($con,$sql);
+function viewE(){
+  $result=$GLOBALS['admin']->display();
+  
   while($row = mysqli_fetch_array($result)) {
   echo "<tr>";
   echo "<td>" . $row['ID'] . "</td>";
@@ -35,31 +37,38 @@ function viewE($con){
   }
 }
 
-function editE($con){
-  $sql = "UPDATE user SET username = '$_POST[username]', password = '$_POST[password]', position = '$_POST[position]'";
-  $result = mysqli_query($con,$sql);
+
+function addE(){
+  $fields=[
+  
+    "first_name"=>$_POST['Fname'],
+    "last_name"=>$_POST['Lname'],
+    "username"=>$_POST['username'],
+    "password"=>$_POST['password'],
+    "position"=>$_POST['position']
+    
+    
+    ];
+    
+    $GLOBALS['admin']->by_data($fields);
+ 
+    $GLOBALS['admin']->insert($fields);
+ 
+
 }
 
-function addE($con){
-
-  $sql = "INSERT INTO user (username, password, first_name, last_name, position) VALUES ('$_POST[username]','$_POST[password]','$_POST[Fname]', '$_POST[Lname]', '$_POST[position]')";
-  echo $sql;
-  $result=mysqli_query($con,$sql);
-}
-
-function deleteE($con){
+function deleteE(){
   $id = intval($_POST['ID']);
-  $sql = "DELETE FROM user WHERE ID = $id ";
-  $result = mysqli_query($con,$sql);
+  $GLOBALS['admin']->delete($id);
 }
 
 switch ($_POST['q']) {
   case 'add':
-    addE($con);
+    addE();
     break;
 
   case 'del':
-    deleteE($con);
+    deleteE();
     break;
 
   case 'edit':
@@ -67,7 +76,7 @@ switch ($_POST['q']) {
     break;
 
   case 'view':
-    viewE($con);
+    viewE();
     break;
 
 }

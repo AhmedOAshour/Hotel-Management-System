@@ -8,9 +8,10 @@ abstract class Database_Handler{
   }
   abstract function insert($fields);
   abstract function update($fields);
-  abstract function delete($fields);
-  abstract function by_id($id);
+ abstract function delete($fields);
+  //abstract function by_id($id);
   abstract function by_data($fields);
+  abstract function display();
   }
 
 class reservation extends Database_Handler{
@@ -43,6 +44,17 @@ class reservation extends Database_Handler{
     $result=mysqli_query($conn,$sql);
     return mysqli_insert_id($conn);
   }
+  function display(){
+
+  }
+  function delete($fields){
+
+    
+  }
+  function update($fields){
+
+
+  }
 }
 
 class client extends Database_Handler{
@@ -59,7 +71,22 @@ class client extends Database_Handler{
   function insert($fields){
 
   }
+  function by_data($fields){
 
+
+  }
+function display(){
+
+
+}
+function delete($fields){
+
+
+}
+function update($fields){
+
+    
+}
   function getbyID($id){
     $SQL="select * from client where ID=$id";
     $conn=parent::create_connection();
@@ -87,14 +114,73 @@ class client extends Database_Handler{
   }
 }
 
-abstract class User
+abstract class User extends Database_Handler
 {
-  public $id, $name, $username, $password, $position;
-  abstract function change_password($password,$Cpassword,$Opassword);
-  abstract function login($username,$password);
+  public $id, $first_name , $last_name, $username, $password, $position;
+  //abstract function change_password($password,$Cpassword,$Opassword);
+  // abstract function login($username,$password);
+  
+  
+}
+class admin extends User{
+  function insert($fields){
+    $conn=parent::create_connection();
+    $sql = "INSERT INTO user (username,first_name,last_name,password,position) VALUES ('$fields[username]','$fields[first_name]','$fields[last_name]','$fields[password]','$fields[position]')";
+    $result=mysqli_query($conn,$sql);
+    echo $sql;
+
+  }
+  function by_data($fields){
+     $this->first_name=$fields['first_name'];
+     $this->last_name=$fields['last_name'];
+     $this->username=$fields['username'];
+     $this->password=$fields['password'];
+     $this->position=$fields['position'];
+    
+   }
+      function display(){
+        $conn=parent::create_connection();
+        $sql = "SELECT * FROM user";
+        $result=mysqli_query($conn,$sql);
+        return $result;
+
+
+      }
+      function delete($id){
+        $conn=parent::create_connection();
+        $sql = "DELETE FROM user WHERE ID = $id ";
+  $result = mysqli_query($conn,$sql);
+      }
+      function update($fields){
+        $sql = "UPDATE user SET username = '$fields[username]', password = '$fields[password]', position = '$fields[position]'";
+  $result = mysqli_query($con,$sql);
+    
+      }
+
+
 }
 
 class Front_Office extends User{
+  function by_data($fields){
+
+
+  }
+  function insert($fields){
+
+
+  }
+  function display(){
+
+
+  }
+  function delete($fields){
+
+
+  }
+  function update($fields){
+
+    
+  }
   function create_reservation($client_id,$room_no,$guest_names,$guest_count,$arrival,$departure,$comments){
       $reservation=new reservation($guest_names,$guest_count,$arrival,$departure,$comments);
 
