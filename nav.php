@@ -15,17 +15,23 @@
     .nav-item{
         padding-left: 50px;
     }
+    .navcolor{
+        background-color:#36486b;
+    }
+    .navbar-light .navbar-nav .nav-link{
+        color:white;
+    }
 </style>
 <body>
     <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light navcolor">
             <a class="navbar-brand">Philae Hotel</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                   <a class="nav-link" href="#">Rooms</a>
                 </li>
                 <li class="nav-item">
