@@ -7,54 +7,54 @@ include "nav.php"
     <script src="JS/employees.js"></script>
   </head>
   <style>
-body{
-  overflow-x: hidden;
-  background-color:#DAE3EB;
-}
-table,th,td,tr{
-  border:1px solid black;
-}
-th,td{
-  padding: 15px;
-  text-align: left;
-}
-th{
-  background-color: grey;
-  color: white;
-}
-table{
-  width: 100%;
-  position:relative;
-}
-h2{
-  text-align:center;
-  margin-top:20px;
-  margin-bottom:20px;
-}
-.button{
-  position: relative;
-  bottom: 35px;
-  font-size: 1.25em;
-  font-weight: 700;
-  color: white;
-  background-color: grey;
-  display: inline-block;
-  cursor: pointer;
-  border: 1px solid black;
-  top:10px;
-}
-.button:focus,
-.button:hover{
-  background-color: rgb(121, 117, 117);
-}
-#addBtn{
-  position: relative;
-  left:470px;
-}
-.submitEmployee{
-  position: relative;
-  left:510px;
-}
+    body{
+      overflow-x: hidden;
+      background-color:#DAE3EB;
+    }
+    table,th,td,tr{
+      border:1px solid black;
+    }
+    th,td{
+      padding: 15px;
+      text-align: left;
+    }
+    th{
+      background-color: grey;
+      color: white;
+    }
+    table{
+      width: 100%;
+      position:relative;
+    }
+    h2{
+      text-align:center;
+      margin-top:20px;
+      margin-bottom:20px;
+    }
+    .button{
+      position: relative;
+      bottom: 35px;
+      font-size: 1.25em;
+      font-weight: 700;
+      color: white;
+      background-color: grey;
+      display: inline-block;
+      cursor: pointer;
+      border: 1px solid black;
+      top:10px;
+    }
+    .button:focus,
+    .button:hover{
+      background-color: rgb(121, 117, 117);
+    }
+    #addBtn{
+      position: relative;
+      left:470px;
+    }
+    .submitEmployee{
+      position: relative;
+      left:510px;
+    }
   </style>
 <body onload="showEmployees()">
   <div class="container">
@@ -95,5 +95,3 @@ h2{
 </div>
   </body>
 </html>
-
-

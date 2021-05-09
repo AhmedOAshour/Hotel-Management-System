@@ -242,9 +242,6 @@ class Front_Office extends User{
   function create_water_followup_entry($reading,$photo){
   }
 }
-<<<<<<< HEAD
-=======
-
 class HK extends User{
   function login($username,$password){
     $this->create_connection();
@@ -256,6 +253,4 @@ class HK extends User{
 
 }
 
-
->>>>>>> 5a0ff36e63939dc4426b94ff5961c330ac5d581e
 ?>
