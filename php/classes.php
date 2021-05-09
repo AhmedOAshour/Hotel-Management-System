@@ -17,6 +17,8 @@ abstract class Database_Handler{
 
 class reservation extends Database_Handler{
   public $id;
+  public $room_type;
+  public $room_floor;
   public $guest_names;
   public $guest_count;
   public $price;
@@ -25,26 +27,22 @@ class reservation extends Database_Handler{
   public $comments;
 
   function by_data($fields) {
-    $fields = [
-      "guest_names" => $this->guest_names,
-      "guest_count"=>$this->guest_count,
-      "arrival"=>$this->arrival,
-      "departure"=> $this->departure,
-    ];
-  // $this->id=$id;
-    $this->guest_names=$guest_names;
-    $this->guest_count=$guest_count;
-   // $this->price=$price;
-    $this->arrival=$arrival;
-    $this->departure=$departure;
-    $this->comments=$comments;
+    $this->room_type = $fields['room_type'];
+    $this->room_floor = $fields['room_floor'];
+    $this->guest_names = $fields['guest_names'];
+    $this->guest_count = $fields['guest_count'];
+    $this->price = $fields['price'];
+    $this->arrival =   $fields['arrival'];
+    $this->departure = $fields['departure'];
+    $this->comments = $fields['comments'];
+    $this->insert($fields);
   }
   function insert($fields){
     $this->create_connection();
-    $sql="INSERT into reservation(client_id,guest_names,guest_count,room_no,arrival,departure,comments) values($fields[client_id],'$this->guest_names','$this->guest_count',$fields[room_no],'$this->arrival','$this->departure','$this->comments')";
+    $sql="INSERT into reservation(client_id,room_type,room_floor,guest_names,guest_count,price,arrival,departure,comments) values($fields[client_id],'$this->room_type','$this->room_floor','$this->guest_names','$this->guest_count',$this->price,'$this->arrival','$this->departure','$this->comments')";
     $result=mysqli_query($this->conn,$sql);
-    $this->close_connection();
     return mysqli_insert_id($this->conn);
+    // doesnt reach. store id as value then return after close? $this->close_connection();
   }
   function display(){
 
@@ -213,14 +211,20 @@ class Front_Office extends User{
     $result=mysqli_query($conn,$sql);
     return $result;
   }
-  function create_reservation($client_id,$room_no,$guest_names,$guest_count,$arrival,$departure,$comments){
-      $reservation=new reservation($guest_names,$guest_count,$arrival,$departure,$comments);
-
-     $fields = [
-          "client_id" => $client_id,
-          "room_no"=>$room_no
-      ];
-      $reservation->insert($fields);
+  function create_reservation($client_id,$room_type,$room_floor,$guest_names,$guest_count,$price,$arrival,$departure,$comments){
+    $fields = [
+      "client_id" => $client_id,
+      "room_type" => $room_type,
+      "room_floor" => $room_floor,
+      "guest_names" => $guest_names,
+      "guest_count" => $guest_count,
+      "price" => $price,
+      "arrival" => $arrival,
+      "departure" => $departure,
+      "comments" => $comments
+    ];
+    $reservation=new reservation();
+    $reservation->by_data($fields);
   }
 
   function cancel_reservation($id){
