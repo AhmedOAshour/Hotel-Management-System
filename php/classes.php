@@ -249,8 +249,6 @@ class HK extends User{
     $result=mysqli_query($this->conn,$sql);
     return $result;
   }
-
-
 }
 
 ?>
