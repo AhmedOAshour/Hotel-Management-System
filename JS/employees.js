@@ -11,9 +11,9 @@ function showEmployees() {
       document.getElementById("rTable").innerHTML=this.responseText;
     }
   }
-  xmlhttp.open("POST","employees.php",true);
+  xmlhttp.open("POST","php/employees.php",true);
   xmlhttp.send(formData);
-  
+
 }
 
 function addEmployee(){
@@ -32,12 +32,12 @@ function addEmployee(){
     if (this.readyState==4 && this.status==200) {
       view_add();
       showEmployees();
-    
-    } 
+
+    }
   }
-  xmlhttp.open("POST","employees.php",true);
+  xmlhttp.open("POST","php/employees.php",true);
   xmlhttp.send(formData);
-  
+
 }
 
 function editEmployee(id){
@@ -55,7 +55,7 @@ function deleteEmployee(id){
       showEmployees();
     }
   }
-  xmlhttp.open("POST","employees.php",true);
+  xmlhttp.open("POST","php/employees.php",true);
   xmlhttp.send(formData);
 }
 

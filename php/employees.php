@@ -9,7 +9,7 @@
 </style>
 <?php
 session_start();
-include "php/classes.php";
+include "classes.php";
 $GLOBALS['admin']=new admin();
 
 // include "dbhandler.php";
@@ -17,7 +17,7 @@ $GLOBALS['admin']=new admin();
 function viewE(){
 
   $result=$GLOBALS['admin']->display_employee();
-  
+
   while($row = mysqli_fetch_array($result)) {
   echo "<tr>";
   echo "<td>" . $row['ID'] . "</td>";
@@ -42,26 +42,26 @@ function viewE(){
 
 function addE(){
   $fields=[
-  
+
     "first_name"=>$_POST['Fname'],
     "last_name"=>$_POST['Lname'],
     "username"=>$_POST['username'],
     "password"=>$_POST['password'],
     "position"=>$_POST['position']
-    
-    
+
+
     ];
-    
-    
- 
+
+
+
     $GLOBALS['admin']->create_employee($fields);
- 
+
 
 }
 
 function deleteE(){
   $id = intval($_POST['ID']);
- 
+
   $GLOBALS['admin']->delete_employee($id);
 }
 
