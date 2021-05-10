@@ -17,9 +17,9 @@ function showEmployees() {
 }
 
 function addEmployee(){
-  // if (!validateAdd()) {
-  //   return;
-  // }
+  if (!validateAdd()) {
+    return;
+  }
   var elements = document.getElementsByClassName("form");
   var formData = new FormData();
   for (var i = 0; i < elements.length; i++) {
@@ -129,34 +129,10 @@ function view_add(){
     var lname = document.getElementById("Lname").value = "";
     var password = document.getElementById("password").value = "";
   }
-  // else if (edit.style.display === "block") {
-  //   edit.style.display = "none";
-  //   view.style.display = "block";
-  //   btn.innerHTML = "Add Employee"
-  // }
+
   else {
     add.style.display = "none";
     view.style.display = "block";
     btn.innerHTML = "Add Employee"
   }
 }
-
-// function view_edit(){
-//   var add = document.getElementById("addEmployees");
-//   var edit = document.getElementById("editEmployees");
-//   var view = document.getElementById("viewEmployees");
-//   var btn = document.getElementById("addBtn");
-//   if (edit.style.display === "none" && add.style.display === "none") {
-//     edit.style.display = "block";
-//     view.style.display = "none";
-//     btn.innerHTML = "View Employees"
-//     var fname = document.getElementById("FnameE").value = "";
-//     var lname = document.getElementById("LnameE").value = "";
-//     var password = document.getElementById("passwordE").value = "";
-//   }
-//   else {
-//     edit.style.display = "none";
-//     view.style.display = "block";
-//     btn.innerHTML = "Add Employee";
-//   }
-// }

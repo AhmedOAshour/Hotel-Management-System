@@ -37,8 +37,8 @@ button:hover {
   position: fixed;
   left: 0;
   top: 0;
-  width: 100%; 
-  height: 100%; 
+  width: 100%;
+  height: 100%;
   background-color: rgba(0,0,0,0.4);
   padding-top: 60px;
 }
@@ -46,7 +46,7 @@ button:hover {
   background-color: #fefefe;
   margin: 5% auto 15% auto;
   border: 1px solid #888;
-  width: 80%; 
+  width: 80%;
 }
 .close {
   position: absolute;
@@ -80,7 +80,7 @@ button:hover {
                 <label for="uname"><b>Username</b></label>
                 <input type="text" placeholder="Enter Username" name="uname" required>
                 <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required> 
+                <input type="password" placeholder="Enter Password" name="psw" required>
                 <button type="submit" name="submit">Login</button>
                 <label>
                 <input type="checkbox" checked="checked" name="remember"> Remember me
@@ -102,12 +102,15 @@ $password = "";
 $dbname = "hotel";
 $conn = new mysqli($servername, $username, $password, $dbname);
 if(isset($_POST["submit"]))
-{ 
+{
+
+
+
 $username=$_POST['uname'];
 $password=$_POST['psw'];
    $sql="SELECT * from user where username='$username'";
-   $result = mysqli_query($conn,$sql);	
- 
+   $result = mysqli_query($conn,$sql);
+
    if($row=mysqli_fetch_array($result)){
    if($row[5]=="front_clerk"){
 $_SESSION["position"]=new Front_Office();

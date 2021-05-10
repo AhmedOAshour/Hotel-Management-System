@@ -57,6 +57,7 @@ h2{
   font-size:20px;
 }
 </style>
+<script src="JS/employees.js"></script>
   </head>
   <body>
   </body>
@@ -72,11 +73,12 @@ $id = $_GET['id'];
 
 $result = $GLOBALS['admin']->by_id($id);
 $row = mysqli_fetch_array($result);
-echo "<form class='editE' action='' method='post'>
-  <label class='names' for='Fname'>First Name</label><input type='text' name='Fname' id='Fname' class='formE form-control border-0 ' value='' placeholder = '".$row['first_name']."''> <br><br>
-  <label class='names' for='Lname'>Last Name</label><input type='text' name='Lname' id='Lname' class='formE form-control border-0 ' value='' placeholder = '".$row['last_name']."''> <br><br>
-  <label class='names' for='username'>username</label><input type='text' name='username' id='username' class='formE form-control border-0 ' value='' placeholder = '".$row['username']."''> <br><br>
-  <label class='names' for='password'>password</label><input type='password' name='password' id='password' class='formE form-control  border-0' value='' placeholder = '".$row['password']."''> <br><br>
+echo "
+  <form class='editE' action='' method='post'>
+  <label class='names' for='Fname'>First Name</label><input type='text' name='Fname' id='Fname' class='formE form-control border-0 ' value='".$row['first_name']."' '> <br><br>
+  <label class='names' for='Lname'>Last Name</label><input type='text' name='Lname' id='Lname' class='formE form-control border-0 ' value='".$row['last_name']."' '> <br><br>
+  <label class='names' for='username'>username</label><input type='text' name='username' id='username' class='formE form-control border-0 ' value='".$row['username']."' '> <br><br>
+  <label class='names' for='password'>password</label><input type='password' name='password' id='password' class='formE form-control  border-0' value='".$row['password']."' '> <br><br>
   <label class='names' for='position'>position</label>
   <select id='position' name='position' class='formE form-control mb-2 border-0'>
   <option value='front_clerk'>Front Clerk</option>
@@ -88,20 +90,49 @@ echo "<form class='editE' action='' method='post'>
 
 
 
-if (isset($_POST['submit'])) 
+if (isset($_POST['submit']))
 {
-  $fields=[
-    "id"=>$id,
-    "first_name"=>$_POST['Fname'],
-    "last_name"=>$_POST['Lname'],
-    "username"=>$_POST['username'],
-    "password"=>$_POST['password'],
-    "position"=>$_POST['position']
-    
-    
-    ];
-    $GLOBALS['admin']->update_employee($fields);
-    header("Location:ViewClients.php");
+  if (!preg_match('/[a-z]/', $_POST['password']) ||
+      !preg_match('/[A-Z]/', $_POST['password']) ||
+      !preg_match('/[\'^�$%&*()}{@#~?><>,|=_+�-]/', $_POST['password']))
+  {
+     echo "Password Must Contain a Lowercase, Uppercase and Special Character.";
+     $flag = true;
+  }
+  elseif (preg_match('/[0-9]/', $_POST['Fname']) ||
+          preg_match('/[0-9]/', $_POST['Lname']))
+  {
+     echo "Your Name Cannot Contain Numbers.";
+     $flag = true;
+  }
+  elseif (strlen($_POST['password']) < 8)
+  {
+     echo "Your Password Must Be At Least 8 Characters.";
+     $flag = true;
+  }
+  elseif (strlen($_POST['username']) > 20)
+  {
+     echo "Your Username Must Be At Less Than 20 Characters.";
+     $flag = true;
+  }
+
+  if (!$flag) {
+    $fields=[
+      "id"=>$id,
+      "first_name"=>$_POST['Fname'],
+      "last_name"=>$_POST['Lname'],
+      "username"=>$_POST['username'],
+      "password"=>$_POST['password'],
+      "position"=>$_POST['position']
+      ];
+      $GLOBALS['admin']->update_employee($fields);
+      header("Location:viewEmployees.php");
+  }
+  else {
+    return;
+  }
+
+
 }
 
 ob_end_flush();
