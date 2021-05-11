@@ -40,7 +40,10 @@ session_start();
                   <a class="nav-link" href="Rooms.php">Rooms</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="viewReservations.php">Reservation</a>
+                  <a class="nav-link" href="createReservation.php">Reservation</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="viewReservations.php">View Reservations</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">CheckOut</a>
@@ -55,7 +58,7 @@ session_start();
                 
                 else if(!empty($_SESSION['Role'])&& $_SESSION['Role']=='admin'){ ?>
                  <li class="nav-item">
-                    <a class="nav-link" href="viewEmployees">View Employees</a>
+                    <a class="nav-link" href="viewEmployees.php">View Employees</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="signout.php">Sign out</a>

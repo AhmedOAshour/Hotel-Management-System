@@ -11,18 +11,23 @@ include "nav.php";?>
     }
     table,th,td,tr{
       border:1px solid black;
+      font-family: "Times New Roman", Times, serif;
     }
     th,td{
       padding: 15px;
       text-align: left;
     }
     th{
-      background-color: grey;
+      background-color:#36486b;
       color: white;
+      
     }
     table{
       width: 100%;
       position:relative;
+    }
+    tr:hover{
+      color:blue;
     }
     h2{
       text-align:center;
@@ -72,13 +77,14 @@ include "nav.php";?>
       font-weight:bolder; 
     }
     .create:hover{
-      background-color:grey;
+      background-color:#36486b;
       color:white;
       border:1px solid black;
     }
     .formE{
       margin-top:15px;
     }
+    
     </style>
     <script type="text/javascript">
       function viewReservation(){

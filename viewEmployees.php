@@ -13,18 +13,23 @@ include "nav.php"
     }
     table,th,td,tr{
       border:1px solid black;
+      font-family: "Times New Roman", Times, serif;
     }
     th,td{
       padding: 15px;
       text-align: left;
     }
     th{
-      background-color: grey;
+      background-color:#36486b;
       color: white;
+      
     }
     table{
       width: 100%;
       position:relative;
+    }
+    tr:hover{
+      color:blue;
     }
     h2{
       text-align:center;
@@ -37,7 +42,7 @@ include "nav.php"
       font-size: 1.25em;
       font-weight: 700;
       color: white;
-      background-color: grey;
+      background-color: #36486b;
       display: inline-block;
       cursor: pointer;
       border: 1px solid black;
@@ -45,7 +50,7 @@ include "nav.php"
     }
     .button:focus,
     .button:hover{
-      background-color: rgb(121, 117, 117);
+      filter: brightness(150%);
     }
     #addBtn{
       position: relative;

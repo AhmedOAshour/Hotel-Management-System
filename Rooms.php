@@ -39,7 +39,8 @@ include "nav.php";
     h3{
         position:relative;
         left:20px;
-        color:blue;
+        color:#36486b;
+        font-family:fantasy;
     }
     .title{
         position: relative;

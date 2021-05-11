@@ -29,7 +29,7 @@ function showReservations(){
     $nights = ($departure - $arrival) / (86400);
     $days = $nights + 1;
     echo "<td>" . "$days/$nights" . "</td>";
-    echo "<td style='text-align:center'>" . "<a href='viewReservation?id=$row[ID]'>View</a>" . "</td>";
+    echo "<td style='text-align:center '>" . "<a href='viewReservation?id=$row[ID]'>View</a>" . "</td>";
     }
   }
 }

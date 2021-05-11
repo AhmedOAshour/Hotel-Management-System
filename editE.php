@@ -1,6 +1,4 @@
-<?php
-include "nav.php"
-?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -10,6 +8,9 @@ include "nav.php"
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/typeit@7.0.4/dist/typeit.min.js"></script>
+    <?php
+include "nav.php"
+?>
 <style>
 body{
   overflow-x: hidden;
@@ -41,7 +42,7 @@ h2{
   font-size: 1.25em;
   font-weight: 700;
   color: white;
-  background-color: grey;
+  background-color: #36486b;
   display: inline-block;
   cursor: pointer;
   border: 1px solid black;
@@ -50,7 +51,7 @@ h2{
 }
 .button:focus,
 .button:hover{
-  background-color: rgb(121, 117, 117);
+  filter: brightness(150%);
 }
 
 .names{

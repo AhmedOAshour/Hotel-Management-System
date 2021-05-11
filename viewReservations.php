@@ -9,21 +9,39 @@ include "nav.php";?>
         overflow-x: hidden;
         background-color:#DAE3EB;
       }
+      
       table,th,td,tr{
-        border:1px solid black;
-      }
-      th,td{
-        padding: 15px;
-        text-align: left;
-      }
-      th{
-        background-color: grey;
-        color: white;
-      }
-      table{
-        width: 100%;
-        position:relative;
-      }
+      border:1px solid black;
+      font-family: "Times New Roman", Times, serif;
+    }
+    th,td{
+      padding: 15px;
+      text-align: left;
+    }
+    th{
+      background-color:#36486b;
+      color: white;
+      
+    }
+    table{
+      width: 100%;
+      position:relative;
+    }
+    tr:hover{
+      color:blue;
+    }
+    a{
+
+      color:#36486b;
+    
+      font-family: "Times New Roman", Times, serif;
+    }
+    a:hover{
+
+      color:blue;
+    }
+
+    
       h2{
         text-align:center;
         margin-top:20px;
@@ -105,6 +123,7 @@ include "nav.php";?>
           <th><strong>Room Floor</strong></th>
           <th><strong>Arrival</strong></th>
           <th><strong>Days/Nights</strong></th>
+          <th><strong>View reservation</strong></th>
         </tr>
       </thead>
       <tbody id="rTable">
