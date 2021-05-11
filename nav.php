@@ -55,7 +55,7 @@ session_start();
                 
                 else if(!empty($_SESSION['Role'])&& $_SESSION['Role']=='admin'){ ?>
                  <li class="nav-item">
-                    <a class="nav-link" href="viewEmployees">View Employees</a>
+                    <a class="nav-link" href="viewEmployees.php">View Employees</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="signout.php">Sign out</a>
