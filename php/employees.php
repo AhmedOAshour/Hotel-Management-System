@@ -1,9 +1,9 @@
 <style>
 .color{
-  color:blue;
+  color:#36486b;
 }
 .color:hover{
-  color:red;
+  color:blue;
   text-decoration:none;
 }
 </style>
