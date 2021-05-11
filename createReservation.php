@@ -221,7 +221,7 @@ include "nav.php";?>
     </div>
   </body>
 </html>
-<html>
+
 
 <?php
 include "php/classes.php";
