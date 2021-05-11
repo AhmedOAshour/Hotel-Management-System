@@ -208,7 +208,7 @@ class Front_Office extends User{
   function login($username,$password){
     $this->create_connection();
     $sql="SELECT * from user where username='$username'and password='$password'";
-    $result=mysqli_query($conn,$sql);
+    $result=mysqli_query($this->conn,$sql);
     return $result;
   }
   function create_reservation($client_id,$room_type,$room_floor,$guest_names,$guest_count,$price,$arrival,$departure,$comments){

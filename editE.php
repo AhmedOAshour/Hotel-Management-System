@@ -64,7 +64,6 @@ h2{
 <div class="container">
 
 <?php
-session_start();
 ob_start();
 // include 'dbhandler.php';
 include "php/classes.php";

@@ -33,6 +33,9 @@ function viewE(){
   elseif ($row['position'] == "front_clerk") {
     echo "<td>Front Office Clerk</td>";
   }
+  elseif ($row['position'] == "admin") {
+    echo "<td>Admin</td>";
+  }
   echo "<td align='center'><a class='color' type='button' name='edit' onclick='editEmployee(".$row['ID'].")'>Edit</a></td>";
   echo "<td align='center'><a class='color' type='button' name='delete' onclick='deleteEmployee(".$row['ID'].")'>Delete</a></td>";
   echo "</tr>";

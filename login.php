@@ -115,21 +115,22 @@ $password=$_POST['psw'];
    if($row[5]=="front_clerk"){
 $_SESSION["position"]=new Front_Office();
 $result=$_SESSION["position"]->login($username,$password);
-
-
+header("Location:Rooms.php");
 
    }
    else if($row[5]=="admin"){
     $_SESSION["position"]=new admin();
     $result=$_SESSION["position"]->login($username,$password);
+    header("Location:viewEmployees.php");
    }
    else if($row[5]=="HK_employee"){
     $_SESSION["position"]=new HK();
     $result=$_SESSION["position"]->login($username,$password);
 
    }
-   $_SESSION['username']=$row[3];
-   header("Location:ViewClients.php");
+   if($_SESSION['username']=$row[3])
+   $_SESSION['Role']=$row[5];
+  
 
 
 

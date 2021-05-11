@@ -1,9 +1,85 @@
-<?php ob_start(); ?>
+<?php ob_start(); 
+include "nav.php";?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <style>
+     body{
+      overflow-x: hidden;
+      background-color:#DAE3EB;
+    }
+    table,th,td,tr{
+      border:1px solid black;
+    }
+    th,td{
+      padding: 15px;
+      text-align: left;
+    }
+    th{
+      background-color: grey;
+      color: white;
+    }
+    table{
+      width: 100%;
+      position:relative;
+    }
+    h2{
+      text-align:center;
+      margin-top:20px;
+      margin-bottom:20px;
+    }
+    .button{
+      position: relative;
+      bottom: 35px;
+      font-size: 1.25em;
+      font-weight: 700;
+      color: white;
+      background-color: grey;
+      display: inline-block;
+      cursor: pointer;
+      border: 1px solid black;
+      top:10px;
+    }
+    .button:focus,
+    .button:hover{
+      background-color: rgb(121, 117, 117);
+    }
+    #addBtn{
+      position: relative;
+      left:470px;
+    }
+    .submitEmployee{
+      position: relative;
+      left:510px;
+    }
+    #bar{
+      border-left:none;
+      border-right:none;
+      border-top:none;
+      border-bottom:2px solid black;
+      background-color:transparent;
+    }
+    #select{
+      border:2px solid black;
+      background-color:transparent;
+    }
+    .create{
+      margin-top:10px;
+      width:100%;   
+      background-color:transparent;
+      height:50px;
+      font-weight:bolder; 
+    }
+    .create:hover{
+      background-color:grey;
+      color:white;
+      border:1px solid black;
+    }
+    .formE{
+      margin-top:15px;
+    }
+    </style>
     <script type="text/javascript">
       function viewReservation(){
         document.getElementById("client").style.display = "none";
@@ -64,10 +140,12 @@
       </script>
   </head>
   <body onload="showClient()">
+  <div class="container mt-3">
+  
       <!-- choose or create client section -->
       <div id="client">
         <div id="showClients">
-          <input type="text" id="bar" placeholder="Search..." oninput="showClient()">
+          <input type="text" id="bar" placeholder="Search by..." oninput="showClient()">
           <select id="select" onchange="showClient()">
             <option value="last_name">Last Name</option>
             <option value="identification_no">ID Number</option>
@@ -83,23 +161,24 @@
                 <th><strong>Mobile</strong></th>
                 <th><strong>E-mail</strong></th>
                 <th><strong>Company</strong></th>
+                <th><strong>Create Reservation</strong></th>
               </tr>
             </thead>
             <tbody id="rTable">
             </tbody>
           </table>
-          <button type="button" onclick="createClient()">Create Client</button>
+          <button type="button" class="create" onclick="createClient()">Add Client</button>
         </div>
         <div id="createClient" style="display:none">
           <form action="index.html" method="post">
-            <input class="form" type="text" name="first_name" placeholder="First Name...">
-            <input class="form" type="text" name="last_name" placeholder="Last Name...">
-            <input class="form" type="text" name="identification_no" placeholder="Identification Number...">
-            <input class="form" type="text" name="nationality" placeholder="Nationality...">
-            <input class="form" type="text" name="mobile" placeholder="Mobile...">
-            <input class="form" type="text" name="email" placeholder="E-mail...">
-            <input class="form" type="text" name="company" placeholder="Company...">
-            <button type="button" onclick="createClient()">Submit</button>
+            <input class="formE form-control border-3" type="text" name="first_name" placeholder="First Name...">
+            <input class="formE form-control border-3" type="text" name="last_name" placeholder="Last Name...">
+            <input class="formE form-control border-3" type="text" name="identification_no" placeholder="Identification Number...">
+            <input class="formE form-control border-3" type="text" name="nationality" placeholder="Nationality...">
+            <input class="formE form-control border-3" type="text" name="mobile" placeholder="Mobile...">
+            <input class="formE form-control border-3" type="text" name="email" placeholder="E-mail...">
+            <input class="formE form-control border-3" type="text" name="company" placeholder="Company...">
+            <button class="create"type="button" onclick="createClient()">Submit</button>
           </form>
         </div>
       </div>
@@ -108,7 +187,7 @@
       <div id="reservation" style="display:none">
         <form method="post">
         <input id="count" type='text' name='guest_count' placeholder="Guest Count"><br>
-        <textarea name="guest_names" rows="8" cols="40" placeholder="Guest Names seperate by ,"></textarea> <br>
+        <textarea name="guest_names" rows="3" cols="23" placeholder="Guest Names seperate by ,"></textarea> <br>
         <label for="room_type">Room Type:</label> <select class="" name="room_type">
           <?php
               $sql = "SELECT DISTINCT type FROM room";
@@ -138,6 +217,7 @@
         <input type="text" name="client_ID" id="client_ID" hidden>
         <input type="submit" name="submit" value="Submit">
       </form>
+    </div>
     </div>
   </body>
 </html>

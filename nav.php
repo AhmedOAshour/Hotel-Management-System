@@ -1,3 +1,6 @@
+<?php ob_start();
+session_start();
+  ?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -23,6 +26,7 @@
     }
 </style>
 <body>
+
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light navcolor">
             <a class="navbar-brand">Philae Hotel</a>
@@ -31,11 +35,12 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
+              <?php if(!empty($_SESSION['Role'])&& $_SESSION['Role']=='front_clerk') {?>
                 <li class="nav-item">
                   <a class="nav-link" href="Rooms.php">Rooms</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="reservation.php">Reservation</a>
+                  <a class="nav-link" href="viewReservations.php">Reservation</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">CheckOut</a>
@@ -43,9 +48,24 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Malfunctions</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="signout.php">Sign out</a>
+                </li>
+                <?php }
+                
+                else if(!empty($_SESSION['Role'])&& $_SESSION['Role']=='admin'){ ?>
+                 <li class="nav-item">
+                    <a class="nav-link" href="viewEmployees">View Employees</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="signout.php">Sign out</a>
+                </li>
+                <?php }
+                 ?>
             </ul>
             </div>
           </nav>
     </div>
 </body>
 </html>
+<?php ob_end_flush();?>
