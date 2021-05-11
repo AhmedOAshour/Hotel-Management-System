@@ -84,8 +84,8 @@ include "nav.php"
           <th><strong>Last Name</strong></th>
           <th><strong>Username</strong></th>
           <th><strong>Position</strong></th>
-          <th><strong></strong></th>
-          <th><strong></strong></th>
+          <th><strong>Edit</strong></th>
+          <th><strong>Delete</strong></th>
         </tr>
       </thead>
       <tbody id="rTable"></tbody>

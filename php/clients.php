@@ -1,3 +1,12 @@
+<style>
+.link{
+  color:blue;
+}
+.link:hover{
+  color:red;
+  text-decoration:none;
+}
+</style>
 <?php
   include 'classes.php';
 
@@ -27,7 +36,7 @@
       echo "<td>" . $row['email'] . "</td>";
       echo "<td>" . $row['company'] . "</td>";
       if($flag)
-        echo "<td style='text-align:center'>" . "<button type='button' onclick='chooseClient($row[ID])'>Create Reservation</button>" . "</td>";
+        echo "<td style='text-align:center'>" . "<a type='button' class='link'onclick='chooseClient($row[ID])'>Create Reservation</a>" . "</td>";
       echo "</tr>";
       }
     }
