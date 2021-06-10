@@ -2,8 +2,8 @@
 // DB Params
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
-define('DB_PASS', 'Q1234567');
-define('DB_NAME', 'miublog');
+define('DB_PASS', '');
+define('DB_NAME', 'hotel');
 
 // App Root
 //echo dirname(dirname(__FILE__));
