@@ -6,7 +6,7 @@ class User extends Model
   public $id, $first_name , $last_name, $username, $password, $position;
 
   function __construct($id=""){
-    $this->db = $this->connect();
+  
     if ($id!="") {
       $this->readUser($id);
     }
