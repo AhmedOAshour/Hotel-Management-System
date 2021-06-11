@@ -7,7 +7,7 @@ include "nav.php";?>
     <style>
        body{
         overflow-x: hidden;
-        background-color:#DAE3EB;
+        background-color:#ead3cb;
       }
       
       table,th,td,tr{
@@ -19,7 +19,7 @@ include "nav.php";?>
       text-align: left;
     }
     th{
-      background-color:#36486b;
+      background-color:#845460;
       color: white;
       
     }

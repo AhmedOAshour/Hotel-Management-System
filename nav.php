@@ -19,7 +19,7 @@ session_start();
         padding-left: 50px;
     }
     .navcolor{
-        background-color:#36486b;
+        background-color:#845460;
     }
     .navbar-light .navbar-nav .nav-link{
         color:white;

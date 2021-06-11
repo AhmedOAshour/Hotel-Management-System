@@ -7,7 +7,7 @@ include "nav.php";
 </head>
 <style>
     body{
-        background-color: #DAE3EB;
+        background-color: #ead3cb;
     }
     .search{
         width:250px;
@@ -29,7 +29,7 @@ include "nav.php";
         text-align:right;
     }
     .left{
-        background-color:#EFEBEB;
+        background-color:#bdc7c9;
         width:230px;
         height:590px;
         position: relative;
@@ -39,7 +39,7 @@ include "nav.php";
     h3{
         position:relative;
         left:20px;
-        color:#36486b;
+        color:#2b4f60;
         font-family:fantasy;
     }
     .title{

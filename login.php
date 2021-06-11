@@ -1,95 +1,96 @@
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+</head>
 <html>
 <head>
 <style>
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #DAE3EB;
+    background-color: #ead3cb;
 }
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  border: 1px solid black;
-  box-sizing: border-box;
+.py-100{
+    padding: 180px 0;
 }
-button {
-  background-color: #36486b;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
+.online{
+    background-color:#ead3cb;
 }
-button:hover {
-  opacity: 0.8;
+.online h1{
+    font-size: 48px;
+    color:black;
 }
-.CloseButton {
-  text-align: center;
-  margin: 24px 0 12px 0;
-  position: relative;
+
+.inputfile{
+    position: relative;
+    bottom: 35px;
+    font-size: 1.25em;
+    font-weight: 700;
+    color: black;
+    background-color: #845460;
+    display: inline-block;
+    cursor: pointer;
+    border: 1px solid #433520;
 }
-.container {
-  padding: 16px;
+.inputfile:focus,
+.inputfile:hover {
+    background-color: #7b113a;
+    color:white;
 }
-.modal {
-  display: none;
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.4);
-  padding-top: 60px;
+h5{
+    position: relative;
+    bottom:220px;
+    left:530px;
+    color : red;
 }
-.modal-content {
-  background-color: #fefefe;
-  margin: 5% auto 15% auto;
-  border: 1px solid #888;
-  width: 80%;
+
+.forget{
+	text-decoration:none;
+	font-weight:bold;
+    position: relative;
+    bottom:30px;
+    color:black;
 }
-.close {
-  position: absolute;
-  right: 25px;
-  top: 0;
-  color: #000;
-  font-size: 35px;
-  font-weight: bold;
+.forget:hover{
+	text-decoration:none;
+    color: #7b113a;
+    }
+
+.pos{
+	width:500px;
 }
-.close:hover,
-.close:focus {
-  color: red;
-  cursor: pointer;
+.head{
+	text-align:center;
+	position:relative;	
 }
-.login{
-  position: relative;
-  left: 550px;
-  top: 300px;
-  width:400px;
+.forms{
+    border:1px solid #433520;
+    background-color: white;
 }
 </style>
 </head>
 <body>
-    <button class="login"onclick="document.getElementById('id01').style.display='block'" >Login</button>
-    <div id="id01" class="modal">
-        <form class="modal-content animate" action="" method="post">
-            <div class="CloseButton">
-                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-            </div>
-            <div class="container">
-                <label for="uname"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" required>
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
-                <button type="submit" name="submit">Login</button>
-                <label>
-                <input type="checkbox" checked="checked" name="remember"> Remember me
-                </label>
-            </div>
-        </form>
-    </div>
-
-
+<div class="online py-100">
+		<div class="container pos">
+			<div class="row">
+				<div class="col-lg">
+					<form action="" method = "post">
+						<div class="form">	
+							<h1 class="head">Login</h1>
+							<input type="text"class="forms form-control mb-4 py-4 " name="uname"placeholder="Enter username.."><br>
+							<input type="password"class="forms form-control mb-4  py-4 "id="fname" name="psw" placeholder="Your password.."><br>
+							<input type="submit"class="inputfile btn w-100 py-3" value="Login" name="Submit">
+							<a href="forgot.php" class="forget">Forgot Password?</a>
+						</div>
+					</form>
+				</div>
+			</div>	
+		</div>
+	</div>
 </body>
 </html>
 
@@ -103,9 +104,6 @@ $dbname = "hotel";
 $conn = new mysqli($servername, $username, $password, $dbname);
 if(isset($_POST["submit"]))
 {
-
-
-
 $username=$_POST['uname'];
 $password=$_POST['psw'];
    $sql="SELECT * from user where username='$username'";
@@ -130,10 +128,6 @@ header("Location:Rooms.php");
    }
    if($_SESSION['username']=$row[3])
    $_SESSION['Role']=$row[5];
-  
-
-
-
 
    }
    else echo "Wrong password";

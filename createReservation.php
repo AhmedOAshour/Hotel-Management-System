@@ -7,7 +7,7 @@ include "nav.php";?>
     <style>
      body{
       overflow-x: hidden;
-      background-color:#DAE3EB;
+      background-color:#ead3cb;
     }
     table,th,td,tr{
       border:1px solid black;
@@ -18,7 +18,7 @@ include "nav.php";?>
       text-align: left;
     }
     th{
-      background-color:#36486b;
+      background-color:#845460;
       color: white;
       
     }
@@ -72,17 +72,18 @@ include "nav.php";?>
     .create{
       margin-top:10px;
       width:100%;   
-      background-color:transparent;
+      background-color:#845460;
       height:50px;
       font-weight:bolder; 
     }
     .create:hover{
-      background-color:#36486b;
+      background-color:#7b113a;
       color:white;
       border:1px solid black;
     }
     .formE{
       margin-top:15px;
+      height:55px;
     }
     
     </style>
@@ -177,13 +178,13 @@ include "nav.php";?>
         </div>
         <div id="createClient" style="display:none">
           <form action="index.html" method="post">
-            <input class="formE form-control border-3" type="text" name="first_name" placeholder="First Name...">
-            <input class="formE form-control border-3" type="text" name="last_name" placeholder="Last Name...">
-            <input class="formE form-control border-3" type="text" name="identification_no" placeholder="Identification Number...">
-            <input class="formE form-control border-3" type="text" name="nationality" placeholder="Nationality...">
-            <input class="formE form-control border-3" type="text" name="mobile" placeholder="Mobile...">
-            <input class="formE form-control border-3" type="text" name="email" placeholder="E-mail...">
-            <input class="formE form-control border-3" type="text" name="company" placeholder="Company...">
+            <input class="formE form-control border-3" type="text" name="first_name" placeholder="First Name..."><br>
+            <input class="formE form-control border-3" type="text" name="last_name" placeholder="Last Name..."><br>
+            <input class="formE form-control border-3" type="text" name="identification_no" placeholder="Identification Number..."><br>
+            <input class="formE form-control border-3" type="text" name="nationality" placeholder="Nationality..."><br>
+            <input class="formE form-control border-3" type="text" name="mobile" placeholder="Mobile..."><br>
+            <input class="formE form-control border-3" type="text" name="email" placeholder="E-mail..."><br>
+            <input class="formE form-control border-3" type="text" name="company" placeholder="Company..."><br>
             <button class="create"type="button" onclick="createClient()">Submit</button>
           </form>
         </div>

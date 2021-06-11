@@ -9,7 +9,7 @@ include "nav.php"
   <style>
     body{
       overflow-x: hidden;
-      background-color:#DAE3EB;
+      background-color:#ead3cb;
     }
     table,th,td,tr{
       border:1px solid black;
@@ -20,7 +20,7 @@ include "nav.php"
       text-align: left;
     }
     th{
-      background-color:#36486b;
+      background-color:#845460;
       color: white;
       
     }
@@ -38,27 +38,20 @@ include "nav.php"
     }
     .button{
       position: relative;
-      bottom: 35px;
-      font-size: 1.25em;
-      font-weight: 700;
-      color: white;
-      background-color: #36486b;
-      display: inline-block;
-      cursor: pointer;
-      border: 1px solid black;
-      top:10px;
+      margin-top:10px;
+      width:100%;   
+      background-color:#845460;
+      height:50px;
+      font-weight:bolder;
     }
-    .button:focus,
     .button:hover{
-      filter: brightness(150%);
+      background-color:#7b113a;
+      color:white;
+      border:1px solid black;
     }
-    #addBtn{
-      position: relative;
-      left:470px;
-    }
-    .submitEmployee{
-      position: relative;
-      left:510px;
+    .formE{
+      margin-top:15px;
+      height:55px;
     }
   </style>
 <body onload="showEmployees()">
@@ -66,11 +59,11 @@ include "nav.php"
     <h2>Employees</h2>
     <div id="addEmployees" style="display: none">
       <form class="addE"  action="" method="post">
-        <input type="text" name="Fname" id="Fname" class="form form-control mb-4 border-0 py-4" placeholder="First Name"><br>
-        <input type="text" name="Lname" id="Lname" class="form form-control mb-4 border-0 py-4" placeholder="Last Name"><br>
-        <input type="password" name="password" id="password" class="form form-control mb-4 border-0 py-4"placeholder="Password"><br>
-        <input type="text" name="username" id="username" class="form form-control mb-4 border-0 py-4" placeholder="UserName"><br>
-        <select id="position" name="position" class="form form-control mb-2 border-0">
+        <input type="text" name="Fname" id="Fname" class="formE form-control mb-4 border-0 py-4" placeholder="First Name"><br>
+        <input type="text" name="Lname" id="Lname" class="formE form-control mb-4 border-0 py-4" placeholder="Last Name"><br>
+        <input type="password" name="password" id="password" class="formE form-control mb-4 border-0 py-4"placeholder="Password"><br>
+        <input type="text" name="username" id="username" class="formE form-control mb-4 border-0 py-4" placeholder="UserName"><br>
+        <select id="position" name="position" class="formE form-control mb-2 border-0">
 
           <option hidden disabled selected value>Position</option>
           <option value='front_clerk'>Front Clerk</option>
