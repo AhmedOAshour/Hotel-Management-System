@@ -17,6 +17,7 @@ include "nav.php";?>
     th,td{
       padding: 15px;
       text-align: left;
+      border:none;
     }
     th{
       background-color:#845460;
@@ -28,13 +29,10 @@ include "nav.php";?>
       position:relative;
     }
     tr:hover{
-      color:blue;
+      background-color:#bdc7c9;
     }
     a{
-
       color:#36486b;
-    
-      font-family: "Times New Roman", Times, serif;
     }
     a:hover{
 
@@ -105,7 +103,7 @@ include "nav.php";?>
   <body onload="showReservations()">
   <div class="container">
   <h2>Reservations</h2>
-    <input type="text" id="bar" placeholder="Search..." oninput="showReservations()">
+    <input id="bar"type="text" placeholder="Search..." oninput="showReservations()"><i class="fa fa-search"></i>
     <select id="select" onchange="showClient()">
       <option value="last_name">Last Name</option>
       <option value="identification_no">ID Number</option>
@@ -116,14 +114,14 @@ include "nav.php";?>
     <table width="100%" border="1" style="border-collapse:collapse; margin-top:4px;">
       <thead>
         <tr>
-          <th><strong>First Name</strong></th>
-          <th><strong>Last Name</strong></th>
-          <th><strong>Nationality</strong></th>
-          <th><strong>Room Type</strong></th>
-          <th><strong>Room Floor</strong></th>
-          <th><strong>Arrival</strong></th>
-          <th><strong>Days/Nights</strong></th>
-          <th><strong>View reservation</strong></th>
+          <th style='text-align:center'><strong>Reservation No.</strong></th>
+          <th style='text-align:center'><strong>First Name</strong></th>
+          <th style='text-align:center'><strong>Last Name</strong></th>
+          <th style='text-align:center'><strong>Nationality</strong></th>
+          <th style='text-align:center'><strong>Room Type</strong></th>
+          <th style='text-align:center'><strong>Room Floor</strong></th>
+          <th style='text-align:center'><strong>Arrival</strong></th>
+          <th style='text-align:center'><strong>Days/Nights</strong></th>
         </tr>
       </thead>
       <tbody id="rTable">

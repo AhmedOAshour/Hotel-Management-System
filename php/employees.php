@@ -20,24 +20,24 @@ function viewE(){
 
   while($row = mysqli_fetch_array($result)) {
   echo "<tr>";
-  echo "<td>" . $row['ID'] . "</td>";
-  echo "<td>" . $row['first_name'] . "</td>";
-  echo "<td>" . $row['last_name'] . "</td>";
-  echo "<td>" . $row['username'] . "</td>";
+  echo "<td style='text-align:center'>" . $row['ID'] . "</td>";
+  echo "<td style='text-align:center'>" . $row['first_name'] . "</td>";
+  echo "<td style='text-align:center'>" . $row['last_name'] . "</td>";
+  echo "<td style='text-align:center'>" . $row['username'] . "</td>";
   if ($row['position'] == "HK_employee") {
-   echo "<td>House Keeping Employee</td>";
+   echo "<td style='text-align:center'>House Keeping Employee</td>";
   }
   elseif ($row['position'] == "reservation_clerk") {
-   echo "<td>Reservation Clerk</td>";
+   echo "<td style='text-align:center'>Reservation Clerk</td>";
   }
   elseif ($row['position'] == "front_clerk") {
-    echo "<td>Front Office Clerk</td>";
+    echo "<td style='text-align:center'> Front Office Clerk</td>";
   }
   elseif ($row['position'] == "admin") {
-    echo "<td>Admin</td>";
+    echo "<td style='text-align:center'>Admin</td>";
   }
-  echo "<td align='center'><a class='color' type='button' name='edit' onclick='editEmployee(".$row['ID'].")'>Edit</a></td>";
-  echo "<td align='center'><a class='color' type='button' name='delete' onclick='deleteEmployee(".$row['ID'].")'>Delete</a></td>";
+  echo "<td style='text-align:center'><a class='color' type='button' name='edit' onclick='editEmployee(".$row['ID'].")'><i class='fa fa-edit'></i></a></td>";
+  echo "<td style='text-align:center'><a class='color' type='button' name='delete' onclick='deleteEmployee(".$row['ID'].")'><i class='fa fa-trash'></i></a></td>";
   echo "</tr>";
   }
 }

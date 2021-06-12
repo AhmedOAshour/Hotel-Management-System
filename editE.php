@@ -14,7 +14,7 @@ include "nav.php"
 <style>
 body{
   overflow-x: hidden;
-  background-color:#DAE3EB;
+  background-color:#ead3cb;
 }
 table,th,td,tr{
   border:1px solid black;
@@ -24,7 +24,7 @@ th,td{
   text-align: left;
 }
 th{
-  background-color: grey;
+  background-color: #845460;
   color: white;
 }
 table{
@@ -38,24 +38,26 @@ h2{
 }
 .button{
   position: relative;
-  bottom: 35px;
-  font-size: 1.25em;
-  font-weight: 700;
-  color: white;
-  background-color: #36486b;
-  display: inline-block;
-  cursor: pointer;
-  border: 1px solid black;
-  width:50%;
-  left:250px;
+    bottom: 35px;
+    font-size: 1.25em;
+    font-weight: 700;
+    color: black;
+    background-color: #845460;
+    display: inline-block;
+    cursor: pointer;
+    border: 1px solid #433520;
+    width:100%;
+    height:50px;
 }
-.button:focus,
 .button:hover{
-  filter: brightness(150%);
+  background-color: #7b113a;
+    color:white;
 }
-
 .names{
   font-size:20px;
+}
+.formE{
+  height:55px;
 }
 </style>
 <script src="JS/employees.js"></script>

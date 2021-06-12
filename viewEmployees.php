@@ -18,11 +18,14 @@ include "nav.php"
     th,td{
       padding: 15px;
       text-align: left;
+      border:none;
+    }
+    tr:hover{
+      background-color:#bdc7c9;
     }
     th{
       background-color:#845460;
       color: white;
-      
     }
     table{
       width: 100%;
@@ -77,13 +80,13 @@ include "nav.php"
     <table>
       <thead>
         <tr>
-          <th><strong>ID</strong></th>
-          <th><strong>First Name</strong></th>
-          <th><strong>Last Name</strong></th>
-          <th><strong>Username</strong></th>
-          <th><strong>Position</strong></th>
-          <th><strong>Edit</strong></th>
-          <th><strong>Delete</strong></th>
+          <th style='text-align:center'><strong>ID</strong></th>
+          <th style='text-align:center'><strong>First Name</strong></th>
+          <th style='text-align:center'><strong>Last Name</strong></th>
+          <th style='text-align:center'><strong>Username</strong></th>
+          <th style='text-align:center'><strong>Position</strong></th>
+          <th style='text-align:center'><strong>Edit</strong></th>
+          <th style='text-align:center'><strong>Delete</strong></th>
         </tr>
       </thead>
       <tbody id="rTable"></tbody>

@@ -17,19 +17,19 @@ function showReservations(){
   else{
     while($row = mysqli_fetch_array($result)) {
     echo "<tr>";
-    echo "<td>" . $row['first_name'] . "</td>";
-    echo "<td>" . $row['last_name'] . "</td>";
-    echo "<td>" . $row['nationality'] . "</td>";
-    echo "<td>" . $row['room_type'] . "</td>";
-    echo "<td>" . $row['room_floor'] . "</td>";
-    echo "<td>" . $row['arrival'] . "</td>";
+    echo "<td style='text-align:center'>" ."<a href='viewReservation?id=$row[ID]'>$row[0]</a>". "</td>";
+    echo "<td style='text-align:center'>" . $row['first_name'] . "</td>";
+    echo "<td style='text-align:center'>" . $row['last_name'] . "</td>";
+    echo "<td style='text-align:center'>" . $row['nationality'] . "</td>";
+    echo "<td style='text-align:center'>" . $row['room_type'] . "</td>";
+    echo "<td style='text-align:center'>" . $row['room_floor'] . "</td>";
+    echo "<td style='text-align:center'>" . $row['arrival'] . "</td>";
     $arrival = strtotime($row['arrival']);
     $departure = strtotime($row['departure']);
     // divide seconds by 86400 to get nights
     $nights = ($departure - $arrival) / (86400);
     $days = $nights + 1;
-    echo "<td>" . "$days/$nights" . "</td>";
-    echo "<td style='text-align:center '>" . "<a href='viewReservation?id=$row[ID]'>View</a>" . "</td>";
+    echo "<td style='text-align:center'>" . "$days/$nights" . "</td>";
     }
   }
 }

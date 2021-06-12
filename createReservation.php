@@ -3,6 +3,7 @@ include "nav.php";?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta charset="utf-8">
     <style>
      body{
@@ -16,6 +17,7 @@ include "nav.php";?>
     th,td{
       padding: 15px;
       text-align: left;
+      border:none;
     }
     th{
       background-color:#845460;
@@ -27,7 +29,7 @@ include "nav.php";?>
       position:relative;
     }
     tr:hover{
-      color:blue;
+      background-color:#bdc7c9;
     }
     h2{
       text-align:center;
@@ -152,7 +154,7 @@ include "nav.php";?>
       <!-- choose or create client section -->
       <div id="client">
         <div id="showClients">
-          <input type="text" id="bar" placeholder="Search by..." oninput="showClient()">
+        <input id="bar"type="text" placeholder="Search by..." oninput="showClient()"><i class="fa fa-search"></i>
           <select id="select" onchange="showClient()">
             <option value="last_name">Last Name</option>
             <option value="identification_no">ID Number</option>
@@ -161,14 +163,14 @@ include "nav.php";?>
           <table width="100%" border="1" style="border-collapse:collapse; margin-top:4px;">
             <thead>
               <tr>
-                <th><strong>First Name</strong></th>
-                <th><strong>Last Name</strong></th>
-                <th><strong>Nationality</strong></th>
-                <th><strong>Identification No.</strong></th>
-                <th><strong>Mobile</strong></th>
-                <th><strong>E-mail</strong></th>
-                <th><strong>Company</strong></th>
-                <th><strong>Create Reservation</strong></th>
+                <th style='text-align:center'><strong>First Name</strong></th>
+                <th style='text-align:center'><strong>Last Name</strong></th>
+                <th style='text-align:center'><strong>Nationality</strong></th>
+                <th style='text-align:center'><strong>Identification No.</strong></th>
+                <th style='text-align:center'><strong>Mobile</strong></th>
+                <th style='text-align:center'><strong>E-mail</strong></th>
+                <th style='text-align:center'><strong>Company</strong></th>
+                <th style='text-align:center'><strong>Create Reservation</strong></th>
               </tr>
             </thead>
             <tbody id="rTable">

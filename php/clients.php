@@ -36,7 +36,7 @@
       echo "<td>" . $row['email'] . "</td>";
       echo "<td>" . $row['company'] . "</td>";
       if($flag)
-        echo "<td style='text-align:center'>" . "<a type='button' class='link'onclick='chooseClient($row[ID])'>Create Reservation</a>" . "</td>";
+        echo "<td style='text-align:center'>" . "<a type='button' class='link'onclick='chooseClient($row[ID])'><i class='fa fa-plus-square'></i></a>" . "</td>";
       echo "</tr>";
       }
     }
