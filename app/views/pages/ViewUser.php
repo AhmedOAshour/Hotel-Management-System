@@ -43,8 +43,8 @@ class ViewUser extends View{
   }
   public function addForm(){
     $str=<<<EOD
-    <div id="addEmployees" >
-    <form class="addE"  >
+    <div id="addEmployees">
+    <form class="addE">
         <input type="text" name="Fname" id="Fname" class="form form-control mb-4 border-0 py-4" placeholder="First Name"><br>
         <input type="text" name="Lname" id="Lname" class="form form-control mb-4 border-0 py-4" placeholder="Last Name"><br>
         <input type="password" name="password" id="password" class="form form-control mb-4 border-0 py-4"placeholder="Password"><br>
