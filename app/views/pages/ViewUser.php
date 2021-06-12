@@ -28,7 +28,7 @@ class ViewUser extends View{
             <td>$user->last_name</td>
             <td>$user->username</td>
             <td>$user->position</td>
-            <td><a href="employees.php?action=edit&id=$user->id">Edit</a></td>
+            <td><a href="employees.php?action=editform&id=$user->id">Edit</a></td>
             <td><a href="employees.php?action=delete&id=$user->id">Delete</a></td>
           </tr>
           EOD;
@@ -38,15 +38,16 @@ class ViewUser extends View{
       </table>
       <br>
     </div>
-    <!-- <button type="button" class="button" id="addBtn" onclick="view_add()">Add Employee</button> -->
+    <a href="employees.php?action=addform"><button type="button" class="button" id="addBtn">Add Employee</button></a>
     EOD;
+    echo $str;
   }
   public function addForm(){
     $str=<<<EOD
     <div id="addEmployees">
     <form class="addE">
-        <input type="text" name="Fname" id="Fname" class="form form-control mb-4 border-0 py-4" placeholder="First Name"><br>
-        <input type="text" name="Lname" id="Lname" class="form form-control mb-4 border-0 py-4" placeholder="Last Name"><br>
+        <input type="text" name="first_name" id="Fname" class="form form-control mb-4 border-0 py-4" placeholder="First Name"><br>
+        <input type="text" name="last_name" id="Lname" class="form form-control mb-4 border-0 py-4" placeholder="Last Name"><br>
         <input type="password" name="password" id="password" class="form form-control mb-4 border-0 py-4"placeholder="Password"><br>
         <input type="text" name="username" id="username" class="form form-control mb-4 border-0 py-4" placeholder="UserName"><br>
         <select id="position" name="position" class="form form-control mb-2 border-0">
@@ -60,14 +61,16 @@ class ViewUser extends View{
       </form>
     </div>
     EOD;
+    echo $str;
   }
   public function editForm($id){
-    $users = $this->model->readUser($id);
+    $user = new User($id);
       $str=<<<EOD
       <form class='editE'>
-        <label class='names' for='Fname'>First Name</label><input type='text' name='Fname' id='Fname' class='formE form-control border-0 ' value='' '> <br><br>
-        <label class='names' for='Lname'>Last Name</label><input type='text' name='Lname' id='Lname' class='formE form-control border-0 ' value='' '> <br><br>
-        <label class='names' for='username'>username</label><input type='text' name='username' id='username' class='formE form-control border-0 ' value='' '> <br><br>
+        <input type="text" name="id" value="$id" style="display:none">
+        <label class='names' for='first_name'>First Name</label><input type='text' name='first_name' id='Fname' class='formE form-control border-0 ' value='$user->first_name' '> <br><br>
+        <label class='names' for='last_name'>Last Name</label><input type='text' name='last_name' id='Lname' class='formE form-control border-0 ' value='$user->last_name' '> <br><br>
+        <label class='names' for='username'>username</label><input type='text' name='username' id='username' class='formE form-control border-0 ' value='$user->username' '> <br><br>
         <label class='names' for='password'>password</label><input type='password' name='password' id='password' class='formE form-control  border-0' value='' '> <br><br>
         <label class='names' for='position'>position</label>
         <select id='position' name='position' class='formE form-control mb-2 border-0'>
@@ -78,10 +81,7 @@ class ViewUser extends View{
         <input type='submit'  name='action' value="edit" class='button'>
       </form>
       EOD;
-
-
-    
-      
+      echo $str;
   }
   
 }

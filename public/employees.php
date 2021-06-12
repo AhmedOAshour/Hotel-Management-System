@@ -1,28 +1,38 @@
+
 <?php
 require_once("../app/bootapp.php");
 require_once(APPROOT."/models/User.php");
 require_once(APPROOT . "/controllers/UserController.php");
 require_once(APPROOT . "/views/pages/ViewUser.php");
 $model=new User();
-$controller=new UserController();
+$controller=new UserController($model);
 $view=new ViewUser($controller,$model);
 if (isset($_GET['action']) && !empty($_GET['action'])) {
 	switch($_GET['action']){
-		case 'edit':
+		case 'editform':
 			echo $view->editForm($_GET['id']);
+			break;
+		case 'edit':
+			$controller->edit($_GET['id']);
 			break;
 		case 'delete':
 			$controller->delete($_GET['id']);
 			echo $view->output();
             break;
-        case 'add':
+        case 'addform':
             $view->addForm();
+			break;
+		case 'add':
+			$controller->insert();
+			$view->output();
+			break;
 
 	
 	}
 }
 else
 	echo $view->output();
+	
 
 
 
