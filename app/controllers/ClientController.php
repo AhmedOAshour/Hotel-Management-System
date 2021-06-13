@@ -19,9 +19,9 @@ class ClientController extends Controller{
    $guest_names=$_REQUEST['guest_names'];
     $guest_count=$_REQUEST['guest_count'];
     $price=0;
-    $arrival=$_REQUEST=['arrival'];
-    $departure=$_REQUEST=['departure'];
-    $comments=$_REQUEST=['comments'];
+    $arrival=$_REQUEST['arrival'];
+    $departure=$_REQUEST['departure'];
+    $comments=$_REQUEST['comments'];
     $this->model->createReservation($client_id,$room_type,$room_floor,$guest_names,$guest_count,$price,$arrival,$departure,$comments);
 
   }

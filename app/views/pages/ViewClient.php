@@ -78,7 +78,7 @@ public function addForm(){
 echo $str;
 
 }
-public function resForm(){
+public function resForm($id){
 
   $roomtypes=$this->model->getRoomType();
   $floorno=$this->model->getFloorsNo();
@@ -122,7 +122,7 @@ public function resForm(){
       Arrival: <input type='date' name='arrival'>
       Departure: <input type='date' name='departure'><br>
       <textarea name="comments" rows="8" cols="80" placeholder="Comments..."></textarea> <br>
-      <input type="text" name="client_ID" value="<?php echo $_GET[id];?>" id="client_ID" hidden>
+      <input type="text" name="client_ID" value="$id"  id="client_ID" hidden>
       <input type="submit" name="action" value="createRes">
       </form>
       </div>

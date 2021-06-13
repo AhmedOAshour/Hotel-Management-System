@@ -21,7 +21,7 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 			$view->output();
 			break;
 		case 'resform':
-			$view2->resForm();
+			$view2->resForm($_GET['id']);
 			break;
 		case 'createRes':
 			$controller->createReservation();

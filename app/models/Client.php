@@ -40,9 +40,9 @@ class client extends Model{
         }
       }
       function createReservation($client_id,$room_type,$room_floor,$guest_names,$guest_count,$price,$arrival,$departure,$comments){
-        $sql="INSERT into reservation(client_id,room_type,room_floor,guest_names,guest_count,price,arrival,departure,comments) values('$client_id','$room_type','$room_floor','".$guest_names."','$guest_count',$price,'".$arrival."','".$departure."','".$comments."')";
+       $sql="INSERT into reservation(client_id,room_type,room_floor,guest_names,guest_count,price,arrival,departure,comments) values('$client_id','$room_type','$room_floor','$guest_names','$guest_count',$price,'$arrival','$departure','$comments')";
         $result = $this->db->query($sql);
-     
+    
       }
     
 
