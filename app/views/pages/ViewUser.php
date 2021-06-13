@@ -57,7 +57,7 @@ class ViewUser extends View{
           <option value='reservation_clerk'>Reservation Clerk</option>
           <option value='HK_employee'>Housekeeping</option>
         </select><br>
-        <input type="submit" class="submitEmployee button" name="action" value="add" id="submitBtn" onclick="addEmployee()">
+        <input type="submit" class="submitEmployee button" name="action" value="add" id="submitBtn">
       </form>
     </div>
     EOD;

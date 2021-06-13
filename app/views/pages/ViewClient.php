@@ -26,13 +26,11 @@ class ViewClient extends View{
                 <th><strong>Create Reservation</strong></th>
               </tr>
             </thead>
-            <tbody id="rTable">
-            </tbody>
-          </table>
-          <button type="button" class="create" onclick="createClient()">Add Client</button>
+            
+          
         </div>
     EOD;
-    $first_name,$last_name,$identification_no $nationality, $mobile, $email, $company;
+   
     foreach ($clients as $client) {
         $str .= <<<EOD
         <tr>
@@ -44,7 +42,7 @@ class ViewClient extends View{
           <td>$client->mobile</td>
           <td>$client->email</td>
           <td>$client->company</td>
-          <td style='text-align:center'><a type='button' class='link'onclick='chooseClient($row[ID])'>Create Reservation</a></td>
+          <td><a href="clients.php?action=resform&id=$client->id">Create Reservation</a></td>
           
         </tr>
         EOD;
@@ -54,10 +52,12 @@ class ViewClient extends View{
     </table>
     <br>
   </div>
-  <!-- <button type="button" class="button" id="addBtn" onclick="view_add()">Add Employee</button> -->
+
+  <a href="clients.php?action=addform"><button type="button" class="button" id="addBtn">Add Client</button></a>
   EOD;
+  echo $str;
 }
-public addForm(){
+public function addForm(){
     $str=
     <<<EOD
             <div id="createClient">
@@ -69,14 +69,68 @@ public addForm(){
             <input class="formE form-control border-3" type="text" name="mobile" placeholder="Mobile...">
             <input class="formE form-control border-3" type="text" name="email" placeholder="E-mail...">
             <input class="formE form-control border-3" type="text" name="company" placeholder="Company...">
-            <button class="create"type="button" onclick="createClient()">Submit</button>
-            <input type="submit" class="create" name="action" value="add" id="submitBtn" onclick="createClient()">
+            <input type="submit" class="create" name="action" value="add" id="submitBtn"">
             </form>
             </div>
         </div>
 
     EOD;
+echo $str;
 
+}
+public function resForm(){
+
+  $roomtypes=$this->model->getRoomType();
+  $floorno=$this->model->getFloorsNo();
+
+  $str=
+  <<<EOD
+              <div id="reservation">
+              <form>
+              <input id="count" type='text' name='guest_count' placeholder="Guest Count"><br>
+              <textarea name="guest_names" rows="3" cols="23" placeholder="Guest Names seperate by ,"></textarea> <br>
+              <label for="room_type">Room Type:</label> 
+              <select class="" name="room_type">
+   EOD;
+            
+          foreach ($roomtypes as $room) {
+            $str.=<<<EOD
+            
+                <option value='$room'>$room</option>
+                EOD;
+                                        }
+              
+        $str.=
+        <<<EOD
+          <option value="">Single</option>
+        </select>
+        <label for="room_floor">Room Floor:</label> 
+        <select class="" name="room_floor">
+        EOD;
+        
+          foreach ($floorno as $floor) {
+          $str.=<<<EOD
+          echo "<option value='$floor'>$floor</option>";
+          EOD;
+                                        }
+         
+
+      $str.=
+      <<<EOD
+ 
+      </select>
+      Arrival: <input type='date' name='arrival'>
+      Departure: <input type='date' name='departure'><br>
+      <textarea name="comments" rows="8" cols="80" placeholder="Comments..."></textarea> <br>
+      <input type="text" name="client_ID" value="<?php echo $_GET[id];?>" id="client_ID" hidden>
+      <input type="submit" name="action" value="createRes">
+      </form>
+      </div>
+      </div>
+      </body>
+      </html>
+      EOD;
+      echo $str;
 
 }
 

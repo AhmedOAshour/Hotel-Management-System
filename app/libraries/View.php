@@ -8,6 +8,7 @@ abstract class  View{
         $this->controller = $controller;
         $this->model = $model;
     }
+   
 	
     public abstract function output();
 }
