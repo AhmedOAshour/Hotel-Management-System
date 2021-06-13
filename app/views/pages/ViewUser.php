@@ -83,6 +83,40 @@ class ViewUser extends View{
       EOD;
       echo $str;
   }
-
+  public function loginForm(){
+    $str=<<<EOD
+    <div id="login">
+    <form class="login">
+        <input type="text" name="username" id="username" class="form form-control mb-4 border-0 py-4" placeholder="UserName"><br>
+        <input type="password" name="password" id="password" class="form form-control mb-4 border-0 py-4"placeholder="Password"><br>
+        <input type="submit" class="login button" name="action" value="login" id="submitBtn">
+        <a href="#">Forgot Password</a>
+      </form>
+    </div>
+    EOD;
+    echo $str;
+  }
+  public function forgotPass(){
+    $str=<<<EOD
+    <div id="login">
+    <form class="login">
+        <label class='username' for='username'>username</label><input type="text" name="username" id="username" class="form form-control mb-4 border-0 py-4" placeholder="Username"><br>
+        <input type="submit" class="forgot" name="action" value="Next" id="submitBtn">
+      </form>
+    </div>
+    EOD;
+    echo $str;
+  }
+  public function security($username){
+    $str=<<<EOD
+    <div id="login">
+    <form class="login">
+        <label class='question' for='question'>Security Question</label><input type="text" name="question" id="question" class="form form-control mb-4 border-0 py-4"><br>
+        <input type="submit" class="forgot" name="action" value="Next" id="submitBtn">
+      </form>
+    </div>
+    EOD;
+    echo $str;
+  }
 }
 ?>
