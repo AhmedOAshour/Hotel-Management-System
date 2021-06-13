@@ -20,7 +20,7 @@ class User extends Model
         $this->password = $row['password'];
         $this->position = $row['position'];
       }
-      
+
     }
   }
 
@@ -36,6 +36,7 @@ class User extends Model
       $_SESSION['position'] = $this->position;
 		}
 		else {
+      return false;
 		}
   }
 
@@ -68,7 +69,7 @@ class User extends Model
     $sql = "UPDATE user SET first_name = '$first_name', last_name = '$last_name', password = '$password', position = '$position', username = '$username' WHERE ID = '$id'";
     if($this->db->query($sql) === true){
 			echo "updated successfully.";
-    
+
 	} else{
 			echo "ERROR: Could not able to execute $sql. " . $conn->error;
 		}

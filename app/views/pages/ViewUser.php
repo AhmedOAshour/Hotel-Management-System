@@ -2,7 +2,7 @@
 class ViewUser extends View{
   public function output(){
     $users = $this->model->readUsers();
-    $str = 
+    $str =
     <<<EOD
     <h2>Employees</h2>
     <div id="viewEmployees">
@@ -83,6 +83,6 @@ class ViewUser extends View{
       EOD;
       echo $str;
   }
-  
+
 }
 ?>
