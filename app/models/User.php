@@ -20,22 +20,22 @@ class User extends Model
         $this->password = $row['password'];
         $this->position = $row['position'];
       }
-      
+
     }
   }
 
   function login($username, $password){
-    $sql = "SELECT ID FROM user WHERE username = $username AND password = $password";
+    $sql = "SELECT * FROM user WHERE username = $username AND password = $password";
     $result = $this->db->query($sql);
     if ($result->num_rows == 1){
 			$row = $this->db->fetchRow();
       $this->id = $row['ID'];
       $_SESSION['ID'] = $this->id;
-      $this->readUser($this->id);
-      $_SESSION['username'] = $this->username;
-      $_SESSION['position'] = $this->position;
+      $_SESSION['username'] = $row['username'];
+      $_SESSION['position'] = $row['position'];
 		}
 		else {
+      echo "Wrong Credentials.";
 		}
   }
 
@@ -68,7 +68,7 @@ class User extends Model
     $sql = "UPDATE user SET first_name = '$first_name', last_name = '$last_name', password = '$password', position = '$position', username = '$username' WHERE ID = '$id'";
     if($this->db->query($sql) === true){
 			echo "updated successfully.";
-    
+
 	} else{
 			echo "ERROR: Could not able to execute $sql. " . $conn->error;
 		}
