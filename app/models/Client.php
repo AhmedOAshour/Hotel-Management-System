@@ -44,6 +44,23 @@ class client extends Model{
         $result = $this->db->query($sql);
     
       }
+      function editClient($id,$first_name,$last_name,$identification_no ,$nationality, $mobile, $email, $company){
+        $sql = "UPDATE client SET first_name = '$first_name', last_name = '$last_name', identification_no = '$identification_no', nationality = '$nationality', mobile = '$mobile',email='$email',company='$company' WHERE ID = '$id'";
+        if($this->db->query($sql) === true){
+          echo "updated successfully.";
+        
+      } else{
+          echo "ERROR: Could not able to execute $sql. " . $conn->error;
+        }
+      }
+      function deleteClient($id){
+        $sql = "DELETE FROM client WHERE ID = $id ";
+        if($this->db->query($sql) === true){
+          echo "deleted successfully.";
+        } else{
+          echo "ERROR: Could not able to execute $sql. " . $conn->error;
+        }
+      }
     
 
 
