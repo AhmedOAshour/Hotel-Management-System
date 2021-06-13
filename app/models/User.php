@@ -25,18 +25,17 @@ class User extends Model
   }
 
   function login($username, $password){
-    $sql = "SELECT ID FROM user WHERE username = $username AND password = $password";
+    $sql = "SELECT * FROM user WHERE username = $username AND password = $password";
     $result = $this->db->query($sql);
     if ($result->num_rows == 1){
 			$row = $this->db->fetchRow();
       $this->id = $row['ID'];
       $_SESSION['ID'] = $this->id;
-      $this->readUser($this->id);
-      $_SESSION['username'] = $this->username;
-      $_SESSION['position'] = $this->position;
+      $_SESSION['username'] = $row['username'];
+      $_SESSION['position'] = $row['position'];
 		}
 		else {
-      return false;
+      echo "Wrong Credentials.";
 		}
   }
 

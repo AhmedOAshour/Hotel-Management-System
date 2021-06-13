@@ -12,6 +12,9 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 		case 'loginForm':
 			echo $view->loginForm();
 			break;
+    case 'login':
+  		echo $controller->login($_GET['username'], $_GET['password']);
+  		break;
 		case 'forgotPass':
 			$controller->forgotPass());
 			break;
