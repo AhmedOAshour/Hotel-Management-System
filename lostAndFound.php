@@ -61,8 +61,8 @@ body {
 						<div class="form">	
 							<h1 class="head">Lost and Found</h1>
 							<input type="date"class="forms form-control mb-1 py-4 " name="date" ><br>
-							<input type="text"class="forms form-control mb-1 py-4 " name="RoomNo" placeholder="Room Number.." ><br>
-							<textarea type="text"class="forms form-control mb-4 "id="fname" name="desc" placeholder="Description.."></textarea><br>
+							<input type="text"class="forms form-control mb-1 py-4 " name="room_number" placeholder="Room Number.." ><br>
+							<textarea type="text"class="forms form-control mb-4 "id="fname" name="item_description" placeholder="Description.."></textarea><br>
 							<input type="submit"class="inputfile btn w-100 py-3" value="Submit" name="Submit">
 						</div>
 					</form>
