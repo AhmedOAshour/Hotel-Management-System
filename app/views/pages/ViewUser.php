@@ -129,7 +129,7 @@ class ViewUser extends View{
         <input type="text" name="username" value="$username" style="display:none;">
         <label class='password' for='password'>New Password</label><br><input type="text" name="password" id="password" class="form form-control mb-4 border-0 py-4"><br>
         <label class='confirmPassword' for='confirmPassword'>Confirm Password</label><br><input type="text" class="confirmP" name="cPassword"><br>
-        <input type="submit" class="forgot" name="action" value="newPass"">
+        <input type="submit" class="forgot" name="action" value="Submit"">
       </form>
     </div>
     EOD;

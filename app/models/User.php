@@ -25,7 +25,7 @@ class User extends Model
   }
 
   function login($username, $password){
-    $sql = "SELECT * FROM user WHERE username = $username AND password = $password";
+    $sql = "SELECT * FROM user WHERE username = '$username' AND password = '$password'";
     $result = $this->db->query($sql);
     if ($result->num_rows == 1){
 			$row = $this->db->fetchRow();
