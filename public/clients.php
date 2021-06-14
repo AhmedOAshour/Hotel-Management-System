@@ -22,12 +22,13 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 			$controller->insert();
 			$view->output();
 			break;
-		case 'resform':
-			$view2->resForm($_GET['id']);
+		case 'resform':	
+			$view2->resForm($_GET['id'],$_GET['quantity']);
 			break;
 		case 'createRes':
-			$controller->createReservation();
-			$view->output();
+			$controller->createReservation($_GET['quantity']);
+			header('location:reservations.php');
+			
 			break;
 		case 'editform':
 			echo $view->editForm($_GET['id']);
@@ -39,6 +40,9 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 		case 'delete':
 			$controller->delete($_GET['id']);
 			echo $view->output();
+			break;
+		case 'addfields':
+			$view->addFields($_GET['id']);
 			break;
 	
 	}

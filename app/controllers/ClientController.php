@@ -15,14 +15,15 @@ class ClientController extends Controller{
   public function createReservation(){
     $client_id=$_REQUEST['client_ID'];
     $room_type=$_REQUEST['room_type'];
-    $room_floor=$_REQUEST['room_floor'];
    $guest_names=$_REQUEST['guest_names'];
     $guest_count=$_REQUEST['guest_count'];
+    $number_of_rooms=$_REQUEST['quantity'];
+
     $price=0;
     $arrival=$_REQUEST['arrival'];
     $departure=$_REQUEST['departure'];
     $comments=$_REQUEST['comments'];
-    $this->model->createReservation($client_id,$room_type,$room_floor,$guest_names,$guest_count,$price,$arrival,$departure,$comments);
+    $this->model->createReservation($client_id,$room_type,$guest_names,$guest_count,$number_of_rooms,$price,$arrival,$departure,$comments);
 
   }
   public function edit(){

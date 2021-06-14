@@ -19,14 +19,16 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 			echo $view->output();
             break;
 		case 'edit':
-			$view2->editForm($_GET['id']);
+			$view2->editForm($_GET['id'],$_GET['quantity']);
 			break;
 		case 'editRes':
 			$controller->edit($_GET['id']);
 			break;
 		case 'createReservation':
-			$view->addRes();
+			header("location:clients.php?flag=true");
 			break;
+		case 'editRoomCount':
+			$view->editRoomCount($_GET['id']);
 
 			
 			

@@ -4,13 +4,13 @@ class Reservation extends Model{
     public $client_id;
     public $bill_ID;
     public $room_type;
-    public $room_floor;
     public $guest_names;
     public $guest_count;
     public $price;
     public $arrival;
     public $departure;
     public $comments;
+    public $number_of_rooms;
   
     function __construct($id=""){
         parent::__construct();
@@ -22,10 +22,9 @@ class Reservation extends Model{
             $this->id = $row['ID'];
             $this->client_id= $row['client_ID'];
             $this->bill_ID = $row['bill_ID'];
-            $this->room_type = $row['room_type'];
-            $this->room_floor= $row['room_floor'];
             $this->guest_names = $row['guest_names'];
             $this->guest_count=$row['guest_count'];
+            $this->number_of_rooms=$row['number_of_rooms'];
             $this->price=$row['price'];
             $this->arrival=$row['arrival'];
             $this->departure=$row['departure'];
@@ -48,23 +47,40 @@ public function readReservations(){
 
 }
 
-public function editReservation($id,$client_ID,$room_type,$room_floor,$guest_names,$guest_count,$arrival,$departure,$comments){
-    $sql = "UPDATE reservation SET client_ID = '$client_ID', room_type = '$room_type', room_floor = '$room_floor', guest_names = '$guest_names', guest_count = '$guest_count' ,arrival = '$arrival',departure='$departure' , comments='$comments' WHERE ID = '$id'";
+public function editReservation($id,$client_ID,$room_type,$guest_names,$guest_count,$number_of_rooms,$arrival,$departure,$comments){
+  $sql2="DELETE from reservedrooms where RID=$id";
+  if($this->db->query($sql2) === true){
+    echo "updated successfully.";
+  
+} else{
+    echo "ERROR: Could not able to execute $sql. " . $conn->error;
+  }
+    $sql = "UPDATE reservation SET client_ID = '$client_ID', guest_names = '$guest_names', guest_count = '$guest_count' ,number_of_rooms='$number_of_rooms',arrival = '$arrival',departure='$departure' , comments='$comments' WHERE ID = '$id'";
     if($this->db->query($sql) === true){
 			echo "updated successfully.";
     
 	} else{
 			echo "ERROR: Could not able to execute $sql. " . $conn->error;
 		}
+    for($i=0;$i<count($room_type);$i++){
+      $price=0;
+      $sql="insert into reservedrooms (RID,room_type,price) values('$id','$room_type[$i]','$price')";
+      $result = $this->db->query($sql);
+      
+
+    }
+   
+
 
     
 }
 function deleteReservation($id){
     $sql = "DELETE FROM reservation WHERE ID = $id ";
-    if($this->db->query($sql) === true){
+    $sql2="DELETE from reservedrooms where RID=$id";
+    if($this->db->query($sql2) === true&&$this->db->query($sql)===true){
       echo "deleted successfully.";
     } else{
-      echo "ERROR: Could not able to execute $sql. " . $conn->error;
+      echo "ERROR: Could not able to execute $sql. " . $this->db->getConn()->error;
     }
   }
   

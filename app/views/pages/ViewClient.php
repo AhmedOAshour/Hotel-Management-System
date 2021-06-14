@@ -61,7 +61,7 @@ class ViewClient extends View{
           EOD;
           if(!empty($_GET['flag'])&&$_GET['flag']==true){
             $str.=<<<EOD
-          <td><a href="clients.php?action=resform&id=$client->id">Create Reservation</a></td>
+          <td><a href="clients.php?action=addfields&id=$client->id">Create Reservation</a></td>
           EOD;
           }
           else { $str.=<<<EOD
@@ -87,6 +87,7 @@ class ViewClient extends View{
     
 }
 public function addForm(){
+
     $str=
     <<<EOD
             <div id="createClient">
@@ -107,11 +108,11 @@ public function addForm(){
 echo $str;
 
 }
-public function resForm($id){
+public function resForm($id,$quantity){
 
   $roomtypes=$this->model->getRoomType();
-  $floorno=$this->model->getFloorsNo();
 
+ 
   $str=
   <<<EOD
               <div id="reservation">
@@ -119,39 +120,38 @@ public function resForm($id){
               <input id="count" type='text' name='guest_count' placeholder="Guest Count"><br>
               <textarea name="guest_names" rows="3" cols="23" placeholder="Guest Names seperate by ,"></textarea> <br>
               <label for="room_type">Room Type:</label> 
-              <select class="" name="room_type">
+              
    EOD;
+   for($i=0;$i<$quantity;$i++){ 
+     $str.=<<<EOD
+     <select class="" name="room_type[]">
+     EOD;
+    foreach ($roomtypes as $room) {
+  $str.=<<<EOD
+     
+                                    <option value='$room'>$room</option>
+          EOD;
+                                  }
+  $str.=
+  <<<EOD
+                                                 </select>
+  EOD;
+
+    
+
+   }
             
-          foreach ($roomtypes as $room) {
-            $str.=<<<EOD
-            
-                <option value='$room'>$room</option>
-                EOD;
-                                        }
+         
               
         $str.=
         <<<EOD
         
-        </select>
-        <label for="room_floor">Room Floor:</label> 
-        <select class="" name="room_floor">
-        EOD;
         
-          foreach ($floorno as $floor) {
-          $str.=<<<EOD
-          echo "<option value='$floor'>$floor</option>";
-          EOD;
-                                        }
-         
-
-      $str.=
-      <<<EOD
- 
-      </select>
       Arrival: <input type='date' name='arrival'>
       Departure: <input type='date' name='departure'><br>
       <textarea name="comments" rows="8" cols="80" placeholder="Comments..."></textarea> <br>
       <input type="text" name="client_ID" value="$id"  id="client_ID" hidden>
+      <input type="text" name="quantity" value="$quantity"  id="quantity" hidden>
       <input type="submit" name="action" value="createRes">
       </form>
       </div>
@@ -186,6 +186,23 @@ echo $str;
 
 
 }
+public function addFields($id){
+  $str=<<<EOD
+
+              <form>
+              Number of Rooms:
+              <input type="number"size="1" name="quantity" id="counter" value=1></input>
+              <input type="text" name="id" id="counter" hidden value=$id></input>
+              <input type="submit" class="btn1 inputfile btn w-100 py-3" name="action" value="resform"></input>
+            </form>
+         
+    EOD;
+
+    echo $str;
 
 
+      
+
+
+}
 }
