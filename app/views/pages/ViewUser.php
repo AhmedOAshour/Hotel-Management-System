@@ -87,10 +87,10 @@ class ViewUser extends View{
     $str=<<<EOD
     <div id="login">
     <form class="login">
-        <input type="text" name="username" id="username" class="form form-control mb-4 border-0 py-4" placeholder="UserName"><br>
+        <input type="text" name="username" id="username" class="form form-control mb-4 border-0 py-4" placeholder="Username"><br>
         <input type="password" name="password" id="password" class="form form-control mb-4 border-0 py-4"placeholder="Password"><br>
         <input type="submit" class="login button" name="action" value="login" id="submitBtn">
-        <a href="#">Forgot Password</a>
+        <a href="index.php?action=forgotpass">Forgot Password</a>
       </form>
     </div>
     EOD;
@@ -101,6 +101,7 @@ class ViewUser extends View{
     <div id="login">
     <form class="login">
         <label class='username' for='username'>username</label><input type="text" name="username" id="username" class="form form-control mb-4 border-0 py-4" placeholder="Username"><br>
+        <button type='submit' name='action' value='security'>submit</button>
         <input type="submit" class="forgot" name="action" value="Next" id="submitBtn">
       </form>
     </div>
@@ -108,11 +109,27 @@ class ViewUser extends View{
     echo $str;
   }
   public function security($username){
+    $question = $this->model->getQuestion($username);
     $str=<<<EOD
     <div id="login">
     <form class="login">
-        <label class='question' for='question'>Security Question</label><input type="text" name="question" id="question" class="form form-control mb-4 border-0 py-4"><br>
-        <input type="submit" class="forgot" name="action" value="Next" id="submitBtn">
+        <h3>Security Question</h3>
+        <label class='question' for='question'>$question ?</label><br><input type="text" name="answer" id="answer" class="form form-control mb-4 border-0 py-4"><br>
+        <input type="text" name="username" value="$username" style="display:none;">
+        <input type="submit" class="forgot" name="action" value="validate" id="submitBtn">
+      </form>
+    </div>
+    EOD;
+    echo $str;
+  }
+  public function newPassword($username){
+    $str=<<<EOD
+    <div id="login">
+    <form class="login">
+        <input type="text" name="username" value="$username" style="display:none;">
+        <label class='password' for='password'>New Password</label><br><input type="text" name="password" id="password" class="form form-control mb-4 border-0 py-4"><br>
+        <label class='confirmPassword' for='confirmPassword'>Confirm Password</label><br><input type="text" class="confirmP" name="cPassword"><br>
+        <input type="submit" class="forgot" name="action" value="Submit"">
       </form>
     </div>
     EOD;
