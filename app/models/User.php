@@ -33,9 +33,11 @@ class User extends Model
       $_SESSION['ID'] = $this->id;
       $_SESSION['username'] = $row['username'];
       $_SESSION['position'] = $row['position'];
+      echo "correct";
 		}
 		else {
       echo "Wrong Credentials.";
+      echo $sql;
 		}
   }
 
@@ -81,6 +83,35 @@ class User extends Model
     } else{
       echo "ERROR: Could not able to execute $sql. " . $conn->error;
     }
+  }
+
+  function getQuestion($username){
+    $sql = "SELECT security_question FROM user WHERE username = '$username'";
+    $result = $this->db->query($sql);
+    $row = $this->db->fetchRow();
+    return $row['security_question'];
+  }
+
+  function validateAnswer($answer, $username){
+    $sql = "SELECT * FROM user WHERE username = '$username' AND security_answer = '$answer'";
+    $result = $this->db->query($sql);
+    if ($result->num_rows == 1){
+      return true;
+    }
+    return false;
+  }
+
+  function newPassword($username, $password, $cPassword){
+    if ($password == $cPassword) {
+      $sql = "UPDATE user SET password = '$password' WHERE username = '$username'";
+      if ($this->db->query($sql) === true) {
+        return true;
+      }
+    }
+    else {
+      return false;
+    }
+
   }
 }
 

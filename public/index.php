@@ -9,18 +9,33 @@ $view=new ViewUser($controller,$model);
 
 if (isset($_GET['action']) && !empty($_GET['action'])) {
 	switch($_GET['action']){
-		case 'loginForm':
+		case 'loginform':
 			echo $view->loginForm();
 			break;
     case 'login':
   		echo $controller->login($_GET['username'], $_GET['password']);
   		break;
-		case 'forgotPass':
-			$controller->forgotPass());
+		case 'forgotpass':
+			$view->forgotPass();
 			break;
 		case 'security':
-			$controller->security($_GET['username']);
-			echo $view->output();
+		  $view->security($_GET['username']);
       break;
+		case 'validate':
+			if ($model->validateAnswer($_GET['answer'], $_GET['username'])) {
+				$view->newPassword($_GET['username']);
+			}
+			else {
+				return false;
+			}
+	    break;
+		case 'newPass':
+		if ($model->newPassword($_GET['username'], $_GET['password'], $_GET['cPassword'])) {
+        $view->loginForm();
+		}
+		else {
+			echo "Passwords do not match.";
+		}
+	    break;
 	}
 }
