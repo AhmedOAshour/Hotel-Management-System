@@ -37,7 +37,6 @@ class User extends Model
 		}
 		else {
       echo "Wrong Credentials.";
-      echo $sql;
 		}
   }
 
