@@ -101,8 +101,7 @@ class ViewUser extends View{
     <div id="login">
     <form class="login">
         <label class='username' for='username'>username</label><input type="text" name="username" id="username" class="form form-control mb-4 border-0 py-4" placeholder="Username"><br>
-        <button type='submit' name='action' value='security'>submit</button>
-        <input type="submit" class="forgot" name="action" value="Next" id="submitBtn">
+        <button type='submit' name='action' value='security'>Next</button>
       </form>
     </div>
     EOD;
@@ -129,7 +128,7 @@ class ViewUser extends View{
         <input type="text" name="username" value="$username" style="display:none;">
         <label class='password' for='password'>New Password</label><br><input type="text" name="password" id="password" class="form form-control mb-4 border-0 py-4"><br>
         <label class='confirmPassword' for='confirmPassword'>Confirm Password</label><br><input type="text" class="confirmP" name="cPassword"><br>
-        <input type="submit" class="forgot" name="action" value="Submit"">
+        <button type="submit" name="action" value="newPass">Submit</button>
       </form>
     </div>
     EOD;
