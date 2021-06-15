@@ -5,18 +5,11 @@ class Followup extends Model
 
   function __construct($id="", $type=""){
     parent::__construct();
-    // echo $id;
-    // echo $type;
-
     if ($id!="" && $type!="") {
       $sql = "SELECT * FROM " . $type . "_followup WHERE ID = $id";
-      echo $sql;
       $result = $this->db->query($sql);
-      echo $result->num_rows;
       if ($result->num_rows == 1){
         $row = $this->db->fetchRow();
-        echo $row['ID'];
-
         $this->id = $row['ID'];
         $this->date = $row['date'];
         $this->reading = $row['comment'];
@@ -42,6 +35,21 @@ class Followup extends Model
     }
   }
 
+  function readFollowup($id, $type){
+    $sql = "SELECT * FROM " . $type . "_followup WHERE ID = $id";
+    $result = $this->db->query($sql);
+    if ($result->num_rows > 0){
+      while($row = $this->db->fetchRow()){
+
+        array_push($followups,new Followup($row['ID'], $type));
+      }
+      return $followups;
+    }
+    else {
+      return null;
+    }
+  }
+
   function insert($date, $comment, $file, $type){
     $entryBy = $_SESSION['ID'];
     $sql = "INSERT INTO " . $type . "_followup (date,comment,photo,entry_by) VALUES ('$date','$comment','$file','$entryBy')";
@@ -53,12 +61,12 @@ class Followup extends Model
 		}
   }
 
-  function deleteFollowup($id){
-    $sql = "DELETE FROM user WHERE ID = $id ";
+  function deleteFollowup($id, $type){
+    $sql = "DELETE FROM $type" . "_followup WHERE ID = $id ";
     if($this->db->query($sql) === true){
-      echo "deleted successfully.";
+      return true;
     } else{
-      echo "ERROR: Could not able to execute $sql. " . $conn->error;
+      return false;
     }
   }
 

@@ -11,7 +11,8 @@ class followupController extends Controller{
 
 	public function delete(){
     $id = $_REQUEST['id'];
-		$this->model->deleteFollowup($id);
+    $type = $_REQUEST['type'];
+		$this->model->deleteFollowup($id, $type);
 	}
 }
 ?>

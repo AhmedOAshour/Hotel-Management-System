@@ -16,10 +16,15 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
     	echo $controller->insert($_POST['date'], $_POST['reading'], $_POST['type'], $_FILES['myfile']['name']);
     	break;
     case 'view':
-    	echo $controller->insert($_POST['date'], $_POST['reading'], $_POST['type'], $_FILES['myfile']['name']);
+    	echo $view->view($_REQUEST['id'], $_REQUEST['type']);
       break;
     case 'delete':
-      echo $controller->insert($_POST['date'], $_POST['reading'], $_POST['type'], $_FILES['myfile']['name']);
+      if ($controller->delete($_REQUEST['id'], $_REQUEST['type'])) {
+        $view->outputFollowups("water");
+      }
+      else {
+        echo "Could not execute query";
+      }
       break;
 	}
 }
@@ -28,5 +33,5 @@ else {
   if (isset($_REQUEST['type'])) {
     $type1 = $_REQUEST['type'];
   }
-	echo$view->outputFollowup($type1);
+	echo$view->outputFollowups($type1);
 }
