@@ -29,25 +29,35 @@ class ViewFollowup extends View{
         </thead>
         <tbody>
     EOD;
-        foreach ($followups as $followup) {
+        if (isset($followups)) {
+          foreach ($followups as $followup) {
+            $str .= <<<EOD
+            <tr>
+              <td>$followup->id</td>
+              <td>$followup->date</td>
+              <td>$followup->reading</td>
+              <td>$followup->photo</td>
+              <td>$followup->entryBy</td>
+              <td><a href="followup.php?id=$followup->id&action=view&type=$type">View</a></td>
+              <td><a href="followup.php?id=$followup->id&action=delete&type=$type">Delete</a></td>
+            </tr>
+            EOD;
+          }
+        }
+        else {
           $str .= <<<EOD
           <tr>
-            <td>$followup->id</td>
-            <td>$followup->date</td>
-            <td>$followup->reading</td>
-            <td>$followup->photo</td>
-            <td>$followup->entryBy</td>
-            <td><a href="followup.php?id=$followup->id&action=view&type=$type">View</a></td>
-            <td><a href="followup.php?id=$followup->id&action=delete&type=$type">Delete</a></td>
+          No Entries Found.
           </tr>
           EOD;
         }
+
     $str .= <<<EOD
         </tbody>
       </table>
       <br>
     </div>
-    <a href="followup.php?action=addform"><button type="button" class="button" id="addBtn">Add Followup </button></a>
+    <a href="followup.php?action=followupForm"><button type="button" class="button" id="addBtn">Add Followup </button></a>
     EOD;
     echo $str;
   }

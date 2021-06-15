@@ -13,18 +13,16 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 			echo $view->followupForm();
 			break;
     case 'submitForm':
-    	echo $controller->insert($_POST['date'], $_POST['reading'], $_POST['type'], $_FILES['myfile']['name']);
+    	echo $controller->insert($_POST['date'], $_POST['comment'], $_POST['type'], $_FILES['myfile']['name']);
+      $view->outputFollowups($_REQUEST['type']);
     	break;
     case 'view':
     	echo $view->view($_REQUEST['id'], $_REQUEST['type']);
       break;
     case 'delete':
-      if ($controller->delete($_REQUEST['id'], $_REQUEST['type'])) {
-        $view->outputFollowups("water");
-      }
-      else {
-        echo "Could not execute query";
-      }
+      $controller->delete($_REQUEST['id'], $_REQUEST['type']);
+      $view->outputFollowups($_REQUEST['type']);
+      echo "succcc";
       break;
 	}
 }
