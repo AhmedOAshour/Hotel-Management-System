@@ -1,7 +1,4 @@
 <?php
-// require_once
-
-
 class User extends Model
 {
   public $id, $first_name , $last_name, $username, $password, $position;
