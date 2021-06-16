@@ -27,12 +27,12 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 			$view->output();
 			break;
 
-	
+
 	}
 }
 else
 	echo $view->output();
-	
+
 
 
 
