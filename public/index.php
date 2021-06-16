@@ -32,15 +32,15 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 		case 'newPass':
 		if ($model->newPassword($_GET['username'], $_GET['password'], $_GET['cPassword'])) {
         $view->loginForm();
+				// unset($_REQUEST);
 		}
 		else {
+			$view->newPassword($_GET['username']);
 			echo "Passwords do not match.";
 		}
 	    break;
 	}
-	
 }
 else {
 	echo $view->loginForm();
-
-	}
+}

@@ -101,8 +101,7 @@ class ViewUser extends View{
     <div id="login">
     <form class="login">
         <label class='username' for='username'>username</label><input type="text" name="username" id="username" class="form form-control mb-4 border-0 py-4" placeholder="Username"><br>
-        <button type='submit' name='action' value='security'>submit</button>
-        <input type="submit" class="forgot" name="action" value="Next" id="submitBtn">
+        <button type='submit' name='action' value='security'>Next</button>
       </form>
     </div>
     EOD;
@@ -129,9 +128,58 @@ class ViewUser extends View{
         <input type="text" name="username" value="$username" style="display:none;">
         <label class='password' for='password'>New Password</label><br><input type="text" name="password" id="password" class="form form-control mb-4 border-0 py-4"><br>
         <label class='confirmPassword' for='confirmPassword'>Confirm Password</label><br><input type="text" class="confirmP" name="cPassword"><br>
-        <input type="submit" class="forgot" name="action" value="Submit"">
+        <button type="submit" name="action" value="newPass">Submit</button>
       </form>
     </div>
+    EOD;
+    echo $str;
+  }
+  public function changePasswordForm(){
+    $str=<<<EOD
+    <div id="changePass">
+    <form class="changePass">
+        <label class='oldPass' for='oldPass'>Old Password</label><br><input type="text" name="oldPass" class="form form-control mb-4 border-0 py-4"><br>
+        <label class='newPass' for='newPass'>New Password</label><br><input type="text" name="newPass" class="form form-control mb-4 border-0 py-4"><br>
+        <label class='cNewPass' for='cNewPass'>Confirm New Password</label><br><input type="text" name="cNewPass" class="form form-control mb-4 border-0 py-4"><br>
+        <button type="submit" name="action" value="confirmPass">Submit</button>
+      </form>
+    </div>
+    EOD;
+    echo $str;
+  }
+  public function profile($username){
+    $info = $this->model->readprofile();
+    $str =
+    <<<EOD
+    <h2>My Profile</h2>
+    <div id="profile">
+      <table>
+        <thead>
+          <tr>
+            <th><strong>ID</strong></th>
+            <th><strong>First Name</strong></th>
+            <th><strong>Last Name</strong></th>
+            <th><strong>Username</strong></th>
+            <th><strong>Position</strong></th>
+          </tr>
+        </thead>
+        <tbody>
+    EOD;
+    $str .= <<<EOD
+    <tr>
+      <td>$info[0]</td>
+      <td>$info[1]</td>
+      <td>$info[2]</td>
+      <td>$info[3]</td>
+      <td>$info[4]</td>
+    </tr>
+       </tbody>
+       </table>
+        <br>
+       </div>
+       <form class="changePass">
+       <button type="submit" name="action" value="changePass">Change Password</button>
+       </form>
     EOD;
     echo $str;
   }
