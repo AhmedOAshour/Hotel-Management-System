@@ -152,7 +152,7 @@ public function resForm($id,$quantity){
       <textarea name="comments" rows="8" cols="80" placeholder="Comments..."></textarea> <br>
       <input type="text" name="client_ID" value="$id"  id="client_ID" hidden>
       <input type="text" name="quantity" value="$quantity"  id="quantity" hidden>
-      <input type="submit" name="action" value="createRes">
+      <button type="submit" name="action" value="createRes">Create Reservation</button>
       </form>
       </div>
       </div>
@@ -193,7 +193,7 @@ public function addFields($id){
               Number of Rooms:
               <input type="number"size="1" name="quantity" id="counter" value=1></input>
               <input type="text" name="id" id="counter" hidden value=$id></input>
-              <input type="submit" class="btn1 inputfile btn w-100 py-3" name="action" value="resform"></input>
+              <button type="submit" class="btn1 inputfile btn w-100 py-3" name="action" value="resform">Proceed</input>
             </form>
          
     EOD;

@@ -63,7 +63,7 @@ $str.=
 <<<EOD
 <form>
   
-        <input type="submit" name="action" value="createReservation">
+        <button type="submit" name="action" value="createReservation">Create Reservation </button>
         </form>
       
      
@@ -118,7 +118,7 @@ $floorno=$this->model->getFloorsNo();
       <input type="text" name="client_ID" value="$reservations->client_id"  id="client_ID" hidden>
       <input type="text" name="id" value="$_GET[id]"  id="ID" hidden>
       <input type="text" name="quantity" value="$quantity"  id="quantity" hidden>
-      <input type="submit" name="action" value="editRes">
+      <button type="submit" name="action" value="editRes">Edit Reservation </button>
       
       </form>
       </div>
@@ -137,7 +137,7 @@ public function editRoomCount($id){
                 Number of Rooms:
                 <input type="number"size="1" name="quantity" id="counter" value=1></input>
                 <input type="text" name="id" id="counter" hidden value=$id></input>
-                <input type="submit" class="btn1 inputfile btn w-100 py-3" name="action" value="edit"></input>
+                <button type="submit" class="btn1 inputfile btn w-100 py-3" name="action" value="edit">Edit Reservation</button>
               </form>
            
       EOD;
