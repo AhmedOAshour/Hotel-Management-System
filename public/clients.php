@@ -11,7 +11,9 @@ $controller=new ClientController($model);
 $controller2=new RoomController($model2);
 $view=new ViewClient($controller,$model);
 $view2=new ViewClient($controller2,$model2);
+
 if (isset($_GET['action']) && !empty($_GET['action'])) {
+	
 	switch($_GET['action']){
         case 'addform':
             $view->addForm();
@@ -20,12 +22,27 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 			$controller->insert();
 			$view->output();
 			break;
-		case 'resform':
-			$view2->resForm($_GET['id']);
+		case 'resform':	
+			$view2->resForm($_GET['id'],$_GET['quantity']);
 			break;
 		case 'createRes':
-			$controller->createReservation();
+			$controller->createReservation($_GET['quantity']);
+			header('location:reservations.php');
+			
+			break;
+		case 'editform':
+			echo $view->editForm($_GET['id']);
+			break;
+		case 'edit':
+			$controller->edit($_GET['id']);
 			$view->output();
+			break;
+		case 'delete':
+			$controller->delete($_GET['id']);
+			echo $view->output();
+			break;
+		case 'addfields':
+			$view->addFields($_GET['id']);
 			break;
 	
 	}

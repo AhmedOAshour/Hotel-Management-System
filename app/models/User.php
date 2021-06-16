@@ -1,7 +1,4 @@
 <?php
-// require_once
-
-
 class User extends Model
 {
   public $id, $first_name , $last_name, $username, $password, $position;
@@ -25,17 +22,18 @@ class User extends Model
   }
 
   function login($username, $password){
-    $sql = "SELECT * FROM user WHERE username = $username AND password = $password";
+    $sql = "SELECT * FROM user WHERE username = '$username' AND password = '$password'";
     $result = $this->db->query($sql);
     if ($result->num_rows == 1){
 			$row = $this->db->fetchRow();
       $this->id = $row['ID'];
       $_SESSION['ID'] = $this->id;
-      $this->readUser($this->id);
-      $_SESSION['username'] = $this->username;
-      $_SESSION['position'] = $this->position;
+      $_SESSION['username'] = $row['username'];
+      $_SESSION['position'] = $row['position'];
+      header('Location: profile.php');
 		}
 		else {
+      echo "Wrong Credentials.";
 		}
   }
 
@@ -48,6 +46,25 @@ class User extends Model
         array_push($users,new User($row['ID']));
       }
       return $users;
+    }
+    else {
+      return null;
+    }
+  }
+
+  function readProfile(){
+    $info = array();
+    $ID = $_SESSION['ID'];
+    $sql = "SELECT * FROM user WHERE ID = $ID";
+    $result = $this->db->query($sql);
+    if ($result->num_rows > 0){
+      $row = $this->db->fetchRow();
+      array_push($info, $row['ID']);
+      array_push($info, $row['first_name']);
+      array_push($info, $row['last_name']);
+      array_push($info, $row['username']);
+      array_push($info, $row['position']);
+      return $info;
     }
     else {
       return null;
@@ -81,6 +98,52 @@ class User extends Model
     } else{
       echo "ERROR: Could not able to execute $sql. " . $conn->error;
     }
+  }
+
+  function getQuestion($username){
+    $sql = "SELECT security_question FROM user WHERE username = '$username'";
+    $result = $this->db->query($sql);
+    $row = $this->db->fetchRow();
+    return $row['security_question'];
+  }
+
+  function validateAnswer($answer, $username){
+    $sql = "SELECT * FROM user WHERE username = '$username' AND security_answer = '$answer'";
+    $result = $this->db->query($sql);
+    if ($result->num_rows == 1){
+      return true;
+    }
+    return false;
+  }
+
+  function newPassword($username, $password, $cPassword){
+    if ($password == $cPassword) {
+      $sql = "UPDATE user SET password = '$password' WHERE username = '$username'";
+      if ($this->db->query($sql) === true) {
+        return true;
+      }
+    }
+    else {
+      return false;
+    }
+  }
+
+  function changePass($oldPass, $newPass, $cNewPass){
+    $username = $_SESSION['username'];
+    $sql1 = "SELECT * FROM user WHERE password = '$oldPass'";
+    $result = $this->db->query($sql1);
+    if ($result->num_rows == 1){
+      if ($newPass == $cNewPass) {
+        $sql2 = "UPDATE user SET password = '$newPass' WHERE username = '$username'";
+        if ($this->db->query($sql2) === true) {
+          return true;
+        }
+      }
+      else {
+        return false;
+      }
+    }
+
   }
 }
 
