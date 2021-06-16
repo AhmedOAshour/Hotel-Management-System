@@ -12,13 +12,13 @@
 <style>
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #ead3cb;
+    background-color:#FFE7E7;
 }
 .py-100{
     padding: 180px 0;
 }
 .online{
-    background-color:#ead3cb;
+    background-color:#FFE7E7;
 }
 .online h1{
     font-size: 48px;

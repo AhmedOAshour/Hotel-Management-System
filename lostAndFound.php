@@ -14,7 +14,7 @@ include "nav.php";?>
 <style>
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #ead3cb;
+    background-color:#FFE7E7;
 }
 .py-100{
     padding: 100px 0;

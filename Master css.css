@@ -1,0 +1,52 @@
+body{
+    overflow-x: hidden;
+    background-color:#FFE7E7;
+  }
+  table,th,td,tr{
+    border:1px solid black;
+    font-family: "Times New Roman", Times, serif;
+  }
+  th,td{
+    padding: 15px;
+    text-align: left;
+    border:none;
+  }
+  tr:hover{
+    background-color:#bdc7c9;
+  }
+  th{
+    background-color:#845460;
+    color: white;
+  }
+  table{
+    width: 100%;
+    position:relative;
+  }
+  tr:hover{
+    color:blue;
+  }
+  h2{
+    text-align:center;
+    margin-top:20px;
+    margin-bottom:20px;
+  }
+  .button{
+    position: relative;
+    margin-top:10px;
+    width:100%;   
+    background-color:#845460;
+    height:50px;
+    font-weight:bolder;
+  }
+  .button:hover{
+    background-color:#7b113a;
+    color:white;
+    border:1px solid black;
+  }
+  .formE{
+    margin-top:15px;
+    height:55px;
+  }
+  .names{
+    font-size:25px;
+  }

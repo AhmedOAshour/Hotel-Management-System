@@ -7,7 +7,7 @@ include "nav.php";
 </head>
 <style>
     body{
-        background-color: #ead3cb;
+        background-color:#FFE7E7;
     }
     .search{
         width:250px;
