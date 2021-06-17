@@ -137,7 +137,28 @@
 
     function checkin($resID){
       $str = <<<EOD
-        $resID
+      <form action="rooms.php" method="POST">
+      EOD;
+      $resRooms = $this->model->getResTypes($_GET['id']);
+      foreach ($resRooms as $key => $type) {
+        $str .= <<<EOD
+          <label>$type</label>
+          <select class="" name="rooms[]">
+        EOD;
+        $freeRooms = $this->model->getFreeType($type);
+        foreach ($freeRooms as $room) {
+          $str .= <<<EOD
+            <option value="$room->number">$room->number</option>
+          EOD;
+        }
+        $str .= <<<EOD
+          </select><br>
+        EOD;
+      }
+      $str .= <<<EOD
+        <input type="text" name='id' value=$_GET[id] style="display:none">
+        <button type='submit' name='action' value='checkedin'> Checkin </button>
+        </form>
       EOD;
       echo $str;
     }
@@ -184,9 +205,6 @@
 <style media="screen">
 .card{
   cursor: pointer;
-}
-.checkin{
-  /* display: none; */
 }
 </style>
 <script type="text/javascript">

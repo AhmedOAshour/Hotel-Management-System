@@ -120,4 +120,49 @@ public function checkout($number){
     echo "ERROR: Could not able to execute $sql. " . $this->db->getConn()->error;
   }
 }
+public function getFreeType($type){
+  $rooms = array();
+  $sql = "SELECT number FROM room WHERE type = '$type' AND status = 'available'";
+  $result = $this->db->query($sql);
+  if ($result->num_rows > 0){
+    while($row = $this->db->fetchRow()){
+      array_push($rooms,new Room($row['number']));
+    }
+    return $rooms;
+  }
+  else {
+    return null;
+  }
+}
+public function getResTypes($id){
+  $resTypes = array();
+  $sql = "SELECT * FROM reservedrooms WHERE RID = '$id'";
+  $result = $this->db->query($sql);
+  if ($result->num_rows > 0){
+    while($row = $this->db->fetchRow()){
+      array_push($resTypes,$row['room_type']);
+    }
+    return $resTypes;
+  }
+  else {
+    return null;
+  }
+}
+public function checkin($room_numbers, $id){
+  $sql = "INSERT INTO checked_in (reservation_ID,room_no) VALUES ";
+  $sql1 = "UPDATE room SET status = 'booked' WHERE number IN (";
+  foreach ($room_numbers as $number) {
+    $sql .= "($id,$number),";
+    $sql1 .= "$number,";
+  }
+  $sql = rtrim($sql,',');
+  $sql1 = rtrim($sql1,',');
+  $sql1 .= ")";
+  if($this->db->query($sql) === true && $this->db->query($sql1) === true){
+    echo "Records inserted successfully.";
+  }
+  else{
+    echo "ERROR: Could not able to execute $sql. " . $this->db->getConn()->error;
+  }
+}
 }

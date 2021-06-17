@@ -61,8 +61,8 @@ $model=new Room();
 $controller=new RoomController($model);
 $view=new ViewRoom($controller,$model);
 
-if (isset($_GET['action']) && !empty($_GET['action'])) {
-	switch($_GET['action']){
+if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
+	switch($_REQUEST['action']){
 		case 'view_room':
 			echo $view->view_room($_GET['id']);
 			break;
@@ -81,8 +81,13 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
     case 'checkin':
       $view->checkin($_GET['id']);
       break;
+    case 'checkedin':
+      $model->checkin($_POST['rooms'],$_POST['id']);
+      echo $view->output();
+      break;
 	}
 }
 else
 	echo $view->output();
+
 ?>

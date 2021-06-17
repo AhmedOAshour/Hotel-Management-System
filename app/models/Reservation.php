@@ -33,7 +33,7 @@ public function readReservations($checkin){
     $sql = "SELECT * ,reservation.ID AS RID FROM reservation INNER JOIN client ON reservation.client_ID = client.ID";
     if ($checkin) {
       $date = date('Y-m-d');
-      $ext = " WHERE reservation.arrival = '$date'";
+      $ext = " WHERE reservation.arrival = '$date' AND check_in is NULL";
       $sql .= $ext;
     }
     $result = $this->db->query($sql);
