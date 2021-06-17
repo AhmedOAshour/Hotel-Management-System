@@ -55,6 +55,7 @@ class ViewUser extends View{
     echo $str;
   }
   public function addForm(){
+   
     $str=<<<EOD
     <form class="addE" oninput="checkAddEdit()">
     <div id="error">
@@ -205,6 +206,20 @@ class ViewUser extends View{
        </form>
     EOD;
     echo $str;
+  }
+  public function valideAddForm(){
+$errors=array();
+$error=validateEmail($_REQUEST['email']);
+if($error!=""){
+$errors['email']=$error;
+
+}
+if(count($errors)==0){
+return false;
+
+} else {
+  return $errors;
+}
   }
 }
 ?>

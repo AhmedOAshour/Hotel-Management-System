@@ -95,9 +95,16 @@ $roomtypes=$this->model->getRoomTypes();
 
   $str=
   <<<EOD
-                <div class="container">
+              <div class="container">
               <div id="reservation">
-              <h1>Edit Reservations</h1>
+              <h1>EditReservation</h1>
+              <form>
+              <h4>Number of Rooms</h4>
+              <input type="number"size="1" name="quantity" id="counter" value=1></input>
+              <input type="text" name="id" value="$id" class="formE form-control border-3" id="id" hidden>
+              <button type="submit" class="button3" name="action" value="resform">Add</button>
+              </form>
+              
               <form>
               <h4 class="words" for="room_type">Room Type</h4>
               EOD;
