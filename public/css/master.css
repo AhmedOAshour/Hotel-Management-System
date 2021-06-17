@@ -6,6 +6,10 @@ body{
     border:1px solid black;
     font-family: "Times New Roman", Times, serif;
   }
+  .position{
+    position:relative;
+    left:130px;
+  }
   th,td{
     padding: 15px;
     text-align: left;
@@ -30,24 +34,57 @@ body{
     margin-top:20px;
     margin-bottom:20px;
   }
+  h1{
+    text-align:center;
+    margin-top:20px;
+    margin-bottom:20px;
+  }
   .button{
     position: relative;
     margin-top:10px;
-    width:100%;   
+    width:40%;   
     background-color:#000026;
     height:50px;
+    left:400px;
     font-weight:bolder;
     color:white;
   }
   .button:hover{
     background-color:#bdc7c9;
     color:black;
-    border:1px solid black;
-    
+    border:1px solid black; 
+  }
+  .button2{
+    position: relative;
+    margin-top:10px;
+    width:40%;   
+    background-color:#000026;
+    height:50px;
+    left:335px;
+    font-weight:bolder;
+    color:white;
+  }
+  .button2:hover{
+    background-color:#bdc7c9;
+    color:black;
+    border:1px solid black; 
   }
   .formE{
     margin-top:15px;
     height:55px;
+    width:600px;
+    position:relative;
+    left:260px;
+  }
+  .words{
+    position: relative;
+    left:130px;
+    top:50px;
+  }
+  .arr{
+    position: relative;
+    left:150px;
+    top:50px;
   }
   .names{
     font-size:25px;
@@ -70,4 +107,7 @@ margin:0;
 padding:0;
 height:50px;
 border-radius:3px;
+}
+.color{
+color:#000026;
 }
