@@ -41,9 +41,7 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 			$controller->delete($_GET['id']);
 			echo $view->output();
 			break;
-		case 'addfields':
-			$view->addFields($_GET['id']);
-			break;
+		
 	
 	}
 }
