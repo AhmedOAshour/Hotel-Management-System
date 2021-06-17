@@ -61,7 +61,7 @@ class ViewClient extends View{
           EOD;
           if(!empty($_GET['flag'])&&$_GET['flag']==true){
             $str.=<<<EOD
-          <td style='text-align:center'><a class="color"href="clients.php?action=addfields&id=$client->id"><i class='fa fa-plus-square'></i></a></td>
+          <td style='text-align:center'><a class="color"href="clients.php?action=resform&id=$client->id&quantity=1"><i class='fa fa-plus-square'></i></a></td>
           EOD;
           }
           else { $str.=<<<EOD
@@ -116,13 +116,17 @@ echo $str;
 public function resForm($id,$quantity){
 
   $roomtypes=$this->model->getRoomTypes();
-
- 
   $str=
   <<<EOD
                 <div class="container">
               <div id="reservation">
               <h1>Create Reservation</h1>
+              <form>
+              <h4>Number of Rooms</h4>
+              <input type="number"size="1" name="quantity" id="counter" value=1></input>
+              <input type="text" name="id" value="$id" class="formE form-control border-3" id="id" hidden>
+              <button type="submit" class="button2" name="action" value="resform">Proceed</button>
+              </form>
               <form>
               <h4 class="words" for="room_type">Room Type</h4> 
               
@@ -134,18 +138,18 @@ public function resForm($id,$quantity){
     foreach ($roomtypes as $room) {
   $str.=<<<EOD
      
-                                    <option value='$room'>$room</option>
+                            <option value='$room'>$room</option>
           EOD;
                                   }
   $str.=
   <<<EOD
-                                                 </select><br>
+                           </select><br>
   EOD;
 
     
 
    }
-            
+          
          
               
         $str.=
@@ -190,27 +194,6 @@ $str=
 
     EOD;
 echo $str;
-
-
-}
-public function addFields($id){
-  $str=<<<EOD
-            <div class="container">
-              <form>
-              Number of Rooms
-              <input type="number"size="1" name="quantity" id="counter" value=1></input>
-              <input type="text" name="id" id="counter" hidden value=$id></input>
-              <button type="submit" class="button2" name="action" value="resform">Proceed</input>
-            </form>
-            </div>
-         
-    EOD;
-
-    echo $str;
-
-
-      
-
 
 }
 }

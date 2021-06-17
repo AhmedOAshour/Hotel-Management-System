@@ -54,7 +54,7 @@ $result=$this->model->readReservations($checkin);
     $buttons;
     if (!$checkin) {
       $buttons = <<<EOD
-        <td style='text-align:center '><a class="color" href='reservations.php?action=editRoomCount&id=$row[RID]'><i class='fa fa-edit'></a></td>
+        <td style='text-align:center '><a class="color" href='reservations.php?action=edit&id=$row[RID]&quantity=$row[number_of_rooms]'><i class='fa fa-edit'></a></td>
         <td style='text-align:center '><a class="color" href='reservations.php?action=delete&id=$row[RID]'><i class='fa fa-trash'></i></a></td>
       EOD;
     }
@@ -77,9 +77,13 @@ $result=$this->model->readReservations($checkin);
 }
 $str.=
 <<<EOD
-        <form>
-        <button type="submit" name="action" value="createReservation">Create Reservation </button>
+<form>
+
+        <button type="submit" name="action" class="button2"value="createReservation">Create Reservation </button>
         </form>
+        </div>
+
+
 EOD;
 
 echo $str;
@@ -88,7 +92,6 @@ echo $str;
 public function editForm($id,$quantity){
 $reservations=new Reservation($id);
 $roomtypes=$this->model->getRoomTypes();
-$floorno=$this->model->getFloorsNo();
 
   $str=
   <<<EOD
@@ -96,9 +99,7 @@ $floorno=$this->model->getFloorsNo();
               <div id="reservation">
               <h1>Edit Reservations</h1>
               <form>
-              <input id="count" type='text' name='guest_count' value='$reservations->guest_count' placeholder="Guest Count"><br>
-              <textarea name="guest_names" rows="3" cols="23" placeholder="Guest Names seperate by ,">$reservations->guest_names</textarea> <br>
-              <label for="room_type">Room Type:</label>
+              <h4 class="words" for="room_type">Room Type</h4>
               EOD;
               for($i=0;$i<$quantity;$i++){
                 $str.=<<<EOD
@@ -130,7 +131,8 @@ $floorno=$this->model->getFloorsNo();
       <input type="text" name="client_ID" value="$reservations->client_id"  id="client_ID" hidden>
       <input type="text" name="id" value="$_GET[id]"  id="ID" hidden>
       <input type="text" name="quantity" value="$quantity"  id="quantity" hidden>
-      <button type="submit" name="action" value="editRes">Edit Reservation </button>
+      <button type="submit" name="action" class="button2" value="editRes">Edit Reservation </button>
+
       </form>
       </div>
       </div>
@@ -141,24 +143,6 @@ $floorno=$this->model->getFloorsNo();
 
 }
 
-public function editRoomCount($id){
-    $str=<<<EOD
-                <form>
-                Number of Rooms:
-                <input type="number"size="1" name="quantity" id="counter" value=1></input>
-                <input type="text" name="id" id="counter" hidden value=$id></input>
-                <button type="submit" class="btn1 inputfile btn w-100 py-3" name="action" value="edit">Edit Reservation</button>
-              </form>
-
-      EOD;
-
-      echo $str;
-
-
-
-
-
-  }
 
 
 
