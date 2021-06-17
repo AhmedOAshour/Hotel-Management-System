@@ -57,13 +57,19 @@ class ViewUser extends View{
   public function addForm(){
     $str=<<<EOD
     <form class="addE" oninput="checkAddEdit()">
-    <div id="error">
-    </div>
     <div id="addEmployees" class="addEmployees">
+        <div id="errorName1">
+        </div>
         <input type="text" name="first_name" id="Fname" class="form form-control mb-4 border-0 py-4" placeholder="First Name" required><br>
+        <div id="errorName2">
+        </div>
         <input type="text" name="last_name" id="Lname" class="form form-control mb-4 border-0 py-4" placeholder="Last Name" required><br>
-        <input type="password" name="password" id="password" class="form form-control mb-4 border-0 py-4"placeholder="Password" required><br>
+        <div id="errorUsername">
+        </div>
         <input type="text" name="username" id="username" class="form form-control mb-4 border-0 py-4" placeholder="Username" required><br>
+        <div id="errorPass">
+        </div>
+        <input type="password" name="password" id="password" class="form form-control mb-4 border-0 py-4"placeholder="Password" required><br>
         <select id="position" name="position" class="form form-control mb-2 border-0">
           <option hidden disabled selected value>Position</option>
           <option value='front_clerk'>Front Clerk</option>
@@ -80,8 +86,6 @@ class ViewUser extends View{
     $user = new User($id);
       $str=<<<EOD
       <form class="editE" oninput="checkAddEdit()">
-
-
         <input type="text" name="id" value="$id" style="display:none">
         <label class='names' for='first_name'>First Name</label><input type='text' name='first_name' id='Fname' class='formE form-control border-0 ' value='$user->first_name' '> <br><br>
         <div id="errorName1">
@@ -149,7 +153,7 @@ class ViewUser extends View{
     <div id="login">
     <form class="login">
         <input type="text" name="username" value="$username" style="display:none;" >
-        <label class='password' for='password'>New Password</label><br><input type="text" name="password" id="password" class="form form-control mb-4 border-0 py-4" required><br>
+        <label class='password' for='password'>New Password</label><br><input type="text" name="password" class="form form-control mb-4 border-0 py-4" required><br>
         <label class='confirmPassword' for='confirmPassword'>Confirm Password</label><br><input type="text" class="confirmP" name="cPassword" required><br>
         <button type="submit" name="action" value="newPass">Submit</button>
       </form>
@@ -160,10 +164,14 @@ class ViewUser extends View{
   public function changePasswordForm(){
     $str=<<<EOD
     <div id="changePass">
-    <form class="changePass">
+    <form class="changePass" oninput="checkNewPass()">
         <label class='oldPass' for='oldPass'>Old Password</label><br><input type="text" name="oldPass" class="form form-control mb-4 border-0 py-4" required><br>
-        <label class='newPass' for='newPass'>New Password</label><br><input type="text" name="newPass" class="form form-control mb-4 border-0 py-4" required><br>
-        <label class='cNewPass' for='cNewPass'>Confirm New Password</label><br><input type="text" name="cNewPass" class="form form-control mb-4 border-0 py-4" required><br>
+        <label class='newPass' for='newPass'>New Password</label><br><input type="text" name="newPass" id="newPass" class="form form-control mb-4 border-0 py-4" required><br>
+        <div id="errorNewPass">
+        </div>
+        <label class='cNewPass' for='cNewPass'>Confirm New Password</label><br><input type="text" name="cNewPass" id="cNewPass" class="form form-control mb-4 border-0 py-4" required><br>
+        <div id="errorCNewPass">
+        </div>
         <button type="submit" name="action" value="confirmPass">Submit</button>
       </form>
     </div>
@@ -207,4 +215,5 @@ class ViewUser extends View{
     echo $str;
   }
 }
+
 ?>
