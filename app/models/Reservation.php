@@ -4,8 +4,6 @@ class Reservation extends Model{
     public $client_id;
     public $bill_ID;
     public $room_type;
-    public $guest_names;
-    public $guest_count;
     public $price;
     public $arrival;
     public $departure;
@@ -22,8 +20,6 @@ class Reservation extends Model{
             $this->id = $row['ID'];
             $this->client_id= $row['client_ID'];
             $this->bill_ID = $row['bill_ID'];
-            $this->guest_names = $row['guest_names'];
-            $this->guest_count=$row['guest_count'];
             $this->number_of_rooms=$row['number_of_rooms'];
             $this->price=$row['price'];
             $this->arrival=$row['arrival'];
@@ -47,7 +43,7 @@ public function readReservations(){
 
 }
 
-public function editReservation($id,$client_ID,$room_type,$guest_names,$guest_count,$number_of_rooms,$arrival,$departure,$comments){
+public function editReservation($id,$client_ID,$room_type,$number_of_rooms,$arrival,$departure,$comments){
   $sql2="DELETE from reservedrooms where RID=$id";
   if($this->db->query($sql2) === true){
     echo "updated successfully.";
@@ -55,7 +51,7 @@ public function editReservation($id,$client_ID,$room_type,$guest_names,$guest_co
 } else{
     echo "ERROR: Could not able to execute $sql. " . $conn->error;
   }
-    $sql = "UPDATE reservation SET client_ID = '$client_ID', guest_names = '$guest_names', guest_count = '$guest_count' ,number_of_rooms='$number_of_rooms',arrival = '$arrival',departure='$departure' , comments='$comments' WHERE ID = '$id'";
+    $sql = "UPDATE reservation SET client_ID = '$client_ID' ,number_of_rooms='$number_of_rooms',arrival = '$arrival',departure='$departure' , comments='$comments' WHERE ID = '$id'";
     if($this->db->query($sql) === true){
 			echo "updated successfully.";
     

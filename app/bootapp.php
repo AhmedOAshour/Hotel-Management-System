@@ -5,13 +5,14 @@
 <link rel="stylesheet" href="../public/css/master.css">
 <?php
 // Load Config
+session_start();
 require_once 'config/config.php';
 require_once 'libraries/Controller.php';
 require_once 'libraries/Database.php';
 require_once 'libraries/Model.php';
 require_once 'libraries/View.php';
 require_once 'views/inc/nav.php';
-session_start();
+
 
 //Autoload Core Libraries
 //spl_autoload_register(function ($className) {

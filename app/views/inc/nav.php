@@ -11,35 +11,52 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
-              <?php if(!empty($_SESSION['Role'])&& $_SESSION['Role']=='front_clerk') {?>
+              <?php if(!empty($_SESSION['position'])&& $_SESSION['position']=='front_clerk') {?>
                 <li class="nav-item">
                   <a class="nav-link" href="Rooms.php">Rooms</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="createReservation.php">Reservation</a>
+                  <a class="nav-link" href="reservations.php">Reservation</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="viewReservations.php">View Reservations</a>
+                  <a class="nav-link" href="clients.php">Clients</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">CheckOut</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Malfunctions</a>
-                </li>
+                     <a class="nav-link" href="malfunctions.php">Malfunctions</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="maintenance.php">Maintenance</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="lost&found.php">Lost&Found</a>
+                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="signout.php">Sign out</a>
                 </li>
                 <?php }
                 
-                else if(!empty($_SESSION['Role'])&& $_SESSION['Role']=='admin'){ ?>
+                else if(!empty($_SESSION['position'])&& $_SESSION['position']=='admin'){ ?>
                  <li class="nav-item">
-                    <a class="nav-link" href="viewEmployees.php">View Employees</a>
+                    <a class="nav-link" href="employees.php">View Employees</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="signout.php">Sign out</a>
                 </li>
                 <?php }
+                 else if(!empty($_SESSION['position'])&& $_SESSION['position']=='HK_Employee'){ ?>
+                  <li class="nav-item">
+                     <a class="nav-link" href="malfunctions.php">Malfunctions</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="maintenance.php">Maintenance</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="lost&found.php">Lost&Found</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="signout.php">Sign out</a>
+                 </li>
+                 <?php }
                  ?>
             </ul>
             </div>

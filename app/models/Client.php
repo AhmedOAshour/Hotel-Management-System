@@ -39,8 +39,8 @@ class client extends Model{
           return null;
         }
       }
-      function createReservation($client_id,$room_type,$guest_names,$guest_count,$number_of_rooms,$price,$arrival,$departure,$comments){
-       $sql="INSERT into reservation(client_id,guest_names,guest_count,number_of_rooms,price,arrival,departure,comments) values('$client_id','$guest_names','$guest_count','$number_of_rooms',$price,'$arrival','$departure','$comments')";
+      function createReservation($client_id,$room_type,$number_of_rooms,$price,$arrival,$departure,$comments){
+       $sql="INSERT into reservation(client_id,number_of_rooms,price,arrival,departure,comments) values('$client_id','$number_of_rooms',$price,'$arrival','$departure','$comments')";
         $result = $this->db->query($sql);
         $newest_id = mysqli_insert_id($this->db->getConn());
         $price=0;

@@ -30,7 +30,8 @@ class User extends Model
       $_SESSION['ID'] = $this->id;
       $_SESSION['username'] = $row['username'];
       $_SESSION['position'] = $row['position'];
-      header('Location: profile.php');
+      
+      header('Location: rooms.php');
 		}
 		else {
       echo "Wrong Credentials.";
@@ -80,6 +81,7 @@ class User extends Model
 			echo "ERROR: Could not able to execute $sql. " . $this->db->getConn()->error;
 		}
   }
+  
 
   function editUser($first_name, $last_name, $password, $position, $username, $id){
     $sql = "UPDATE user SET first_name = '$first_name', last_name = '$last_name', password = '$password', position = '$position', username = '$username' WHERE ID = '$id'";
