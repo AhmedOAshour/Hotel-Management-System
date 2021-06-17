@@ -125,7 +125,7 @@ public function resForm($id,$quantity){
               <h4>Number of Rooms</h4>
               <input type="number"size="1" name="quantity" id="counter" value=1></input>
               <input type="text" name="id" value="$id" class="formE form-control border-3" id="id" hidden>
-              <button type="submit" class="button2" name="action" value="resform">Proceed</button>
+              <button type="submit" class="button3" name="action" value="resform">Add</button>
               </form>
               <form>
               <h4 class="words" for="room_type">Room Type</h4> 
