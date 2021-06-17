@@ -27,17 +27,12 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 		case 'createReservation':
 			header("location:clients.php?flag=true");
 			break;
-<<<<<<< HEAD
 		case 'editRoomCount':
 			$view->editRoomCount($_GET['id']);
 			break;
 		case 'checkin':
 			echo $view->output(true);
 			break;
-=======
-		
-
->>>>>>> 9e6aaaca2590efd0774444f7c451297634d59f4f
 
 
 
