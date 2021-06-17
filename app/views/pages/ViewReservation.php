@@ -52,8 +52,6 @@ $result=$this->model->readReservations();
     <<<EOD
         </tbody>
         </table>
-
-
         </body>
         </html>
      EOD;
