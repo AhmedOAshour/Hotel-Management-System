@@ -29,33 +29,24 @@ function checkAddEdit(){
 
   if (password != "") {
     if (!password.match(numbers)) {
-      errorPass = errorPass.concat("Password must contain a number.");
-    }
-    else {
-      errorPass = "";
+      errorPass = errorPass.concat("Password must contain a number.<br>");
     }
 
     if (!password.match(upperCaseLetters)) {
-      errorPass = errorPass.concat("Password must contain an uppercase letter.");
+      errorPass = errorPass.concat("Password must contain an uppercase letter.<br>");
     }
-    else {
-      errorPass = "";
-    }
+
 
     if (!password.match(lowerCaseLetters)) {
-      errorPass = errorPass.concat("Password must contain an lowercase letter.");
-    }
-    else {
-      errorPass = "";
+      errorPass = errorPass.concat("Password must contain an lowercase letter.<br>");
     }
 
+
     if (!password.match(special)) {
-      errorPass = errorPass.concat("Password must contain an special character.");
-    }
-    else {
-      errorPass = "";
+      errorPass = errorPass.concat("Password must contain an special character.<br>");
     }
   }
+
 
   if (username != "") {
     if (username.length < 10 || username.length > 255) {
@@ -85,32 +76,24 @@ function checkNewPass(){
 
   if (password != "") {
     if (!password.match(numbers)) {
-      errorPass = errorPass.concat("Password must contain a number.");
-    }
-    else {
-      errorPass = "";
+      errorPass = errorPass.concat("Password must contain a number.<br>");
     }
 
     if (!password.match(upperCaseLetters)) {
-      errorPass = errorPass.concat("Password must contain an uppercase letter.");
+      errorPass = errorPass.concat("Password must contain an uppercase letter.<br>");
     }
-    else {
-      errorPass = "";
-    }
+
 
     if (!password.match(lowerCaseLetters)) {
-      errorPass = errorPass.concat("Password must contain an lowercase letter.");
-    }
-    else {
-      errorPass = "";
+      errorPass = errorPass.concat("Password must contain an lowercase letter.<br>");
     }
 
+
     if (!password.match(special)) {
-      errorPass = errorPass.concat("Password must contain an special character.");
+      errorPass = errorPass.concat("Password must contain an special character.<br>");
     }
-    else {
-      errorPass = "";
-    }
+  }
+
   }
 
   if (cPassword != "") {
