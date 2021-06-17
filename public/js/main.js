@@ -14,6 +14,7 @@ function checkAddEdit(){
   var errorName2 = "";
   var errorPass = "";
   var errorUsername = "";
+  var errorPosition = "";
 
   if (fName != "" || lName != "") {
     if (fName.match(numbers) || lName.match(numbers)) {
@@ -64,10 +65,63 @@ function checkAddEdit(){
       errorUsername = "";
     }
   }
-
   document.getElementById("errorName1").innerHTML = errorName1;
   document.getElementById("errorName2").innerHTML = errorName2;
   document.getElementById("errorPass").innerHTML = errorPass;
   document.getElementById("errorUsername").innerHTML = errorUsername;
+}
+
+function checkNewPass(){
+  var password = document.getElementById("newPass").value;
+  var cPassword = document.getElementById("cNewPass").value;
+
+  const numbers = /[0-9]/g;
+  const upperCaseLetters = /[A-Z]/g;
+  const lowerCaseLetters = /[a-z]/g;
+  const special = /[$-/:-?{-~!"^_`\[\]]/g;
+
+  var errorPass = "";
+  var errorCPass = "";
+
+  if (password != "") {
+    if (!password.match(numbers)) {
+      errorPass = errorPass.concat("Password must contain a number.");
+    }
+    else {
+      errorPass = "";
+    }
+
+    if (!password.match(upperCaseLetters)) {
+      errorPass = errorPass.concat("Password must contain an uppercase letter.");
+    }
+    else {
+      errorPass = "";
+    }
+
+    if (!password.match(lowerCaseLetters)) {
+      errorPass = errorPass.concat("Password must contain an lowercase letter.");
+    }
+    else {
+      errorPass = "";
+    }
+
+    if (!password.match(special)) {
+      errorPass = errorPass.concat("Password must contain an special character.");
+    }
+    else {
+      errorPass = "";
+    }
+  }
+
+  if (cPassword != "") {
+    if (password != cPassword) {
+      errorCPass = errorCPass.concat("Passwords must match.")
+    }
+    else {
+      errorCPass = "";
+    }
+  }
+  document.getElementById("errorNewPass").innerHTML = errorPass;
+  document.getElementById("errorCNewPass").innerHTML = errorCPass;
 
 }
