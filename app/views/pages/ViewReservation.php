@@ -88,59 +88,66 @@ EOD;
 
 echo $str;
 }
-
 public function editForm($id,$quantity){
-$reservations=new Reservation($id);
-$roomtypes=$this->model->getRoomTypes();
-
-  $str=
-  <<<EOD
+  $reservations=new Reservation($id);
+  $roomtypes=$this->model->getRoomTypes();
+  
+    $str=
+    <<<EOD
                 <div class="container">
-              <div id="reservation">
-              <h1>Edit Reservations</h1>
-              <form>
-              <h4 class="words" for="room_type">Room Type</h4>
-              EOD;
-              for($i=0;$i<$quantity;$i++){
-                $str.=<<<EOD
-                <select class="formE form-control border-3" name="room_type[]">
+                <div id="reservation">
+                <h1>EditReservation</h1>
+                <form>
+                <h4 class="words nu">Number<br>of Rooms</h4>
+                <input type="number"size="1" class="formE form-control border-3" name="quantity" id="counter" value=1></input>
+                <input type="text" name="id" value="$id" class="formE form-control border-3" id="id" hidden>
+                <button type="submit" class="button3" name="action" value="resform">Add</button>
+                </form>
+                
+                <form>
+                <h4 class="words" for="room_type">Room Type</h4>
                 EOD;
-               foreach ($roomtypes as $room) {
-             $str.=<<<EOD
-               <option value='$room'>$room</option>
-             EOD;
-             }
-             $str.=
-             <<<EOD
-                </select>
-             EOD;
+                for($i=0;$i<$quantity;$i++){
+                  $str.=<<<EOD
+                  <select class="formE form-control border-3" name="room_type[]">
+                  EOD;
+                 foreach ($roomtypes as $room) {
+               $str.=<<<EOD
+                 <option value='$room'>$room</option>
+               EOD;
+               }
+               $str.=
+               <<<EOD
+                  </select>
+               EOD;
+  
+  
+  
+                }
+  
+  
+  
+  
+        $str.=
+        <<<EOD
+        </select>
+        <h4 class="words arr">Arrival</h4><input type='date' class="formE form-control border-3"value='$reservations->arrival'name='arrival'>
+        <h4 class="words">Departure</h4> <input type='date' class="formE form-control border-3"value='$reservations->departure' name='departure'><br>
+        <h4 class="words">Comments</h4><textarea name="comments"  rows="2" cols="50" class="formE form-control border-3"placeholder="Comments...">$reservations->comments</textarea> <br>
+        <input type="text" name="client_ID" value="$reservations->client_id"  id="client_ID" hidden>
+        <input type="text" name="id" value="$_GET[id]"  id="ID" hidden>
+        <input type="text" name="quantity" value="$quantity"  id="quantity" hidden>
+        <button type="submit" name="action" class="button2" value="editRes">Edit Reservation </button>
+        </form>
+        </div>
+        </div>
+        </body>
+        </html>
+        EOD;
+        echo $str;
+  
+  }
 
-
-
-              }
-
-
-
-
-      $str.=
-      <<<EOD
-      </select>
-      <h4 class="words arr">Arrival</h4><input type='date' class="formE form-control border-3"value='$reservations->arrival'name='arrival'>
-      <h4 class="words">Departure</h4> <input type='date' class="formE form-control border-3"value='$reservations->departure' name='departure'><br>
-      <h4 class="words">Comments</h4><textarea name="comments"  rows="2" cols="50" class="formE form-control border-3"placeholder="Comments...">$reservations->comments</textarea> <br>
-      <input type="text" name="client_ID" value="$reservations->client_id"  id="client_ID" hidden>
-      <input type="text" name="id" value="$_GET[id]"  id="ID" hidden>
-      <input type="text" name="quantity" value="$quantity"  id="quantity" hidden>
-      <button type="submit" name="action" class="button2" value="editRes">Edit Reservation </button>
-      </form>
-      </div>
-      </div>
-      </body>
-      </html>
-      EOD;
-      echo $str;
-
-}
 
 
 

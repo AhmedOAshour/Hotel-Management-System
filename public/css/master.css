@@ -71,11 +71,11 @@ body{
   }
   .button3{
     position: relative;
-    margin-top:10px;
-    width:20%;   
+    width:10%;   
     background-color:#000026;
     height:50px;
-    left:335px;
+    left:480px;
+    bottom:-10px;
     font-weight:bolder;
     color:white;
   }
@@ -101,6 +101,10 @@ body{
     left:150px;
     top:50px;
   }
+  .nu{
+    position: relative;
+    top:65px;
+  }
   .names{
     font-size:25px;
   }
@@ -125,4 +129,10 @@ border-radius:3px;
 }
 .color{
 color:#000026;
+}
+#errorName1,#errorName2,#errorUsername,#errorPass{
+  color:red;
+  position: relative;
+  left:260px;
+  bottom:40px;
 }

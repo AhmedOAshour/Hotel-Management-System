@@ -1,3 +1,4 @@
+
 <?php
 class ViewClient extends View{
     public function output(){
@@ -122,8 +123,8 @@ public function resForm($id,$quantity){
               <div id="reservation">
               <h1>Create Reservation</h1>
               <form>
-              <h4>Number of Rooms</h4>
-              <input type="number"size="1" name="quantity" id="counter" value=1></input>
+              <h4 class="words nu">Number<br>of Rooms</h4>
+              <input type="number"size="1" class="formE form-control border-3"name="quantity" id="counter" value=1></input>
               <input type="text" name="id" value="$id" class="formE form-control border-3" id="id" hidden>
               <button type="submit" class="button3" name="action" value="resform">Add</button>
               </form>
