@@ -132,7 +132,6 @@ $roomtypes=$this->model->getRoomTypes();
       <input type="text" name="id" value="$_GET[id]"  id="ID" hidden>
       <input type="text" name="quantity" value="$quantity"  id="quantity" hidden>
       <button type="submit" name="action" class="button2" value="editRes">Edit Reservation </button>
-
       </form>
       </div>
       </div>
