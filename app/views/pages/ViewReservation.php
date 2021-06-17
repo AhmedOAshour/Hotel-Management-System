@@ -4,9 +4,7 @@ class ViewReservation extends View{
 public function output(){
 $result=$this->model->readReservations();
 
-    $str=
-<<<EOD
-
+    $str=<<<EOD
         <input type="date" id="date" value="<?php echo date('Y-m-d'); ?>">
         <table width="100%" border="1" style="border-collapse:collapse; margin-top:4px;">
         <thead>
@@ -25,8 +23,8 @@ $result=$this->model->readReservations();
         EOD;
         if(!empty($result)){
         while($row = mysqli_fetch_array($result)) {
-         
-        
+
+
             $str.=
             <<<EOD
                     <tr>
@@ -54,7 +52,6 @@ $result=$this->model->readReservations();
         </tbody>
         </table>
         </div>
-        
         </body>
         </html>
      EOD;
@@ -62,13 +59,13 @@ $result=$this->model->readReservations();
 $str.=
 <<<EOD
 <form>
-  
+
         <button type="submit" name="action" value="createReservation">Create Reservation </button>
         </form>
-      
-     
-     
-EOD;     
+
+
+
+EOD;
 
 echo $str;
 }
@@ -84,33 +81,31 @@ $floorno=$this->model->getFloorsNo();
               <form>
               <input id="count" type='text' name='guest_count' value='$reservations->guest_count' placeholder="Guest Count"><br>
               <textarea name="guest_names" rows="3" cols="23" placeholder="Guest Names seperate by ,">$reservations->guest_names</textarea> <br>
-              <label for="room_type">Room Type:</label> 
+              <label for="room_type">Room Type:</label>
               EOD;
-              for($i=0;$i<$quantity;$i++){ 
+              for($i=0;$i<$quantity;$i++){
                 $str.=<<<EOD
                 <select class="" name="room_type[]">
                 EOD;
                foreach ($roomtypes as $room) {
              $str.=<<<EOD
-                
-                                               <option value='$room'>$room</option>
-                     EOD;
-                                             }
+               <option value='$room'>$room</option>
+             EOD;
+             }
              $str.=
              <<<EOD
-                                                            </select>
+                </select>
              EOD;
-           
-               
-           
+
+
+
               }
-                       
-                    
-         
+
+
+
 
       $str.=
       <<<EOD
-     
       </select>
       Arrival: <input type='date' value='$reservations->arrival'name='arrival'>
       Departure: <input type='date' value='$reservations->departure' name='departure'><br>
@@ -119,7 +114,6 @@ $floorno=$this->model->getFloorsNo();
       <input type="text" name="id" value="$_GET[id]"  id="ID" hidden>
       <input type="text" name="quantity" value="$quantity"  id="quantity" hidden>
       <button type="submit" name="action" value="editRes">Edit Reservation </button>
-      
       </form>
       </div>
       </div>
@@ -129,25 +123,24 @@ $floorno=$this->model->getFloorsNo();
       echo $str;
 
 }
-     
+
 public function editRoomCount($id){
     $str=<<<EOD
-  
                 <form>
                 Number of Rooms:
                 <input type="number"size="1" name="quantity" id="counter" value=1></input>
                 <input type="text" name="id" id="counter" hidden value=$id></input>
                 <button type="submit" class="btn1 inputfile btn w-100 py-3" name="action" value="edit">Edit Reservation</button>
               </form>
-           
+
       EOD;
-  
+
       echo $str;
-  
-  
-        
-  
-  
+
+
+
+
+
   }
 
 

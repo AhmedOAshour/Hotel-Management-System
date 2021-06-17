@@ -13,7 +13,7 @@
         border-right: none;
         border-left: none;
     }
-    .row{
+    .sidebar{
         background-color:white;
         width:100%;
         height:25px;
@@ -63,9 +63,21 @@ $view=new ViewRoom($controller,$model);
 
 if (isset($_GET['action']) && !empty($_GET['action'])) {
 	switch($_GET['action']){
-		case 'editform':
-			echo $view->editForm($_GET['id']);
+		case 'view_room':
+			echo $view->view_room($_GET['id']);
 			break;
+    case 'mark_available':
+      $model->changeStatus($_GET['id'],"available");
+      header("Location: rooms.php?action=view_room&id=$_GET[id]");
+      break;
+      case 'mark_unavailable':
+        $model->changeStatus($_GET['id'],"unavailable");
+        header("Location: rooms.php?action=view_room&id=$_GET[id]");
+        break;
+    case 'checkout':
+      $model->checkout($_GET['id']);
+      header("Location: rooms.php");
+      break;
 	}
 }
 else

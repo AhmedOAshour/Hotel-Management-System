@@ -85,7 +85,7 @@ public function getFloorsNo(){
   return $floorno;
 }
 public function getReservation(){
-  $sql = "SELECT c.first_name,c.last_name,r.ID FROM checked_in as ci
+  $sql = "SELECT ci.*, r.*, c.* FROM checked_in as ci
    INNER JOIN reservation as r
    ON r.ID = ci.reservation_ID
    INNER JOIN client as c
@@ -94,5 +94,30 @@ public function getReservation(){
   $result = $this->db->query($sql);
   $row = $this->db->fetchRow();
   return $row;
+}
+public function changeStatus($number,$status){
+  $sql = "UPDATE room SET status = '$status' where number = '$number'";
+  if($this->db->query($sql) === true){
+    echo "Records inserted successfully.";
+  }
+  else{
+    echo "ERROR: Could not able to execute $sql. " . $this->db->getConn()->error;
+  }
+}
+public function checkout($number){
+  $date = date('Y-m-d H:i:sP');
+  $sql = "UPDATE reservation as r
+          INNER JOIN checked_in as ci
+          INNER JOIN room
+          ON room.number = ci.room_no
+          on r.ID = ci.reservation_ID
+          SET r.check_out = '$date',room.status='available' WHERE room.number = '$number'";
+  $sql1 = "DELETE FROM checked_in WHERE room_no = '$number'";
+  if($this->db->query($sql) === true && $this->db->query($sql1) === true){
+    echo "Records inserted successfully.";
+  }
+  else{
+    echo "ERROR: Could not able to execute $sql. " . $this->db->getConn()->error;
+  }
 }
 }

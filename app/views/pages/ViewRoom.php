@@ -4,7 +4,7 @@
     function output(){
       $str = <<<EOD
         <div class="container">
-            <div class="row">
+            <div class="row sidebar">
                 <div class="col-3 bar">
                     <form action="/action_page.php">
                         <label>Date:</label>
@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="container">
-            <div class="row">
+            <div class="row sidebar">
                 <div class="col-3">
                     <ul class="nav flex-column left">
                         <h3>Status</h3>
@@ -51,10 +51,11 @@
                             <input type="checkbox" id="HouseKeeping3" name="HouseKeeping3" value="Inprogress">
                             <label for="vehicle1">In progress</label><br>
                         </li>
+                        <li><a href="reservations.php?action=checkin"> <button> Check In </button> </a></li>
+                        <li><a href="rooms.php?action=manage"> <button> Manage rooms </button> </a></li>
                     </ul>
                 </div>
                 <div class="col-9">
-
       EOD;
       $types = $this->model->getRoomTypes();
       foreach ($types as $type) {
@@ -62,13 +63,14 @@
         $str .= <<<EOD
           <div class="col-9">
             <h3 class="title">$type</h3>
+            <div class="row">
         EOD;
         // make a function for each display type?
         foreach ($rooms as $room) {
           $class = $this->getClass($room->status);
           $title = $this->getTitle($room);
           $str .= <<<EOD
-                        <div onclick="alert($room->number)" class="card text-black bg-$class mb-3" style="max-width: 15rem;">
+                        <div onclick="view_room($room->number)" class="card text-black bg-$class mb-3 mx-3" style="width: 15rem;">
                             <div class="card-header">Room $room->number</div>
                                 <div class="card-body">
                                     <h2 class="card-title">$title</h2>
@@ -78,57 +80,97 @@
           EOD;
         }
         $str .= <<<EOD
+          </div>
         </div>
         EOD;
       }
-
-//<a class="nostyle" href="#"><a>
       $str .= <<<EOD
             </div>
         </div>
-EOD;
-echo $str;
+      EOD;
+      echo $str;
+    }
+
+    function view_room($id){
+      $room = new Room($id);
+      $str = <<<EOD
+        <a href="rooms.php">Back</a> <br>
+        room number $room->number<br>
+        room type $room->type<br>
+        room status $room->status<br>
+        comments $room->comments<br><br>
+      EOD;
+      switch ($room->status) {
+        case 'booked':
+          $res = $room->getReservation();
+          $str .= <<<EOD
+          guest names $res[guest_names] <br>
+          arrival $res[arrival]<br>
+          departure $res[departure]<br>
+          check in $res[check_in]<br>
+          comments $res[comments]<br>
+          first_name $res[first_name]<br>
+          last_name $res[last_name]<br>
+          Identification Number $res[identification_no]<br>
+          Nationality $res[nationality]<br>
+          mobile $res[mobile]<br>
+          email $res[email]<br>
+          company $res[company]<br>
+          <button onclick="checkout($_GET[id])"> Check out </button>
+          EOD;
+          break;
+        case 'available':
+          $str .= <<<EOD
+            <button onclick="mark_unavailable($_GET[id])"> Mark as Unavailable </button>
+          EOD;
+          break;
+        case 'unavailable'||'checked_out':
+          $str .= <<<EOD
+            <button onclick="mark_available($_GET[id])"> Mark as Available </button>
+          EOD;
+          break;
+      }
+      $str .= <<<EOD
+      EOD;
+      echo $str;
     }
 
     private function getClass($status){
-      $class;
       switch ($status) {
         case 'available':
-          $class = "success";
+          return "success";
           break;
         case 'unavailable':
-          $class = "danger";
+          return "danger";
           break;
         case 'booked':
-          $class = "primary";
+          return "primary";
           break;
         case 'checked_out':
-          $class = "warning";
+          return "warning";
           break;
       }
-      return $class;
     }
 
     private function getTitle($room){
       $status=$room->status;
-      $title;
       switch ($status) {
         case 'available':
-          $title = "Free Room";
+          return "Free Room";
           break;
         case 'unavailable':
-          $title = "Unavailable Room";
+          return "Unavailable Room";
           break;
         case 'booked':
           $reservation = $room->getReservation();
-          $title = "$reservation[first_name] $reservation[last_name]";
+          return "$reservation[first_name] $reservation[last_name]";
           break;
         case 'checked_out':
-          $title = "Checked out";
+          return "Checked out";
           break;
       }
-      return $title;
     }
+
   }
 
 ?>
@@ -136,4 +178,21 @@ echo $str;
 .card{
   cursor: pointer;
 }
+.checkin{
+  /* display: none; */
+}
 </style>
+<script type="text/javascript">
+  function view_room(id){
+    window.location.href = "rooms.php?action=view_room&id="+id;
+  }
+  function mark_available(id){
+    window.location.href = "rooms.php?action=mark_available&id="+id;
+  }
+  function mark_unavailable(id){
+    window.location.href = "rooms.php?action=mark_unavailable&id="+id;
+  }
+  function checkout(id){
+    window.location.href = "rooms.php?action=checkout&id="+id;
+  }
+</script>
