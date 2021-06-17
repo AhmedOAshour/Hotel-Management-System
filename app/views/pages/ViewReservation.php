@@ -1,9 +1,17 @@
 <?php
 
 class ViewReservation extends View{
-public function output(){
-$result=$this->model->readReservations();
-
+public function output($checkin){
+$result=$this->model->readReservations($checkin);
+    $thead;
+    if(!$checkin)
+    {
+      $thead = "<th style='text-align:center'><strong>Edit Reservation</strong></th>
+      <th style='text-align:center'><strong>Delete Reservation</strong></th>";
+    }
+    else {
+      $thead = "<th style='text-align:center'><strong>Checkin</strong></th>";
+    }
     $str=<<<EOD
         <div class="container">
         <input type="date" id="date" value="<?php echo date('Y-m-d'); ?>">
@@ -16,8 +24,7 @@ $result=$this->model->readReservations();
             <th style='text-align:center'><strong>Number of Rooms</strong></th>
             <th style='text-align:center'><strong>Arrival</strong></th>
             <th style='text-align:center'><strong>Days/Nights</strong></th>
-            <th style='text-align:center'><strong>Edit Reservation</strong></th>
-            <th style='text-align:center'><strong>Delete Reservation</strong></th>
+            $thead
             </tr>
         </thead>
         <tbody id="rTable">
@@ -43,9 +50,21 @@ $result=$this->model->readReservations();
     $str.=
     <<<EOD
         <td style='text-align:center'>$days/$nights</td>
+    EOD;
+    $buttons;
+    if (!$checkin) {
+      $buttons = <<<EOD
         <td style='text-align:center '><a class="color" href='reservations.php?action=editRoomCount&id=$row[RID]'><i class='fa fa-edit'></a></td>
         <td style='text-align:center '><a class="color" href='reservations.php?action=delete&id=$row[RID]'><i class='fa fa-trash'></i></a></td>
-        EOD;
+      EOD;
+    }
+    else {
+      $buttons = <<<EOD
+        <td style='text-align:center '><a class="color" href='rooms.php?action=checkin&id=$row[RID]'>Check In</a></td>
+      EOD;
+    }
+
+      $str .= $buttons;
     }
 
     $str.=

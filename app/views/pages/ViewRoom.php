@@ -135,6 +135,13 @@
       echo $str;
     }
 
+    function checkin($resID){
+      $str = <<<EOD
+        $resID
+      EOD;
+      echo $str;
+    }
+
     private function getClass($status){
       switch ($status) {
         case 'available':

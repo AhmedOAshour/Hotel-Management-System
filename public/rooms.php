@@ -78,6 +78,9 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
       $model->checkout($_GET['id']);
       header("Location: rooms.php");
       break;
+    case 'checkin':
+      $view->checkin($_GET['id']);
+      break;
 	}
 }
 else

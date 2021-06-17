@@ -29,13 +29,16 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 			break;
 		case 'editRoomCount':
 			$view->editRoomCount($_GET['id']);
-
+			break;
+		case 'checkin':
+			echo $view->output(true);
+			break;
 
 
 
 	}
 }
 else
-	echo $view->output();
+	echo $view->output(false);
 
     ?>

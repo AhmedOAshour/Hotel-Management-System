@@ -9,7 +9,7 @@ class Reservation extends Model{
     public $departure;
     public $comments;
     public $number_of_rooms;
-  
+
     function __construct($id=""){
         parent::__construct();
         if ($id!="") {
@@ -28,10 +28,14 @@ class Reservation extends Model{
           }
         }
         }
-     
-public function readReservations(){
-   
+
+public function readReservations($checkin){
     $sql = "SELECT * ,reservation.ID AS RID FROM reservation INNER JOIN client ON reservation.client_ID = client.ID";
+    if ($checkin) {
+      $date = date('Y-m-d');
+      $ext = " WHERE reservation.arrival = '$date'";
+      $sql .= $ext;
+    }
     $result = $this->db->query($sql);
     if ($result->num_rows > 0){
       return $result;
@@ -47,14 +51,14 @@ public function editReservation($id,$client_ID,$room_type,$number_of_rooms,$arri
   $sql2="DELETE from reservedrooms where RID=$id";
   if($this->db->query($sql2) === true){
     echo "updated successfully.";
-  
+
 } else{
     echo "ERROR: Could not able to execute $sql. " . $conn->error;
   }
     $sql = "UPDATE reservation SET client_ID = '$client_ID' ,number_of_rooms='$number_of_rooms',arrival = '$arrival',departure='$departure' , comments='$comments' WHERE ID = '$id'";
     if($this->db->query($sql) === true){
 			echo "updated successfully.";
-    
+
 	} else{
 			echo "ERROR: Could not able to execute $sql. " . $conn->error;
 		}
@@ -62,13 +66,13 @@ public function editReservation($id,$client_ID,$room_type,$number_of_rooms,$arri
       $price=0;
       $sql="insert into reservedrooms (RID,room_type,price) values('$id','$room_type[$i]','$price')";
       $result = $this->db->query($sql);
-      
+
 
     }
-   
 
 
-    
+
+
 }
 function deleteReservation($id){
     $sql = "DELETE FROM reservation WHERE ID = $id ";
@@ -79,22 +83,22 @@ function deleteReservation($id){
       echo "ERROR: Could not able to execute $sql. " . $this->db->getConn()->error;
     }
   }
-  
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
     }
 
 
 
 
 
-  
-    
-  
-  
+
+
+
+
 ?>
