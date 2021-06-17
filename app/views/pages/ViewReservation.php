@@ -4,8 +4,7 @@ class ViewReservation extends View{
 public function output(){
 $result=$this->model->readReservations();
 
-    $str=
-<<<EOD
+    $str=<<<EOD
         <div class="container">
         <input type="date" id="date" value="<?php echo date('Y-m-d'); ?>">
         <table width="100%" border="1" style="border-collapse:collapse; margin-top:4px;">
@@ -25,8 +24,8 @@ $result=$this->model->readReservations();
         EOD;
         if(!empty($result)){
         while($row = mysqli_fetch_array($result)) {
-         
-        
+
+
             $str.=
             <<<EOD
                     <tr>
@@ -53,8 +52,12 @@ $result=$this->model->readReservations();
     <<<EOD
         </tbody>
         </table>
-        
-        
+<<<<<<< HEAD
+        </div>
+=======
+
+
+>>>>>>> 5def0494afc89ff47a55fcf72ac774af8a0422c3
         </body>
         </html>
      EOD;
@@ -62,13 +65,23 @@ $result=$this->model->readReservations();
 $str.=
 <<<EOD
 <form>
-  
+<<<<<<< HEAD
+
+        <button type="submit" name="action" value="createReservation">Create Reservation </button>
+        </form>
+
+
+
+EOD;
+=======
+
         <button type="submit" name="action" class="button2"value="createReservation">Create Reservation </button>
         </form>
         </div>
-     
-     
-EOD;     
+
+
+EOD;
+>>>>>>> 5def0494afc89ff47a55fcf72ac774af8a0422c3
 
 echo $str;
 }
@@ -84,33 +97,37 @@ $floorno=$this->model->getFloorsNo();
               <div id="reservation">
               <h1>Edit Reservations</h1>
               <form>
-              <h4 class="words" for="room_type">Room Type</h4> 
+<<<<<<< HEAD
+              <input id="count" type='text' name='guest_count' value='$reservations->guest_count' placeholder="Guest Count"><br>
+              <textarea name="guest_names" rows="3" cols="23" placeholder="Guest Names seperate by ,">$reservations->guest_names</textarea> <br>
+              <label for="room_type">Room Type:</label>
+=======
+              <h4 class="words" for="room_type">Room Type</h4>
+>>>>>>> 5def0494afc89ff47a55fcf72ac774af8a0422c3
               EOD;
-              for($i=0;$i<$quantity;$i++){ 
+              for($i=0;$i<$quantity;$i++){
                 $str.=<<<EOD
                 <select class="formE form-control border-3" name="room_type[]">
                 EOD;
                foreach ($roomtypes as $room) {
              $str.=<<<EOD
-                
-                                               <option value='$room'>$room</option>
-                     EOD;
-                                             }
+               <option value='$room'>$room</option>
+             EOD;
+             }
              $str.=
              <<<EOD
-                                                            </select>
+                </select>
              EOD;
-           
-               
-           
+
+
+
               }
-                       
-                    
-         
+
+
+
 
       $str.=
       <<<EOD
-     
       </select>
       <h4 class="words arr">Arrival</h4><input type='date' class="formE form-control border-3"value='$reservations->arrival'name='arrival'>
       <h4 class="words">Departure</h4> <input type='date' class="formE form-control border-3"value='$reservations->departure' name='departure'><br>
@@ -118,8 +135,12 @@ $floorno=$this->model->getFloorsNo();
       <input type="text" name="client_ID" value="$reservations->client_id"  id="client_ID" hidden>
       <input type="text" name="id" value="$_GET[id]"  id="ID" hidden>
       <input type="text" name="quantity" value="$quantity"  id="quantity" hidden>
+<<<<<<< HEAD
+      <button type="submit" name="action" value="editRes">Edit Reservation </button>
+=======
       <button type="submit" name="action" class="button2" value="editRes">Edit Reservation </button>
-      
+
+>>>>>>> 5def0494afc89ff47a55fcf72ac774af8a0422c3
       </form>
       </div>
       </div>
@@ -129,25 +150,24 @@ $floorno=$this->model->getFloorsNo();
       echo $str;
 
 }
-     
+
 public function editRoomCount($id){
     $str=<<<EOD
-  
                 <form>
                 Number of Rooms:
                 <input type="number"size="1" name="quantity" id="counter" value=1></input>
                 <input type="text" name="id" id="counter" hidden value=$id></input>
                 <button type="submit" class="btn1 inputfile btn w-100 py-3" name="action" value="edit">Edit Reservation</button>
               </form>
-           
+
       EOD;
-  
+
       echo $str;
-  
-  
-        
-  
-  
+
+
+
+
+
   }
 
 

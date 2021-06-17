@@ -30,9 +30,9 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 		case 'editRoomCount':
 			$view->editRoomCount($_GET['id']);
 
-			
-			
-	
+
+
+
 	}
 }
 else

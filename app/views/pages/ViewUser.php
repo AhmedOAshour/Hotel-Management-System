@@ -51,7 +51,6 @@ class ViewUser extends View{
         <input type="password" name="password" id="password" class="form form-control mb-4 border-0 py-4"placeholder="Password"><br>
         <input type="text" name="username" id="username" class="form form-control mb-4 border-0 py-4" placeholder="UserName"><br>
         <select id="position" name="position" class="form form-control mb-2 border-0">
-
           <option hidden disabled selected value>Position</option>
           <option value='front_clerk'>Front Clerk</option>
           <option value='reservation_clerk'>Reservation Clerk</option>
