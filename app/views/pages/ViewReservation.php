@@ -75,6 +75,7 @@ $result=$this->model->readReservations($checkin);
         </html>
      EOD;
 }
+
 $str.=
 <<<EOD
 <form>

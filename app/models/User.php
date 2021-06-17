@@ -30,12 +30,12 @@ class User extends Model
       $_SESSION['ID'] = $this->id;
       $_SESSION['username'] = $row['username'];
       $_SESSION['position'] = $row['position'];
-      
       header('Location: rooms.php');
+     
 		}
-		else {
-      echo "Wrong Credentials.";
-		}
+		
+ 
+
   }
 
   function readUsers(){
