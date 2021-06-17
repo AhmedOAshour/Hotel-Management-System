@@ -5,18 +5,19 @@ public function output(){
 $result=$this->model->readReservations();
 
     $str=<<<EOD
+        <div class="container">
         <input type="date" id="date" value="<?php echo date('Y-m-d'); ?>">
         <table width="100%" border="1" style="border-collapse:collapse; margin-top:4px;">
         <thead>
             <tr>
-            <th><strong>First Name</strong></th>
-            <th><strong>Last Name</strong></th>
-            <th><strong>Nationality</strong></th>
-            <th><strong>Number of Rooms</strong></th>
-            <th><strong>Arrival</strong></th>
-            <th><strong>Days/Nights</strong></th>
-            <th><strong>Edit Reservation</strong></th>
-            <th><strong>Delete Reservation</strong></th>
+            <th style='text-align:center'><strong>First Name</strong></th>
+            <th style='text-align:center'><strong>Last Name</strong></th>
+            <th style='text-align:center'><strong>Nationality</strong></th>
+            <th style='text-align:center'><strong>Number of Rooms</strong></th>
+            <th style='text-align:center'><strong>Arrival</strong></th>
+            <th style='text-align:center'><strong>Days/Nights</strong></th>
+            <th style='text-align:center'><strong>Edit Reservation</strong></th>
+            <th style='text-align:center'><strong>Delete Reservation</strong></th>
             </tr>
         </thead>
         <tbody id="rTable">
@@ -28,11 +29,11 @@ $result=$this->model->readReservations();
             $str.=
             <<<EOD
                     <tr>
-                    <td>$row[first_name]</td>
-                    <td>$row[last_name]</td>
-                    <td>$row[nationality]</td>
-                    <td>$row[number_of_rooms]</td>
-                    <td>$row[arrival]</td>
+                    <td style='text-align:center'>$row[first_name]</td>
+                    <td style='text-align:center'>$row[last_name]</td>
+                    <td style='text-align:center'>$row[nationality]</td>
+                    <td style='text-align:center'>$row[number_of_rooms]</td>
+                    <td style='text-align:center'>$row[arrival]</td>
         EOD;
         $arrival = strtotime($row['arrival']);
         $departure = strtotime($row['departure']);
@@ -41,9 +42,9 @@ $result=$this->model->readReservations();
         $days = $nights + 1;
     $str.=
     <<<EOD
-        <td>$days/$nights</td>
-        <td style='text-align:center '><a href='reservations.php?action=editRoomCount&id=$row[RID]'>Edit</a></td>
-        <td style='text-align:center '><a href='reservations.php?action=delete&id=$row[RID]'>Delete</a></td>
+        <td style='text-align:center'>$days/$nights</td>
+        <td style='text-align:center '><a class="color" href='reservations.php?action=editRoomCount&id=$row[RID]'><i class='fa fa-edit'></a></td>
+        <td style='text-align:center '><a class="color" href='reservations.php?action=delete&id=$row[RID]'><i class='fa fa-trash'></i></a></td>
         EOD;
     }
 
@@ -51,7 +52,12 @@ $result=$this->model->readReservations();
     <<<EOD
         </tbody>
         </table>
+<<<<<<< HEAD
         </div>
+=======
+
+
+>>>>>>> 5def0494afc89ff47a55fcf72ac774af8a0422c3
         </body>
         </html>
      EOD;
@@ -59,6 +65,7 @@ $result=$this->model->readReservations();
 $str.=
 <<<EOD
 <form>
+<<<<<<< HEAD
 
         <button type="submit" name="action" value="createReservation">Create Reservation </button>
         </form>
@@ -66,26 +73,41 @@ $str.=
 
 
 EOD;
+=======
+
+        <button type="submit" name="action" class="button2"value="createReservation">Create Reservation </button>
+        </form>
+        </div>
+
+
+EOD;
+>>>>>>> 5def0494afc89ff47a55fcf72ac774af8a0422c3
 
 echo $str;
 }
 
 public function editForm($id,$quantity){
 $reservations=new Reservation($id);
-$roomtypes=$this->model->getRoomType();
+$roomtypes=$this->model->getRoomTypes();
 $floorno=$this->model->getFloorsNo();
 
   $str=
   <<<EOD
+                <div class="container">
               <div id="reservation">
+              <h1>Edit Reservations</h1>
               <form>
+<<<<<<< HEAD
               <input id="count" type='text' name='guest_count' value='$reservations->guest_count' placeholder="Guest Count"><br>
               <textarea name="guest_names" rows="3" cols="23" placeholder="Guest Names seperate by ,">$reservations->guest_names</textarea> <br>
               <label for="room_type">Room Type:</label>
+=======
+              <h4 class="words" for="room_type">Room Type</h4>
+>>>>>>> 5def0494afc89ff47a55fcf72ac774af8a0422c3
               EOD;
               for($i=0;$i<$quantity;$i++){
                 $str.=<<<EOD
-                <select class="" name="room_type[]">
+                <select class="formE form-control border-3" name="room_type[]">
                 EOD;
                foreach ($roomtypes as $room) {
              $str.=<<<EOD
@@ -107,13 +129,18 @@ $floorno=$this->model->getFloorsNo();
       $str.=
       <<<EOD
       </select>
-      Arrival: <input type='date' value='$reservations->arrival'name='arrival'>
-      Departure: <input type='date' value='$reservations->departure' name='departure'><br>
-      <textarea name="comments"  rows="8" cols="80" placeholder="Comments...">$reservations->comments</textarea> <br>
+      <h4 class="words arr">Arrival</h4><input type='date' class="formE form-control border-3"value='$reservations->arrival'name='arrival'>
+      <h4 class="words">Departure</h4> <input type='date' class="formE form-control border-3"value='$reservations->departure' name='departure'><br>
+      <h4 class="words">Comments</h4><textarea name="comments"  rows="2" cols="50" class="formE form-control border-3"placeholder="Comments...">$reservations->comments</textarea> <br>
       <input type="text" name="client_ID" value="$reservations->client_id"  id="client_ID" hidden>
       <input type="text" name="id" value="$_GET[id]"  id="ID" hidden>
       <input type="text" name="quantity" value="$quantity"  id="quantity" hidden>
+<<<<<<< HEAD
       <button type="submit" name="action" value="editRes">Edit Reservation </button>
+=======
+      <button type="submit" name="action" class="button2" value="editRes">Edit Reservation </button>
+
+>>>>>>> 5def0494afc89ff47a55fcf72ac774af8a0422c3
       </form>
       </div>
       </div>

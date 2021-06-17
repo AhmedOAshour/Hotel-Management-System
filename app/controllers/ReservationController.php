@@ -1,10 +1,10 @@
 <?php
 class ReservationController extends Controller{
     public function edit() {
-        $client_id=$_REQUEST['client_ID'];
-        $room_type=$_REQUEST['room_type'];
+   $client_id=$_REQUEST['client_ID'];
+   $room_type=$_REQUEST['room_type'];
    $guest_names=$_REQUEST['guest_names'];
-    $guest_count=$_REQUEST['guest_count'];
+   $guest_count=$_REQUEST['guest_count'];
     $number_of_rooms=$_REQUEST['quantity'];
     $arrival=$_REQUEST['arrival'];
     $departure=$_REQUEST['departure'];

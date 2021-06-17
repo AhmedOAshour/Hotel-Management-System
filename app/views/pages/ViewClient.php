@@ -6,10 +6,10 @@ class ViewClient extends View{
       
         $str = 
         <<<EOD
-        
+                    <div class="col-10 position">
                     <div id="client">
                     <div id="showClients">
-                      <input type="text" id="bar" placeholder="Search by..." oninput="showClient()">
+                      <input type="text" id="bar" placeholder="Search by..." oninput="showClient()"><i class="fa fa-search"></i>
                       <select id="select" onchange="showClient()">
                         <option value="last_name">Last Name</option>
                         <option value="identification_no">ID Number</option>
@@ -18,23 +18,23 @@ class ViewClient extends View{
                       <table width="100%" border="1" style="border-collapse:collapse; margin-top:4px;">
                         <thead>
                     <tr>
-                <th><strong>First Name</strong></th>
-                <th><strong>Last Name</strong></th>
-                <th><strong>Nationality</strong></th>
-                <th><strong>Identification No.</strong></th>
-                <th><strong>Mobile</strong></th>
-                <th><strong>E-mail</strong></th>
-                <th><strong>Company</strong></th>
+                <th style='text-align:center'><strong>First Name</strong></th>
+                <th style='text-align:center'><strong>Last Name</strong></th>
+                <th style='text-align:center'><strong>Nationality</strong></th>
+                <th style='text-align:center'><strong>Identification No.</strong></th>
+                <th style='text-align:center'><strong>Mobile</strong></th>
+                <th style='text-align:center'><strong>E-mail</strong></th>
+                <th style='text-align:center'><strong>Company</strong></th>
                 EOD;
                 if(!empty($_GET['flag'])&&$_GET['flag']==true){
                 $str.=<<<EOD
-                  <th><strong>Create Reservation</strong></th>             
+                  <th style='text-align:center'><strong>Create Reservation</strong></th>             
                 EOD;
                 }
                 else {
                 $str.=<<<EOD
-                  <th><strong>Edit</strong></th>
-                  <th><strong>Delete</strong></th>                 
+                  <th style='text-align:center'><strong>Edit</strong></th>
+                  <th style='text-align:center'><strong>Delete</strong></th>                 
                 EOD;
 
                 }
@@ -51,22 +51,22 @@ class ViewClient extends View{
         $str .= <<<EOD
                                           <tr>
                                         
-                                            <td>$client->first_name</td>
-                                            <td>$client->last_name</td>
-                                            <td>$client->identification_no</td>
-                                            <td>$client->nationality</td>
-                                            <td>$client->mobile</td>
-                                            <td>$client->email</td>
-                                            <td>$client->company</td>
+                                            <td style='text-align:center'>$client->first_name</td>
+                                            <td style='text-align:center'>$client->last_name</td>
+                                            <td style='text-align:center'>$client->identification_no</td>
+                                            <td style='text-align:center'>$client->nationality</td>
+                                            <td style='text-align:center'>$client->mobile</td>
+                                            <td style='text-align:center'>$client->email</td>
+                                            <td style='text-align:center'>$client->company</td>
           EOD;
           if(!empty($_GET['flag'])&&$_GET['flag']==true){
             $str.=<<<EOD
-          <td><a href="clients.php?action=addfields&id=$client->id">Create Reservation</a></td>
+          <td style='text-align:center'><a class="color"href="clients.php?action=addfields&id=$client->id"><i class='fa fa-plus-square'></i></a></td>
           EOD;
           }
           else { $str.=<<<EOD
-            <td><a href="clients.php?action=editform&id=$client->id">Edit</a></td>
-            <td><a href="clients.php?action=delete&id=$client->id">Delete</a></td>
+            <td style='text-align:center'><a class="color" href="clients.php?action=editform&id=$client->id"><i class='fa fa-edit'></i></a></td>
+            <td style='text-align:center'><a class="color" href="clients.php?action=delete&id=$client->id"><i class='fa fa-trash'></i></a></td>
             EOD;
 
 
@@ -80,6 +80,8 @@ class ViewClient extends View{
     </table>
     <br>
   </div>
+  </div>
+
 
   <a href="clients.php?action=addform"><button type="button" class="button" id="addBtn">Add Client</button></a>
   EOD;
@@ -90,7 +92,9 @@ public function addForm(){
 
     $str=
     <<<EOD
+            <div class="container"> 
             <div id="createClient">
+            <h1>Add client</h1>
             <form>
             <input class="formE form-control border-3" type="text" name="first_name" placeholder="First Name...">
             <input class="formE form-control border-3" type="text" name="last_name" placeholder="Last Name...">
@@ -99,9 +103,10 @@ public function addForm(){
             <input class="formE form-control border-3" type="text" name="mobile" placeholder="Mobile...">
             <input class="formE form-control border-3" type="text" name="email" placeholder="E-mail...">
             <input class="formE form-control border-3" type="text" name="company" placeholder="Company...">
-            <input type="submit" class="create" name="action" value="add" id="submitBtn"">
+            <input type="submit" class="button2" name="action" value="Add" id="submitBtn"">
             </form>
             </div>
+        </div>
         </div>
 
     EOD;
@@ -110,21 +115,21 @@ echo $str;
 }
 public function resForm($id,$quantity){
 
-  $roomtypes=$this->model->getRoomType();
+  $roomtypes=$this->model->getRoomTypes();
 
  
   $str=
   <<<EOD
+                <div class="container">
               <div id="reservation">
+              <h1>Create Reservation</h1>
               <form>
-              <input id="count" type='text' name='guest_count' placeholder="Guest Count"><br>
-              <textarea name="guest_names" rows="3" cols="23" placeholder="Guest Names seperate by ,"></textarea> <br>
-              <label for="room_type">Room Type:</label> 
+              <h4 class="words" for="room_type">Room Type</h4> 
               
    EOD;
    for($i=0;$i<$quantity;$i++){ 
      $str.=<<<EOD
-     <select class="" name="room_type[]">
+     <select class="formE form-control border-3" name="room_type[]">
      EOD;
     foreach ($roomtypes as $room) {
   $str.=<<<EOD
@@ -134,7 +139,7 @@ public function resForm($id,$quantity){
                                   }
   $str.=
   <<<EOD
-                                                 </select>
+                                                 </select><br>
   EOD;
 
     
@@ -147,12 +152,12 @@ public function resForm($id,$quantity){
         <<<EOD
         
         
-      Arrival: <input type='date' name='arrival'>
-      Departure: <input type='date' name='departure'><br>
-      <textarea name="comments" rows="8" cols="80" placeholder="Comments..."></textarea> <br>
-      <input type="text" name="client_ID" value="$id"  id="client_ID" hidden>
-      <input type="text" name="quantity" value="$quantity"  id="quantity" hidden>
-      <button type="submit" name="action" value="createRes">Create Reservation</button>
+      <h4 class="words arr">Arrival</h4><input type='date'class="formE form-control border-3" name='arrival'>
+      <h4 class="words">Departure</h4> <input type='date' class="formE form-control border-3" name='departure'><br>
+      <textarea class="formE form-control border-3" name="comments" rows="2" cols="50" placeholder="Comments..."></textarea> <br>
+      <input type="text" name="client_ID" value="$id" class="formE form-control border-3" id="client_ID" hidden>
+      <input type="text" name="quantity" value="$quantity" class="formE form-control border-3" id="quantity" hidden>
+      <button type="submit" name="action" class="button2"value="createRes">Create Reservation</button>
       </form>
       </div>
       </div>
@@ -166,7 +171,8 @@ public function editForm($id){
   $client = new Client($id);
 $str=
     <<<EOD
-            <div id="createClient">
+            <div class="container">
+            <h1>Edit Clients</h1>
             <form>
             <input class="formE form-control border-3" type="text" value="$client->first_name" name="first_name" placeholder="First Name...">
             <input class="formE form-control border-3" type="text" name="last_name" value="$client->last_name" placeholder="Last Name...">
@@ -176,10 +182,11 @@ $str=
             <input class="formE form-control border-3" type="text" name="email" value="$client->email"placeholder="E-mail...">
             <input class="formE form-control border-3" type="text" name="company"value="$client->company" placeholder="Company...">
             <input class="formE form-control border-3" type="text" name="id"value="$id" hidden placeholder="Company...">
-            <input type="submit" class="create" name="action" value="edit" id="submitBtn"">
+            <button type="submit" class="button2" name="action" value="edit">Submit</button>
             </form>
-            </div>
         </div>
+        
+      
 
     EOD;
 echo $str;
@@ -188,13 +195,14 @@ echo $str;
 }
 public function addFields($id){
   $str=<<<EOD
-
+            <div class="container">
               <form>
-              Number of Rooms:
+              Number of Rooms
               <input type="number"size="1" name="quantity" id="counter" value=1></input>
               <input type="text" name="id" id="counter" hidden value=$id></input>
-              <button type="submit" class="btn1 inputfile btn w-100 py-3" name="action" value="resform">Proceed</input>
+              <button type="submit" class="button2" name="action" value="resform">Proceed</input>
             </form>
+            </div>
          
     EOD;
 
