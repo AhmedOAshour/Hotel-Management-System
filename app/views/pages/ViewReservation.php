@@ -52,36 +52,16 @@ $result=$this->model->readReservations();
     <<<EOD
         </tbody>
         </table>
-<<<<<<< HEAD
-        </div>
-=======
-
-
->>>>>>> 5def0494afc89ff47a55fcf72ac774af8a0422c3
         </body>
         </html>
      EOD;
 }
 $str.=
 <<<EOD
-<form>
-<<<<<<< HEAD
-
+        <form>
         <button type="submit" name="action" value="createReservation">Create Reservation </button>
         </form>
-
-
-
 EOD;
-=======
-
-        <button type="submit" name="action" class="button2"value="createReservation">Create Reservation </button>
-        </form>
-        </div>
-
-
-EOD;
->>>>>>> 5def0494afc89ff47a55fcf72ac774af8a0422c3
 
 echo $str;
 }
@@ -97,13 +77,9 @@ $floorno=$this->model->getFloorsNo();
               <div id="reservation">
               <h1>Edit Reservations</h1>
               <form>
-<<<<<<< HEAD
               <input id="count" type='text' name='guest_count' value='$reservations->guest_count' placeholder="Guest Count"><br>
               <textarea name="guest_names" rows="3" cols="23" placeholder="Guest Names seperate by ,">$reservations->guest_names</textarea> <br>
               <label for="room_type">Room Type:</label>
-=======
-              <h4 class="words" for="room_type">Room Type</h4>
->>>>>>> 5def0494afc89ff47a55fcf72ac774af8a0422c3
               EOD;
               for($i=0;$i<$quantity;$i++){
                 $str.=<<<EOD
@@ -135,12 +111,7 @@ $floorno=$this->model->getFloorsNo();
       <input type="text" name="client_ID" value="$reservations->client_id"  id="client_ID" hidden>
       <input type="text" name="id" value="$_GET[id]"  id="ID" hidden>
       <input type="text" name="quantity" value="$quantity"  id="quantity" hidden>
-<<<<<<< HEAD
       <button type="submit" name="action" value="editRes">Edit Reservation </button>
-=======
-      <button type="submit" name="action" class="button2" value="editRes">Edit Reservation </button>
-
->>>>>>> 5def0494afc89ff47a55fcf72ac774af8a0422c3
       </form>
       </div>
       </div>
