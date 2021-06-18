@@ -12,7 +12,7 @@ class Followup extends Model
         $row = $this->db->fetchRow();
         $this->id = $row['ID'];
         $this->date = $row['date'];
-        $this->reading = $row['comment'];
+        $this->reading = $row['reading'];
         $this->photo = $row['photo'];
         $this->entryBy = $row['entry_by'];
       }

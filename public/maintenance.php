@@ -21,7 +21,7 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 			case 'insert':
 			$controller->insert();
 			//$controller->insert($_SESSION['username']);
-			//$view->output();
+			$view->output();
 			
 	
 	}

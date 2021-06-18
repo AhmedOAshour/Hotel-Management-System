@@ -1,3 +1,9 @@
+<style>
+  #myfile{
+    background-color:#000026;
+    color:white;
+  }
+</style>
 <?php
 class ViewFollowup extends View{
   public function outputFollowups($type){
@@ -12,19 +18,21 @@ class ViewFollowup extends View{
     ucwords($otherType);
     $str =
     <<<EOD
-    <h2>Followup Reports</h2>
-    <a href="followup.php?type=$otherType">View $otherType</a>
+    <div class="container">
+    <h1>Followup Reports</h1>
+
     <div id="viewFollowups">
+    
       <table>
         <thead>
           <tr>
-            <th><strong>ID</strong></th>
-            <th><strong>Date</strong></th>
-            <th><strong>Reading</strong></th>
-            <th><strong>Photo</strong></th>
-            <th><strong>Entered By</strong></th>
-            <th><strong>Delete</strong></th>
-            <th><strong>View</strong></th>
+            <th style='text-align:center'><strong>ID</strong></th>
+            <th style='text-align:center'><strong>Date</strong></th>
+            <th style='text-align:center'><strong>Reading</strong></th>
+            <th style='text-align:center'><strong>Photo</strong></th>
+            <th style='text-align:center'><strong>Entered By</strong></th>
+            <th style='text-align:center'><strong>View</strong></th>
+            <th style='text-align:center'><strong>Delete</strong></th>
           </tr>
         </thead>
         <tbody>
@@ -33,49 +41,47 @@ class ViewFollowup extends View{
           foreach ($followups as $followup) {
             $str .= <<<EOD
             <tr>
-              <td>$followup->id</td>
-              <td>$followup->date</td>
-              <td>$followup->reading</td>
-              <td>$followup->photo</td>
-              <td>$followup->entryBy</td>
-              <td><a href="followup.php?id=$followup->id&action=view&type=$type">View</a></td>
-              <td><a href="followup.php?id=$followup->id&action=delete&type=$type">Delete</a></td>
+              <td style='text-align:center'>$followup->id</td>
+              <td style='text-align:center'>$followup->date</td>
+              <td style='text-align:center'>$followup->reading</td>
+              <td style='text-align:center'>$followup->photo</td>
+              <td style='text-align:center'>$followup->entryBy</td>
+              <td style='text-align:center'><a class="color" href="followup.php?id=$followup->id&action=view&type=$type"><i class="fa fa-eye"></i></a></td>
+              <td style='text-align:center'><a class="color" href="followup.php?id=$followup->id&action=delete&type=$type"><i class='fa fa-trash'></i></a></td>
             </tr>
             EOD;
           }
         }
-        else {
-          $str .= <<<EOD
-          <tr>
-          No Entries Found.
-          </tr>
-          EOD;
-        }
+
 
     $str .= <<<EOD
         </tbody>
       </table>
       <br>
-    </div>
-    <a href="followup.php?action=followupForm"><button type="button" class="button" id="addBtn">Add Followup </button></a>
+      <a href="followup.php?type=$otherType"><button type="button" class="button2">View $otherType </button></a><br>
+      <a href="followup.php?action=followupForm"><button type="button" class="button2" id="addBtn">Add Followup </button></a>
+      </div>
     EOD;
     echo $str;
   }
 
   public function followupForm(){
     $str=<<<EOD
-    <h3>Followup</h3>
+    <div class="container"> 
+    <h1>Add Followup</h1>
     <div id="followupForm">
     <form class="followupForm" method="post" enctype = "multipart/form-data">
-        <input type="date" name="date" class="form form-control mb-4 border-0 py-4" required><br>
-        <input type="text" name="comment" placeholder="comments..." class="form form-control mb-4 border-0 py-4" required><br>
-        <label class='followup' for='type'>Type</label>
-        <select name="type" id="type">
-          <option value="electricity">Electricity</option>
+        <input type="date" name="date" class="formE form-control mb-4 border-0 py-4" required><br>
+        <input type="text" name="comment" placeholder="comments..." class="formE form-control mb-4 border-0 py-4" required><br>
+        <label class='followup' for='type'></label>
+        <select class="formE form-control mb-4 border-0 py-4" name="type" id="type">
+        
+        <option value="Task">Task</option>
+        <option value="electricity">Electricity</option>
           <option value="water">Water</option>
         </select><br>
-        <input type="file" id="myfile" name="myfile" required><br>
-        <button type="submit" name="action" value="submitForm">Submit</button>
+        <input class="formE form-control mb-4 border-0 py-4"type="file" id="myfile" name="myfile"style="height:65px" required><br>
+        <button class="button2"type="submit" name="action" value="submitForm">Submit</button>
       </form>
     </div>
     EOD;
