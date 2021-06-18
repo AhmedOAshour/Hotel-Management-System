@@ -119,7 +119,9 @@ public function addForm(){
         <input class="formE form-control border-3" type="text" name="mobile" id="mobile" onchange="checkMobile()" placeholder="Mobile..." required>
         <div id="errorMobile">
         </div>
-        <input class="formE form-control border-3" type="text" name="email" placeholder="E-mail..." required>
+        <input class="formE form-control border-3" type="text" name="email" id="email" onchange="checkEmail()" placeholder="E-mail..." required>
+        <div id="errorEmail">
+        </div>
         <input class="formE form-control border-3" type="text" name="company" placeholder="Company..."required>
         <input type="submit" class="button2" name="action" value="Add" id="submitBtn"">
         </form>

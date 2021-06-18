@@ -95,3 +95,15 @@ function checkMobile(){
   }
   document.getElementById("errorMobile").innerHTML = errorMobile;
 }
+
+function checkEmail(){
+  var email = document.getElementById("email").value;
+  var str1 = "@";
+  var str2 = ".com";
+  var errorEmail = "";
+
+  if (!email.match(str1) || !email.match(str2)) {
+    errorEmail = errorEmail.concat("Please enter a valid email.<br>");
+  }
+  document.getElementById("errorEmail").innerHTML = errorEmail;
+}
