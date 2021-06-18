@@ -67,10 +67,9 @@ class ViewUser extends View{
     echo $str;
   }
   public function addForm(){
-   
     $str=<<<EOD
     <div class="container">
-    <h1>Add Employee</h1> 
+    <h1>Add Employee</h1>
     <form class="addE" oninput="checkAddEdit()">
     <div id="addEmployees" class="addEmployees">
         <div id="errorName1">
@@ -85,13 +84,14 @@ class ViewUser extends View{
         <div id="errorPass">
         </div>
         <input type="password" name="password" id="password" class="form form-control mb-4 border-0 py-4"placeholder="Password" required><br>
-        <select id="position" name="position" class="form form-control mb-2 border-0">
+        <select id="position" name="position" class="form form-control mb-2 border-0" required>
           <option hidden disabled selected value>Position</option>
+          <option value='admin'>admin</option>
           <option value='front_clerk'>Front Clerk</option>
           <option value='reservation_clerk'>Reservation Clerk</option>
           <option value='HK_employee'>Housekeeping</option>
         </select><br>
-        <input type="submit" class="submitEmployee button2" name="action" value="Add" id="submitBtn">
+        <input type="submit" class="submitEmployee button2" name="action" value="add" id="submitBtn">
       </form>
     </div>
     EOD;
@@ -122,7 +122,7 @@ class ViewUser extends View{
         <option value='reservation_clerk'>Reservation Clerk</option>
         <option value='HK_employee'>HouseKeeping Clerk</option>
         </select> <br><br>
-        <input type='submit'  name='action' value="Edit" class='button2'>
+        <input type='submit'  name='action' value="edit" class='button2'>
       </form>
       EOD;
       echo $str;
@@ -165,7 +165,7 @@ class ViewUser extends View{
         <input class='formE form-control mb-4 border-0 py-4' for='question' disabled value='$question ?'><br>
         <input type="text" name="answer" id="answer" placeholder="Answer.."class="formE form-control mb-4 border-0 py-4"><br>
         <input type="text" name="username" value="$username" style="display:none;" required>
-        <input type="submit" class="button2" name="action" value="Validate" id="submitBtn">
+        <input type="submit" class="button2" name="action" value="validate" id="submitBtn">
       </form>
     </div>
     EOD;
@@ -237,7 +237,7 @@ class ViewUser extends View{
        </form>
     EOD;
     echo $str;
-    
+
   }
   public function valideAddForm(){
 $errors=array();
