@@ -22,20 +22,20 @@ class User extends Model
   }
 
   function login($username, $password){
-    $sql = "SELECT * FROM user WHERE username = '$username' AND password = '$password'";
+    $sql = "SELECT * FROM user WHERE username = '$username'";
     $result = $this->db->query($sql);
-    if ($result->num_rows == 1){
-			$row = $this->db->fetchRow();
+    $row = $this->db->fetchRow();
+   if (password_verify($password, $row['password']))
+   {
       $this->id = $row['ID'];
       $_SESSION['ID'] = $this->id;
       $_SESSION['username'] = $row['username'];
       $_SESSION['position'] = $row['position'];
-      
       header('Location: rooms.php');
+     
 		}
-		else {
-      echo "Wrong Credentials.";
-		}
+    
+
   }
 
   function readUsers(){
@@ -56,7 +56,7 @@ class User extends Model
   function readProfile(){
     $info = array();
     $ID = $_SESSION['ID'];
-    $sql = "SELECT * FROM user WHERE ID = $ID";
+    $sql = "SELECT * FROM user WHERE ID = '$ID'";
     $result = $this->db->query($sql);
     if ($result->num_rows > 0){
       $row = $this->db->fetchRow();
@@ -73,33 +73,22 @@ class User extends Model
   }
 
   function insertUser($first_name, $last_name, $password, $position, $username){
+    $password=password_hash($password,PASSWORD_DEFAULT);
     $sql = "INSERT INTO user (username,first_name,last_name,password,position) VALUES ('$username','$first_name','$last_name','$password','$position')";
-		if($this->db->query($sql) === true){
-			echo "Records inserted successfully.";
-		}
-		else{
-			echo "ERROR: Could not able to execute $sql. " . $this->db->getConn()->error;
-		}
+    $this->db->query($sql);
+
   }
   
 
   function editUser($first_name, $last_name, $password, $position, $username, $id){
     $sql = "UPDATE user SET first_name = '$first_name', last_name = '$last_name', password = '$password', position = '$position', username = '$username' WHERE ID = '$id'";
-    if($this->db->query($sql) === true){
-			echo "updated successfully.";
-
-	} else{
-			echo "ERROR: Could not able to execute $sql. " . $conn->error;
-		}
+    $this->db->query($sql);
   }
 
   function deleteUser($id){
     $sql = "DELETE FROM user WHERE ID = $id ";
-    if($this->db->query($sql) === true){
-      echo "deleted successfully.";
-    } else{
-      echo "ERROR: Could not able to execute $sql. " . $conn->error;
-    }
+    $this->db->query($sql);
+    
   }
 
   function getQuestion($username){
@@ -120,6 +109,7 @@ class User extends Model
 
   function newPassword($username, $password, $cPassword){
     if ($password == $cPassword) {
+      $password=password_hash($password,PASSWORD_DEFAULT);
       $sql = "UPDATE user SET password = '$password' WHERE username = '$username'";
       if ($this->db->query($sql) === true) {
         return true;
@@ -132,10 +122,13 @@ class User extends Model
 
   function changePass($oldPass, $newPass, $cNewPass){
     $username = $_SESSION['username'];
-    $sql1 = "SELECT * FROM user WHERE password = '$oldPass'";
+    $sql1 = "SELECT * FROM user WHERE username = '$username'";
     $result = $this->db->query($sql1);
-    if ($result->num_rows == 1){
+    $row = $this->db->fetchRow();
+    if (password_verify($oldPass, $row['password']))
+    {
       if ($newPass == $cNewPass) {
+        $newPass=password_hash($newPass,PASSWORD_DEFAULT);
         $sql2 = "UPDATE user SET password = '$newPass' WHERE username = '$username'";
         if ($this->db->query($sql2) === true) {
           return true;

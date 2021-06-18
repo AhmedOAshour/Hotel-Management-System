@@ -40,31 +40,19 @@ function readRooms($type=""){
 
 function insertRoom($number, $type, $floor, $status, $comments){
   $sql = "INSERT INTO room (number, type, floor, status, comments) VALUES ('$number', '$type', '$floor', '$status', '$comments')";
-  if($this->db->query($sql) === true){
-    echo "Records inserted successfully.";
-  }
-  else{
-    echo "ERROR: Could not able to execute $sql. " . $this->db->getConn()->error;
-  }
+  $this->db->query($sql);
+ 
 }
 
 function editRoom($number, $type, $floor, $status, $comments){
   $sql = "UPDATE room SET type = '$type', floor = '$floor', status = '$status', comments = '$comments' where number = '$number'";
-  if($this->db->query($sql) === true){
-    echo "Records inserted successfully.";
-  }
-  else{
-    echo "ERROR: Could not able to execute $sql. " . $this->db->getConn()->error;
-  }
+  $this->db->query($sql);
+  
 }
 
 function deleteRoom($number){
   $sql = "DELETE FROM room WHERE number = '$number' ";
-  if($this->db->query($sql) === true){
-    echo "deleted successfully.";
-  } else{
-    echo "ERROR: Could not able to execute $sql. " . $conn->error;
-  }
+  $this->db->query($sql);
 }
 public function getRoomTypes(){
   $roomtypes=array();
@@ -97,12 +85,8 @@ public function getReservation(){
 }
 public function changeStatus($number,$status){
   $sql = "UPDATE room SET status = '$status' where number = '$number'";
-  if($this->db->query($sql) === true){
-    echo "Records inserted successfully.";
-  }
-  else{
-    echo "ERROR: Could not able to execute $sql. " . $this->db->getConn()->error;
-  }
+  $this->db->query($sql);
+
 }
 public function checkout($number){
   $date = date('Y-m-d H:i:sP');
@@ -113,12 +97,8 @@ public function checkout($number){
           on r.ID = ci.reservation_ID
           SET r.check_out = '$date',room.status='available' WHERE room.number = '$number'";
   $sql1 = "DELETE FROM checked_in WHERE room_no = '$number'";
-  if($this->db->query($sql) === true && $this->db->query($sql1) === true){
-    echo "Records inserted successfully.";
-  }
-  else{
-    echo "ERROR: Could not able to execute $sql. " . $this->db->getConn()->error;
-  }
+  $this->db->query($sql);
+  $this->db->query($sql1);
 }
 public function getFreeType($type){
   $rooms = array();
@@ -158,11 +138,8 @@ public function checkin($room_numbers, $id){
   $sql = rtrim($sql,',');
   $sql1 = rtrim($sql1,',');
   $sql1 .= ")";
-  if($this->db->query($sql) === true && $this->db->query($sql1) === true){
-    echo "Records inserted successfully.";
-  }
-  else{
-    echo "ERROR: Could not able to execute $sql. " . $this->db->getConn()->error;
-  }
+  $this->db->query($sql);
+  $this->db->query($sql1);
+  
 }
 }

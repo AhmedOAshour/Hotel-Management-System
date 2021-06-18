@@ -24,6 +24,10 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
             $view->addForm();
 			break;
 		case 'add':
+		$errors=validateAddForm();
+		if($errors){
+		$view->addForm($string);
+					}
 			$controller->insert();
 			$view->output();
 			break;

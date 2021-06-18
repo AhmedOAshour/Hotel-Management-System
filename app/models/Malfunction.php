@@ -21,12 +21,8 @@ function __construct($id=""){
   function insert($description,$entry_by,$date){
     $is_Archived="Pending";
     $sql = "INSERT INTO malfunction (description,entry_by,is_Archived,date) VALUES ('$description','$entry_by','$is_Archived','$date')";
-		if($this->db->query($sql) === true){
-			echo "Records inserted successfully.";
-		}
-		else{
-			echo "ERROR: Could not able to execute $sql. " . $this->db->getConn()->error;
-		}
+    $this->db->query($sql);
+
   }
   function readMalfunctions(){
     $malfunctions = array();

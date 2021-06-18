@@ -55,7 +55,7 @@ $str=
                                 <form>
                                     <div class="form">	
                                         <h1 class="head">Lost and Found</h1>
-                                        <input type="date"class="forms form-control mb-1 py-4 " name="date" ><br>
+                                        <input type="date"class="forms form-control mb-1 py-4 " name="date" required><br>
                                         <select class="" name="room_number">
 EOD;
                                         foreach ($numbers as $room) {
@@ -70,7 +70,7 @@ EOD;
                                         
                                         </select>
                                         <input type="text"class="forms form-control mb-1 py-4 " name="username" value="$username" placeholder="username" hidden><br>
-                                        <textarea type="text"class="forms form-control mb-4 "id="fname" name="item_description" placeholder="Description.."></textarea><br>
+                                        <textarea type="text"class="forms form-control mb-4 "id="fname" name="item_description" placeholder="Description.." required></textarea><br>
                                         <input type="submit"class="inputfile btn w-100 py-3" value="add" name="action">
                                     </div>
                                 </form>

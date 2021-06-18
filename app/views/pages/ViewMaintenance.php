@@ -59,12 +59,12 @@ $str=<<<EOD
 
 
     <form>
-    <textarea name='materials_bought' rows="3" cols="23" placeholder="Materials bought seperated by ,"></textarea>
-    <textarea name="cost_of_materials" rows="3" cols="23" placeholder="cost of materials seperate by  , respectively"></textarea> </br>
-    Date: <input type='date' name='date'>
+    <textarea name='materials_bought' rows="3" cols="23" placeholder="Materials bought seperated by ," required></textarea>
+    <textarea name="cost_of_materials" rows="3" cols="23" placeholder="cost of materials seperate by  , respectively" required></textarea> </br>
+    Date: <input type='date' name='date'required>
     <input type="text" name="malfunction_no" value="$malfunction_no"  id="malfunction_no" hidden>
-    <input type="text" name="technician_name"  placeholder="Please enter technician name" id="technician_no">
-    <input type="text" name="work_done"  placeholder="Describe the work done" id="work_done">
+    <input type="text" name="technician_name"  placeholder="Please enter technician name" id="technician_no" required>
+    <input type="text" name="work_done"  placeholder="Describe the work done" id="work_done" required>
     <button type="submit" name="action" value="insert">Insert Entry</button>
     </form>
 

@@ -49,19 +49,10 @@ public function readReservations($checkin){
 
 public function editReservation($id,$client_ID,$room_type,$number_of_rooms,$arrival,$departure,$comments){
   $sql2="DELETE from reservedrooms where RID=$id";
-  if($this->db->query($sql2) === true){
-    echo "updated successfully.";
-
-} else{
-    echo "ERROR: Could not able to execute $sql. " . $conn->error;
-  }
+  $this->db->query($sql2);
+  
     $sql = "UPDATE reservation SET client_ID = '$client_ID' ,number_of_rooms='$number_of_rooms',arrival = '$arrival',departure='$departure' , comments='$comments' WHERE ID = '$id'";
-    if($this->db->query($sql) === true){
-			echo "updated successfully.";
-
-	} else{
-			echo "ERROR: Could not able to execute $sql. " . $conn->error;
-		}
+    $this->db->query($sql);
     for($i=0;$i<count($room_type);$i++){
       $price=0;
       $sql="insert into reservedrooms (RID,room_type,price) values('$id','$room_type[$i]','$price')";
@@ -77,11 +68,9 @@ public function editReservation($id,$client_ID,$room_type,$number_of_rooms,$arri
 function deleteReservation($id){
     $sql = "DELETE FROM reservation WHERE ID = $id ";
     $sql2="DELETE from reservedrooms where RID=$id";
-    if($this->db->query($sql2) === true&&$this->db->query($sql)===true){
-      echo "deleted successfully.";
-    } else{
-      echo "ERROR: Could not able to execute $sql. " . $this->db->getConn()->error;
-    }
+    $this->db->query($sql2);
+    $this->db->query($sql);
+   
   }
 
 
