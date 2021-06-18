@@ -1,3 +1,9 @@
+<style>
+    .add{
+        position: relative;
+        left:450px;
+    }
+</style> 
 <?php
 class ViewMaintenance extends View{
 public function output(){
@@ -5,7 +11,8 @@ public function output(){
     $str=
 <<<EOD
                 <body>
-                <div class="container mt-3">
+                <h1>Maintenance</h1>
+                <div class="container">
                     <table width="100%" border="1" style="border-collapse:collapse; margin-top:4px;">
                         <thead>
                             <tr>
@@ -26,12 +33,12 @@ EOD;
         $str.=
         <<<EOD
                 <tr>
-                <td>$row[description]</td>
-                <td>$row[MDate]</td>
-                <td>$row[materials_bought]</td>
-                <td>$row[cost_of_materials]</td>
-                <td>$row[technician_name]</td>
-                <td>$row[work_done]</td>
+                <td style='text-align:center'>$row[description]</td>
+                <td style='text-align:center'>$row[MDate]</td>
+                <td style='text-align:center'>$row[materials_bought]</td>
+                <td style='text-align:center'>$row[cost_of_materials]</td>
+                <td style='text-align:center'>$row[technician_name]</td>
+                <td style='text-align:center'>$row[work_done]</td>
       EOD;
                             }
     $str.=<<<EOD
@@ -44,7 +51,7 @@ EOD;
                 </body>
                 <form>
             <br>
-                <button type="submit" name="action" value="addpage">Add Maintenance Entry</button>
+                <button type="submit" name="action" class="button add" value="addpage">Add Maintenance Entry</button>
                 </form>
     EOD;
                         
@@ -57,17 +64,18 @@ public function addform($malfunction_no){
 $str=<<<EOD
 
 
-
+    <div class="container">
     <form>
-    <textarea name='materials_bought' rows="3" cols="23" placeholder="Materials bought seperated by ," required></textarea>
-    <textarea name="cost_of_materials" rows="3" cols="23" placeholder="cost of materials seperate by  , respectively" required></textarea> </br>
-    Date: <input type='date' name='date'required>
-    <input type="text" name="malfunction_no" value="$malfunction_no"  id="malfunction_no" hidden>
-    <input type="text" name="technician_name"  placeholder="Please enter technician name" id="technician_no" required>
-    <input type="text" name="work_done"  placeholder="Describe the work done" id="work_done" required>
-    <button type="submit" name="action" value="insert">Insert Entry</button>
+    <h1>Maintenance</h1>
+    <textarea name='materials_bought' rows="1" cols="80" class="formE form-control  py-4 "placeholder="Materials bought seperated by ," required></textarea>
+    <textarea name="cost_of_materials" rows="1" cols="80" class="formE form-control  py-4 "placeholder="cost of materials seperate by  , respectively" required></textarea>
+    <input type='date' class="formE form-control mb-1 py-4 "name='date'required>
+    <input type="text" name="malfunction_no" class="formE form-control mb-1 py-4 "value="$malfunction_no"  id="malfunction_no" hidden>
+    <input type="text" name="technician_name"  class="formE form-control mb-1 py-4 "placeholder="Please enter technician name" id="technician_no" required>
+    <input type="text" name="work_done"  class="formE form-control mb-1 py-4 "placeholder="Describe the work done" id="work_done" required>
+    <button type="submit" name="action" class="button2"value="insert">Insert Entry</button>
     </form>
-
+    </div>
     EOD;
     echo $str;
 }

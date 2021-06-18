@@ -22,14 +22,13 @@ class ViewFollowup extends View{
     <h1>Followup Reports</h1>
 
     <div id="viewFollowups">
-    
+
       <table>
         <thead>
           <tr>
             <th style='text-align:center'><strong>ID</strong></th>
             <th style='text-align:center'><strong>Date</strong></th>
-            <th style='text-align:center'><strong>Reading</strong></th>
-            <th style='text-align:center'><strong>Photo</strong></th>
+            <th style='text-align:center'><strong>Comment</strong></th>
             <th style='text-align:center'><strong>Entered By</strong></th>
             <th style='text-align:center'><strong>View</strong></th>
             <th style='text-align:center'><strong>Delete</strong></th>
@@ -44,7 +43,6 @@ class ViewFollowup extends View{
               <td style='text-align:center'>$followup->id</td>
               <td style='text-align:center'>$followup->date</td>
               <td style='text-align:center'>$followup->reading</td>
-              <td style='text-align:center'>$followup->photo</td>
               <td style='text-align:center'>$followup->entryBy</td>
               <td style='text-align:center'><a class="color" href="followup.php?id=$followup->id&action=view&type=$type"><i class="fa fa-eye"></i></a></td>
               <td style='text-align:center'><a class="color" href="followup.php?id=$followup->id&action=delete&type=$type"><i class='fa fa-trash'></i></a></td>
@@ -67,18 +65,16 @@ class ViewFollowup extends View{
 
   public function followupForm(){
     $str=<<<EOD
-    <div class="container"> 
+    <div class="container">
     <h1>Add Followup</h1>
     <div id="followupForm">
     <form class="followupForm" method="post" enctype = "multipart/form-data">
         <input type="date" name="date" class="formE form-control mb-4 border-0 py-4" required><br>
         <input type="text" name="comment" placeholder="comments..." class="formE form-control mb-4 border-0 py-4" required><br>
         <label class='followup' for='type'></label>
-        <select class="formE form-control mb-4 border-0 py-4" name="type" id="type">
-        
-        <option value="Task">Task</option>
-        <option value="electricity">Electricity</option>
-          <option value="water">Water</option>
+        <select class="formE form-control mb-4 border-0 py-4" name="type" id="type" required>
+        <option selected value="electricity">Electricity</option>
+        <option value="water">Water</option>
         </select><br>
         <input class="formE form-control mb-4 border-0 py-4"type="file" id="myfile" name="myfile"style="height:65px" required><br>
         <button class="button2"type="submit" name="action" value="submitForm">Submit</button>
@@ -88,11 +84,15 @@ class ViewFollowup extends View{
     echo $str;
   }
 
-  public function viewFollowup($id){
+  public function viewFollowup($id, $type){
+    $followup = $this->model->readFollowup($id, $type);
     $str=<<<EOD
     <h3>Followup number $id</h3>
     <div id="followupForm">
-
+    <img src="./images/$followup[3]" alt="photo" width="100" height="100"><br>
+    Date: $followup[1]<br>
+    Comment: $followup[2]<br>
+    Entry By: $followup[4]<br>
     </div>
     EOD;
     echo $str;

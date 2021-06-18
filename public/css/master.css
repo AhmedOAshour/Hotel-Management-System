@@ -42,7 +42,7 @@ body{
   .button{
     position: relative;
     margin-top:10px;
-    width:40%;   
+    width:40%;
     background-color:#000026;
     height:50px;
     left:400px;
@@ -52,12 +52,12 @@ body{
   .button:hover{
     background-color:#bdc7c9;
     color:black;
-    border:1px solid black; 
+    border:1px solid black;
   }
   .button2{
     position: relative;
     margin-top:10px;
-    width:40%;   
+    width:40%;
     background-color:#000026;
     height:50px;
     left:335px;
@@ -67,11 +67,11 @@ body{
   .button2:hover{
     background-color:#bdc7c9;
     color:black;
-    border:1px solid black; 
+    border:1px solid black;
   }
   .button3{
     position: relative;
-    width:10%;   
+    width:10%;
     background-color:#000026;
     height:50px;
     left:480px;
@@ -82,9 +82,9 @@ body{
   .button3:hover{
     background-color:#bdc7c9;
     color:black;
-    border:1px solid black; 
+    border:1px solid black;
   }
- 
+
   .formE{
     margin-top:15px;
     height:55px;
@@ -131,7 +131,7 @@ border-radius:3px;
 .color{
 color:#000026;
 }
-#errorName1,#errorName2,#errorUsername,#errorPass{
+#errorName1,#errorName2,#errorUsername,#errorPass,#errorCPass{
   color:red;
   position: relative;
   left:260px;

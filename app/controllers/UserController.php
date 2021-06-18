@@ -7,8 +7,10 @@ class UserController extends Controller{
     $password = $_REQUEST['password'];
     $position = $_REQUEST['position'];
     $username = $_REQUEST['username'];
+    $sQuestion = $_REQUEST['sQuestion'];
+    $sAnswer= $_REQUEST['sAnswer'];
 
-		$this->model->insertUser($first_name, $last_name, $password, $position, $username);
+		$this->model->insertUser($first_name, $last_name, $password, $position, $username, $sQuestion, $sAnswer);
 	}
 
 	public function edit() {
@@ -17,9 +19,11 @@ class UserController extends Controller{
     $password = $_REQUEST['password'];
     $position = $_REQUEST['position'];
     $username = $_REQUEST['username'];
+    $sQuestion = $_REQUEST['sQuestion'];
+    $sAnswer = $_REQUEST['sAnswer'];
     $id = $_REQUEST['id'];
 
-		$this->model->editUser($first_name, $last_name, $password, $position, $username,$id);
+		$this->model->editUser($first_name, $last_name, $password, $position, $username, $id, $sQuestion, $sAnswer);
 	}
 
   public function login() {

@@ -12,7 +12,7 @@ class Followup extends Model
         $row = $this->db->fetchRow();
         $this->id = $row['ID'];
         $this->date = $row['date'];
-        $this->reading = $row['reading'];
+        $this->reading = $row['comment'];
         $this->photo = $row['photo'];
         $this->entryBy = $row['entry_by'];
       }
@@ -36,14 +36,14 @@ class Followup extends Model
   }
 
   function readFollowup($id, $type){
+    $followup = array();
     $sql = "SELECT * FROM " . $type . "_followup WHERE ID = $id";
     $result = $this->db->query($sql);
     if ($result->num_rows > 0){
       while($row = $this->db->fetchRow()){
-
-        array_push($followups,new Followup($row['ID'], $type));
+        array_push($followup, $row['ID'], $row['date'], $row['comment'], $row['photo'], $row['entry_by']);
       }
-      return $followups;
+      return $followup;
     }
     else {
       return null;
@@ -54,7 +54,7 @@ class Followup extends Model
     $entryBy = $_SESSION['ID'];
     $sql = "INSERT INTO " . $type . "_followup (date,comment,photo,entry_by) VALUES ('$date','$comment','$file','$entryBy')";
     $this->db->query($sql);
-		
+
   }
 
   function deleteFollowup($id, $type){
