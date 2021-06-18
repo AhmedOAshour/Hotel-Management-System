@@ -27,7 +27,7 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 			break;
 		case 'createRes':
 			$controller->createReservation($_GET['quantity']);
-			header('location:reservations.php');
+			// header('location:reservations.php');
 			break;
 		case 'editform':
 			echo $view->editForm($_GET['id']);

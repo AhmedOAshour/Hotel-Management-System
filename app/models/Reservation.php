@@ -43,51 +43,25 @@ public function readReservations($checkin){
     else {
       return null;
     }
-
-
 }
 
 public function editReservation($id,$client_ID,$room_type,$number_of_rooms,$arrival,$departure,$comments){
   $sql2="DELETE from reservedrooms where RID=$id";
   $this->db->query($sql2);
-  
+
     $sql = "UPDATE reservation SET client_ID = '$client_ID' ,number_of_rooms='$number_of_rooms',arrival = '$arrival',departure='$departure' , comments='$comments' WHERE ID = '$id'";
     $this->db->query($sql);
     for($i=0;$i<count($room_type);$i++){
       $price=0;
       $sql="insert into reservedrooms (RID,room_type,price) values('$id','$room_type[$i]','$price')";
       $result = $this->db->query($sql);
-
-
     }
-
-
-
-
 }
 function deleteReservation($id){
     $sql = "DELETE FROM reservation WHERE ID = $id ";
     $sql2="DELETE from reservedrooms where RID=$id";
     $this->db->query($sql2);
     $this->db->query($sql);
-   
   }
-
-
-
-
-
-
-
-
     }
-
-
-
-
-
-
-
-
-
 ?>

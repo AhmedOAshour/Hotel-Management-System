@@ -34,10 +34,7 @@ class User extends Model
       $_SESSION['username'] = $row['username'];
       $_SESSION['position'] = $row['position'];
       header('Location: rooms.php');
-
 		}
-
-
   }
 
   function readUsers(){
