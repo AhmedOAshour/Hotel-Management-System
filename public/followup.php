@@ -17,7 +17,7 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
       $view->outputFollowups($_REQUEST['type']);
     	break;
     case 'view':
-    	echo $view->view($_REQUEST['id'], $_REQUEST['type']);
+    	echo $view->viewFollowup($_REQUEST['id'], $_REQUEST['type']);
       break;
     case 'delete':
       $controller->delete($_REQUEST['id'], $_REQUEST['type']);

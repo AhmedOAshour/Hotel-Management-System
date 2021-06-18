@@ -36,14 +36,14 @@ class Followup extends Model
   }
 
   function readFollowup($id, $type){
+    $followup = array();
     $sql = "SELECT * FROM " . $type . "_followup WHERE ID = $id";
     $result = $this->db->query($sql);
     if ($result->num_rows > 0){
       while($row = $this->db->fetchRow()){
-
-        array_push($followups,new Followup($row['ID'], $type));
+        array_push($followup, $row['ID'], $row['date'], $row['comment'], $row['photo'], $row['entry_by']);
       }
-      return $followups;
+      return $followup;
     }
     else {
       return null;

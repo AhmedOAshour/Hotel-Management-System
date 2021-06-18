@@ -88,11 +88,15 @@ class ViewFollowup extends View{
     echo $str;
   }
 
-  public function viewFollowup($id){
+  public function viewFollowup($id, $type){
+    $followup = $this->model->readFollowup($id, $type);
     $str=<<<EOD
     <h3>Followup number $id</h3>
     <div id="followupForm">
-
+    <img src="./images/$followup[3]" alt="photo" width="100" height="100"><br>
+    Date: $followup[1]<br>
+    Comment: $followup[2]<br>
+    Entry By: $followup[4]<br>
     </div>
     EOD;
     echo $str;
