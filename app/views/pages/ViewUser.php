@@ -11,7 +11,7 @@
   .forgot{
     position: relative;
     left:270px;
-    bottom:110px;
+    bottom:100px;
     color:#000026;
   }
   .forgot:hover{
@@ -144,10 +144,12 @@ class ViewUser extends View{
   }
   public function forgotPass(){
     $str=<<<EOD
+    <div class="container">
     <div id="login">
+    <h1>Forget Password</h1>
     <form class="login">
-        <label class='username' for='username'>username</label><input type="text" name="username" id="username" class="form form-control mb-4 border-0 py-4" placeholder="Username" required><br>
-        <button type='submit' name='action' value='security'>Next</button>
+        <input type="text" name="username" id="username" class="formE form-control mb-2 border-0 py-2" placeholder="Username" required><br>
+        <button type='submit' name='action' class="button2"value='security'>Next</button>
       </form>
     </div>
     EOD;
@@ -156,12 +158,14 @@ class ViewUser extends View{
   public function security($username){
     $question = $this->model->getQuestion($username);
     $str=<<<EOD
+    <div class="container">
     <div id="login">
     <form class="login">
-        <h3>Security Question</h3>
-        <label class='question' for='question'>$question ?</label><br><input type="text" name="answer" id="answer" class="form form-control mb-4 border-0 py-4"><br>
+        <h1>Security Question</h1>
+        <input class='formE form-control mb-4 border-0 py-4' for='question' disabled value='$question ?'><br>
+        <input type="text" name="answer" id="answer" placeholder="Answer.."class="formE form-control mb-4 border-0 py-4"><br>
         <input type="text" name="username" value="$username" style="display:none;" required>
-        <input type="submit" class="forgot" name="action" value="validate" id="submitBtn">
+        <input type="submit" class="button2" name="action" value="Validate" id="submitBtn">
       </form>
     </div>
     EOD;

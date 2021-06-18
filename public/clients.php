@@ -18,7 +18,7 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
         case 'addform':
             $view->addForm();
 			break;
-		case 'add':
+		case 'Add':
 			$controller->insert();
 			$view->output();
 			break;
