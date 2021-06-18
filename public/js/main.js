@@ -75,5 +75,23 @@ function checkConfirmPass(){
     errorCPass = errorCPass.concat("Passwords must match.<br>");
   }
   document.getElementById("errorCPass").innerHTML = errorCPass;
+}
 
+function checkMobile(){
+  var mobile = document.getElementById("password").value;
+  const upperCaseLetters = /[A-Z]/g;
+  const lowerCaseLetters = /[a-z]/g;
+  const special = /['^!.£$%&*()}{@#~?><>,|=_+¬-]/g;
+  var errorMobile = "";
+
+  if (mobile.match(upperCaseLetters) || mobile.match(lowerCaseLetters)) {
+    errorMobile = errorMobile.concat("Mobile number cannot contain letters.<br>");
+  }
+  if (mobile.match(special)) {
+    errorMobile = errorMobile.concat("Mobile number cannot special characters.<br>");
+  }
+  if (mobile.length != 11) {
+    errorMobile = errorMobile.concat("Mobile number must be 11 digits.<br>");
+  }
+  document.getElementById("errorMobile").innerHTML = errorMobile;
 }
