@@ -74,24 +74,24 @@ class ViewUser extends View{
     <div id="addEmployees" class="addEmployees">
         <div id="errorName1">
         </div>
-        <input type="text" name="first_name" id="Fname" class="form form-control mb-4 border-0 py-4" placeholder="First Name" required><br>
+        <input type="text" name="first_name" id="Fname" class="formE form-control mb-4 border-0 py-4" placeholder="First Name" required><br>
         <div id="errorName2">
         </div>
-        <input type="text" name="last_name" id="Lname" class="form form-control mb-4 border-0 py-4" placeholder="Last Name" required><br>
+        <input type="text" name="last_name" id="Lname" class="formE form-control mb-4 border-0 py-4" placeholder="Last Name" required><br>
         <div id="errorUsername">
         </div>
-        <input type="text" name="username" id="username" class="form form-control mb-4 border-0 py-4" placeholder="Username" required><br>
+        <input type="text" name="username" id="username" class="formE form-control mb-4 border-0 py-4" placeholder="Username" required><br>
         <div id="errorPass">
         </div>
-        <input type="password" name="password" id="password" class="form form-control mb-4 border-0 py-4"placeholder="Password" required><br>
-        <select id="position" name="position" class="form form-control mb-2 border-0" required>
+        <input type="password" name="password" id="password" class="formE form-control mb-4 border-0 py-4"placeholder="Password" required><br>
+        <select id="position" name="position" class="formE form-control mb-2 border-0" required>
           <option hidden disabled selected value>Position</option>
           <option value='admin'>admin</option>
           <option value='front_clerk'>Front Clerk</option>
           <option value='reservation_clerk'>Reservation Clerk</option>
           <option value='HK_employee'>Housekeeping</option>
         </select><br>
-        <input type="submit" class="submitEmployee button2" name="action" value="add" id="submitBtn">
+        <input type="submit" class="submitEmployee button2" name="action" value="Add" id="submitBtn">
       </form>
     </div>
     EOD;
@@ -187,16 +187,18 @@ class ViewUser extends View{
   }
   public function changePasswordForm(){
     $str=<<<EOD
+    <div class="container">
+    <h1>Change Password</h1>
     <div id="changePass">
     <form class="changePass" oninput="checkNewPass()">
-        <label class='oldPass' for='oldPass'>Old Password</label><br><input type="text" name="oldPass" class="form form-control mb-4 border-0 py-4" required><br>
-        <label class='newPass' for='newPass'>New Password</label><br><input type="text" name="newPass" id="newPass" class="form form-control mb-4 border-0 py-4" required><br>
+        <input type="text" name="oldPass" placeholder="Old Password"class="formE form-control mb-4 border-0 py-4" required><br>
+        <input type="text" name="newPass" id="newPass" placeholder="New Password"class="formE form-control mb-4 border-0 py-4" required><br>
         <div id="errorNewPass">
         </div>
-        <label class='cNewPass' for='cNewPass'>Confirm New Password</label><br><input type="text" name="cNewPass" id="cNewPass" class="form form-control mb-4 border-0 py-4" required><br>
+        <input type="text" name="cNewPass" placeholder="Confirm New Password"id="cNewPass" class="formE form-control mb-4 border-0 py-4" required><br>
         <div id="errorCNewPass">
         </div>
-        <button type="submit" name="action" value="confirmPass">Submit</button>
+        <button type="submit" name="action" class="button2"value="confirmPass">Submit</button>
       </form>
     </div>
     EOD;
@@ -206,34 +208,35 @@ class ViewUser extends View{
     $info = $this->model->readprofile();
     $str =
     <<<EOD
-    <h2>My Profile</h2>
+    <div class="container">
+    <h1>My Profile</h1>
     <div id="profile">
       <table>
         <thead>
           <tr>
-            <th><strong>ID</strong></th>
-            <th><strong>First Name</strong></th>
-            <th><strong>Last Name</strong></th>
-            <th><strong>Username</strong></th>
-            <th><strong>Position</strong></th>
+            <th style='text-align:center'><strong>ID</strong></th>
+            <th style='text-align:center'><strong>First Name</strong></th>
+            <th style='text-align:center'><strong>Last Name</strong></th>
+            <th style='text-align:center'><strong>Username</strong></th>
+            <th style='text-align:center'><strong>Position</strong></th>
           </tr>
         </thead>
         <tbody>
     EOD;
     $str .= <<<EOD
     <tr>
-      <td>$info[0]</td>
-      <td>$info[1]</td>
-      <td>$info[2]</td>
-      <td>$info[3]</td>
-      <td>$info[4]</td>
+      <td style='text-align:center'>$info[0]</td>
+      <td style='text-align:center'>$info[1]</td>
+      <td style='text-align:center'>$info[2]</td>
+      <td style='text-align:center'>$info[3]</td>
+      <td style='text-align:center'>$info[4]</td>
     </tr>
        </tbody>
        </table>
         <br>
        </div>
        <form class="changePass">
-       <button type="submit" name="action" value="changePass">Change Password</button>
+       <button type="submit" name="action" class="button2"value="changePass">Change Password</button>
        </form>
     EOD;
     echo $str;

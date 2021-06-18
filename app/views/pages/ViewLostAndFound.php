@@ -1,3 +1,9 @@
+<style>
+    .add{
+        position: relative;
+        left:450px;
+    }
+</style>
 <?php
 class ViewLostAndFound extends View{
 public function output(){
@@ -6,7 +12,8 @@ public function output(){
 <<<EOD
                 <body>
                 <div class="container ">
-                    <table width="100%" border="1" style="border-collapse:collapse; margin-top:4px;">
+                <h1>Lost&Found</h1>
+                    <table>
                         <thead>
                             <tr>
                                 <th style='text-align:center'><strong>Date</strong></th>
@@ -20,10 +27,10 @@ foreach ($entries as $entry) {
     $str .= <<<EOD
                                       <tr>
                                     
-                                        <td>$entry->date</td>
-                                        <td>$entry->room_number</td>
-                                        <td>$entry->item_description</td>
-                                        <td>$entry->HK_Username</td>
+                                        <td style='text-align:center'>$entry->date</td>
+                                        <td style='text-align:center'>$entry->room_number</td>
+                                        <td style='text-align:center'>$entry->item_description</td>
+                                        <td style='text-align:center'>$entry->HK_Username</td>
                                         
       EOD;
                             }
@@ -37,7 +44,7 @@ foreach ($entries as $entry) {
                 </body>
                 <form>
                 <br>
-                <button type="submit" name="action" value="addform">Add a new entry</button>
+                <button type="submit" name="action" value="addform" class="button add">Add a new entry</button>
                 </form>
     EOD;
     echo $str;
@@ -48,15 +55,12 @@ public function addForm($username){
 $str=
 <<<EOD
             <body>
-            <div class="online py-100">
-                    <div class="container pos">
-                        <div class="row">
-                            <div class="col-lg">
+                    <div class="container">
                                 <form>
                                     <div class="form">	
                                         <h1 class="head">Lost and Found</h1>
-                                        <input type="date"class="forms form-control mb-1 py-4 " name="date" required><br>
-                                        <select class="" name="room_number">
+                                        <input type="date"class="formE form-control mb-1 py-4 " name="date" required><br>
+                                        <select class="formE form-control mb-1 py-4" name="room_number">
 EOD;
                                         foreach ($numbers as $room) {
                                             $str.=<<<EOD
@@ -69,15 +73,13 @@ EOD;
                                         <<<EOD
                                         
                                         </select>
-                                        <input type="text"class="forms form-control mb-1 py-4 " name="username" value="$username" placeholder="username" hidden><br>
-                                        <textarea type="text"class="forms form-control mb-4 "id="fname" name="item_description" placeholder="Description.." required></textarea><br>
-                                        <input type="submit"class="inputfile btn w-100 py-3" value="add" name="action">
+                                        <input type="text"class="formE form-control mb-1 py-4 " name="username" value="$username" placeholder="username" hidden><br>
+                                        <textarea type="text"class="formE form-control mb-4 "id="fname" name="item_description" placeholder="Description.." required></textarea><br>
+                                        <input type="submit"class="button2" value="Add" name="action">
                                     </div>
                                 </form>
                             </div>
                         </div>	
-                    </div>
-                </div>
             </body>
             </html>
 

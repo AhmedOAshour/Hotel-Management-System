@@ -131,7 +131,7 @@ border-radius:3px;
 .color{
 color:#000026;
 }
-#errorName1,#errorName2,#errorUsername,#errorPass{
+#errorName1,#errorName2,#errorUsername,#errorPass,#errorNewPass,#errorCNewPass{
   color:red;
   position: relative;
   left:260px;
