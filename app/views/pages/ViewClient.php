@@ -192,7 +192,9 @@ public function editForm($id){
             <input class="formE form-control border-3" type="text" name="mobile" id="mobile" onchange="checkMobile()" value="$client->mobile"placeholder="Mobile..." required>
             <div id="errorMobile">
             </div>
-            <input class="formE form-control border-3" type="text" name="email" value="$client->email"placeholder="E-mail..." required>
+            <input class="formE form-control border-3" type="text" name="email" id="email" onchange="checkEmail()" value="$client->email"placeholder="E-mail..." required>
+            <div id="errorEmail">
+            </div>
             <input class="formE form-control border-3" type="text" name="company"value="$client->company" placeholder="Company..." required>
             <input class="formE form-control border-3" type="text" name="id"value="$id" hidden placeholder="Company..." required>
             <button type="submit" class="button2" name="action" value="edit">Submit</button>

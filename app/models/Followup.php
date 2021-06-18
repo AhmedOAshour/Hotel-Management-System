@@ -12,7 +12,7 @@ class Followup extends Model
         $row = $this->db->fetchRow();
         $this->id = $row['ID'];
         $this->date = $row['date'];
-        $this->reading = $row['reading'];
+        $this->reading = $row['comment'];
         $this->photo = $row['photo'];
         $this->entryBy = $row['entry_by'];
       }
@@ -54,7 +54,7 @@ class Followup extends Model
     $entryBy = $_SESSION['ID'];
     $sql = "INSERT INTO " . $type . "_followup (date,comment,photo,entry_by) VALUES ('$date','$comment','$file','$entryBy')";
     $this->db->query($sql);
-		
+
   }
 
   function deleteFollowup($id, $type){
