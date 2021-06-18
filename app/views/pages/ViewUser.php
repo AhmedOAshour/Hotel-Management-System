@@ -70,20 +70,22 @@ class ViewUser extends View{
     $str=<<<EOD
     <div class="container">
     <h1>Add Employee</h1>
-    <form class="addE" oninput="checkAddEdit()">
+    <form class="addE">
     <div id="addEmployees" class="addEmployees">
+        <input type="text" name="first_name" id="Fname" onchange="checkfName()" class="form form-control mb-4 border-0 py-4" placeholder="First Name" required><br>
         <div id="errorName1">
         </div>
-        <input type="text" name="first_name" id="Fname" class="form form-control mb-4 border-0 py-4" placeholder="First Name" required><br>
+        <input type="text" name="last_name" id="Lname" onchange="checklName()" class="form form-control mb-4 border-0 py-4" placeholder="Last Name" required><br>
         <div id="errorName2">
         </div>
-        <input type="text" name="last_name" id="Lname" class="form form-control mb-4 border-0 py-4" placeholder="Last Name" required><br>
+        <input type="text" name="username" id="username" onchange="checkUsername()" class="form form-control mb-4 border-0 py-4" placeholder="Username" required><br>
         <div id="errorUsername">
         </div>
-        <input type="text" name="username" id="username" class="form form-control mb-4 border-0 py-4" placeholder="Username" required><br>
+        <input type="password" name="password" id="password" oninput="checkPassword()" class="form form-control mb-4 border-0 py-4"placeholder="Password" required><br>
         <div id="errorPass">
         </div>
-        <input type="password" name="password" id="password" class="form form-control mb-4 border-0 py-4"placeholder="Password" required><br>
+        <input type="text" name="sQuestion" id="sQuestion" class="form form-control mb-4 border-0 py-4"placeholder="Security Question" required><br>
+        <input type="text" name="sAnswer" id="sAnswer" class="form form-control mb-4 border-0 py-4"placeholder="Security Answer" required><br>
         <select id="position" name="position" class="form form-control mb-2 border-0" required>
           <option hidden disabled selected value>Position</option>
           <option value='admin'>admin</option>
@@ -102,20 +104,22 @@ class ViewUser extends View{
       $str=<<<EOD
       <div class="container">
       <h1>Edit Employees</h1>
-      <form class="editE" oninput="checkAddEdit()">
+      <form class="editE">
         <input type="text" name="id" value="$id" style="display:none">
-        <label class='names' for='first_name'>First Name</label><input type='text' required name='first_name' id='Fname' class='form form-control mb-4 border-0 py-4 ' value='$user->first_name' '> <br><br>
+        <label class='names' for='first_name'>First Name</label><input type='text' required name='first_name' id='Fname' onchange="checkfName()" class='form form-control mb-4 border-0 py-4 ' value='$user->first_name' '> <br><br>
         <div id="errorName1">
         </div>
-        <label class='names' for='last_name'>Last Name</label><input type='text' required name='last_name' id='Lname' class='form form-control mb-4 border-0 py-4' value='$user->last_name' '> <br><br>
+        <label class='names' for='last_name'>Last Name</label><input type='text' required name='last_name' id='Lname' onchange="checklName()" class='form form-control mb-4 border-0 py-4' value='$user->last_name' '> <br><br>
         <div id="errorName2">
         </div>
-        <label class='names' for='username'>Username</label><input type='text' required name='username' id='username' class='form form-control mb-4 border-0 py-4' value='$user->username' '> <br><br>
+        <label class='names' for='username'>Username</label><input type='text' required name='username' id='username' onchange="checkUsername()" class='form form-control mb-4 border-0 py-4' value='$user->username' '> <br><br>
         <div id="errorUsername">
         </div>
-        <label class='names' for='password'>Password</label><input type='password' required name='password' id='password' class='form form-control mb-4 border-0 py-4' value='' '> <br><br>
+        <label class='names' for='password'>Password</label><input type='password' required name='password' id='password' oninput="checkPassword()" class='form form-control mb-4 border-0 py-4' value='' '> <br><br>
         <div id="errorPass">
         </div>
+        <label class='names' for='sQuestion'>Security Question</label><input type='text' required name='sQuestion' id='sQuestion' class='form form-control mb-4 border-0 py-4' value='$user->sQuestion' '> <br><br>
+        <label class='names' for='sAnswer'>Security Answer</label><input type='text' required name='sAnswer' id='sAnswer' class='form form-control mb-4 border-0 py-4' value='$user->sAnswer' '> <br><br>
         <h4 class='names'  for='position'>Position</h4>
         <select id='position' name='position' class='form form-control mb-4 border-0 py-2'>
         <option value='front_clerk'>Front Clerk</option>

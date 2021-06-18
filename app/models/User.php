@@ -1,7 +1,7 @@
 <?php
 class User extends Model
 {
-  public $id, $first_name , $last_name, $username, $password, $position;
+  public $id, $first_name , $last_name, $username, $password, $position, $sQuestion, $sAnswer;
 
   function __construct($id=""){
     parent::__construct();
@@ -16,6 +16,8 @@ class User extends Model
         $this->username = $row['username'];
         $this->password = $row['password'];
         $this->position = $row['position'];
+        $this->sQuestion = $row['security_question'];
+        $this->sAnswer = $row['security_answer'];
       }
 
     }
@@ -32,9 +34,9 @@ class User extends Model
       $_SESSION['username'] = $row['username'];
       $_SESSION['position'] = $row['position'];
       header('Location: rooms.php');
-     
+
 		}
-    
+
 
   }
 
@@ -72,23 +74,23 @@ class User extends Model
     }
   }
 
-  function insertUser($first_name, $last_name, $password, $position, $username){
+  function insertUser($first_name, $last_name, $password, $position, $username, $sQuestion, $sAnswer){
     $password=password_hash($password,PASSWORD_DEFAULT);
-    $sql = "INSERT INTO user (username,first_name,last_name,password,position) VALUES ('$username','$first_name','$last_name','$password','$position')";
+    $sql = "INSERT INTO user (username,first_name,last_name,password,position,security_question,security_answer) VALUES ('$username','$first_name','$last_name','$password','$position','$sQuestion','$sAnswer')";
     $this->db->query($sql);
 
   }
-  
 
-  function editUser($first_name, $last_name, $password, $position, $username, $id){
-    $sql = "UPDATE user SET first_name = '$first_name', last_name = '$last_name', password = '$password', position = '$position', username = '$username' WHERE ID = '$id'";
+
+  function editUser($first_name, $last_name, $password, $position, $username, $id, $sQuestion, $sAnswer){
+    $sql = "UPDATE user SET first_name = '$first_name', last_name = '$last_name', password = '$password', position = '$position', username = '$username', security_question = '$sQuestion', security_answer = '$sAnswer' WHERE ID = '$id'";
     $this->db->query($sql);
   }
 
   function deleteUser($id){
     $sql = "DELETE FROM user WHERE ID = $id ";
     $this->db->query($sql);
-    
+
   }
 
   function getQuestion($username){
