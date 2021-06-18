@@ -173,10 +173,11 @@ class ViewUser extends View{
   }
   public function newPassword($username){
     $str=<<<EOD
+    <div class="container">
     <div id="login">
     <form class="login">
         <input type="text" name="username" value="$username" style="display:none;" >
-        <label class='password' for='password'>New Password</label><br><input type="text" name="password" class="form form-control mb-4 border-0 py-4" required><br>
+        <label class='password' for='password'>New Password</label><br><input type="text" name="password" class="formE form-control mb-4 border-0 py-4" required><br>
         <label class='confirmPassword' for='confirmPassword'>Confirm Password</label><br><input type="text" class="confirmP" name="cPassword" required><br>
         <button type="submit" name="action" value="newPass">Submit</button>
       </form>

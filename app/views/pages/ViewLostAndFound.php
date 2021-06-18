@@ -5,7 +5,7 @@ public function output(){
     $str=
 <<<EOD
                 <body>
-                <div class="container mt-3">
+                <div class="container ">
                     <table width="100%" border="1" style="border-collapse:collapse; margin-top:4px;">
                         <thead>
                             <tr>
