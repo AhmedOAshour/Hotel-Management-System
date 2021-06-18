@@ -33,20 +33,12 @@ class RoomPrices extends Model
 
   function insertPrice($room_type, $price){
     $sql = "INSERT INTO room_prices (room_type, price) VALUES ('$room_type' ,$price)";
-    if($this->db->query($sql) === true){
-      echo "deleted successfully.";
-    } else{
-      echo "ERROR: Could not able to execute $sql. " . $conn->error;
-    }
+    $this->db->query($sql);
   }
 
   function editPrice($room_type,$price){
     $sql = "UPDATE room_prices SET price = $price where room_type = '$room_type'";
-    if($this->db->query($sql) === true){
-      echo "deleted successfully.";
-    } else{
-      echo "ERROR: Could not able to execute $sql. " . $conn->error;
-    }
+    $this->db->query($sql);
   }
 }
 

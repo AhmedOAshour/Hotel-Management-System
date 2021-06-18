@@ -36,13 +36,9 @@ function insert($malfunction_no,$date,$materials_bought,$cost_of_materials,$tech
     $is_Archived="Archived";
     $sql = "INSERT INTO maintenance (malfunction_no,date,materials_bought,cost_of_materials,technician_name,work_done) VALUES ('$malfunction_no','$date','$materials_bought','$cost_of_materials','$technician_name','$work_done')";
     $sql2="UPDATE malfunction SET is_Archived = '$is_Archived' WHERE ID = '$malfunction_no'";
-		if($this->db->query($sql) === true&&$this->db->query($sql2)===true){
-			echo "Records inserted successfully.";
-		}
-		else{
-			echo "ERROR: Could not able to execute $sql. " . $this->db->getConn()->error;
-		}
-
+    $this->db->query($sql);
+    $this->db->query($sql2);
+	
 
 
 }

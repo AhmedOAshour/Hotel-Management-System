@@ -96,13 +96,13 @@ public function addForm(){
             <div id="createClient">
             <h1>Add client</h1>
             <form>
-            <input class="formE form-control border-3" type="text" name="first_name" placeholder="First Name...">
-            <input class="formE form-control border-3" type="text" name="last_name" placeholder="Last Name...">
-            <input class="formE form-control border-3" type="text" name="identification_no" placeholder="Identification Number...">
-            <input class="formE form-control border-3" type="text" name="nationality" placeholder="Nationality...">
-            <input class="formE form-control border-3" type="text" name="mobile" placeholder="Mobile...">
-            <input class="formE form-control border-3" type="text" name="email" placeholder="E-mail...">
-            <input class="formE form-control border-3" type="text" name="company" placeholder="Company...">
+            <input class="formE form-control border-3" type="text" name="first_name" placeholder="First Name..." required>
+            <input class="formE form-control border-3" type="text" name="last_name" placeholder="Last Name..."required>
+            <input class="formE form-control border-3" type="text" name="identification_no" placeholder="Identification Number..." required>
+            <input class="formE form-control border-3" type="text" name="nationality" placeholder="Nationality..." required>
+            <input class="formE form-control border-3" type="text" name="mobile" placeholder="Mobile..." required>
+            <input class="formE form-control border-3" type="text" name="email" placeholder="E-mail..." required>
+            <input class="formE form-control border-3" type="text" name="company" placeholder="Company..."required>
             <input type="submit" class="button2" name="action" value="Add" id="submitBtn"">
             </form>
             </div>
@@ -123,7 +123,7 @@ public function resForm($id,$quantity){
               <h1>Create Reservation</h1>
               <form>
               <h4>Number of Rooms</h4>
-              <input type="number"size="1" name="quantity" id="counter" value=1></input>
+              <input type="number"size="1" name="quantity" id="counter" value=1> required</input>
               <input type="text" name="id" value="$id" class="formE form-control border-3" id="id" hidden>
               <button type="submit" class="button3" name="action" value="resform">Add</button>
               </form>
@@ -156,9 +156,9 @@ public function resForm($id,$quantity){
         <<<EOD
         
         
-      <h4 class="words arr">Arrival</h4><input type='date'class="formE form-control border-3" name='arrival'>
-      <h4 class="words">Departure</h4> <input type='date' class="formE form-control border-3" name='departure'><br>
-      <textarea class="formE form-control border-3" name="comments" rows="2" cols="50" placeholder="Comments..."></textarea> <br>
+      <h4 class="words arr">Arrival</h4><input type='date'class="formE form-control border-3" name='arrival' required>
+      <h4 class="words">Departure</h4> <input type='date' class="formE form-control border-3" name='departure'required><br>
+      <textarea class="formE form-control border-3" name="comments" rows="2" cols="50" placeholder="Comments..." required></textarea> <br>
       <input type="text" name="client_ID" value="$id" class="formE form-control border-3" id="client_ID" hidden>
       <input type="text" name="quantity" value="$quantity" class="formE form-control border-3" id="quantity" hidden>
       <button type="submit" name="action" class="button2"value="createRes">Create Reservation</button>
@@ -178,14 +178,14 @@ $str=
             <div class="container">
             <h1>Edit Clients</h1>
             <form>
-            <input class="formE form-control border-3" type="text" value="$client->first_name" name="first_name" placeholder="First Name...">
-            <input class="formE form-control border-3" type="text" name="last_name" value="$client->last_name" placeholder="Last Name...">
-            <input class="formE form-control border-3" type="text" name="identification_no" value="$client->identification_no"placeholder="Identification Number...">
-            <input class="formE form-control border-3" type="text" name="nationality" value="$client->nationality"placeholder="Nationality...">
-            <input class="formE form-control border-3" type="text" name="mobile" value="$client->mobile"placeholder="Mobile...">
-            <input class="formE form-control border-3" type="text" name="email" value="$client->email"placeholder="E-mail...">
-            <input class="formE form-control border-3" type="text" name="company"value="$client->company" placeholder="Company...">
-            <input class="formE form-control border-3" type="text" name="id"value="$id" hidden placeholder="Company...">
+            <input class="formE form-control border-3" type="text" value="$client->first_name" name="first_name" placeholder="First Name..." required>
+            <input class="formE form-control border-3" type="text" name="last_name" value="$client->last_name" placeholder="Last Name..." required>
+            <input class="formE form-control border-3" type="text" name="identification_no" value="$client->identification_no"placeholder="Identification Number..." required>
+            <input class="formE form-control border-3" type="text" name="nationality" value="$client->nationality"placeholder="Nationality..." required>
+            <input class="formE form-control border-3" type="text" name="mobile" value="$client->mobile"placeholder="Mobile..." required>
+            <input class="formE form-control border-3" type="text" name="email" value="$client->email"placeholder="E-mail..." required>
+            <input class="formE form-control border-3" type="text" name="company"value="$client->company" placeholder="Company..." required>
+            <input class="formE form-control border-3" type="text" name="id"value="$id" hidden placeholder="Company..." required>
             <button type="submit" class="button2" name="action" value="edit">Submit</button>
             </form>
         </div>

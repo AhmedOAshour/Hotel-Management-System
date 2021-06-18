@@ -133,9 +133,9 @@ $roomtypes=$this->model->getRoomTypes();
       $str.=
       <<<EOD
       </select>
-      <h4 class="words arr">Arrival</h4><input type='date' class="formE form-control border-3"value='$reservations->arrival'name='arrival'>
-      <h4 class="words">Departure</h4> <input type='date' class="formE form-control border-3"value='$reservations->departure' name='departure'><br>
-      <h4 class="words">Comments</h4><textarea name="comments"  rows="2" cols="50" class="formE form-control border-3"placeholder="Comments...">$reservations->comments</textarea> <br>
+      <h4 class="words arr">Arrival</h4><input type='date' class="formE form-control border-3"value='$reservations->arrival'name='arrival' required>
+      <h4 class="words">Departure</h4> <input type='date' class="formE form-control border-3"value='$reservations->departure' name='departure' required><br>
+      <h4 class="words">Comments</h4><textarea name="comments"  rows="2" cols="50" class="formE form-control border-3"placeholder="Comments..." required>$reservations->comments</textarea> <br>
       <input type="text" name="client_ID" value="$reservations->client_id"  id="client_ID" hidden>
       <input type="text" name="id" value="$_GET[id]"  id="ID" hidden>
       <input type="text" name="quantity" value="$quantity"  id="quantity" hidden>

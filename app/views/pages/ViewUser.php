@@ -88,16 +88,16 @@ class ViewUser extends View{
       $str=<<<EOD
       <form class="editE" oninput="checkAddEdit()">
         <input type="text" name="id" value="$id" style="display:none">
-        <label class='names' for='first_name'>First Name</label><input type='text' name='first_name' id='Fname' class='formE form-control border-0 ' value='$user->first_name' '> <br><br>
+        <label class='names' for='first_name'>First Name</label><input type='text' required name='first_name' id='Fname' class='formE form-control border-0 ' value='$user->first_name' '> <br><br>
         <div id="errorName1">
         </div>
-        <label class='names' for='last_name'>Last Name</label><input type='text' name='last_name' id='Lname' class='formE form-control border-0 ' value='$user->last_name' '> <br><br>
+        <label class='names' for='last_name'>Last Name</label><input type='text' required name='last_name' id='Lname' class='formE form-control border-0 ' value='$user->last_name' '> <br><br>
         <div id="errorName2">
         </div>
-        <label class='names' for='username'>username</label><input type='text' name='username' id='username' class='formE form-control border-0 ' value='$user->username' '> <br><br>
+        <label class='names' for='username'>username</label><input type='text' required name='username' id='username' class='formE form-control border-0 ' value='$user->username' '> <br><br>
         <div id="errorUsername">
         </div>
-        <label class='names' for='password'>password</label><input type='password' name='password' id='password' class='formE form-control  border-0' value='' '> <br><br>
+        <label class='names' for='password'>password</label><input type='password' required name='password' id='password' class='formE form-control  border-0' value='' '> <br><br>
         <div id="errorPass">
         </div>
         <label class='names' for='position'>position</label>
@@ -214,6 +214,7 @@ class ViewUser extends View{
        </form>
     EOD;
     echo $str;
+    
   }
   public function valideAddForm(){
 $errors=array();

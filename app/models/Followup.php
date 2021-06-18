@@ -53,21 +53,13 @@ class Followup extends Model
   function insert($date, $comment, $file, $type){
     $entryBy = $_SESSION['ID'];
     $sql = "INSERT INTO " . $type . "_followup (date,comment,photo,entry_by) VALUES ('$date','$comment','$file','$entryBy')";
-		if($this->db->query($sql) === true){
-			echo "Records inserted successfully.";
-		}
-		else{
-			echo "ERROR: Could not able to execute $sql. " . $this->db->getConn()->error;
-		}
+    $this->db->query($sql);
+		
   }
 
   function deleteFollowup($id, $type){
     $sql = "DELETE FROM $type" . "_followup WHERE ID = $id ";
-    if($this->db->query($sql) === true){
-      return true;
-    } else{
-      return false;
-    }
+    $this->db->query($sql);
   }
 
 }

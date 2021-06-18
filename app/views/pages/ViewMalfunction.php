@@ -73,9 +73,9 @@ $str=
                                 <form>
                                     <div class="form">	
                                         <h1 class="head">Malfunctions</h1>
-                                        <input type="date"class="forms form-control mb-1 py-4 " name="date" ><br>
+                                        <input type="date"class="forms form-control mb-1 py-4 " name="date" required><br>
                                         <input type="text"class="forms form-control mb-1 py-4 " name="username" value="$username" placeholder="username" hidden><br>
-                                        <textarea type="text"class="forms form-control mb-4 "id="fname" name="description" placeholder="Description.."></textarea><br>
+                                        <textarea type="text"class="forms form-control mb-4 "id="fname" name="description" placeholder="Description.."required></textarea><br>
                                         <input type="submit"class="inputfile btn w-100 py-3" value="add" name="action">
                                     </div>
                                 </form>

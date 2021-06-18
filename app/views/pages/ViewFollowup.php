@@ -67,14 +67,14 @@ class ViewFollowup extends View{
     <h3>Followup</h3>
     <div id="followupForm">
     <form class="followupForm" method="post" enctype = "multipart/form-data">
-        <input type="date" name="date" class="form form-control mb-4 border-0 py-4"><br>
-        <input type="text" name="comment" placeholder="comments..." class="form form-control mb-4 border-0 py-4"><br>
+        <input type="date" name="date" class="form form-control mb-4 border-0 py-4" required><br>
+        <input type="text" name="comment" placeholder="comments..." class="form form-control mb-4 border-0 py-4" required><br>
         <label class='followup' for='type'>Type</label>
         <select name="type" id="type">
           <option value="electricity">Electricity</option>
           <option value="water">Water</option>
         </select><br>
-        <input type="file" id="myfile" name="myfile"><br>
+        <input type="file" id="myfile" name="myfile" required><br>
         <button type="submit" name="action" value="submitForm">Submit</button>
       </form>
     </div>
