@@ -31,26 +31,22 @@ $result=$this->model->readReservations($checkin);
         EOD;
         if(!empty($result)){
         while($row = mysqli_fetch_array($result)) {
-
-
-            $str.=
-            <<<EOD
-                    <tr>
-                    <td style='text-align:center'>$row[first_name]</td>
-                    <td style='text-align:center'>$row[last_name]</td>
-                    <td style='text-align:center'>$row[nationality]</td>
-                    <td style='text-align:center'>$row[number_of_rooms]</td>
-                    <td style='text-align:center'>$row[arrival]</td>
+        $str.=<<<EOD
+            <tr>
+            <td style='text-align:center'>$row[first_name]</td>
+            <td style='text-align:center'>$row[last_name]</td>
+            <td style='text-align:center'>$row[nationality]</td>
+            <td style='text-align:center'>$row[number_of_rooms]</td>
+            <td style='text-align:center'>$row[arrival]</td>
         EOD;
         $arrival = strtotime($row['arrival']);
         $departure = strtotime($row['departure']);
         // divide seconds by 86400 to get nights
         $nights = ($departure - $arrival) / (86400);
         $days = $nights + 1;
-    $str.=
-    <<<EOD
-        <td style='text-align:center'>$days/$nights</td>
-    EOD;
+        $str.= <<<EOD
+            <td style='text-align:center'>$days/$nights</td>
+        EOD;
     $buttons;
     if (!$checkin) {
       $buttons = <<<EOD
@@ -67,8 +63,7 @@ $result=$this->model->readReservations($checkin);
       $str .= $buttons;
     }
 
-    $str.=
-    <<<EOD
+    $str.=<<<EOD
         </tbody>
         </table>
         </body>
@@ -76,15 +71,11 @@ $result=$this->model->readReservations($checkin);
      EOD;
 }
 
-$str.=
-<<<EOD
+$str.=<<<EOD
 <form>
-
         <button type="submit" name="action" class="button2"value="createReservation">Create Reservation </button>
         </form>
         </div>
-
-
 EOD;
 
 echo $str;
@@ -92,9 +83,7 @@ echo $str;
 public function editForm($id,$quantity){
   $reservations=new Reservation($id);
   $roomtypes=$this->model->getRoomTypes();
-  
-    $str=
-    <<<EOD
+    $str=<<<EOD
                 <div class="container">
                 <div id="reservation">
                 <h1>EditReservation</h1>
@@ -104,38 +93,23 @@ public function editForm($id,$quantity){
                 <input type="text" name="id" value="$id" class="formE form-control border-3" id="id" hidden>
                 <button type="submit" class="button3" name="action" value="edit">Add</button>
                 </form>
-                
                 <form>
                 <h4 class="words" for="room_type">Room Type</h4>
-                
                 EOD;
-                for($i=0;$i<$quantity;$i++){ 
+                for($i=0;$i<$quantity;$i++){
                   $str.=<<<EOD
                   <select class="formE form-control border-3" name="room_type[]">
                   EOD;
                   foreach ($roomtypes as $room) {
+                    $str.=<<<EOD
+                      <option value='$room'>$room</option>
+                    EOD;
+                  }
                 $str.=<<<EOD
-                  
-                                          <option value='$room'>$room</option>
-                        EOD;
-                                                }
-                $str.=
-                <<<EOD
-                                        </select><br>
+                    </select><br>
                 EOD;
-
-                  
-
                 }
-          
-             
-            
-
-
-              
-
-      $str.=
-      <<<EOD
+      $str.=<<<EOD
       </select>
       <h4 class="words arr">Arrival</h4><input type='date' class="formE form-control border-3"value='$reservations->arrival'name='arrival' required>
       <h4 class="words">Departure</h4> <input type='date' class="formE form-control border-3"value='$reservations->departure' name='departure' required><br>
@@ -151,12 +125,6 @@ public function editForm($id,$quantity){
       </html>
       EOD;
       echo $str;
-
-
-
-
-
-
 }
 }
 

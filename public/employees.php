@@ -15,19 +15,16 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 			break;
 		case 'edit':
 			$controller->edit($_GET['id']);
+			header("Location: employees.php");
 			break;
 		case 'delete':
 			$controller->delete($_GET['id']);
 			echo $view->output();
-            break;
-        case 'addform':
-            $view->addForm();
+      break;
+    case 'addform':
+      $view->addForm();
 			break;
 		case 'add':
-		$errors=validateAddForm();
-		if($errors){
-		$view->addForm($string);
-					}
 			$controller->insert();
 			$view->output();
 			break;
