@@ -83,6 +83,7 @@ class User extends Model
 
 
   function editUser($first_name, $last_name, $password, $position, $username, $id, $sQuestion, $sAnswer){
+    $password=password_hash($password,PASSWORD_DEFAULT);
     $sql = "UPDATE user SET first_name = '$first_name', last_name = '$last_name', password = '$password', position = '$position', username = '$username', security_question = '$sQuestion', security_answer = '$sAnswer' WHERE ID = '$id'";
     $this->db->query($sql);
   }

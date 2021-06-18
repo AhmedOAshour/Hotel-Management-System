@@ -153,7 +153,7 @@ class ViewUser extends View{
     <h1>Forget Password</h1>
     <form class="login">
         <input type="text" name="username" id="username" class="formE form-control mb-2 border-0 py-2" placeholder="Username" required><br>
-        <button type='submit' name='action' class="button2"value='security'>Next</button>
+        <button type='submit' name='action' class="button2" value='security'>Next</button>
       </form>
     </div>
     EOD;
@@ -177,11 +177,15 @@ class ViewUser extends View{
   }
   public function newPassword($username){
     $str=<<<EOD
-    <div id="login">
-    <form class="login">
+    <div id="changePass">
+    <form class="changePass">
         <input type="text" name="username" value="$username" style="display:none;" >
-        <label class='password' for='password'>New Password</label><br><input type="text" name="password" class="form form-control mb-4 border-0 py-4" required><br>
-        <label class='confirmPassword' for='confirmPassword'>Confirm Password</label><br><input type="text" class="confirmP" name="cPassword" required><br>
+        <label class='password' for='password'>New Password</label><br><input type="text" name="password" id="password" onchange="checkPassword()" class="form form-control mb-4 border-0 py-4" required><br>
+        <div id="errorPass">
+        </div>
+        <label class='confirmPassword' for='confirmPassword'>Confirm Password</label><br><input type="text" class="confirmP" id="cPassword" oninput="checkConfirmPass()" name="cPassword" required><br>
+        <div id="errorCPass">
+        </div>
         <button type="submit" name="action" value="newPass">Submit</button>
       </form>
     </div>
@@ -191,13 +195,13 @@ class ViewUser extends View{
   public function changePasswordForm(){
     $str=<<<EOD
     <div id="changePass">
-    <form class="changePass" oninput="checkNewPass()">
+    <form class="changePass">
         <label class='oldPass' for='oldPass'>Old Password</label><br><input type="text" name="oldPass" class="form form-control mb-4 border-0 py-4" required><br>
-        <label class='newPass' for='newPass'>New Password</label><br><input type="text" name="newPass" id="newPass" class="form form-control mb-4 border-0 py-4" required><br>
-        <div id="errorNewPass">
+        <label class='newPass' for='newPass'>New Password</label><br><input type="text" name="newPass" id="password" onchange="checkPassword()" class="form form-control mb-4 border-0 py-4" required><br>
+        <div id="errorPass">
         </div>
-        <label class='cNewPass' for='cNewPass'>Confirm New Password</label><br><input type="text" name="cNewPass" id="cNewPass" class="form form-control mb-4 border-0 py-4" required><br>
-        <div id="errorCNewPass">
+        <label class='cNewPass' for='cNewPass'>Confirm New Password</label><br><input type="text" name="cNewPass" id="cPassword" oninput="checkConfirmPass()" oninput="checkConfirmPass()" class="form form-control mb-4 border-0 py-4" required><br>
+        <div id="errorCPass">
         </div>
         <button type="submit" name="action" value="confirmPass">Submit</button>
       </form>

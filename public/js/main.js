@@ -66,44 +66,14 @@ function checkPassword(){
   document.getElementById("errorPass").innerHTML = errorPass;
 }
 
-function checkNewPass(){
-  var password = document.getElementById("newPass").value;
-  var cPassword = document.getElementById("cNewPass").value;
-
-  const numbers = /[0-9]/g;
-  const upperCaseLetters = /[A-Z]/g;
-  const lowerCaseLetters = /[a-z]/g;
-  const special = /[$-/:-?{-~!"^_`\[\]]/g;
-
-  var errorPass = "";
+function checkConfirmPass(){
+  var password = document.getElementById("password").value;
+  var cPassword = document.getElementById("cPassword").value;
   var errorCPass = "";
 
-  if (password != "") {
-    if (!password.match(numbers)) {
-      errorPass = errorPass.concat("Password must contain a number.<br>");
-    }
-
-    if (!password.match(upperCaseLetters)) {
-      errorPass = errorPass.concat("Password must contain an uppercase letter.<br>");
-    }
-
-    if (!password.match(lowerCaseLetters)) {
-      errorPass = errorPass.concat("Password must contain an lowercase letter.<br>");
-    }
-
-    if (!password.match(special)) {
-      errorPass = errorPass.concat("Password must contain an special character.<br>");
-    }
+  if (password != cPassword) {
+    errorCPass = errorCPass.concat("Passwords must match.<br>");
   }
-  if (password != "") {
-    if (password != cPassword) {
-      errorCPass = errorCPass.concat("Passwords must match.")
-    }
-    else {
-      errorCPass = "";
-    }
-  }
-  document.getElementById("errorNewPass").innerHTML = errorPass;
-  document.getElementById("errorCNewPass").innerHTML = errorCPass;
+  document.getElementById("errorCPass").innerHTML = errorCPass;
 
-  }
+}
