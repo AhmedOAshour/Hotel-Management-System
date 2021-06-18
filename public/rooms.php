@@ -65,6 +65,10 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
       $model->changeStatus($_GET['id'],"available");
       header("Location: rooms.php?action=view_room&id=$_GET[id]");
       break;
+    case 'mark_unavailable':
+      $model->changeStatus($_GET['id'],"unavailable");
+      header("Location: rooms.php?action=view_room&id=$_GET[id]");
+      break;
     case 'checkout':
       $model->checkout($_GET['id']);
       header("Location: rooms.php");
