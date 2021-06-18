@@ -65,10 +65,6 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
       $model->changeStatus($_GET['id'],"available");
       header("Location: rooms.php?action=view_room&id=$_GET[id]");
       break;
-      case 'mark_unavailable':
-        $model->changeStatus($_GET['id'],"unavailable");
-        header("Location: rooms.php?action=view_room&id=$_GET[id]");
-        break;
     case 'checkout':
       $model->checkout($_GET['id']);
       header("Location: rooms.php");
@@ -78,7 +74,17 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
       break;
     case 'checkedin':
       $model->checkin($_POST['rooms'],$_POST['id']);
-      echo $view->output();
+      $view->output();
+      break;
+    case 'manage':
+      $view->viewTable();
+      break;
+    case 'addform':
+      $view->addForm();
+      break;
+    case 'add':
+      $controller->insert();
+      // header("Location: rooms.php?action=manage")
       break;
 	}
 }

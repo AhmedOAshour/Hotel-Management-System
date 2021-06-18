@@ -163,6 +163,64 @@
       echo $str;
     }
 
+    function viewTable(){
+      $rooms = $this->model->readRooms();
+      $str = <<<EOD
+      <a href="roomprices.php">Manage Room Pricing</a>
+      <a href="rooms.php?action=addform">Add a Room</a>
+      <table>
+      <thead>
+        <th>Room Number</th>
+        <th>Type</th>
+        <th>Status</th>
+        <th>Comments</th>
+      </thead>
+      <tbody>
+      EOD;
+      if($rooms){
+          foreach ($rooms as $room) {
+          $str .= <<<EOD
+            <tr>
+              <td>$room->number</td>
+              <td>$room->type</td>
+              <td>$room->status</td>
+              <td>$room->comments</td>
+            </tr>
+          EOD;
+        }
+      }
+      $str .= <<<EOD
+      </tbody>
+      </table>
+      EOD;
+      echo $str;
+    }
+
+    function addForm(){
+      $types = $this->model->getRoomTypes();
+      $str = <<<EOD
+      <form method="POST">
+        <label>Room Number:</label> <input type="text" name="number" required><br>
+        <label>Type:</label>
+        <select name="type" required>
+          <option value="single">Single</option>
+          <option value="double">Double</option>
+          <option value="triple">Triple</option>
+          <option value="family">Family</option>
+          <option value="suite">Suite</option>
+        </select><br>
+        <label>Status:</label>
+        <select name="status" required>
+          <option value="available">Available</option>
+          <option value="unavailable">Unavailable</option>
+        </select><br>
+        <label>Comments:</label> <textarea name="comments" rows="4" cols="40"></textarea><br>
+        <button type="submit" name="action" value="add">Submit</button>
+      </form>
+      EOD;
+      echo $str;
+    }
+
     private function getClass($status){
       switch ($status) {
         case 'available':

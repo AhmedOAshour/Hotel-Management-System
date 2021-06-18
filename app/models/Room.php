@@ -1,6 +1,6 @@
 <?php
 class Room extends Model{
-public $number,$type,$floor,$status,$comments;
+public $number,$type,$status,$comments;
 
 function __construct($number="")
 {
@@ -12,7 +12,6 @@ function __construct($number="")
       $row = $this->db->fetchRow();
       $this->number = $row['number'];
       $this->type = $row['type'];
-      $this->floor = $row['floor'];
       $this->status = $row['status'];
       $this->comments = $row['comments'];
     }
@@ -38,16 +37,16 @@ function readRooms($type=""){
   }
 }
 
-function insertRoom($number, $type, $floor, $status, $comments){
-  $sql = "INSERT INTO room (number, type, floor, status, comments) VALUES ('$number', '$type', '$floor', '$status', '$comments')";
+function insertRoom($number, $type, $status, $comments){
+  $sql = "INSERT INTO room (number, type, status, comments) VALUES ('$number', '$type', '$status', '$comments')";
   $this->db->query($sql);
- 
+
 }
 
-function editRoom($number, $type, $floor, $status, $comments){
-  $sql = "UPDATE room SET type = '$type', floor = '$floor', status = '$status', comments = '$comments' where number = '$number'";
+function editRoom($number, $type, $status, $comments){
+  $sql = "UPDATE room SET type = '$type', status = '$status', comments = '$comments' where number = '$number'";
   $this->db->query($sql);
-  
+
 }
 
 function deleteRoom($number){
@@ -62,15 +61,6 @@ public function getRoomTypes(){
       array_push($roomtypes,$row['type']);
   }
   return $roomtypes;
-}
-public function getFloorsNo(){
-  $floorno=array();
-  $sql = "SELECT DISTINCT floor FROM room";
-  $result = $this->db->query($sql);
-  while($row = $this->db->fetchRow()){
-      array_push($floorno,$row['floor']);
-  }
-  return $floorno;
 }
 public function getReservation(){
   $sql = "SELECT ci.*, r.*, c.* FROM checked_in as ci
@@ -140,6 +130,6 @@ public function checkin($room_numbers, $id){
   $sql1 .= ")";
   $this->db->query($sql);
   $this->db->query($sql1);
-  
 }
 }
+?>

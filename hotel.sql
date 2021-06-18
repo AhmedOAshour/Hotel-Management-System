@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 16, 2021 at 04:24 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.1
+-- Generation Time: Jun 18, 2021 at 12:02 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -45,9 +46,7 @@ CREATE TABLE `bill` (
 
 CREATE TABLE `checked_in` (
   `reservation_ID` int(11) NOT NULL,
-  `room_no` varchar(3) NOT NULL,
-  `check_in` datetime NOT NULL,
-  `check_out` datetime NOT NULL
+  `room_no` varchar(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -66,13 +65,6 @@ CREATE TABLE `client` (
   `email` varchar(254) NOT NULL,
   `company` varchar(255) NOT NULL DEFAULT 'N/A'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `client`
---
-
-INSERT INTO `client` (`ID`, `first_name`, `last_name`, `identification_no`, `nationality`, `mobile`, `email`, `company`) VALUES
-(3, 'MohamedAAAAAAA', 'AminAAAAAA', '10101010', 'Egypt', '01008796598', 'aZZZdmin@gmail.com', 'amco');
 
 -- --------------------------------------------------------
 
@@ -102,14 +94,6 @@ CREATE TABLE `lost_and_found` (
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `lost_and_found`
---
-
-INSERT INTO `lost_and_found` (`ID`, `room_number`, `item_description`, `HK_Username`, `date`) VALUES
-(1, '101', 'shoes', 'admin', '2021-06-16'),
-(2, '105', 'A bag', 'admin', '2021-06-19');
-
 -- --------------------------------------------------------
 
 --
@@ -126,14 +110,6 @@ CREATE TABLE `maintenance` (
   `work_done` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `maintenance`
---
-
-INSERT INTO `maintenance` (`ID`, `malfunction_no`, `date`, `materials_bought`, `cost_of_materials`, `technician_name`, `work_done`) VALUES
-(1, 2, '2021-06-19 18:59:51', 'Electric_Wire,Wires', '500,50', 'Amer Mohamed', 'Fixed the light bulb'),
-(2, 2, '2021-06-16 00:00:00', 'Wires,Wires,Wires', '250,250,250', 'MOHAMED', 'LOL');
-
 -- --------------------------------------------------------
 
 --
@@ -148,14 +124,6 @@ CREATE TABLE `malfunction` (
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `malfunction`
---
-
-INSERT INTO `malfunction` (`ID`, `description`, `is_Archived`, `entry_by`, `date`) VALUES
-(2, 'Bad elec', 'Archived', 'admin', '2021-06-17 00:00:00'),
-(3, 'bad habit', 'Pending', 'admin', '2021-06-17 00:00:00');
-
 -- --------------------------------------------------------
 
 --
@@ -166,21 +134,14 @@ CREATE TABLE `reservation` (
   `ID` int(11) NOT NULL,
   `client_ID` int(11) NOT NULL,
   `bill_ID` varchar(11) DEFAULT NULL,
-  `guest_names` text NOT NULL,
-  `guest_count` int(11) NOT NULL,
   `number_of_rooms` int(11) NOT NULL,
   `price` int(11) DEFAULT NULL,
   `arrival` date NOT NULL,
   `departure` date NOT NULL,
+  `check_in` datetime DEFAULT NULL,
+  `check_out` datetime DEFAULT NULL,
   `comments` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `reservation`
---
-
-INSERT INTO `reservation` (`ID`, `client_ID`, `bill_ID`, `guest_names`, `guest_count`, `number_of_rooms`, `price`, `arrival`, `departure`, `comments`) VALUES
-(3, 3, NULL, 'HAZEM,MOSTAFA', 3, 0, 0, '2021-06-11', '2021-06-29', 'LOL');
 
 -- --------------------------------------------------------
 
@@ -190,18 +151,8 @@ INSERT INTO `reservation` (`ID`, `client_ID`, `bill_ID`, `guest_names`, `guest_c
 
 CREATE TABLE `reservedrooms` (
   `RID` int(11) NOT NULL,
-  `room_type` enum('Single','Double','Triple','Family','Suite') NOT NULL,
-  `price` int(11) NOT NULL
+  `room_type` enum('Single','Double','Triple','Family','Suite') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `reservedrooms`
---
-
-INSERT INTO `reservedrooms` (`RID`, `room_type`, `price`) VALUES
-(3, 'Suite', 0),
-(3, 'Suite', 0),
-(3, 'Suite', 0);
 
 -- --------------------------------------------------------
 
@@ -212,8 +163,7 @@ INSERT INTO `reservedrooms` (`RID`, `room_type`, `price`) VALUES
 CREATE TABLE `room` (
   `number` varchar(3) NOT NULL,
   `type` enum('Single','Double','Triple','Family','Suite') NOT NULL,
-  `floor` enum('1','2','3','4') NOT NULL,
-  `status` enum('available','unavailable') NOT NULL,
+  `status` enum('available','unavailable','booked','checked_out') NOT NULL,
   `comments` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -221,12 +171,19 @@ CREATE TABLE `room` (
 -- Dumping data for table `room`
 --
 
-INSERT INTO `room` (`number`, `type`, `floor`, `status`, `comments`) VALUES
-('101', 'Single', '1', 'available', ''),
-('102', 'Double', '1', 'available', NULL),
-('103', 'Triple', '1', 'available', NULL),
-('104', 'Family', '1', 'available', NULL),
-('105', 'Suite', '2', 'available', NULL);
+INSERT INTO `room` (`number`, `type`, `status`, `comments`) VALUES
+('101', 'Single', 'available', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `room_prices`
+--
+
+CREATE TABLE `room_prices` (
+  `room_type` enum('Single','Double','Triple','Family','Suite') NOT NULL,
+  `price` double(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -250,10 +207,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`ID`, `first_name`, `last_name`, `username`, `password`, `position`, `security_question`, `security_answer`) VALUES
-(32, 'MohamedA', 'AminA', 'Amin2', 'Hazem213321321', 'HK_employee', '', ''),
-(33, 'admin', 'admin', 'admin', 'admin', 'admin', '', ''),
-(42, 'MohamedAA', 'AminAA', 'hazem22332222', 'HAZEERW@21312312', 'HK_employee', '', ''),
-(43, 'MohamedAaaa', 'AminAAABC', 'hazem223', 'Hazem@23333', 'front_clerk', '', '');
+(1, 'admin', 'admin', 'admin', 'admin', 'admin', 'admin', 'admin');
 
 -- --------------------------------------------------------
 
@@ -343,6 +297,12 @@ ALTER TABLE `room`
   ADD PRIMARY KEY (`number`);
 
 --
+-- Indexes for table `room_prices`
+--
+ALTER TABLE `room_prices`
+  ADD PRIMARY KEY (`room_type`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -364,7 +324,7 @@ ALTER TABLE `water_followup`
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `electricity`
@@ -376,31 +336,31 @@ ALTER TABLE `electricity`
 -- AUTO_INCREMENT for table `lost_and_found`
 --
 ALTER TABLE `lost_and_found`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `maintenance`
 --
 ALTER TABLE `maintenance`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `malfunction`
 --
 ALTER TABLE `malfunction`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `water_followup`
