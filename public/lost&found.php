@@ -16,14 +16,9 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 		$controller->insert($_SESSION['username']);
 		$view->output();
 		break;
-
-			
-			
-	
 	}
 }
 else
 	echo $view->output();
 
     ?>
-    
