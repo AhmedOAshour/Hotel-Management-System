@@ -22,7 +22,6 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
     case 'delete':
       $controller->delete($_REQUEST['id'], $_REQUEST['type']);
       $view->outputFollowups($_REQUEST['type']);
-      echo "succcc";
       break;
 	}
 }

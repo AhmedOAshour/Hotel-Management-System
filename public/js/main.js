@@ -115,4 +115,4 @@ function checkNewPass(){
   document.getElementById("errorNewPass").innerHTML = errorPass;
   document.getElementById("errorCNewPass").innerHTML = errorCPass;
 
-}
+

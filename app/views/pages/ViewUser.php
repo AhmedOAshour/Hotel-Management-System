@@ -7,7 +7,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body>
-
+<style>
+  .forgot{
+    position: relative;
+    left:270px;
+    bottom:110px;
+    color:#000026;
+  }
+  .forgot:hover{
+    text-decoration:none;
+    color:blue;
+  }
+</style>
   </body>
 </html>
 <?php
@@ -118,12 +129,14 @@ class ViewUser extends View{
   }
   public function loginForm(){
     $str=<<<EOD
+    <div class="container">
     <div id="login">
+    <h1>Login</h1>
     <form class="login">
-        <input type="text" name="username" id="username" class="form form-control mb-4 border-0 py-4" placeholder="Username" required><br>
-        <input type="password" name="password" id="password" class="form form-control mb-4 border-0 py-4"placeholder="Password" required><br>
-        <input type="submit" class="login button" name="action" value="login" id="submitBtn">
-        <a href="index.php?action=forgotpass">Forgot Password</a>
+        <input type="text" name="username" id="username" class="formE form-control mb-4 border-0 py-4" placeholder="Username" required><br>
+        <input type="password" name="password" id="password" class="formE form-control mb-4 border-0 py-4"placeholder="Password" required><br>
+        <input type="submit" class="login button2" name="action" value="login" id="submitBtn"><br>
+        <a class="forgot" href="index.php?action=forgotpass">Forgot Password?</a>
       </form>
     </div>
     EOD;
