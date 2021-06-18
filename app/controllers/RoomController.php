@@ -15,12 +15,12 @@ class RoomController extends Controller{
     $status = $_REQUEST['status'];
     $comments = $_REQUEST['comments'];
 
-    $this->$model->editRoom($number, $type, $status, $comments);
+    $this->model->editRoom($number, $type, $status, $comments);
   }
 
   public function delete(){
     $number = $_REQUEST['number'];
-    $this->$model->deleteRoom($number);
+    $this->model->deleteRoom($number);
   }
 }
 ?>

@@ -84,7 +84,18 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
       break;
     case 'add':
       $controller->insert();
-      // header("Location: rooms.php?action=manage")
+      header("Location: rooms.php?action=manage");
+      break;
+    case 'editform':
+      $view->editForm($_GET['number']);
+      break;
+    case 'edit':
+      $controller->edit();
+      header("Location: rooms.php?action=manage");
+      break;
+    case 'delete':
+      $controller->delete();
+      header("Location: rooms.php?action=manage");
       break;
 	}
 }

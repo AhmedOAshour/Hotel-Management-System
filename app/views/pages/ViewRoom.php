@@ -166,6 +166,7 @@
     function viewTable(){
       $rooms = $this->model->readRooms();
       $str = <<<EOD
+      <a href="rooms.php">Back</a>
       <a href="roomprices.php">Manage Room Pricing</a>
       <a href="rooms.php?action=addform">Add a Room</a>
       <table>
@@ -174,6 +175,8 @@
         <th>Type</th>
         <th>Status</th>
         <th>Comments</th>
+        <th>Edit</th>
+        <th>Delete</th>
       </thead>
       <tbody>
       EOD;
@@ -185,6 +188,8 @@
               <td>$room->type</td>
               <td>$room->status</td>
               <td>$room->comments</td>
+              <td><a href="rooms.php?action=editform&number=$room->number">Edit</a></td>
+              <td><a href="rooms.php?action=delete&number=$room->number">Delete</a></td>
             </tr>
           EOD;
         }
@@ -197,7 +202,6 @@
     }
 
     function addForm(){
-      $types = $this->model->getRoomTypes();
       $str = <<<EOD
       <form method="POST">
         <label>Room Number:</label> <input type="text" name="number" required><br>
@@ -216,6 +220,31 @@
         </select><br>
         <label>Comments:</label> <textarea name="comments" rows="4" cols="40"></textarea><br>
         <button type="submit" name="action" value="add">Submit</button>
+      </form>
+      EOD;
+      echo $str;
+    }
+
+    function editForm($number){
+      $room = new Room($number);
+      $str = <<<EOD
+      <form method="POST">
+        <label>Room Number:</label> <input type="text" name="number" value="$room->number" required><br>
+        <label>Type:</label>
+        <select name="type" value="$room->type" required>
+          <option value="single">Single</option>
+          <option value="double">Double</option>
+          <option value="triple">Triple</option>
+          <option value="family">Family</option>
+          <option value="suite">Suite</option>
+        </select><br>
+        <label>Status:</label>
+        <select name="status" value="$room->status" required>
+          <option value="available">Available</option>
+          <option value="unavailable">Unavailable</option>
+        </select><br>
+        <label>Comments:</label> <textarea name="comments" rows="4" cols="40">$room->comments</textarea><br>
+        <button type="submit" name="action" value="edit">Submit</button>
       </form>
       EOD;
       echo $str;
