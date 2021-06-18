@@ -14,6 +14,7 @@ class RoomPrices extends Model
         $this->price = $row['price'];
       }
   }
+}
 
   function readPrices(){
     parent::__construct();
@@ -33,13 +34,20 @@ class RoomPrices extends Model
 
   function insertPrice($room_type, $price){
     $sql = "INSERT INTO room_prices (room_type, price) VALUES ('$room_type' ,$price)";
+    echo "$sql";
     $this->db->query($sql);
   }
 
   function editPrice($room_type,$price){
-    $sql = "UPDATE room_prices SET price = $price where room_type = '$room_type'";
+    $sql = "UPDATE room_prices SET price = $price WHERE room_type = '$room_type'";
+    $this->db->query($sql);
+  }
+
+  function deletePrice($room_type){
+    $sql = "DELETE FROM room_prices WHERE room_type = '$room_type'";
     $this->db->query($sql);
   }
 }
+
 
 ?>
