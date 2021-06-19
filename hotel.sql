@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2021 at 10:46 AM
+-- Generation Time: Jun 19, 2021 at 11:51 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -38,9 +38,9 @@ CREATE TABLE `bill` (
 --
 
 INSERT INTO `bill` (`ID`, `reservation_ID`) VALUES
-(8, 8),
-(9, 9),
-(10, 10);
+(5, 5),
+(6, 6),
+(7, 7);
 
 -- --------------------------------------------------------
 
@@ -61,11 +61,12 @@ CREATE TABLE `bill_items` (
 --
 
 INSERT INTO `bill_items` (`ID`, `bill_ID`, `item`, `is_Room`, `price`) VALUES
-(8, 7, 'Single', 1, 100.00),
-(9, 7, 'test', 0, 123.00),
-(10, 8, 'Single', 1, 100.00),
-(11, 9, 'Single', 1, 100.00),
-(12, 10, 'Single', 1, 100.00);
+(1, 1, 'Item1', 0, 50.00),
+(2, 5, 'Single', 1, 60.00),
+(3, 6, 'Single', 1, 60.00),
+(4, 6, 'Double', 1, 70.00),
+(5, 6, 'Triple', 1, 80.00),
+(6, 7, 'Family', 1, 90.00);
 
 -- --------------------------------------------------------
 
@@ -83,10 +84,9 @@ CREATE TABLE `checked_in` (
 --
 
 INSERT INTO `checked_in` (`reservation_ID`, `room_no`) VALUES
-(8, '101'),
-(10, '201'),
-(10, '302'),
-(10, '303');
+(6, '101'),
+(6, '302'),
+(6, '403');
 
 -- --------------------------------------------------------
 
@@ -110,7 +110,8 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`ID`, `first_name`, `last_name`, `identification_no`, `nationality`, `mobile`, `email`, `company`) VALUES
-(1, 'test', 'test', 'test', 'test', 'test', 'test', 'test');
+(1, 'client', 'client', 'client', 'client', 'client', 'client', 'client'),
+(2, 'client1', 'client1', 'client1', 'client1', 'client1', 'client1', 'client1');
 
 -- --------------------------------------------------------
 
@@ -156,6 +157,13 @@ CREATE TABLE `maintenance` (
   `work_done` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `maintenance`
+--
+
+INSERT INTO `maintenance` (`ID`, `malfunction_no`, `date`, `materials_bought`, `cost_of_materials`, `technician_name`, `work_done`) VALUES
+(1, 1, '2021-06-19 00:00:00', 'Capacitor', '200', 'Mohamed', 'installed capacitor');
+
 -- --------------------------------------------------------
 
 --
@@ -169,6 +177,13 @@ CREATE TABLE `malfunction` (
   `entry_by` varchar(256) NOT NULL,
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `malfunction`
+--
+
+INSERT INTO `malfunction` (`ID`, `description`, `is_Archived`, `entry_by`, `date`) VALUES
+(1, 'AC not working 301', 'Archived', 'front', '2021-06-23 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -194,9 +209,9 @@ CREATE TABLE `reservation` (
 --
 
 INSERT INTO `reservation` (`ID`, `client_ID`, `bill_ID`, `number_of_rooms`, `price`, `arrival`, `departure`, `check_in`, `check_out`, `comments`) VALUES
-(8, 1, 8, 1, 0, '2021-06-19', '2021-06-20', '2021-06-19 10:45:30', NULL, ''),
-(9, 1, 9, 1, 0, '2021-06-19', '2021-06-20', NULL, NULL, ''),
-(10, 1, 10, 3, 0, '2021-06-19', '2021-06-20', '2021-06-19 10:46:27', NULL, '');
+(5, 1, 5, 1, 0, '2021-06-19', '2021-06-20', NULL, NULL, ''),
+(6, 1, 6, 3, 0, '2021-06-19', '2021-06-20', '2021-06-19 11:48:27', NULL, ''),
+(7, 2, 7, 1, 0, '2021-06-19', '2021-06-20', NULL, NULL, '');
 
 -- --------------------------------------------------------
 
@@ -214,11 +229,11 @@ CREATE TABLE `reservedrooms` (
 --
 
 INSERT INTO `reservedrooms` (`RID`, `room_type`) VALUES
-(8, 'Single'),
-(9, 'Single'),
-(10, 'Single'),
-(10, 'Double'),
-(10, 'Triple');
+(5, 'Single'),
+(6, 'Single'),
+(6, 'Double'),
+(6, 'Triple'),
+(7, 'Family');
 
 -- --------------------------------------------------------
 
@@ -243,19 +258,19 @@ INSERT INTO `room` (`number`, `type`, `status`, `comments`) VALUES
 ('103', 'Triple', 'available', ''),
 ('104', 'Family', 'available', ''),
 ('105', 'Suite', 'available', ''),
-('201', 'Single', 'booked', ''),
+('201', 'Single', 'available', ''),
 ('202', 'Double', 'available', ''),
-('203', 'Triple', 'available', ''),
+('203', 'Triple', 'unavailable', ''),
 ('204', 'Family', 'available', ''),
 ('205', 'Suite', 'available', ''),
-('301', 'Single', 'available', ''),
+('301', 'Single', 'unavailable', ''),
 ('302', 'Double', 'booked', ''),
-('303', 'Triple', 'booked', ''),
+('303', 'Triple', 'available', ''),
 ('304', 'Family', 'available', ''),
 ('305', 'Suite', 'available', ''),
 ('401', 'Single', 'available', ''),
 ('402', 'Double', 'available', ''),
-('403', 'Triple', 'available', ''),
+('403', 'Triple', 'booked', ''),
 ('404', 'Family', 'available', ''),
 ('405', 'Suite', 'available', '');
 
@@ -275,7 +290,11 @@ CREATE TABLE `room_prices` (
 --
 
 INSERT INTO `room_prices` (`room_type`, `price`) VALUES
-('Single', 100.00);
+('Single', 60.00),
+('Double', 70.00),
+('Triple', 80.00),
+('Family', 90.00),
+('Suite', 100.00);
 
 -- --------------------------------------------------------
 
@@ -299,9 +318,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`ID`, `first_name`, `last_name`, `username`, `password`, `position`, `security_question`, `security_answer`) VALUES
-(1, 'admin', 'admin', 'admin', '$2y$10$v4wgB9yIC4jGoRF7FXkHuOq9GFBpt2C2Jy7QeeAVlRypcNhjLByuu', 'admin', 'admin', 'admin'),
-(2, 'test', 'test', 'test', '$2y$10$cU9EBHLN4bA1mfyacjy3Wuz/yLWjHH7FN0xOJSd2hZzb/YdMCqhEC', 'front_clerk', 'test', 'test'),
-(3, 'test1', 'test1', 'test1', '$2y$10$So63JZ/zGSZPzLJgMncJReU69r3qZ1l.4KuQjegclzPJGDuj.APIa', 'HK_employee', 'test1', 'test1');
+(1, 'admin', 'admin', 'admin', '$2y$10$0t.7cmUzCbrFxQXhhYMIJ.0k9XckBogMuauZPIHc8LzE0o17z9pjq', 'admin', 'admin', 'admin'),
+(2, 'front', 'front', 'front', '$2y$10$FxkC7d.r0ngBwSywobOBguJ9G0g1GJZ75okj9i.wrJ8lwJkz9wBL6', 'front_clerk', 'front', 'front'),
+(3, 'hk', 'hk', 'hk', '$2y$10$pPe2pU8Nlsr/C.s03bZXeu7r1nZskfoFnf5hb5H769HKa7VzjDvy2', 'HK_employee', 'hk', 'hk');
 
 -- --------------------------------------------------------
 
@@ -425,19 +444,19 @@ ALTER TABLE `water_followup`
 -- AUTO_INCREMENT for table `bill`
 --
 ALTER TABLE `bill`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `bill_items`
 --
 ALTER TABLE `bill_items`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `electricity`
@@ -455,25 +474,25 @@ ALTER TABLE `lost_and_found`
 -- AUTO_INCREMENT for table `maintenance`
 --
 ALTER TABLE `maintenance`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `malfunction`
 --
 ALTER TABLE `malfunction`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `water_followup`

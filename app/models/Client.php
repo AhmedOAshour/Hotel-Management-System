@@ -57,8 +57,7 @@ class client extends Model{
         for($i=0;$i<count($room_type);$i++){
           $sql="INSERT INTO reservedrooms (RID,room_type) VALUES('$reservation_id','$room_type[$i]')";
           $price = $rooms[$room_type[$i]];
-          $is_Room=1;
-          $sql3 = "INSERT INTO bill_items(bill_ID,item,price,is_Room) VALUES('$bill_id', '$room_type[$i]', $price,'$is_Room')";
+          $sql3 = "INSERT INTO bill_items(bill_ID,item,price,is_Room) VALUES('$bill_id', '$room_type[$i]', $price,'1')";
           $result = $this->db->query($sql);
           $result = $this->db->query($sql3);
         }

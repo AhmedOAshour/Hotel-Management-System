@@ -25,13 +25,12 @@ class Followup extends Model
     $result = $this->db->query($sql);
     if ($result->num_rows > 0){
       while($row = $this->db->fetchRow()){
-
         array_push($followups,new Followup($row['ID'], $type));
       }
       return $followups;
     }
     else {
-      return null;  
+      return null;
     }
   }
 
@@ -54,7 +53,6 @@ class Followup extends Model
     $entryBy = $_SESSION['ID'];
     $sql = "INSERT INTO " . $type . "_followup (date,comment,photo,entry_by) VALUES ('$date','$comment','$file','$entryBy')";
     $this->db->query($sql);
-
   }
 
   function deleteFollowup($id, $type){

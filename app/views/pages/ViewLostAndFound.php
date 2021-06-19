@@ -29,7 +29,7 @@
         position: relative;
         top:15px;
         right:15px;
-    } 
+    }
 </style>
 <?php
 class ViewLostAndFound extends View{
@@ -94,13 +94,14 @@ else {
 public function addForm($username){
     $rooms=new Room();
     $numbers=$rooms->readRooms();
+    $date=date('Y-m-d');
     $str=<<<EOD
     <body>
       <div class="container">
         <form>
           <div class="form">
             <h1 class="head">Lost and Found</h1>
-            <input type="date"class="formE form-control mb-1 py-4 " name="date" required><br>
+            <input type="date" value="$date" class="formE form-control mb-1 py-4 " name="date" required><br>
             <select class="formE form-control mb-1 " name="room_number">
 EOD;
   foreach ($numbers as $room) {

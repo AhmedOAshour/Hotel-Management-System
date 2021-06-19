@@ -38,9 +38,7 @@ class ViewFollowup extends View{
     <<<EOD
     <div class="container">
     <h1>Followup Reports</h1>
-
     <div id="viewFollowups">
-
       <table>
         <thead>
           <tr>
