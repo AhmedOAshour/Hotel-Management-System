@@ -119,8 +119,10 @@ public function getResTypes($id){
   }
 }
 public function checkin($room_numbers, $id){
+  $date = date('Y-m-d H:i:sP');
   $sql = "INSERT INTO checked_in (reservation_ID,room_no) VALUES ";
-  $sql1 = "UPDATE room SET status = 'booked' WHERE number IN (";
+  $sql2 = "UPDATE reservation SET check_in = '$date'  WHERE ID = $id";
+  $sql1 = "UPDATE room SET status = 'booked'  WHERE number IN (";
   foreach ($room_numbers as $number) {
     $sql .= "($id,$number),";
     $sql1 .= "$number,";
@@ -130,6 +132,7 @@ public function checkin($room_numbers, $id){
   $sql1 .= ")";
   $this->db->query($sql);
   $this->db->query($sql1);
+  $this->db->query($sql2);
 }
 }
 ?>

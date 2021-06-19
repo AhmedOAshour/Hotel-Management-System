@@ -113,6 +113,22 @@
 
     function view_room($id){
       $room = new Room($id);
+      $ext = "";
+      if ($room->status == 'booked') {
+        $res = $room->getReservation();
+        $ext = <<<EOD
+        <h4><b>Arrival: </b>$res[arrival]</h4>
+        <h4><b>Departure: </b>$res[departure]</h4>
+        <h4><b>Check In: </b>$res[check_in]</h4>
+        <h4><b>First Name: </b>$res[first_name]</h4>
+        <h4><b>Last Name: </b>$res[last_name]</h4>
+        <h4><b>Identification Number: </b>$res[identification_no]</h4>
+        <h4><b>Nationality: </b>$res[nationality]</h4>
+        <h4><b>Mobile: </b>$res[mobile]</h4>
+        <h4><b>Email: </b>$res[email]</h4>
+        <h4><b>Company: </b>$res[company]</h4>
+        EOD;
+      }
       $str = <<<EOD
           <div class="container">
           <h1>Room Description</h1><br>
@@ -120,11 +136,11 @@
           <header class="w3-container w3-blue">
             <h1>$room->number</h1>
           </header>
-      
           <div class="w3-container">
           <h4><b>Room type: </b>$room->type</h4>
           <h4><b>Room status: </b>$room->status</h4>
           <h4><b>Comments: </b>$room->comments</h4>
+          $ext
           </div>
         </div>
         <br>
@@ -132,21 +148,8 @@
       EOD;
       switch ($room->status) {
         case 'booked':
-          $res = $room->getReservation();
           $str .= <<<EOD
-          guest names $res[guest_names] <br>
-          arrival $res[arrival]<br>
-          departure $res[departure]<br>
-          check in $res[check_in]<br>
-          comments $res[comments]<br>
-          first_name $res[first_name]<br>
-          last_name $res[last_name]<br>
-          Identification Number $res[identification_no]<br>
-          Nationality $res[nationality]<br>
-          mobile $res[mobile]<br>
-          email $res[email]<br>
-          company $res[company]<br>
-          <button onclick="checkout($_GET[id])"> Check out </button>
+          <button class="button2" onclick="checkout($_GET[id])"> Check out </button>
           EOD;
           break;
         case 'available':
@@ -323,6 +326,14 @@
       }
     }
 
+    function checkout(){
+      $resRooms = $this->model->getResTypes($_GET['id']);
+      $str = <<<EOD
+
+      EOD;
+      echo $str;
+    }
+
   }
 
 ?>
@@ -342,6 +353,6 @@
     window.location.href = "rooms.php?action=mark_unavailable&id="+id;
   }
   function checkout(id){
-    window.location.href = "rooms.php?action=checkout&id="+id;
+    window.location.href = "rooms.php?action=checkoutform&id="+id;
   }
 </script>
