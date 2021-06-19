@@ -30,7 +30,10 @@ $result=$this->model->readReservations($checkin);
     if(!$checkin)
     {
       $thead = "<th style='text-align:center'><strong>Edit Reservation</strong></th>
-      <th style='text-align:center'><strong>Delete Reservation</strong></th>";
+      <th style='text-align:center'><strong>Delete Reservation</strong></th>
+      <th style='text-align:center'><strong>View Bill</strong></th>
+      ";
+      
     }
     else {
       $thead = "<th style='text-align:center'><strong>Checkin</strong></th>";
@@ -47,6 +50,7 @@ $result=$this->model->readReservations($checkin);
             <th style='text-align:center'><strong>Number of Rooms</strong></th>
             <th style='text-align:center'><strong>Arrival</strong></th>
             <th style='text-align:center'><strong>Days/Nights</strong></th>
+          
             $thead
             </tr>
         </thead>
@@ -75,6 +79,7 @@ $result=$this->model->readReservations($checkin);
       $buttons = <<<EOD
         <td style='text-align:center '><a class="color" href='reservations.php?action=edit&id=$row[RID]&quantity=$row[number_of_rooms]'><i class='fa fa-edit'></i></a></td>
         <td style='text-align:center '><a class="color" href='reservations.php?action=delete&id=$row[RID]'><i class='fa fa-trash'></i></a></td>
+        <td style='text-align:center '><a class="color" href='bills.php?&action=read&id=$row[bill_ID]'><i class="fa fa-eye"></i></a></td>
       EOD;
     }
     else {

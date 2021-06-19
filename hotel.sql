@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2021 at 09:08 PM
+-- Generation Time: Jun 18, 2021 at 10:06 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -29,9 +29,20 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `bill` (
-  `ID` varchar(11) NOT NULL,
+  `ID` int(11) NOT NULL,
   `reservation_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `bill`
+--
+
+INSERT INTO `bill` (`ID`, `reservation_ID`) VALUES
+(1, 3),
+(2, 4),
+(3, 5),
+(4, 6),
+(5, 7);
 
 -- --------------------------------------------------------
 
@@ -44,6 +55,13 @@ CREATE TABLE `bill_items` (
   `item` varchar(255) NOT NULL,
   `price` double(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `bill_items`
+--
+
+INSERT INTO `bill_items` (`bill_ID`, `item`, `price`) VALUES
+(5, 'Single', 5.00);
 
 -- --------------------------------------------------------
 
@@ -147,7 +165,7 @@ CREATE TABLE `malfunction` (
 CREATE TABLE `reservation` (
   `ID` int(11) NOT NULL,
   `client_ID` int(11) NOT NULL,
-  `bill_ID` varchar(11) DEFAULT NULL,
+  `bill_ID` int(11) DEFAULT NULL,
   `number_of_rooms` int(11) NOT NULL,
   `price` int(11) DEFAULT NULL,
   `arrival` date NOT NULL,
@@ -162,7 +180,12 @@ CREATE TABLE `reservation` (
 --
 
 INSERT INTO `reservation` (`ID`, `client_ID`, `bill_ID`, `number_of_rooms`, `price`, `arrival`, `departure`, `check_in`, `check_out`, `comments`) VALUES
-(2, 1, NULL, 1, 0, '2021-06-19', '2021-06-29', NULL, NULL, 'asdasd');
+(2, 1, NULL, 1, 0, '2021-06-19', '2021-06-29', NULL, NULL, 'asdasd'),
+(3, 1, NULL, 3, 0, '2021-06-19', '2021-06-21', NULL, NULL, ''),
+(4, 1, NULL, 3, 0, '2021-06-25', '2021-06-29', NULL, NULL, ''),
+(5, 1, NULL, 3, 0, '2021-06-10', '2021-06-08', NULL, NULL, ''),
+(6, 1, NULL, 1, 0, '2021-06-16', '2021-07-01', NULL, NULL, ''),
+(7, 1, NULL, 1, 0, '2021-06-16', '2021-07-01', NULL, NULL, '');
 
 -- --------------------------------------------------------
 
@@ -174,6 +197,20 @@ CREATE TABLE `reservedrooms` (
   `RID` int(11) NOT NULL,
   `room_type` enum('Single','Double','Triple','Family','Suite') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `reservedrooms`
+--
+
+INSERT INTO `reservedrooms` (`RID`, `room_type`) VALUES
+(2, 'Single'),
+(2, 'Double'),
+(2, 'Triple'),
+(3, 'Single'),
+(3, 'Double'),
+(3, 'Triple'),
+(4, 'Single'),
+(5, 'Single');
 
 -- --------------------------------------------------------
 
@@ -282,8 +319,8 @@ ALTER TABLE `bill_items`
 -- Indexes for table `checked_in`
 --
 ALTER TABLE `checked_in`
-  ADD KEY `reservation_ID` (`reservation_ID`),
-  ADD KEY `room_no` (`room_no`);
+  ADD KEY `room_no` (`room_no`),
+  ADD KEY `reservation_ID` (`reservation_ID`);
 
 --
 -- Indexes for table `client`
@@ -365,6 +402,12 @@ ALTER TABLE `water_followup`
 --
 
 --
+-- AUTO_INCREMENT for table `bill`
+--
+ALTER TABLE `bill`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
@@ -398,7 +441,7 @@ ALTER TABLE `malfunction`
 -- AUTO_INCREMENT for table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -426,8 +469,8 @@ ALTER TABLE `bill`
 -- Constraints for table `checked_in`
 --
 ALTER TABLE `checked_in`
-  ADD CONSTRAINT `checked_in_ibfk_1` FOREIGN KEY (`reservation_ID`) REFERENCES `reservation` (`ID`),
-  ADD CONSTRAINT `checked_in_ibfk_2` FOREIGN KEY (`room_no`) REFERENCES `room` (`number`);
+  ADD CONSTRAINT `checked_in_ibfk_2` FOREIGN KEY (`room_no`) REFERENCES `room` (`number`),
+  ADD CONSTRAINT `checked_in_ibfk_3` FOREIGN KEY (`reservation_ID`) REFERENCES `reservation` (`ID`);
 
 --
 -- Constraints for table `electricity`
@@ -459,7 +502,7 @@ ALTER TABLE `malfunction`
 --
 ALTER TABLE `reservation`
   ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`client_ID`) REFERENCES `client` (`ID`),
-  ADD CONSTRAINT `reservation_ibfk_3` FOREIGN KEY (`bill_ID`) REFERENCES `bill` (`ID`);
+  ADD CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`bill_ID`) REFERENCES `bill` (`ID`);
 
 --
 -- Constraints for table `reservedrooms`
