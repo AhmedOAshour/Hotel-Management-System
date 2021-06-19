@@ -78,15 +78,16 @@ public function changeStatus($number,$status){
   $this->db->query($sql);
 
 }
-public function checkout($number){
+public function checkout($id){
   $date = date('Y-m-d H:i:sP');
   $sql = "UPDATE reservation as r
           INNER JOIN checked_in as ci
           INNER JOIN room
           ON room.number = ci.room_no
           on r.ID = ci.reservation_ID
-          SET r.check_out = '$date',room.status='available' WHERE room.number = '$number'";
-  $sql1 = "DELETE FROM checked_in WHERE room_no = '$number'";
+          SET r.check_out = '$date',room.status='available' WHERE r.ID = $id";
+  $sql1 = "DELETE FROM checked_in WHERE reservation_ID = $id";
+  echo "$sql1";
   $this->db->query($sql);
   $this->db->query($sql1);
 }

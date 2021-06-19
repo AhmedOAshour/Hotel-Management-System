@@ -38,18 +38,18 @@ $this->db->query($sql);
 
 public function readBill($id){
     $info = array();
-    $sql = "SELECT *, bill.ID as BID FROM bill INNER JOIN bill_items ON bill.ID =bill_items.bill_ID where bill.ID='$id' AND bill_items.is_Room=0";
+    $sql = "SELECT *, bill.ID as BID FROM bill INNER JOIN bill_items ON bill.ID =bill_items.bill_ID where bill.ID='$id' ";
     $result = $this->db->query($sql);
-  
+
     while ($row = $this->db->fetchRow()){
-    
-      array_push($info,array('ID'=>$row['ID'],'Item'=>$row['item'],'Price'=>$row['price']));
-      
+
+      array_push($info,array('ID'=>$row['ID'],'Item'=>$row['item'],'Price'=>$row['price'],'is_room'=>$row['is_Room']));
+
     }
     return $info;
-     
-    
-  
+
+
+
   }
 
 }

@@ -149,7 +149,7 @@
       switch ($room->status) {
         case 'booked':
           $str .= <<<EOD
-          <button class="button2" onclick="checkout($_GET[id])"> Check out </button>
+          <button class="button2" onclick="checkout($res[reservation_ID])"> Check out </button>
           EOD;
           break;
         case 'available':
@@ -232,8 +232,12 @@
       </table>
       <a href="rooms.php"><button class="button2 ">Back</button></a><br>
       <a href="roomprices.php"><button class="button2">Manage Room Pricing</button></a><br>
-      <a href="rooms.php?action=addform"><button class="button2">Add a Room</button></a><br>
       EOD;
+      if ($_SESSION['position'] == 'admin') {
+        $str .= <<<EOD
+        <a href="rooms.php?action=addform"><button class="button2">Add a Room</button></a><br>
+        EOD;
+      }
       echo $str;
     }
 
@@ -353,6 +357,6 @@
     window.location.href = "rooms.php?action=mark_unavailable&id="+id;
   }
   function checkout(id){
-    window.location.href = "rooms.php?action=checkoutform&id="+id;
+    window.location.href = "bills.php?action=checkoutview&id="+id;
   }
 </script>

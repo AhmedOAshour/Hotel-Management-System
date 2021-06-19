@@ -12,18 +12,19 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 		case 'read':
 			echo $view->read($_GET['id']);
 			break;
-         case 'delete':
-            $controller->delete($_GET['itemid']);
-            echo $view->read($_GET['id']);
-             break;
+   case 'delete':
+      $controller->delete($_GET['itemid']);
+      header("Location: bills.php?action=read&id=$_GET[id]");
+       break;
 		case 'addform':
 			echo $view->addForm($_GET['id']);
 			break;
 		case 'add':
 			$controller->insertItem($_GET['id']);
-			echo $view->read($_GET['id']);
+			header("Location: bills.php?action=read&id=$_GET[id]");
+		case 'checkoutview':
+			echo $view->checkout($_GET['id']);
 	}
 }
 else
 	echo $view->output();
-
