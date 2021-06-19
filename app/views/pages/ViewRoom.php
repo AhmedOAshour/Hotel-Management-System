@@ -24,7 +24,8 @@
   {
     function output(){
       $str = <<<EOD
-        <div class="container">
+      <div class="col-12">
+      <div class="container">
             <div class="row sidebar">
                 <div class="col-3 bar">
                     <form action="/action_page.php">
