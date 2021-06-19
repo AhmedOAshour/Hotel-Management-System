@@ -14,14 +14,23 @@
 <?php
 class ViewReservation extends View{
 public function output($checkin){
+  $date = date('Y-m-d');
+  $nextdate = date('Y-m-d',strtotime($date."+7 days"));
+  $dateform = "";
+  if (!$checkin) {
+    $dateform = <<<EOD
+    <div class="col-6 bar">
+    <form action="/action_page.php">
+    <label>From: </label><input type="date" id="date" class="date" value="$date">
+    <label>To: </label><input type="date" id="date" class="date" value="$nextdate">
+    </form>
+    </div>
+    EOD;
+  }
   $str=<<<EOD
       <div class="container">
       <div class="row sidebar">
-          <div class="col-3 bar">
-              <form action="/action_page.php">
-              <input type="date" id="date" class="date"value="<?php echo date('Y-m-d'); ?>">
-              </form>
-          </div>
+          $dateform
       </div>
     </div>
 EOD;
@@ -33,7 +42,6 @@ $result=$this->model->readReservations($checkin);
       <th style='text-align:center'><strong>Delete Reservation</strong></th>
       <th style='text-align:center'><strong>View Bill</strong></th>
       ";
-
     }
     else {
       $thead = "<th style='text-align:center'><strong>Checkin</strong></th>";
@@ -50,7 +58,6 @@ $result=$this->model->readReservations($checkin);
             <th style='text-align:center'><strong>Number of Rooms</strong></th>
             <th style='text-align:center'><strong>Arrival</strong></th>
             <th style='text-align:center'><strong>Days/Nights</strong></th>
-
             $thead
             </tr>
         </thead>

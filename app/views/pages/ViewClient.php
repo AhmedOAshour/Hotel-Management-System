@@ -60,7 +60,7 @@ class ViewClient extends View{
                               </form>
                           </div>
                           <div class="col-9 searchbar">
-                          <input type="text" id="bar" class="search"placeholder="Search..." oninput="showClient()"><i class="fa fa-search"></i>
+                          <input type="text" id="bar" class="search"placeholder="Search by name, company, etc." oninput="showClient()"><i class="fa fa-search"></i>
                           </div>
                       </div>
                   </div>
