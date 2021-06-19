@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2021 at 10:06 PM
+-- Generation Time: Jun 19, 2021 at 10:46 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -38,11 +38,9 @@ CREATE TABLE `bill` (
 --
 
 INSERT INTO `bill` (`ID`, `reservation_ID`) VALUES
-(1, 3),
-(2, 4),
-(3, 5),
-(4, 6),
-(5, 7);
+(8, 8),
+(9, 9),
+(10, 10);
 
 -- --------------------------------------------------------
 
@@ -51,8 +49,10 @@ INSERT INTO `bill` (`ID`, `reservation_ID`) VALUES
 --
 
 CREATE TABLE `bill_items` (
+  `ID` int(11) NOT NULL,
   `bill_ID` int(11) NOT NULL,
   `item` varchar(255) NOT NULL,
+  `is_Room` tinyint(1) NOT NULL,
   `price` double(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -60,8 +60,12 @@ CREATE TABLE `bill_items` (
 -- Dumping data for table `bill_items`
 --
 
-INSERT INTO `bill_items` (`bill_ID`, `item`, `price`) VALUES
-(5, 'Single', 5.00);
+INSERT INTO `bill_items` (`ID`, `bill_ID`, `item`, `is_Room`, `price`) VALUES
+(8, 7, 'Single', 1, 100.00),
+(9, 7, 'test', 0, 123.00),
+(10, 8, 'Single', 1, 100.00),
+(11, 9, 'Single', 1, 100.00),
+(12, 10, 'Single', 1, 100.00);
 
 -- --------------------------------------------------------
 
@@ -73,6 +77,16 @@ CREATE TABLE `checked_in` (
   `reservation_ID` int(11) NOT NULL,
   `room_no` varchar(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `checked_in`
+--
+
+INSERT INTO `checked_in` (`reservation_ID`, `room_no`) VALUES
+(8, '101'),
+(10, '201'),
+(10, '302'),
+(10, '303');
 
 -- --------------------------------------------------------
 
@@ -96,7 +110,7 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`ID`, `first_name`, `last_name`, `identification_no`, `nationality`, `mobile`, `email`, `company`) VALUES
-(1, 'customer1', 'customer', 'customer', 'customer', 'customer', 'customer', 'customer');
+(1, 'test', 'test', 'test', 'test', 'test', 'test', 'test');
 
 -- --------------------------------------------------------
 
@@ -180,12 +194,9 @@ CREATE TABLE `reservation` (
 --
 
 INSERT INTO `reservation` (`ID`, `client_ID`, `bill_ID`, `number_of_rooms`, `price`, `arrival`, `departure`, `check_in`, `check_out`, `comments`) VALUES
-(2, 1, NULL, 1, 0, '2021-06-19', '2021-06-29', NULL, NULL, 'asdasd'),
-(3, 1, NULL, 3, 0, '2021-06-19', '2021-06-21', NULL, NULL, ''),
-(4, 1, NULL, 3, 0, '2021-06-25', '2021-06-29', NULL, NULL, ''),
-(5, 1, NULL, 3, 0, '2021-06-10', '2021-06-08', NULL, NULL, ''),
-(6, 1, NULL, 1, 0, '2021-06-16', '2021-07-01', NULL, NULL, ''),
-(7, 1, NULL, 1, 0, '2021-06-16', '2021-07-01', NULL, NULL, '');
+(8, 1, 8, 1, 0, '2021-06-19', '2021-06-20', '2021-06-19 10:45:30', NULL, ''),
+(9, 1, 9, 1, 0, '2021-06-19', '2021-06-20', NULL, NULL, ''),
+(10, 1, 10, 3, 0, '2021-06-19', '2021-06-20', '2021-06-19 10:46:27', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -203,14 +214,11 @@ CREATE TABLE `reservedrooms` (
 --
 
 INSERT INTO `reservedrooms` (`RID`, `room_type`) VALUES
-(2, 'Single'),
-(2, 'Double'),
-(2, 'Triple'),
-(3, 'Single'),
-(3, 'Double'),
-(3, 'Triple'),
-(4, 'Single'),
-(5, 'Single');
+(8, 'Single'),
+(9, 'Single'),
+(10, 'Single'),
+(10, 'Double'),
+(10, 'Triple');
 
 -- --------------------------------------------------------
 
@@ -230,15 +238,26 @@ CREATE TABLE `room` (
 --
 
 INSERT INTO `room` (`number`, `type`, `status`, `comments`) VALUES
-('', '', '', ''),
-('101', 'Single', 'available', ''),
+('101', 'Single', 'booked', ''),
 ('102', 'Double', 'available', ''),
 ('103', 'Triple', 'available', ''),
 ('104', 'Family', 'available', ''),
-('201', 'Single', 'available', ''),
+('105', 'Suite', 'available', ''),
+('201', 'Single', 'booked', ''),
 ('202', 'Double', 'available', ''),
 ('203', 'Triple', 'available', ''),
-('204', 'Family', 'available', '');
+('204', 'Family', 'available', ''),
+('205', 'Suite', 'available', ''),
+('301', 'Single', 'available', ''),
+('302', 'Double', 'booked', ''),
+('303', 'Triple', 'booked', ''),
+('304', 'Family', 'available', ''),
+('305', 'Suite', 'available', ''),
+('401', 'Single', 'available', ''),
+('402', 'Double', 'available', ''),
+('403', 'Triple', 'available', ''),
+('404', 'Family', 'available', ''),
+('405', 'Suite', 'available', '');
 
 -- --------------------------------------------------------
 
@@ -256,9 +275,7 @@ CREATE TABLE `room_prices` (
 --
 
 INSERT INTO `room_prices` (`room_type`, `price`) VALUES
-('Single', 5.00),
-('Double', 1.00),
-('Triple', 1.00);
+('Single', 100.00);
 
 -- --------------------------------------------------------
 
@@ -272,7 +289,7 @@ CREATE TABLE `user` (
   `last_name` varchar(256) NOT NULL,
   `username` varchar(255) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
-  `position` enum('front_clerk','reservation_clerk','HK_employee','admin') NOT NULL,
+  `position` enum('front_clerk','HK_employee','admin') NOT NULL,
   `security_question` varchar(255) NOT NULL,
   `security_answer` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -282,7 +299,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`ID`, `first_name`, `last_name`, `username`, `password`, `position`, `security_question`, `security_answer`) VALUES
-(9, 'admin', 'admin', 'admin', '$2y$10$KLpKZ//l/kk5ySliV90sZuI5utslLSCVkTQF6UcpFizefqnWS78PS', 'front_clerk', '', '');
+(1, 'admin', 'admin', 'admin', '$2y$10$v4wgB9yIC4jGoRF7FXkHuOq9GFBpt2C2Jy7QeeAVlRypcNhjLByuu', 'admin', 'admin', 'admin'),
+(2, 'test', 'test', 'test', '$2y$10$cU9EBHLN4bA1mfyacjy3Wuz/yLWjHH7FN0xOJSd2hZzb/YdMCqhEC', 'front_clerk', 'test', 'test'),
+(3, 'test1', 'test1', 'test1', '$2y$10$So63JZ/zGSZPzLJgMncJReU69r3qZ1l.4KuQjegclzPJGDuj.APIa', 'HK_employee', 'test1', 'test1');
 
 -- --------------------------------------------------------
 
@@ -313,6 +332,7 @@ ALTER TABLE `bill`
 -- Indexes for table `bill_items`
 --
 ALTER TABLE `bill_items`
+  ADD PRIMARY KEY (`ID`),
   ADD KEY `bill_ID` (`bill_ID`);
 
 --
@@ -405,13 +425,19 @@ ALTER TABLE `water_followup`
 -- AUTO_INCREMENT for table `bill`
 --
 ALTER TABLE `bill`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `bill_items`
+--
+ALTER TABLE `bill_items`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `electricity`
@@ -441,13 +467,13 @@ ALTER TABLE `malfunction`
 -- AUTO_INCREMENT for table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `water_followup`
@@ -466,55 +492,10 @@ ALTER TABLE `bill`
   ADD CONSTRAINT `bill_ibfk_1` FOREIGN KEY (`reservation_ID`) REFERENCES `reservation` (`ID`);
 
 --
--- Constraints for table `checked_in`
---
-ALTER TABLE `checked_in`
-  ADD CONSTRAINT `checked_in_ibfk_2` FOREIGN KEY (`room_no`) REFERENCES `room` (`number`),
-  ADD CONSTRAINT `checked_in_ibfk_3` FOREIGN KEY (`reservation_ID`) REFERENCES `reservation` (`ID`);
-
---
 -- Constraints for table `electricity`
 --
 ALTER TABLE `electricity`
   ADD CONSTRAINT `electricity_ibfk_1` FOREIGN KEY (`entry_by`) REFERENCES `user` (`ID`);
-
---
--- Constraints for table `lost_and_found`
---
-ALTER TABLE `lost_and_found`
-  ADD CONSTRAINT `lost_and_found_ibfk_3` FOREIGN KEY (`room_number`) REFERENCES `room` (`number`),
-  ADD CONSTRAINT `lost_and_found_ibfk_4` FOREIGN KEY (`HK_Username`) REFERENCES `user` (`username`);
-
---
--- Constraints for table `maintenance`
---
-ALTER TABLE `maintenance`
-  ADD CONSTRAINT `maintenance_ibfk_1` FOREIGN KEY (`malfunction_no`) REFERENCES `malfunction` (`ID`);
-
---
--- Constraints for table `malfunction`
---
-ALTER TABLE `malfunction`
-  ADD CONSTRAINT `malfunction_ibfk_1` FOREIGN KEY (`entry_by`) REFERENCES `user` (`username`);
-
---
--- Constraints for table `reservation`
---
-ALTER TABLE `reservation`
-  ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`client_ID`) REFERENCES `client` (`ID`),
-  ADD CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`bill_ID`) REFERENCES `bill` (`ID`);
-
---
--- Constraints for table `reservedrooms`
---
-ALTER TABLE `reservedrooms`
-  ADD CONSTRAINT `reservedrooms_ibfk_1` FOREIGN KEY (`RID`) REFERENCES `reservation` (`ID`);
-
---
--- Constraints for table `water_followup`
---
-ALTER TABLE `water_followup`
-  ADD CONSTRAINT `water_followup_ibfk_1` FOREIGN KEY (`entry_by`) REFERENCES `user` (`ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
