@@ -9,7 +9,6 @@
     margin-bottom:5px;
     left:45px;
     border-radius: 15px;
-
   }
   .w3-blue{
     background-color:#000026 !important;
@@ -18,6 +17,14 @@
     position:relative;
     left:334px;
   }
+  .mainbody{
+    overflow-y:scroll;
+    height: 85vh;
+  }
+  body{
+    overflow-y: hidden;
+  }
+
   </style>
 <?php
   class ViewRoom extends View
@@ -25,7 +32,6 @@
     function output(){
       $str = <<<EOD
       <div class="col-12">
-      <div class="container">
             <div class="row sidebar">
                 <div class="col-3 bar">
                     <form action="/action_page.php">
@@ -36,7 +42,7 @@
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div >
             <div class="row sidebar">
                 <div class="col-3">
                     <ul class="nav flex-column left">
@@ -75,7 +81,7 @@
                         <li><a href="rooms.php?action=manage"> <button class="button5"> Manage rooms </button> </a></li>
                     </ul>
                 </div>
-                <div class="col-9">
+                <div class="col-9 mainbody">
       EOD;
       $types = $this->model->getRoomTypes();
       foreach ($types as $type) {
