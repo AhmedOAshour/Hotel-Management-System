@@ -3,6 +3,24 @@
     background-color:#000026;
     color:white;
   }
+  .w3-blue{
+    background-color:#000026 !important;
+  }
+  .cards{
+    position:relative;
+    left:334px;
+  }
+  #followupForm{
+    position:relative;
+    left:150px;
+  }
+  .image{
+    border-radius:25px;
+  }
+  .data{
+    position:relative;
+    right:50px;
+  }
 </style>
 <?php
 class ViewFollowup extends View{
@@ -87,13 +105,19 @@ class ViewFollowup extends View{
   public function viewFollowup($id, $type){
     $followup = $this->model->readFollowup($id, $type);
     $str=<<<EOD
-    <h3>Followup number $id</h3>
-    <div id="followupForm">
-    <img src="./images/$followup[3]" alt="photo" width="100" height="100"><br>
-    Date: $followup[1]<br>
-    Reading: $followup[2]<br>
-    Entry By: $followup[4]<br>
-    </div>
+      <div class="container">
+          <h1>Follow Up</h1><br>
+          <div class="w3-card-4 cards" style="width:40%;">
+          <header class="w3-container w3-blue">
+              <h1>$id</h1>
+          </header>
+          <div class="w3-container" id="followupForm">
+            <img class="image"src="./images/$followup[3]" alt="photo" width="100" height="100"><br>
+            <h4 class="data"><b>Date: </b>$followup[1]<br></h4>
+            <h4 class="data"><b>Reading: </b>$followup[2]<br></h4>
+            <h4 class="data"><b>Entry By: </b>$followup[4]<br></h4>
+          </div>
+        </div>
     EOD;
     echo $str;
   }

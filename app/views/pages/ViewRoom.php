@@ -8,6 +8,8 @@
     color:white;
     margin-bottom:5px;
     left:45px;
+    border-radius: 15px;
+
   }
   .w3-blue{
     background-color:#000026 !important;
