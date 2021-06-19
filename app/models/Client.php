@@ -41,11 +41,13 @@ class client extends Model{
       function createReservation($client_id,$room_type,$number_of_rooms,$price,$arrival,$departure,$comments){
         $sql="INSERT into reservation(client_id,number_of_rooms,price,arrival,departure,comments) values('$client_id','$number_of_rooms',$price,'$arrival','$departure','$comments')";
         $result = $this->db->query($sql);
-        $newest_id = mysqli_insert_id($this->db->getConn());
+        $reservation_id = mysqli_insert_id($this->db->getConn());
 
-        $sql = "INSERT INTO bill(reservation_ID) VALUES ($newest_id)";
+        $sql = "INSERT INTO bill(reservation_ID) VALUES ($reservation_id)";
         $result = $this->db->query($sql);
-        $newest_id = mysqli_insert_id($this->db->getConn());
+        $bill_id=mysqli_insert_id($this->db->getConn());
+        $sql="UPDATE RESERVATION SET bill_ID='$bill_id' WHERE ID='$reservation_id' ";
+        $result = $this->db->query($sql);
         $rooms = array();
         $sql = "SELECT * FROM room_prices";
         $result = $this->db->query($sql);
@@ -53,10 +55,10 @@ class client extends Model{
             $rooms[$row['room_type']] = $row['price'];
           }
         for($i=0;$i<count($room_type);$i++){
-          $sql="INSERT INTO reservedrooms (RID,room_type) VALUES('$newest_id','$room_type[$i]')";
+          $sql="INSERT INTO reservedrooms (RID,room_type) VALUES('$reservation_id','$room_type[$i]')";
           $price = $rooms[$room_type[$i]];
-          $sql3 = "INSERT INTO bill_items(bill_ID,item,price) VALUES('$newest_id', '$room_type[$i]', $price)";
-          echo $sql;
+          $is_Room=1;
+          $sql3 = "INSERT INTO bill_items(bill_ID,item,price,is_Room) VALUES('$bill_id', '$room_type[$i]', $price,'$is_Room')";
           $result = $this->db->query($sql);
           $result = $this->db->query($sql3);
         }

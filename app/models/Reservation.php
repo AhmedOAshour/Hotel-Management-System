@@ -46,15 +46,32 @@ public function readReservations($checkin){
 }
 
 public function editReservation($id,$client_ID,$room_type,$number_of_rooms,$arrival,$departure,$comments){
+  $sql="SELECT ID from bill where reservation_ID='$id'";
+  $this->db->query($sql);
+  $row=$this->db->fetchRow();
+  $bill_id=$row['ID'];
+  $sql="DELETE from bill_items where bill_ID='$bill_id' and is_Room=1";
+  $this->db->query($sql);
   $sql2="DELETE from reservedrooms where RID=$id";
   $this->db->query($sql2);
 
     $sql = "UPDATE reservation SET client_ID = '$client_ID' ,number_of_rooms='$number_of_rooms',arrival = '$arrival',departure='$departure' , comments='$comments' WHERE ID = '$id'";
     $this->db->query($sql);
+    $rooms = array();
+    $sql = "SELECT * FROM room_prices";
+    $result = $this->db->query($sql);
+     while($row = $this->db->fetchRow()){
+            $rooms[$row['room_type']] = $row['price'];
+          }
     for($i=0;$i<count($room_type);$i++){
-      $price=0;
-      $sql="insert into reservedrooms (RID,room_type,price) values('$id','$room_type[$i]','$price')";
+      
+      $sql="insert into reservedrooms (RID,room_type) values('$id','$room_type[$i]')";
       $result = $this->db->query($sql);
+      $price = $rooms[$room_type[$i]];
+      $is_Room=1;
+          $sql3 = "INSERT INTO bill_items(bill_ID,item,price,is_Room) VALUES('$bill_id', '$room_type[$i]', $price,'$is_Room')";
+          $result = $this->db->query($sql);
+          $result = $this->db->query($sql3);
     }
 }
 function deleteReservation($id){
