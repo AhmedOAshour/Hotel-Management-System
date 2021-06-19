@@ -57,13 +57,14 @@ public function output(){
     echo $str;
 }
 public function addform($malfunction_no){
+  $date=date('Y-m-d');
 $str=<<<EOD
     <div class="container">
     <form>
     <h1>Maintenance</h1>
     <textarea name='materials_bought' rows="1" cols="80" class="formE form-control  py-4 "placeholder="Materials bought seperated by ," required></textarea>
     <textarea name="cost_of_materials" rows="1" cols="80" class="formE form-control  py-4 "placeholder="cost of materials seperate by  , respectively" required></textarea>
-    <input type='date' class="formE form-control mb-1 py-4 "name='date'required>
+    <input type='date' value="$date" class="formE form-control mb-1 py-4 "name='date'required>
     <input type="text" name="malfunction_no" class="formE form-control mb-1 py-4 "value="$malfunction_no"  id="malfunction_no" hidden>
     <input type="text" name="technician_name"  class="formE form-control mb-1 py-4 "placeholder="Please enter technician name" id="technician_no" required>
     <input type="text" name="work_done"  class="formE form-control mb-1 py-4 "placeholder="Describe the work done" id="work_done" required>

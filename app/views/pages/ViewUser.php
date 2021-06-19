@@ -44,19 +44,26 @@ class ViewUser extends View{
         </thead>
         <tbody>
     EOD;
-        foreach ($users as $user) {
-          $str .= <<<EOD
-          <tr>
-            <td style='text-align:center'>$user->id</td>
-            <td style='text-align:center'>$user->first_name</td>
-            <td style='text-align:center'>$user->last_name</td>
-            <td style='text-align:center'>$user->username</td>
-            <td style='text-align:center'>$user->position</td>
-            <td style='text-align:center'><a class="color" href="employees.php?action=editform&id=$user->id"><i class='fa fa-edit'></a></td>
-            <td style='text-align:center'><a class="color" href="employees.php?action=delete&id=$user->id"><i class='fa fa-trash'></i></a></td>
-          </tr>
-          EOD;
-        }
+    if($users){
+      foreach ($users as $user) {
+        $str .= <<<EOD
+        <tr>
+        <td style='text-align:center'>$user->id</td>
+        <td style='text-align:center'>$user->first_name</td>
+        <td style='text-align:center'>$user->last_name</td>
+        <td style='text-align:center'>$user->username</td>
+        <td style='text-align:center'>$user->position</td>
+        <td style='text-align:center'><a class="color" href="employees.php?action=editform&id=$user->id"><i class='fa fa-edit'></a></td>
+        <td style='text-align:center'><a class="color" href="employees.php?action=delete&id=$user->id"><i class='fa fa-trash'></i></a></td>
+        </tr>
+        EOD;
+      }
+    }
+    else {
+      $str.= <<<EOD
+      <tr><td>No Results</td></tr>
+      EOD;
+    }
     $str .= <<<EOD
         </tbody>
       </table>

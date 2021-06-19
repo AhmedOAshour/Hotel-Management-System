@@ -15,7 +15,10 @@ require_once 'libraries/Model.php';
 require_once 'libraries/View.php';
 require_once 'views/inc/nav.php';
 
-
+// if (!isset($_SESSION['username'])&&!isset($_SESSION['username'])) {
+//   header("Location: index.php");
+//   $_SESSION['is_login'] = true;
+// }
 //Autoload Core Libraries
 //spl_autoload_register(function ($className) {
   // require_once 'libraries/' . $className . '.php';

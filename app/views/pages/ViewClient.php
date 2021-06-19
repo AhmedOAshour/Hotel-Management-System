@@ -96,32 +96,38 @@ class ViewClient extends View{
                     </thead>
                     </div>
                  EOD;
-
-    foreach ($clients as $client) {
-        $str .= <<<EOD
-          <tr>
-            <td style='text-align:center'>$client->first_name</td>
-            <td style='text-align:center'>$client->last_name</td>
-            <td style='text-align:center'>$client->identification_no</td>
-            <td style='text-align:center'>$client->nationality</td>
-            <td style='text-align:center'>$client->mobile</td>
-            <td style='text-align:center'>$client->email</td>
-            <td style='text-align:center'>$client->company</td>
-          EOD;
-          if(!empty($_GET['flag'])&&$_GET['flag']==true){
-          $str.=<<<EOD
-          <td style='text-align:center'><a class="color"href="clients.php?action=resform&id=$client->id&quantity=1"><i class='fa fa-plus-square'></i></a></td>
-          EOD;
-          }
-          else { $str.=<<<EOD
-            <td style='text-align:center'><a class="color" href="clients.php?action=editform&id=$client->id"><i class='fa fa-edit'></i></a></td>
-            <td style='text-align:center'><a class="color" href="clients.php?action=delete&id=$client->id"><i class='fa fa-trash'></i></a></td>
-            EOD;
-          }
-    $str.=<<<EOD
-        </tr>
-        EOD;
-      }
+   if ($clients) {
+     foreach ($clients as $client) {
+       $str .= <<<EOD
+       <tr>
+       <td style='text-align:center'>$client->first_name</td>
+       <td style='text-align:center'>$client->last_name</td>
+       <td style='text-align:center'>$client->identification_no</td>
+       <td style='text-align:center'>$client->nationality</td>
+       <td style='text-align:center'>$client->mobile</td>
+       <td style='text-align:center'>$client->email</td>
+       <td style='text-align:center'>$client->company</td>
+       EOD;
+       if(!empty($_GET['flag'])&&$_GET['flag']==true){
+         $str.=<<<EOD
+         <td style='text-align:center'><a class="color"href="clients.php?action=resform&id=$client->id&quantity=1"><i class='fa fa-plus-square'></i></a></td>
+         EOD;
+       }
+       else { $str.=<<<EOD
+         <td style='text-align:center'><a class="color" href="clients.php?action=editform&id=$client->id"><i class='fa fa-edit'></i></a></td>
+         <td style='text-align:center'><a class="color" href="clients.php?action=delete&id=$client->id"><i class='fa fa-trash'></i></a></td>
+         EOD;
+       }
+       $str.=<<<EOD
+       </tr>
+       EOD;
+     }
+   }
+   else {
+     $str.=<<<EOD
+     <tr><td>No Results</td></tr>
+     EOD;
+   }
   $str .= <<<EOD
       </tbody>
     </table>
