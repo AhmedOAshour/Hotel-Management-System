@@ -1,7 +1,30 @@
-<?php
+<style>
+    .sidebar{
+        background-color:white;
+        width:100%;
+        height:45px;
+        margin:0;
+        padding-top:10px;
+    }
+    .bar{
+        text-align:left;
+    }
 
+ </style> 
+<?php
 class ViewReservation extends View{
 public function output($checkin){
+  $str=<<<EOD
+      <div class="container">
+      <div class="row sidebar">
+          <div class="col-3 bar">
+              <form action="/action_page.php">
+              <input type="date" id="date" class="date"value="<?php echo date('Y-m-d'); ?>">
+              </form>
+          </div>
+      </div>
+    </div>
+EOD;
 $result=$this->model->readReservations($checkin);
     $thead;
     if(!$checkin)
@@ -12,9 +35,9 @@ $result=$this->model->readReservations($checkin);
     else {
       $thead = "<th style='text-align:center'><strong>Checkin</strong></th>";
     }
-    $str=<<<EOD
+    $str.=<<<EOD
         <div class="container">
-        <input type="date" id="date" value="<?php echo date('Y-m-d'); ?>">
+        <h1>Reservations</h1>
         <table width="100%" border="1" style="border-collapse:collapse; margin-top:4px;">
         <thead>
             <tr>
@@ -50,13 +73,13 @@ $result=$this->model->readReservations($checkin);
     $buttons;
     if (!$checkin) {
       $buttons = <<<EOD
-        <td style='text-align:center '><a class="color" href='reservations.php?action=edit&id=$row[RID]&quantity=$row[number_of_rooms]'><i class='fa fa-edit'></a></td>
+        <td style='text-align:center '><a class="color" href='reservations.php?action=edit&id=$row[RID]&quantity=$row[number_of_rooms]'><i class='fa fa-edit'></i></a></td>
         <td style='text-align:center '><a class="color" href='reservations.php?action=delete&id=$row[RID]'><i class='fa fa-trash'></i></a></td>
       EOD;
     }
     else {
       $buttons = <<<EOD
-        <td style='text-align:center '><a class="color" href='rooms.php?action=checkin&id=$row[RID]'>Check In</a></td>
+        <td style='text-align:center '><a class="color" href='rooms.php?action=checkin&id=$row[RID]'><i class="fa fa-check-square"></i></a></td>
       EOD;
     }
 

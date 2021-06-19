@@ -169,7 +169,7 @@ class ViewUser extends View{
         <input class='formE form-control mb-4 border-0 py-4' for='question' disabled value='$question ?'><br>
         <input type="text" name="answer" id="answer" placeholder="Answer.."class="formE form-control mb-4 border-0 py-4"><br>
         <input type="text" name="username" value="$username" style="display:none;" required>
-        <input type="submit" class="button2" name="action" value="validate" id="submitBtn">
+        <input type="submit" class="button2" name="action" value="Validate" id="submitBtn">
       </form>
     </div>
     EOD;
@@ -177,16 +177,18 @@ class ViewUser extends View{
   }
   public function newPassword($username){
     $str=<<<EOD
+    <div class="container">
+    <h1>Change Password</h1>
     <div id="changePass">
     <form class="changePass">
         <input type="text" name="username" value="$username" style="display:none;" >
-        <label class='password' for='password'>New Password</label><br><input type="text" name="password" id="password" onchange="checkPassword()" class="form form-control mb-4 border-0 py-4" required><br>
+        <input type="password" name="password" id="password" onchange="checkPassword()" placeholder="New Password" class="formE form-control mb-4 border-0 py-4" required><br>
         <div id="errorPass">
         </div>
-        <label class='confirmPassword' for='confirmPassword'>Confirm Password</label><br><input type="text" class="confirmP" id="cPassword" oninput="checkConfirmPass()" name="cPassword" required><br>
+        <input type="password" class="formE form-control mb-4 border-0 py-4 confirmP" placeholder="Confirm New Password"id="cPassword" oninput="checkConfirmPass()" name="cPassword" required><br>
         <div id="errorCPass">
         </div>
-        <button type="submit" name="action" value="newPass">Submit</button>
+        <button type="submit" name="action" class="button2"value="newPass">Submit</button>
       </form>
     </div>
     EOD;

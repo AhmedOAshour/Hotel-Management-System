@@ -1,3 +1,6 @@
+<?php
+ob_start();
+?>
 <style>
     body{
         background-color: #DAE3EB;
@@ -24,7 +27,7 @@
     .left{
         background-color:#EFEBEB;
         width:230px;
-        height:590px;
+        height:790px;
         position: relative;
         top:15px;
         right:15px;

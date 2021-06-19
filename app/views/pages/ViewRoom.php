@@ -1,3 +1,22 @@
+<style>
+  .button5{
+    position: relative;
+    width:50%;
+    background-color:#000026;
+    height:50px;
+    font-weight:bolder;
+    color:white;
+    margin-bottom:5px;
+    left:45px;
+  }
+  .w3-blue{
+    background-color:#000026 !important;
+  }
+  .cards{
+    position:relative;
+    left:334px;
+  }
+  </style>
 <?php
   class ViewRoom extends View
   {
@@ -7,8 +26,6 @@
             <div class="row sidebar">
                 <div class="col-3 bar">
                     <form action="/action_page.php">
-                        <label>Date:</label>
-                        <input type="date" id="date" name="Date">
                     </form>
                 </div>
                 <div class="col-9 searchbar">
@@ -51,8 +68,8 @@
                             <input type="checkbox" id="HouseKeeping3" name="HouseKeeping3" value="Inprogress">
                             <label for="vehicle1">In progress</label><br>
                         </li>
-                        <li><a href="reservations.php?action=checkin"> <button> Check In </button> </a></li>
-                        <li><a href="rooms.php?action=manage"> <button> Manage rooms </button> </a></li>
+                        <li><a href="reservations.php?action=checkin"> <button class="button5"> Check In </button> </a></li>
+                        <li><a href="rooms.php?action=manage"> <button class="button5"> Manage rooms </button> </a></li>
                     </ul>
                 </div>
                 <div class="col-9">
@@ -94,11 +111,21 @@
     function view_room($id){
       $room = new Room($id);
       $str = <<<EOD
-        <a href="rooms.php">Back</a> <br>
-        room number $room->number<br>
-        room type $room->type<br>
-        room status $room->status<br>
-        comments $room->comments<br><br>
+          <div class="container">
+          <h1>Room Description</h1><br>
+          <div class="w3-card-4 cards" style="width:40%;">
+          <header class="w3-container w3-blue">
+            <h1>$room->number</h1>
+          </header>
+      
+          <div class="w3-container">
+          <h4><b>Room type: </b>$room->type</h4>
+          <h4><b>Room status: </b>$room->status</h4>
+          <h4><b>Comments: </b>$room->comments</h4>
+          </div>
+        </div>
+        <br>
+        <a href="rooms.php"><button class="button2">Back</button></a><br>
       EOD;
       switch ($room->status) {
         case 'booked':
@@ -121,12 +148,12 @@
           break;
         case 'available':
           $str .= <<<EOD
-            <button onclick="mark_unavailable($_GET[id])"> Mark as Unavailable </button>
+            <button class="button2" onclick="mark_unavailable($_GET[id])"> Mark as Unavailable </button>
           EOD;
           break;
         case 'unavailable'||'checked_out':
           $str .= <<<EOD
-            <button onclick="mark_available($_GET[id])"> Mark as Available </button>
+            <button class="button2" onclick="mark_available($_GET[id])"> Mark as Available </button>
           EOD;
           break;
       }
@@ -137,6 +164,7 @@
 
     function checkin($resID){
       $str = <<<EOD
+      <div class="container">
       <form action="rooms.php" method="POST">
       EOD;
       $resRooms = $this->model->getResTypes($_GET['id']);
@@ -166,17 +194,16 @@
     function viewTable(){
       $rooms = $this->model->readRooms();
       $str = <<<EOD
-      <a href="rooms.php">Back</a>
-      <a href="roomprices.php">Manage Room Pricing</a>
-      <a href="rooms.php?action=addform">Add a Room</a>
+      <div class="container">
+      <h1>Manage Rooms</h1>
       <table>
       <thead>
-        <th>Room Number</th>
-        <th>Type</th>
-        <th>Status</th>
-        <th>Comments</th>
-        <th>Edit</th>
-        <th>Delete</th>
+        <th style='text-align:center'>Room Number</th>
+        <th style='text-align:center'>Type</th>
+        <th style='text-align:center'>Status</th>
+        <th style='text-align:center'>Comments</th>
+        <th style='text-align:center'>Edit</th>
+        <th style='text-align:center'>Delete</th>
       </thead>
       <tbody>
       EOD;
@@ -184,12 +211,12 @@
           foreach ($rooms as $room) {
           $str .= <<<EOD
             <tr>
-              <td>$room->number</td>
-              <td>$room->type</td>
-              <td>$room->status</td>
-              <td>$room->comments</td>
-              <td><a href="rooms.php?action=editform&number=$room->number">Edit</a></td>
-              <td><a href="rooms.php?action=delete&number=$room->number">Delete</a></td>
+              <td style='text-align:center'>$room->number</td>
+              <td style='text-align:center'>$room->type</td>
+              <td style='text-align:center'>$room->status</td>
+              <td style='text-align:center'>$room->comments</td>
+              <td style='text-align:center'><a class="color"href="rooms.php?action=editform&number=$room->number"><i class='fa fa-edit'></i></a></td>
+              <td style='text-align:center'><a class="color"href="rooms.php?action=delete&number=$room->number"><i class='fa fa-trash'></i></a></td>
             </tr>
           EOD;
         }
@@ -197,29 +224,34 @@
       $str .= <<<EOD
       </tbody>
       </table>
+      <a href="rooms.php"><button class="button2 ">Back</button></a><br>
+      <a href="roomprices.php"><button class="button2">Manage Room Pricing</button></a><br>
+      <a href="rooms.php?action=addform"><button class="button2">Add a Room</button></a><br>
       EOD;
       echo $str;
     }
 
     function addForm(){
       $str = <<<EOD
+      <div class="container">
+      <h1>Add Room</h1>
       <form method="POST">
-        <label>Room Number:</label> <input type="text" name="number" required><br>
-        <label>Type:</label>
-        <select name="type" required>
+        <h4 class="words">Room<br>Number</h4> <input class="formE form-control border-3" type="text" name="number" required><br>
+        <h4 class="words">Type</h4>
+        <select name="type" class="formE form-control border-3" required>
           <option value="single">Single</option>
           <option value="double">Double</option>
           <option value="triple">Triple</option>
           <option value="family">Family</option>
           <option value="suite">Suite</option>
         </select><br>
-        <label>Status:</label>
-        <select name="status" required>
+        <h4 class="words">Status</h4>
+        <select name="status" class="formE form-control border-3" required>
           <option value="available">Available</option>
           <option value="unavailable">Unavailable</option>
         </select><br>
-        <label>Comments:</label> <textarea name="comments" rows="4" cols="40"></textarea><br>
-        <button type="submit" name="action" value="add">Submit</button>
+        <h4 class="words">Comments</h4> <textarea class="formE form-control border-3" name="comments" rows="2" cols="40"></textarea><br>
+        <button type="submit" class="button2"name="action" value="add">Submit</button>
       </form>
       EOD;
       echo $str;
@@ -228,23 +260,25 @@
     function editForm($number){
       $room = new Room($number);
       $str = <<<EOD
+      <div class="container">
+      <h1>Edit Room</h1>
       <form method="POST">
-        <label>Room Number:</label> <input type="text" name="number" value="$room->number" required><br>
-        <label>Type:</label>
-        <select name="type" value="$room->type" required>
+        <h4 class="words">Room<br>Number</h4> <input class="formE form-control border-3" type="text" name="number" value="$room->number" required><br>
+        <h4 class="words">Type</h4>
+        <select class="formE form-control border-3" name="type" value="$room->type" required>
           <option value="single">Single</option>
           <option value="double">Double</option>
           <option value="triple">Triple</option>
           <option value="family">Family</option>
           <option value="suite">Suite</option>
         </select><br>
-        <label>Status:</label>
-        <select name="status" value="$room->status" required>
+        <h4 class="words">Status</h4>
+        <select class="formE form-control border-3" name="status" value="$room->status" required>
           <option value="available">Available</option>
           <option value="unavailable">Unavailable</option>
         </select><br>
-        <label>Comments:</label> <textarea name="comments" rows="4" cols="40">$room->comments</textarea><br>
-        <button type="submit" name="action" value="edit">Submit</button>
+        <h4 class="words">Comments</h4> <textarea class="formE form-control border-3" name="comments" rows="2" cols="80">$room->comments</textarea><br>
+        <button type="submit"class="button2" name="action" value="edit">Submit</button>
       </form>
       EOD;
       echo $str;

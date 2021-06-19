@@ -70,9 +70,9 @@ class ViewFollowup extends View{
     <div id="followupForm">
     <form class="followupForm" method="post" enctype = "multipart/form-data">
         <input type="date" name="date" class="formE form-control mb-4 border-0 py-4" required><br>
-        <input type="text" name="comment" placeholder="comments..." class="formE form-control mb-4 border-0 py-4" required><br>
+        <input type="text" name="comment" placeholder="Reading..." class="formE form-control mb-4 border-0 py-4" required><br>
         <label class='followup' for='type'></label>
-        <select class="formE form-control mb-4 border-0 py-4" name="type" id="type" required>
+        <select class="formE form-control mb-4 border-0 " name="type" id="type" required>
         <option selected value="electricity">Electricity</option>
         <option value="water">Water</option>
         </select><br>
@@ -91,7 +91,7 @@ class ViewFollowup extends View{
     <div id="followupForm">
     <img src="./images/$followup[3]" alt="photo" width="100" height="100"><br>
     Date: $followup[1]<br>
-    Comment: $followup[2]<br>
+    Reading: $followup[2]<br>
     Entry By: $followup[4]<br>
     </div>
     EOD;

@@ -1,3 +1,10 @@
+<style>
+  .wrong{
+    position: relative;
+    left:475px;
+    color:red;
+  }
+</style>
 <?php
 require_once("../app/bootapp.php");
 require_once(APPROOT."/models/User.php");
@@ -12,17 +19,22 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 		case 'loginform':
 			echo $view->loginForm();
 			break;
-    case 'login':
-  		echo $controller->login($_GET['username'], $_GET['password']);
-		  $view->loginForm();
-  		break;
+			case 'login':
+				if($controller->login($_GET['username'], $_GET['password'])){
+					  header('Location: rooms.php');
+				  }
+				  else {
+					  $view->loginForm();
+					  echo "<h5 class='wrong'>Wrong credentials.</h5>";
+				  }
+				break;
 		case 'forgotpass':
 			$view->forgotPass();
 			break;
 		case 'security':
 		  $view->security($_GET['username']);
       break;
-		case 'validate':
+		case 'Validate':
 			if ($model->validateAnswer($_GET['answer'], $_GET['username'])) {
 				$view->newPassword($_GET['username']);
 			}

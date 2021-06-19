@@ -12,7 +12,7 @@ class Followup extends Model
         $row = $this->db->fetchRow();
         $this->id = $row['ID'];
         $this->date = $row['date'];
-        $this->reading = $row['comment'];
+        $this->reading = $row['reading'];
         $this->photo = $row['photo'];
         $this->entryBy = $row['entry_by'];
       }
@@ -31,7 +31,7 @@ class Followup extends Model
       return $followups;
     }
     else {
-      return null;
+      return null;  
     }
   }
 
@@ -41,7 +41,7 @@ class Followup extends Model
     $result = $this->db->query($sql);
     if ($result->num_rows > 0){
       while($row = $this->db->fetchRow()){
-        array_push($followup, $row['ID'], $row['date'], $row['comment'], $row['photo'], $row['entry_by']);
+        array_push($followup, $row['ID'], $row['date'], $row['reading'], $row['photo'], $row['entry_by']);
       }
       return $followup;
     }

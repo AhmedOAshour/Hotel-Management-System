@@ -26,7 +26,9 @@ class User extends Model
   function login($username, $password){
     $sql = "SELECT * FROM user WHERE username = '$username'";
     $result = $this->db->query($sql);
-    $row = $this->db->fetchRow();
+
+    if($result->num_rows>0){
+      $row = $this->db->fetchRow();
    if (password_verify($password, $row['password']))
    {
       $this->id = $row['ID'];
@@ -34,10 +36,12 @@ class User extends Model
       $_SESSION['username'] = $row['username'];
       $_SESSION['position'] = $row['position'];
       header('Location: rooms.php');
-
-		}
-
-
+      return true;
+        }
+  }
+    else {
+      return false;
+     }
   }
 
   function readUsers(){

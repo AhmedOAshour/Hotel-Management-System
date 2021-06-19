@@ -1,3 +1,8 @@
+<style>
+.nav-link:hover{
+  color:#bdc7c9 !important;
+}
+</style>
 <?php ob_start();
   ?>
 
@@ -36,6 +41,9 @@
                 <?php }
                 
                 else if(!empty($_SESSION['position'])&& $_SESSION['position']=='admin'){ ?>
+                <li class="nav-item">
+                  <a class="nav-link" href="Rooms.php">Rooms</a>
+                </li>
                  <li class="nav-item">
                     <a class="nav-link" href="employees.php">View Employees</a>
                 </li>
@@ -43,7 +51,10 @@
                     <a class="nav-link" href="signout.php">Sign out</a>
                 </li>
                 <?php }
-                 else if(!empty($_SESSION['position'])&& $_SESSION['position']=='HK_Employee'){ ?>
+                 else if(!empty($_SESSION['position'])&& $_SESSION['position']=='HK_employee'){ ?>
+                 <li class="nav-item">
+                  <a class="nav-link" href="Rooms.php">Rooms</a>
+                </li>
                   <li class="nav-item">
                      <a class="nav-link" href="malfunctions.php">Malfunctions</a>
                  </li>
@@ -52,6 +63,9 @@
                  </li>
                  <li class="nav-item">
                      <a class="nav-link" href="lost&found.php">Lost&Found</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="followup.php">FollowUp</a>
                  </li>
                  <li class="nav-item">
                      <a class="nav-link" href="signout.php">Sign out</a>

@@ -60,7 +60,7 @@ $str=
                                     <div class="form">	
                                         <h1 class="head">Lost and Found</h1>
                                         <input type="date"class="formE form-control mb-1 py-4 " name="date" required><br>
-                                        <select class="formE form-control mb-1 py-4" name="room_number">
+                                        <select class="formE form-control mb-1 " name="room_number">
 EOD;
                                         foreach ($numbers as $room) {
                                             $str.=<<<EOD

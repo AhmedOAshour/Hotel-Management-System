@@ -18,6 +18,33 @@
     text-decoration:none;
     color:blue;
   }
+  .search{
+        width:250px;
+        border-top: none;
+        border-right: none;
+        border-left: none;
+    }
+    .sidebar{
+        background-color:white;
+        width:100%;
+        height:45px;
+        margin:0;
+        padding-top:10px;
+    }
+    .bar{
+        text-align:left;
+    }
+    .searchbar{
+        text-align:right;
+    }
+    .left{
+        background-color:#EFEBEB;
+        width:230px;
+        height:790px;
+        position: relative;
+        top:15px;
+        right:15px;
+    }
 </style>
   </body>
 </html>
@@ -26,15 +53,21 @@ class ViewClient extends View{
     public function output(){
         $clients=$this->model->readClients();
         $str =<<<EOD
-                    <div class="col-10 position">
+                      <div class="container">
+                      <div class="row sidebar">
+                          <div class="col-3 bar">
+                              <form action="/action_page.php">
+                              </form>
+                          </div>
+                          <div class="col-9 searchbar">
+                          <input type="text" id="bar" class="search"placeholder="Search..." oninput="showClient()"><i class="fa fa-search"></i>
+                          </div>
+                      </div>
+                  </div>
+                    <div class="container">
+                    <h1>Create Reservation</h1>
                     <div id="client">
                     <div id="showClients">
-                      <input type="text" id="bar" placeholder="Search by..." oninput="showClient()"><i class="fa fa-search"></i>
-                      <select id="select" onchange="showClient()">
-                        <option value="last_name">Last Name</option>
-                        <option value="identification_no">ID Number</option>
-                        <option value="company">Company</option>
-                      </select>
                       <table width="100%" border="1" style="border-collapse:collapse; margin-top:4px;">
                         <thead>
                     <tr>
@@ -95,7 +128,7 @@ class ViewClient extends View{
     <br>
   </div>
   </div>
-  <a href="clients.php?action=addform"><button type="button" class="button" id="addBtn">Add Client</button></a>
+  <a href="clients.php?action=addform"><button type="button" class="button2" id="addBtn">Add Client</button></a>
   EOD;
   echo $str;
 
@@ -181,22 +214,22 @@ public function editForm($id){
             <div class="container">
             <h1>Edit Clients</h1>
             <form>
-            <input class="formE form-control border-3" type="text" id="Fname" onchange="checkfName()" value="$client->first_name" name="first_name" placeholder="First Name..." required>
+            <h5 class="words">First Name</h5><input class="formE form-control border-3" type="text" id="Fname" onchange="checkfName()" value="$client->first_name" name="first_name"  required>
             <div id="errorFName">
             </div>
-            <input class="formE form-control border-3" type="text" name="last_name" id="Lname" onchange="checklName()" value="$client->last_name" placeholder="Last Name..." required>
+            <h5 class="words">Last Name</h5><input class="formE form-control border-3" type="text" name="last_name" id="Lname" onchange="checklName()" value="$client->last_name" required>
             <div id="errorLName">
             </div>
-            <input class="formE form-control border-3" type="text" name="identification_no" value="$client->identification_no"placeholder="Identification Number..." required>
-            <input class="formE form-control border-3" type="text" name="nationality" value="$client->nationality"placeholder="Nationality..." required>
-            <input class="formE form-control border-3" type="text" name="mobile" id="mobile" onchange="checkMobile()" value="$client->mobile"placeholder="Mobile..." required>
+            <h5 class="words down">Idetification<br>number</h5><input class="formE form-control border-3" type="text" name="identification_no" value="$client->identification_no" required>
+            <h5 class="words">Nationality</h5><input class="formE form-control border-3" type="text" name="nationality" value="$client->nationality" required>
+            <h5 class="words down">Mobile<br>Number</h5><input class="formE form-control border-3" type="text" name="mobile" id="mobile" onchange="checkMobile()" value="$client->mobile" required>
             <div id="errorMobile">
             </div>
-            <input class="formE form-control border-3" type="text" name="email" id="email" onchange="checkEmail()" value="$client->email"placeholder="E-mail..." required>
+            <h5 class="words">Email</h5><input class="formE form-control border-3" type="text" name="email" id="email" onchange="checkEmail()" value="$client->email" required>
             <div id="errorEmail">
             </div>
-            <input class="formE form-control border-3" type="text" name="company"value="$client->company" placeholder="Company..." required>
-            <input class="formE form-control border-3" type="text" name="id"value="$id" hidden placeholder="Company..." required>
+            <h5 class="words">Company</h5><input class="formE form-control border-3" type="text" name="company"value="$client->company"  required>
+            <h5 class="words"></h5><input class="formE form-control border-3" type="text" name="id"value="$id" hidden  required>
             <button type="submit" class="button2" name="action" value="edit">Submit</button>
             </form>
         </div>
