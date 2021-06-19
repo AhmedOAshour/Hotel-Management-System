@@ -42,7 +42,7 @@
                 </div>
             </div>
         </div>
-        <div >
+        <div>
             <div class="row sidebar">
                 <div class="col-3">
                     <ul class="nav flex-column left">
