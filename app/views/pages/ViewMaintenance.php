@@ -3,6 +3,33 @@
         position: relative;
         left:450px;
     }
+    .search{
+        width:250px;
+        border-top: none;
+        border-right: none;
+        border-left: none;
+    }
+    .sidebar{
+        background-color:white;
+        width:100%;
+        height:45px;
+        margin:0;
+        padding-top:10px;
+    }
+    .bar{
+        text-align:left;
+    }
+    .searchbar{
+        text-align:right;
+    }
+    .left{
+        background-color:#EFEBEB;
+        width:230px;
+        height:790px;
+        position: relative;
+        top:15px;
+        right:15px;
+    }
 </style>
 <?php
 class ViewMaintenance extends View{
@@ -10,8 +37,19 @@ public function output(){
   $result=$this->model->readLogs();
   $str=<<<EOD
   <body>
-  <h1>Maintenance</h1>
   <div class="container">
+                      <div class="row sidebar">
+                          <div class="col-3 bar">
+                              <form action="/action_page.php">
+                              </form>
+                          </div>
+                          <div class="col-9 searchbar">
+                          <input type="text" id="bar" class="search"placeholder="Search by description.." oninput="showClient()"><i class="fa fa-search"></i>
+                          </div>
+                      </div>
+                  </div>
+  <div class="container">
+  <h1>Maintenance</h1>
       <table width="100%" border="1" style="border-collapse:collapse; margin-top:4px;">
           <thead>
               <tr>
