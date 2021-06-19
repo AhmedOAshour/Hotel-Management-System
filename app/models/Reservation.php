@@ -64,7 +64,7 @@ public function editReservation($id,$client_ID,$room_type,$number_of_rooms,$arri
             $rooms[$row['room_type']] = $row['price'];
           }
     for($i=0;$i<count($room_type);$i++){
-      
+
       $sql="insert into reservedrooms (RID,room_type) values('$id','$room_type[$i]')";
       $result = $this->db->query($sql);
       $price = $rooms[$room_type[$i]];
@@ -76,7 +76,10 @@ public function editReservation($id,$client_ID,$room_type,$number_of_rooms,$arri
 }
 function deleteReservation($id){
     $sql = "DELETE FROM reservation WHERE ID = $id ";
-    $sql2="DELETE from reservedrooms where RID=$id";
+    echo "$sql";
+    $sql2="DELETE from reservedrooms where RID = $id";
+    $sql3 = "DELETE from bill where reservation_ID = $id";
+    $this->db->query($sql3);
     $this->db->query($sql2);
     $this->db->query($sql);
   }

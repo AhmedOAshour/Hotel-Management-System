@@ -10,7 +10,7 @@
         text-align:left;
     }
 
- </style> 
+ </style>
 <?php
 class ViewReservation extends View{
 public function output($checkin){
@@ -33,7 +33,7 @@ $result=$this->model->readReservations($checkin);
       <th style='text-align:center'><strong>Delete Reservation</strong></th>
       <th style='text-align:center'><strong>View Bill</strong></th>
       ";
-      
+
     }
     else {
       $thead = "<th style='text-align:center'><strong>Checkin</strong></th>";
@@ -50,7 +50,7 @@ $result=$this->model->readReservations($checkin);
             <th style='text-align:center'><strong>Number of Rooms</strong></th>
             <th style='text-align:center'><strong>Arrival</strong></th>
             <th style='text-align:center'><strong>Days/Nights</strong></th>
-          
+
             $thead
             </tr>
         </thead>
@@ -137,10 +137,13 @@ public function editForm($id,$quantity){
                     </select><br>
                 EOD;
                 }
+      $date = date('Y-m-d');
+      $nextdate = date('Y-m-d',strtotime($date."+1 days"));
       $str.=<<<EOD
       </select>
-      <h4 class="words arr">Arrival</h4><input type='date' class="formE form-control border-3"value='$reservations->arrival'name='arrival' required>
-      <h4 class="words">Departure</h4> <input type='date' class="formE form-control border-3"value='$reservations->departure' name='departure' required><br>
+      <h4 class="words arr">Arrival</h4><input type='date' value="$date" min="$date" class="formE form-control border-3"value='$reservations->arrival'name='arrival' required>
+      <h4 class="words">Departure</h4> <input type='date'
+      value="$nextdate" min="$nextdate" class="formE form-control border-3"value='$reservations->departure' name='departure' required><br>
       <h4 class="words">Comments</h4><textarea name="comments"  rows="2" cols="50" class="formE form-control border-3"placeholder="Comments..." required>$reservations->comments</textarea> <br>
       <input type="text" name="client_ID" value="$reservations->client_id"  id="client_ID" hidden>
       <input type="text" name="id" value="$_GET[id]"  id="ID" hidden>

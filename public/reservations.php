@@ -31,9 +31,6 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 		case 'checkin':
 			echo $view->output(true);
 			break;
-
-
-
 	}
 }
 else

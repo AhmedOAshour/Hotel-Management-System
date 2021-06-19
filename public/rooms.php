@@ -77,7 +77,7 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
       break;
     case 'checkout':
       $model->checkout($_REQUEST['id']);
-      // header("Location: rooms.php");
+      header("Location: rooms.php");
       break;
     case 'checkin':
       $view->checkin($_GET['id']);

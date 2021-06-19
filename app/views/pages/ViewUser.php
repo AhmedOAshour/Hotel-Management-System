@@ -90,7 +90,6 @@ class ViewUser extends View{
           <option hidden disabled selected value>Position</option>
           <option value='admin'>admin</option>
           <option value='front_clerk'>Front Clerk</option>
-          <option value='reservation_clerk'>Reservation Clerk</option>
           <option value='HK_employee'>Housekeeping</option>
         </select><br>
         <input type="submit" class="submitEmployee button2" name="action" value="Add" id="submitBtn">

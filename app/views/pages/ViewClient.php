@@ -167,6 +167,8 @@ echo $str;
 }
 public function resForm($id,$quantity){
   $roomtypes=$this->model->getRoomTypes();
+  $date = date('Y-m-d');
+  $nextdate = date('Y-m-d',strtotime($date."+1 days"));
   $str=<<<EOD
       <div class="container">
       <div id="reservation">
@@ -194,8 +196,8 @@ public function resForm($id,$quantity){
   EOD;
    }
     $str.= <<<EOD
-      <h4 class="words arr">Arrival</h4><input type='date'class="formE form-control border-3" name='arrival' required>
-      <h4 class="words">Departure</h4> <input type='date' class="formE form-control border-3" name='departure'required><br>
+      <h4 class="words arr">Arrival</h4><input value="$date" min="$date" type='date'class="formE form-control border-3" name='arrival' required>
+      <h4 class="words">Departure</h4> <input type='date' value="$nextdate" min="$nextdate" class="formE form-control border-3" name='departure'required><br>
       <textarea class="formE form-control border-3" name="comments" rows="2" cols="50" placeholder="Comments..."></textarea> <br>
       <input type="text" name="client_ID" value="$id" class="formE form-control border-3" id="client_ID" hidden>
       <input type="text" name="quantity" value="$quantity" class="formE form-control border-3" id="quantity" hidden>
