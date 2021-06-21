@@ -9,6 +9,11 @@
     .bar{
         text-align:left;
     }
+    .errors{
+      color:red;
+      position: relative;
+      left:270px;
+    }
 
  </style>
 <?php
@@ -161,12 +166,15 @@ if(!isset($_SESSION['quantity'])){
                 <h1>EditReservation</h1>
                 <form>
                 <h4 class="words nu">Number<br>of Rooms</h4>
+                <h5 class="errors">$number_of_rooms</h5>
                 <input type="number"size="1" class="formE form-control border-3" name="quantity" id="counter" value=1></input>
                 <input type="text" name="id" value="$_SESSION[CID]" class="formE form-control border-3" id="id" hidden>
                 <button type="submit" class="button3" name="action" value="edit">Add</button>
                 </form>
                 <form>
                 <h4 class="words" for="room_type">Room Type</h4>
+                <h5 class="errors">$room_type</h5>
+                $room_type
                 EOD;
                 for($i=0;$i<$_SESSION['quantity'];$i++){
                   $str.=<<<EOD
@@ -186,8 +194,11 @@ if(!isset($_SESSION['quantity'])){
       $str.=<<<EOD
       </select>
       <h4 class="words arr">Arrival</h4><input type='date' value="$date" min="$date" class="formE form-control border-3"value='$reservations->arrival'name='arrival' required>
+      <h5 class="errors">$arrival</h5>
       <h4 class="words">Departure</h4> <input type='date'
       value="$nextdate" min="$nextdate" class="formE form-control border-3"value='$reservations->departure' name='departure' required><br>
+      
+      <h5 class="errors">$departure</h5>
       <h4 class="words">Comments</h4><textarea name="comments"  rows="2" cols="50" class="formE form-control border-3"placeholder="Comments..." >$reservations->comments</textarea> <br>
       <input type="text" name="client_ID" value="$reservations->client_id"  id="client_ID" hidden>
       <input type="text" name="id" value="$_SESSION[CID]"  id="ID" hidden>
