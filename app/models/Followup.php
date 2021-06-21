@@ -19,7 +19,7 @@ class Followup extends Model
     }
   }
 
-  function readFollowups($type){
+  public function readFollowups($type){
     $followups = array();
     $sql = "SELECT ID FROM " . $type . "_followup";
     $result = $this->db->query($sql);
@@ -34,7 +34,7 @@ class Followup extends Model
     }
   }
 
-  function readFollowup($id, $type){
+  public function readFollowup($id, $type){
     $followup = array();
     $sql = "SELECT * FROM " . $type . "_followup WHERE ID = $id";
     $result = $this->db->query($sql);
@@ -49,13 +49,13 @@ class Followup extends Model
     }
   }
 
-  function insert($date, $comment, $file, $type){
+  public function insert($date, $comment, $file, $type){
     $entryBy = $_SESSION['ID'];
     $sql = "INSERT INTO " . $type . "_followup (date,comment,photo,entry_by) VALUES ('$date','$comment','$file','$entryBy')";
     $this->db->query($sql);
   }
 
-  function deleteFollowup($id, $type){
+  public function deleteFollowup($id, $type){
     $sql = "DELETE FROM $type" . "_followup WHERE ID = $id ";
     $this->db->query($sql);
   }
