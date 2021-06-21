@@ -25,9 +25,9 @@ public function output($checkin){
   if (!$checkin) {
     $dateform = <<<EOD
     <div class="col-6 bar">
-    <form action="/action_page.php">
-    <label>From: </label><input type="date" id="date" class="date" value="$date">
-    <label>To: </label><input type="date" id="date" class="date" value="$nextdate">
+    <form>
+    <label>From: </label><input onchange="searchReservation()" type="date" id="date" name="from" class="date" value="$date">
+    <label>To: </label><input onchange="searchReservation()" type="date" id="date" name="to" class="date" value="$nextdate">
     </form>
     </div>
     EOD;
@@ -39,7 +39,6 @@ public function output($checkin){
       </div>
     </div>
 EOD;
-$result=$this->model->readReservations($checkin);
     $thead;
     if(!$checkin)
     {
@@ -68,40 +67,7 @@ $result=$this->model->readReservations($checkin);
         </thead>
         <tbody id="rTable">
         EOD;
-        if(!empty($result)){
-        while($row = mysqli_fetch_array($result)) {
-        $str.=<<<EOD
-            <tr>
-            <td style='text-align:center'>$row[first_name]</td>
-            <td style='text-align:center'>$row[last_name]</td>
-            <td style='text-align:center'>$row[nationality]</td>
-            <td style='text-align:center'>$row[number_of_rooms]</td>
-            <td style='text-align:center'>$row[arrival]</td>
-        EOD;
-        $arrival = strtotime($row['arrival']);
-        $departure = strtotime($row['departure']);
-        // divide seconds by 86400 to get nights
-        $nights = ($departure - $arrival) / (86400);
-        $days = $nights + 1;
-        $str.= <<<EOD
-            <td style='text-align:center'>$days/$nights</td>
-        EOD;
-    $buttons;
-    if (!$checkin) {
-      $buttons = <<<EOD
-        <td style='text-align:center '><a class="color" href='reservations.php?action=edit&id=$row[RID]&quantity=$row[number_of_rooms]'><i class='fa fa-edit'></i></a></td>
-        <td style='text-align:center '><a class="color" href='reservations.php?action=delete&id=$row[RID]'><i class='fa fa-trash'></i></a></td>
-        <td style='text-align:center '><a class="color" href='bills.php?&action=read&id=$row[bill_ID]'><i class="fa fa-eye"></i></a></td>
-      EOD;
-    }
-    else {
-      $buttons = <<<EOD
-        <td style='text-align:center '><a class="color" href='rooms.php?action=checkin&id=$row[RID]'><i class="fa fa-check-square"></i></a></td>
-      EOD;
-    }
-
-      $str .= $buttons;
-    }
+        $str .= $this->table($checkin,$date,$nextdate);
 
     $str.=<<<EOD
         </tbody>
@@ -109,7 +75,6 @@ $result=$this->model->readReservations($checkin);
         </body>
         </html>
      EOD;
-}
 
 $str.=<<<EOD
 <form>
@@ -120,43 +85,77 @@ EOD;
 
 echo $str;
 }
+
+public function table($checkin,$from,$to){
+  $result=$this->model->readReservations($checkin,$from,$to);
+  $str = <<<EOD
+  EOD;
+  if(!empty($result)){
+    while($row = mysqli_fetch_array($result)) {
+      $str.=<<<EOD
+          <tr>
+          <td style='text-align:center'>$row[first_name]</td>
+          <td style='text-align:center'>$row[last_name]</td>
+          <td style='text-align:center'>$row[nationality]</td>
+          <td style='text-align:center'>$row[number_of_rooms]</td>
+          <td style='text-align:center'>$row[arrival]</td>
+      EOD;
+      $arrival = strtotime($row['arrival']);
+      $departure = strtotime($row['departure']);
+      // divide seconds by 86400 to get nights
+      $nights = ($departure - $arrival) / (86400);
+      $days = $nights + 1;
+      $str.= <<<EOD
+          <td style='text-align:center'>$days/$nights</td>
+      EOD;
+      $buttons;
+      if (!$checkin) {
+        $buttons = <<<EOD
+          <td style='text-align:center '><a class="color" href='reservations.php?action=edit&id=$row[RID]&quantity=$row[number_of_rooms]'><i class='fa fa-edit'></i></a></td>
+          <td style='text-align:center '><a class="color" href='reservations.php?action=delete&id=$row[RID]'><i class='fa fa-trash'></i></a></td>
+          <td style='text-align:center '><a class="color" href='bills.php?&action=read&id=$row[bill_ID]'><i class="fa fa-eye"></i></a></td>
+        EOD;
+      }
+      else {
+        $buttons = <<<EOD
+          <td style='text-align:center '><a class="color" href='rooms.php?action=checkin&id=$row[RID]'><i class="fa fa-check-square"></i></a></td>
+        EOD;
+      }
+      $str .= $buttons;
+    }
+  }
+  return $str;
+}
+
 public function editForm($id,$quantity){
   $number_of_rooms="";
   $room_type="";
   $arrival="";
   $departure="";
-  
+
   if(isset($_SESSION['errors'])){
     $errors=$_SESSION['errors'];
-    
+
     if(isset($errors['room_type'])){
       $room_type=$errors['room_type'];
-                                }
+    }
     if(isset($errors['departure'])){
     $departure=$errors['departure'];
-
     }
     if(isset($errors['arrival'])){
       $arrival=$errors['arrival'];
-  
-      }
+    }
       if(isset($errors['number_of_rooms'])){
         $number_of_rooms=$errors['number_of_rooms'];
-    
-        }
-      
-    
-   
-
-
+    }
   }
-unset($_SESSION['errors']);
+  unset($_SESSION['errors']);
 
-if(!isset($_SESSION['CID'])){
-$_SESSION['CID']=$id;
-}
-if(!isset($_SESSION['quantity'])){
-  $_SESSION['quantity']=$quantity;
+  if(!isset($_SESSION['CID'])){
+  $_SESSION['CID']=$id;
+  }
+  if(!isset($_SESSION['quantity'])){
+    $_SESSION['quantity']=$quantity;
   }
   $reservations=new Reservation($id);
   $roomtypes=$this->model->getRoomTypes();
@@ -197,7 +196,6 @@ if(!isset($_SESSION['quantity'])){
       <h5 class="errors">$arrival</h5>
       <h4 class="words">Departure</h4> <input type='date'
       value="$nextdate" min="$nextdate" class="formE form-control border-3"value='$reservations->departure' name='departure' required><br>
-      
       <h5 class="errors">$departure</h5>
       <h4 class="words">Comments</h4><textarea name="comments"  rows="2" cols="50" class="formE form-control border-3"placeholder="Comments..." >$reservations->comments</textarea> <br>
       <input type="text" name="client_ID" value="$reservations->client_id"  id="client_ID" hidden>

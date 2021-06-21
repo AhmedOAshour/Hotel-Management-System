@@ -71,11 +71,17 @@
                             <label>Suite</label><br>
                         </li>
                         <li><a href="reservations.php?action=checkin"> <button class="button5"> Check In </button> </a></li>
-                        <li><a href="rooms.php?action=manage"> <button class="button5"> Manage rooms </button> </a></li>
+      EOD;
+                        if ($_SESSION['position'] == 'admin') {
+                          $str .= <<<EOD
+                          <li><a href="rooms.php?action=manage"> <button class="button5"> Manage rooms </button> </a></li>
+                          EOD;
+                        }
+                $str.=<<<EOD
                     </ul>
                 </div>
                 <div class="col-9 mainbody">
-      EOD;
+                EOD;
       $types = $this->model->getRoomTypes();
       foreach ($types as $type) {
         $rooms = $this->model->readRooms("$type");
@@ -233,11 +239,9 @@
       <a href="rooms.php"><button class="button2 ">Back</button></a><br>
       <a href="roomprices.php"><button class="button2">Manage Room Pricing</button></a><br>
       EOD;
-      if ($_SESSION['position'] == 'admin') {
-        $str .= <<<EOD
-        <a href="rooms.php?action=addform"><button class="button2">Add a Room</button></a><br>
-        EOD;
-      }
+      $str .= <<<EOD
+      <a href="rooms.php?action=addform"><button class="button2">Add a Room</button></a><br>
+      EOD;
       echo $str;
     }
 

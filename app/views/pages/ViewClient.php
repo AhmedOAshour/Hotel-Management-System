@@ -197,32 +197,32 @@ unset($_SESSION['errors']);
         <div id="createClient">
         <h1>Add client</h1>
         <form>
-
+        
         <input class="formE form-control border-3" type="text" name="first_name" id="Fname" onchange="checkfName()" placeholder="First Name..." required>
         <h5 class="errors">$fname</h5>
         <div id="errorName1"></div>
-
+        
         <input class="formE form-control border-3" type="text" name="last_name" id="Lname" onchange="checklName()" placeholder="Last Name..."required>
         <h5 class="errors">$lname</h5>
         <div id="errorName2"></div>
-
+        
         <input class="formE form-control border-3" type="text" name="identification_no" placeholder="Identification Number..." required>
         <h5 class="errors">$idn</h5>
-
+        
         <input class="formE form-control border-3" type="text" name="nationality" placeholder="Nationality..." required>
         <h5 class="errors">$nationality</h5>
-
+        
         <input class="formE form-control border-3" type="text" name="mobile" id="mobile" onchange="checkMobile()" placeholder="Mobile..." required>
         <h5 class="errors">$mobile</h5>
         <div id="errorMobile"></div>
-
+        
         <input class="formE form-control border-3" type="text" name="email" id="email" onchange="checkEmail()" placeholder="E-mail..." required>
         <h5 class="errors">$email</h5>
         <div id="errorEmail"></div>
-
+        
         <input class="formE form-control border-3" type="text" name="company" placeholder="Company..."required>
         <h5 class="errors">$company</h5>
-
+        
         <input type="submit" class="button2" name="action" value="Add" id="submitBtn"">
         </form>
         </div>
@@ -382,23 +382,23 @@ $_SESSION['CID']=$id;
             
             <h5 class="words down">Identification<br>number</h5><input class="formE form-control border-3" type="text" name="identification_no" value="$client->identification_no" required>
             <h5 class="errors">$idn</h5>
-
+            
             <h5 class="words">Nationality</h5><input class="formE form-control border-3" type="text" name="nationality" value="$client->nationality" required>
             <h5 class="errors">$nationality</h5>
-
+            
             <h5 class="words down">Mobile<br>Number</h5><input class="formE form-control border-3" type="text" name="mobile" id="mobile" onchange="checkMobile()" value="$client->mobile" required>
             <div id="errorMobile"></div>
             <h5 class="errors">$mobile</h5>
-            
+              
             <h5 class="words">Email</h5><input class="formE form-control border-3" type="text" name="email" id="email" onchange="checkEmail()" value="$client->email" required>
             <div id="errorEmail"></div>
             <h5 class="errors">$email</h5>
-            
+              
             <h5 class="words">Company</h5><input class="formE form-control border-3" type="text" name="company"value="$client->company"  required>
             <h5 class="errors">$company</h5>
-
+            
             <h5 class="words"></h5><input class="formE form-control border-3" type="text" name="id"value="$_SESSION[CID]" hidden  required>
-
+            
             <button type="submit" class="button2" name="action" value="edit">Submit</button>
             </form>
         </div>
