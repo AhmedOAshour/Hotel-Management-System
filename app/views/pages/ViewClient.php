@@ -141,6 +141,45 @@ class ViewClient extends View{
 }
 public function addForm(){
 
+  $email="";
+  $fname="";
+  $lname="";
+  $mobile="";
+  $nationality="";
+  $company="";
+  $idn="";
+
+  if(isset($_SESSION['errors'])){
+    $errors=$_SESSION['errors'];
+    print_r($errors);
+    if(isset($errors['fname'])){
+      $fname=$errors['fname'];
+                                }
+    if(isset($errors['email'])){
+    $email=$errors['email'];
+
+    }
+    
+    if(isset($errors['lname'])){
+       $lname=$errors['lname'];
+                                }
+    if(isset($errors['id'])){
+        $idn=$errors['id'];
+                             }
+    if(isset($errors['nationality'])){
+        $nationality=$errors['nationality'];
+                            }
+      if(isset($errors['mobile'])){
+          $mobile=$errors['mobile'];
+                                  }
+        if(isset($errors['company'])){
+          $company=$errors['company'];
+                }
+
+
+  }
+unset($_SESSION['errors']);
+
     $str=
     <<<EOD
         <div class="container">
@@ -148,20 +187,29 @@ public function addForm(){
         <h1>Add client</h1>
         <form>
         <input class="formE form-control border-3" type="text" name="first_name" id="Fname" onchange="checkfName()" placeholder="First Name..." required>
+        $fname
         <div id="errorName1">
+        
         </div>
         <input class="formE form-control border-3" type="text" name="last_name" id="Lname" onchange="checklName()" placeholder="Last Name..."required>
+        $lname
         <div id="errorName2">
+        
         </div>
         <input class="formE form-control border-3" type="text" name="identification_no" placeholder="Identification Number..." required>
+        $idn
         <input class="formE form-control border-3" type="text" name="nationality" placeholder="Nationality..." required>
+        $nationality
         <input class="formE form-control border-3" type="text" name="mobile" id="mobile" onchange="checkMobile()" placeholder="Mobile..." required>
         <div id="errorMobile">
+        $mobile
         </div>
         <input class="formE form-control border-3" type="text" name="email" id="email" onchange="checkEmail()" placeholder="E-mail..." required>
         <div id="errorEmail">
+        $email
         </div>
         <input class="formE form-control border-3" type="text" name="company" placeholder="Company..."required>
+        $company
         <input type="submit" class="button2" name="action" value="Add" id="submitBtn"">
         </form>
         </div>
@@ -217,31 +265,86 @@ public function resForm($id,$quantity){
       echo $str;
 }
 public function editForm($id){
+  
+  $email="";
+  $fname="";
+  $lname="";
+  $mobile="";
+  $nationality="";
+  $company="";
+  $idn="";
+
+  if(isset($_SESSION['errors'])){
+    $errors=$_SESSION['errors'];
+    
+    if(isset($errors['fname'])){
+      $fname=$errors['fname'];
+                                }
+    if(isset($errors['email'])){
+    $email=$errors['email'];
+
+    }
+    
+    if(isset($errors['lname'])){
+       $lname=$errors['lname'];
+                                }
+    if(isset($errors['id'])){
+        $idn=$errors['id'];
+                             }
+    if(isset($errors['nationality'])){
+        $nationality=$errors['nationality'];
+                            }
+      if(isset($errors['mobile'])){
+          $mobile=$errors['mobile'];
+                                  }
+        if(isset($errors['company'])){
+          $company=$errors['company'];
+                }
+
+
+  }
+unset($_SESSION['errors']);
+
+
   $client = new Client($id);
+  if(!isset($_SESSION['CID'])){
+$_SESSION['CID']=$id;
+
+  }
+
   $str=<<<EOD
             <div class="container">
             <h1>Edit Clients</h1>
             <form>
             <h5 class="words">First Name</h5><input class="formE form-control border-3" type="text" id="Fname" onchange="checkfName()" value="$client->first_name" name="first_name"  required>
             <div id="errorFName">
+            $fname
             </div>
             <h5 class="words">Last Name</h5><input class="formE form-control border-3" type="text" name="last_name" id="Lname" onchange="checklName()" value="$client->last_name" required>
             <div id="errorLName">
+            $lname
             </div>
-            <h5 class="words down">Idetification<br>number</h5><input class="formE form-control border-3" type="text" name="identification_no" value="$client->identification_no" required>
+            <h5 class="words down">Identification<br>number</h5><input class="formE form-control border-3" type="text" name="identification_no" value="$client->identification_no" required>
+            $idn
             <h5 class="words">Nationality</h5><input class="formE form-control border-3" type="text" name="nationality" value="$client->nationality" required>
+            $nationality
             <h5 class="words down">Mobile<br>Number</h5><input class="formE form-control border-3" type="text" name="mobile" id="mobile" onchange="checkMobile()" value="$client->mobile" required>
+            $mobile
             <div id="errorMobile">
             </div>
             <h5 class="words">Email</h5><input class="formE form-control border-3" type="text" name="email" id="email" onchange="checkEmail()" value="$client->email" required>
+            $email
             <div id="errorEmail">
             </div>
             <h5 class="words">Company</h5><input class="formE form-control border-3" type="text" name="company"value="$client->company"  required>
-            <h5 class="words"></h5><input class="formE form-control border-3" type="text" name="id"value="$id" hidden  required>
+            $company
+            <h5 class="words"></h5><input class="formE form-control border-3" type="text" name="id"value="$_SESSION[CID]" hidden  required>
             <button type="submit" class="button2" name="action" value="edit">Submit</button>
             </form>
         </div>
     EOD;
 echo $str;
+unset($_SESSION['CID']);
+
 }
 }

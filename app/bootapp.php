@@ -14,7 +14,7 @@ require_once 'libraries/Database.php';
 require_once 'libraries/Model.php';
 require_once 'libraries/View.php';
 require_once 'views/inc/nav.php';
-
+require_once 'libraries/Validate.php';
 // if (!isset($_SESSION['username'])&&!isset($_SESSION['username'])) {
 //   header("Location: index.php");
 //   $_SESSION['is_login'] = true;

@@ -81,7 +81,14 @@ class User extends Model
   function insertUser($first_name, $last_name, $password, $position, $username, $sQuestion, $sAnswer){
     $password=password_hash($password,PASSWORD_DEFAULT);
     $sql = "INSERT INTO user (username,first_name,last_name,password,position,security_question,security_answer) VALUES ('$username','$first_name','$last_name','$password','$position','$sQuestion','$sAnswer')";
-    $this->db->query($sql);
+    $result=$this->db->query($sql);
+
+   // echo $result;
+    if($result==false){
+
+ return "Username already exists";
+    }
+    else return false;
 
   }
 

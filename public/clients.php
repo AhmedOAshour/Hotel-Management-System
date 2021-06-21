@@ -19,8 +19,14 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
       $view->addForm();
 			break;
 		case 'Add':
-			$controller->insert();
-			$view->output();
+			if(!$temp=$controller->insert()){
+			header("location:clients.php");
+			}
+			else{ 
+				$_SESSION['errors']=$temp;
+				
+				header("location:clients.php?action=addform");
+			}
 			break;
 		case 'resform':
 			$view2->resForm($_GET['id'],$_GET['quantity']);
@@ -30,11 +36,26 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 			header('location:reservations.php');
 			break;
 		case 'editform':
-			echo $view->editForm($_GET['id']);
+			if(isset($_SESSION['CID'])){
+				echo $view->editForm($_SESSION['CID']);
+				
+			
+			}
+			else{
+				echo $view->editForm($_GET['id']);
+				
+			}
 			break;
 		case 'edit':
-			$controller->edit($_GET['id']);
-			$view->output();
+			if(!$temp=$controller->edit()){
+				header("location:clients.php");
+				}
+			else{ 
+					$_SESSION['errors']=$temp;
+					
+					header("location:clients.php?action=editform");
+				}
+			
 			break;
 		case 'delete':
 			$controller->delete($_GET['id']);
