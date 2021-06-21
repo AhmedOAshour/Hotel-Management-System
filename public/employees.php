@@ -11,11 +11,27 @@ $view=new ViewUser($controller,$model);
 if (isset($_GET['action']) && !empty($_GET['action'])) {
 	switch($_GET['action']){
 		case 'editform':
-			echo $view->editForm($_GET['id']);
+			if(isset($_REQUEST['id'])){
+				echo $view->editForm($_REQUEST['id']);
+				
+			
+			}
+			else{
+				echo $view->editForm($_SESSION['CID']);
+				
+			}
 			break;
 		case 'edit':
-			$controller->edit($_GET['id']);
-			header("Location: employees.php");
+			
+			if(!$temp=$controller->edit()){
+				header("location:employees.php");
+				}
+			else{ 
+					$_SESSION['errors']=$temp;
+					
+					header("location:employees.php?action=editform");
+				}
+			
 			break;
 		case 'delete':
 			$controller->delete($_GET['id']);
@@ -25,8 +41,17 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
       $view->addForm();
 			break;
 		case 'Add':
+			if(!$temp=$controller->insert()){
+				header("location:employees.php");
+				}
+				else{ 
+					$_SESSION['errors']=$temp;
+					
+					header("location:employees.php?action=addform");
+				}
+				break;
 			$controller->insert();
-			$view->output();
+		
 			break;
 	}
 }

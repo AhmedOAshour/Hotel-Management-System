@@ -1,5 +1,5 @@
 <?php
-public function validEmail($email){
+function validEmail($email){
     if(filter_var($email,FILTER_VALIDATE_EMAIL)==false){
 return "invalid email";
 
@@ -8,13 +8,14 @@ return "invalid email";
         return "Email field can't be empty";
     }
     else{
-return "";
+return false;
     }
-public function validPassword($password){
+}
+ function validPassword($password){
     $checkNumeric=true;
     $checkSpecial=true;
     $checkEmpty=true;
-    for($i=0;$i<strlen($password;$i++)
+    for($i=0;$i<strlen($password);$i++)
     {
       if(is_numeric($password[$i]))
       {
@@ -27,33 +28,44 @@ public function validPassword($password){
           $checkSpecial=false;
          
         }
-        if($password==""){
+        if($password!=""){
             $checkEmpty=false;
         }
-        if($checkNumeric==true||$checkSpecial==true||checkEmpty=true){
+        if($checkNumeric==true||$checkSpecial==true||$checkEmpty==true){
             return "Password should be atleast 8 chars in length & should contain <br> atleast 1 uppercase letter , 1 number , and one special char";
 
 
         }
-        else return "";
+        else return false;
 
 
 }
-public function validName($name){
-    if (preg_match('/^[0-9]*$/', $name)) 
-{
-    return "Names cannot contain numbers";
-}
-else if($name==""){
-return "Name field can't be empty";
+ function validName($name){
+    if($name==""){
+        return "Name field can't be empty";
+        
+        }
+        $checkNumeric=true;
+   
+        
+        for($i=0;$i<strlen($name);$i++)
+            {
+              if(is_numeric($name[$i]))
+              {
+                $checkNumeric=false;
+              }
+            }
+            if($checkNumeric==false){
+      return "Names cannot contain numbers";
+        
+            }
+
+else return false;
 
 }
-else return "";
-
-}
-public function validId($id){
+ function validId($id){
     if(filter_var($id,FILTER_VALIDATE_INT)){
-return "";
+return false;
 
     }
     else if($id==""){
@@ -62,11 +74,11 @@ return "";
     else return "IDs must be integers";
 
 }
-public function validDate($date){
+ function validDate($date){
     
     $test_date  = explode('/', $date);
     if (checkdate($test_date[0], $test_date[1], $test_date[2])) {
-        return "";
+        return false;
     }
     else if($date=""){
         return "Date field can't be empty";
@@ -74,10 +86,10 @@ public function validDate($date){
     else return "Invalid date";
 
 }
-public function validRoomNo($roomno){
+ function validRoomNo($roomno){
     $checkCount=true;
     $checkNumeric=true;
-    for($i=0;$i<strlen($roomno;$i++)
+    for($i=0;$i<strlen($roomno);$i++)
     {
       if(is_numeric($roomno[$i]))
       {
@@ -91,11 +103,28 @@ public function validRoomNo($roomno){
 
         return "Room Number should be an integer of 3 numbers";
     }
-    else return "";
+    else return false;
 
 
 }
-public function validRoomType($roomtype){
+function validPosition($position){
+    $check=false;
+        $positions = array(0 => 'front_clerk', 'admin', 'HK_employee');
+    for($i=0;$i<count($positions);$i++){
+    if($position==$positions[$i]){
+    $check=true;
+    }
+    }
+    if($check==false){
+    return "Enter valid position";
+    }
+    else return false;
+    
+    
+    
+    
+    }
+ function validRoomType($roomtype){
 $check=false;
     $roomtypes = array(0 => 'Single', 'Double', 'Triple','Suite','Family');
 for($i=0;$i<len($roomtypes);$i++){
@@ -106,16 +135,16 @@ $check=true;
 if($check==false){
 return "Room type should be one of the five room types: Single,Double,Triple,Suite,Family";
 }
-else return "";
+else return false;
 
 
 
 
 }
-public function validRoomStatus($status){
+ function validRoomStatus($status){
 $check=false;
 $roomstatus=array(0=>'Available','Unavailable');
-or($i=0;$i<len($roomtypes);$i++){
+for($i=0;$i<len($roomtypes);$i++){
     if($status==$roomstatus[$i]){
     $check=true;
     }
@@ -123,11 +152,12 @@ or($i=0;$i<len($roomtypes);$i++){
     if($check==false){
     return "Room status should be :Available,Unavailable";
     }
-    else return "";
+    else return false;
 
 }
-public function validMobileNo($mobileno){
-if(len($mobileno)!=11){
+ function validMobileNo($mobileno){
+     
+if(strlen($mobileno)!=11){
 return "Invalid Mobile number , must be 11 digits";
 
 }
@@ -143,10 +173,26 @@ else if(!preg_match('/^[0,1,2,5]*$/', $mobileno[2])) {
 
 return "Mobile Number field can't be empty";
     }
-    else return "";
+    else return false;
 
 
 
+}
+function notEmpty($string){
+if($string==""){
+return "Cannot be empty";
+
+}
+else return "";
+
+}
+function validUsername($username){
+
+    if(preg_match('/^[a-zA-Z0-9]+/', $username)){
+        return "";
+
+    }
+    else return "Username cannot contain symbols";
 }
 
 ?>
