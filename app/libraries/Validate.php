@@ -42,7 +42,7 @@ function validPassword($password){
       }
     }
 
-    if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $password))
+    if (preg_match('/[\'^£$%&*()}{@#~?><!>,|=_+¬-]/', $password))
         {
           $checkSpecial=false;
 

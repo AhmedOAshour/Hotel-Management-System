@@ -9,7 +9,7 @@ require_once("../app/bootapp.php");
 require_once(APPROOT."/models/RoomPrices.php");
 require_once(APPROOT . "/controllers/RoomPricesController.php");
 require_once(APPROOT . "/views/pages/ViewRoomPrices.php");
-
+require_once ('../app/views/inc/nav.php');
 $model=new RoomPrices();
 $controller=new RoomPricesController($model);
 $view=new ViewRoomPrices($controller,$model);

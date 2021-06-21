@@ -29,8 +29,11 @@ class Reservation extends Model{
         }
         }
 
-public function readReservations($checkin){
+public function readReservations($checkin,$from="",$to=""){
     $sql = "SELECT * ,reservation.ID AS RID FROM reservation INNER JOIN client ON reservation.client_ID = client.ID";
+    if($from!=""&&$to!=""){
+      $sql .= " WHERE reservation.arrival BETWEEN '$from' AND '$to'";
+    }
     if ($checkin) {
       $date = date('Y-m-d');
       $ext = " WHERE reservation.arrival = '$date' AND check_in is NULL";

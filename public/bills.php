@@ -5,10 +5,13 @@
 	}
 </style>
 <?php
+require_once ('../app/views/inc/nav.php');<?php
+
 require_once("../app/bootapp.php");
 require_once(APPROOT."/models/Bill.php");
 require_once(APPROOT . "/controllers/BillController.php");
 require_once(APPROOT . "/views/pages/ViewBill.php");
+require_once ('../app/views/inc/nav.php');
 
 $model=new Bill();
 $controller=new BillController($model);

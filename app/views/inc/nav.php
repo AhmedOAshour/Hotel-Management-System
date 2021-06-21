@@ -33,12 +33,12 @@
                  <li class="nav-item">
                      <a class="nav-link" href="lost&found.php">Lost&Found</a>
                  </li>
+                 <li class="nav-item">
+                   <a class="nav-link" href="profile.php">Profile</a>
+                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="signout.php">Sign out</a>
                 </li>
-                <li class="nav-item">
-                   <a class="nav-link" href="profile.php">Profile</a>
-               </li>
                 <?php }
 
                 else if(!empty($_SESSION['position'])&& $_SESSION['position']=='admin'){ ?>
@@ -49,11 +49,11 @@
                     <a class="nav-link" href="employees.php">View Employees</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="signout.php">Sign out</a>
-                </li>
-                <li class="nav-item">
                    <a class="nav-link" href="profile.php">Profile</a>
                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="signout.php">Sign out</a>
+                </li>
                 <?php }
                  else if(!empty($_SESSION['position'])&& $_SESSION['position']=='HK_employee'){ ?>
                  <li class="nav-item">

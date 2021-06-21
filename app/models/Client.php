@@ -23,9 +23,12 @@ class client extends Model{
         $result = $this->db->query($sql);
       }
 
-      function readClients(){
+      function readClients($bar=""){
         $clients = array();
         $sql = "SELECT ID FROM client";
+        if ($bar!="") {
+          $sql .= " WHERE first_name LIKE '%$bar%' OR last_name LIKE '%$bar%' OR nationality LIKE '%$bar%' OR identification_no LIKE '%$bar%' OR mobile LIKE '%$bar%' OR email LIKE '%$bar%' OR company LIKE '%$bar%'";
+        }
         $result = $this->db->query($sql);
         if ($result->num_rows > 0){
           while($row = $this->db->fetchRow()){

@@ -10,6 +10,7 @@ require_once(APPROOT."/models/LostAndFound.php");
 require_once(APPROOT."/models/Room.php");
 require_once(APPROOT . "/controllers/LostAndFoundController.php");
 require_once(APPROOT . "/views/pages/ViewLostAndFound.php");
+require_once ('../app/views/inc/nav.php');
 
 $model=new LostAndFound();
 $controller=new LostAndFoundController($model);

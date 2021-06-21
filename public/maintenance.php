@@ -9,6 +9,8 @@ require_once("../app/bootapp.php");
 require_once(APPROOT."/models/Maintenance.php");
 require_once(APPROOT . "/controllers/MaintenanceController.php");
 require_once(APPROOT . "/views/pages/ViewMaintenance.php");
+require_once ('../app/views/inc/nav.php');
+$model=new Maintenance();
 
 $model=new Maintenance();
 $controller=new MaintenanceController($model);

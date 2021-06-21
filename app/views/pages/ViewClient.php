@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <script src="js/main.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  </head>
-  <body>
+<meta charset="utf-8">
+<title></title>
+<script src="js/main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
   .forgot{
     position: relative;
@@ -57,12 +52,10 @@
     top:0px;
   }
 </style>
-  </body>
-</html>
 <?php
 class ViewClient extends View{
     public function output(){
-        $clients=$this->model->readClients();
+        
         $str =<<<EOD
                       <div class="container">
                       <div class="row sidebar">
@@ -71,7 +64,7 @@ class ViewClient extends View{
                               </form>
                           </div>
                           <div class="col-9 searchbar">
-                          <input type="text" id="bar" class="search"placeholder="Search by name, company, etc." oninput="showClient()"><i class="fa fa-search"></i>
+                          <input oninput="searchReservation()" type="text" id="bar" class="search"placeholder="Search by name, company, etc." oninput="showClient()"><i class="fa fa-search"></i>
                           </div>
                       </div>
                   </div>
@@ -106,39 +99,9 @@ class ViewClient extends View{
                     </tr>
                     </thead>
                     </div>
+                    <tbody id="rTable">
                  EOD;
-   if ($clients) {
-     foreach ($clients as $client) {
-       $str .= <<<EOD
-       <tr>
-       <td style='text-align:center'>$client->first_name</td>
-       <td style='text-align:center'>$client->last_name</td>
-       <td style='text-align:center'>$client->identification_no</td>
-       <td style='text-align:center'>$client->nationality</td>
-       <td style='text-align:center'>$client->mobile</td>
-       <td style='text-align:center'>$client->email</td>
-       <td style='text-align:center'>$client->company</td>
-       EOD;
-       if(!empty($_GET['flag'])&&$_GET['flag']==true){
-         $str.=<<<EOD
-         <td style='text-align:center'><a class="color"href="clients.php?action=resform&id=$client->id&quantity=1"><i class='fa fa-plus-square'></i></a></td>
-         EOD;
-       }
-       else { $str.=<<<EOD
-         <td style='text-align:center'><a class="color" href="clients.php?action=editform&id=$client->id"><i class='fa fa-edit'></i></a></td>
-         <td style='text-align:center'><a class="color" href="clients.php?action=delete&id=$client->id"><i class='fa fa-trash'></i></a></td>
-         EOD;
-       }
-       $str.=<<<EOD
-       </tr>
-       EOD;
-     }
-   }
-   else {
-     $str.=<<<EOD
-     <tr><td>No Results</td></tr>
-     EOD;
-   }
+  $str .= $this->table();
   $str .= <<<EOD
       </tbody>
     </table>
@@ -148,8 +111,48 @@ class ViewClient extends View{
   <a href="clients.php?action=addform"><button type="button" class="button2" id="addBtn">Add Client</button></a>
   EOD;
   echo $str;
-
 }
+
+public function table($bar=""){
+  $str = <<<EOD
+  EOD;
+  $clients=$this->model->readClients($bar);
+  if ($clients) {
+    foreach ($clients as $client) {
+      $str .= <<<EOD
+      <tr>
+      <td style='text-align:center'>$client->first_name</td>
+      <td style='text-align:center'>$client->last_name</td>
+      <td style='text-align:center'>$client->identification_no</td>
+      <td style='text-align:center'>$client->nationality</td>
+      <td style='text-align:center'>$client->mobile</td>
+      <td style='text-align:center'>$client->email</td>
+      <td style='text-align:center'>$client->company</td>
+      EOD;
+      if(!empty($_GET['flag'])&&$_GET['flag']==true){
+        $str .= <<<EOD
+        <td style='text-align:center'><a class="color"href="clients.php?action=resform&id=$client->id&quantity=1"><i class='fa fa-plus-square'></i></a></td>
+        EOD;
+      }
+      else { 
+        $str.=<<<EOD
+        <td style='text-align:center'><a class="color" href="clients.php?action=editform&id=$client->id"><i class='fa fa-edit'></i></a></td>
+        <td style='text-align:center'><a class="color" href="clients.php?action=delete&id=$client->id"><i class='fa fa-trash'></i></a></td>
+        EOD;
+      }
+      $str.=<<<EOD
+      </tr>
+      EOD;
+    }
+  }
+  else {
+    $str.=<<<EOD
+    <tr><td>No Results</td></tr>
+    EOD;
+  }
+  return $str;
+}
+
 public function addForm(){
 
   $email="";
@@ -197,32 +200,32 @@ unset($_SESSION['errors']);
         <div id="createClient">
         <h1>Add client</h1>
         <form>
-
+        
         <input class="formE form-control border-3" type="text" name="first_name" id="Fname" onchange="checkfName()" placeholder="First Name..." required>
         <h5 class="errors">$fname</h5>
         <div id="errorName1"></div>
-
+        
         <input class="formE form-control border-3" type="text" name="last_name" id="Lname" onchange="checklName()" placeholder="Last Name..."required>
         <h5 class="errors">$lname</h5>
         <div id="errorName2"></div>
-
+        
         <input class="formE form-control border-3" type="text" name="identification_no" placeholder="Identification Number..." required>
         <h5 class="errors">$idn</h5>
-
+        
         <input class="formE form-control border-3" type="text" name="nationality" placeholder="Nationality..." required>
         <h5 class="errors">$nationality</h5>
-
+        
         <input class="formE form-control border-3" type="text" name="mobile" id="mobile" onchange="checkMobile()" placeholder="Mobile..." required>
         <h5 class="errors">$mobile</h5>
         <div id="errorMobile"></div>
-
+        
         <input class="formE form-control border-3" type="text" name="email" id="email" onchange="checkEmail()" placeholder="E-mail..." required>
         <h5 class="errors">$email</h5>
         <div id="errorEmail"></div>
-
+        
         <input class="formE form-control border-3" type="text" name="company" placeholder="Company..."required>
         <h5 class="errors">$company</h5>
-
+        
         <input type="submit" class="button2" name="action" value="Add" id="submitBtn"">
         </form>
         </div>
@@ -382,23 +385,23 @@ $_SESSION['CID']=$id;
             
             <h5 class="words down">Identification<br>number</h5><input class="formE form-control border-3" type="text" name="identification_no" value="$client->identification_no" required>
             <h5 class="errors">$idn</h5>
-
+            
             <h5 class="words">Nationality</h5><input class="formE form-control border-3" type="text" name="nationality" value="$client->nationality" required>
             <h5 class="errors">$nationality</h5>
-
+            
             <h5 class="words down">Mobile<br>Number</h5><input class="formE form-control border-3" type="text" name="mobile" id="mobile" onchange="checkMobile()" value="$client->mobile" required>
             <div id="errorMobile"></div>
             <h5 class="errors">$mobile</h5>
-            
+              
             <h5 class="words">Email</h5><input class="formE form-control border-3" type="text" name="email" id="email" onchange="checkEmail()" value="$client->email" required>
             <div id="errorEmail"></div>
             <h5 class="errors">$email</h5>
-            
+              
             <h5 class="words">Company</h5><input class="formE form-control border-3" type="text" name="company"value="$client->company"  required>
             <h5 class="errors">$company</h5>
-
+            
             <h5 class="words"></h5><input class="formE form-control border-3" type="text" name="id"value="$_SESSION[CID]" hidden  required>
-
+            
             <button type="submit" class="button2" name="action" value="edit">Submit</button>
             </form>
         </div>

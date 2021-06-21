@@ -60,13 +60,13 @@ ob_start();
   require_once(APPROOT."/models/Room.php");
   require_once(APPROOT . "/controllers/RoomController.php");
   require_once(APPROOT . "/views/pages/ViewRoom.php");
-
+  require_once ('../app/views/inc/nav.php');
   $model=new Room();
   $controller=new RoomController($model);
   $view=new ViewRoom($controller,$model);
 
 if (isset($_SESSION['position'])) {
-  if ($_SESSION['position'] == "admin" || $_SESSION['position'] == "front_clerk") {
+  if ($_SESSION['position'] == "admin" || $_SESSION['position'] == "front_clerk" || $_SESSION['position'] == "HK_employee") {
     if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
       switch($_REQUEST['action']){
         case 'view_room':

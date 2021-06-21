@@ -15,14 +15,11 @@ function __construct($id=""){
         $this->cost_of_materials = $row['cost_of_materials'];
         $this->technician_name= $row['technician_name'];
         $this->work_done=$row['work_done'];
-        
       }
-
     }
   }
 
 function readLogs(){
-
     $sql = "SELECT *,maintenance.date AS MDate FROM maintenance INNER JOIN malfunction ON maintenance.malfunction_no=malfunction.ID";
     $result = $this->db->query($sql);
     if ($result->num_rows > 0){
