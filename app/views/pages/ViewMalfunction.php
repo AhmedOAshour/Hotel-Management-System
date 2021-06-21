@@ -39,81 +39,94 @@
 <?php
 class ViewMalfunction extends View{
 public function output(){
-   $entries= $this->model->readMalfunctions();
-    $str=
-<<<EOD
-                <body>
-                <div class="container">
-                      <div class="row sidebar">
-                          <div class="col-3 bar">
-                              <form action="/action_page.php">
-                              </form>
-                          </div>
-                          <div class="col-9 searchbar">
-                          <input type="text" id="bar" class="search"placeholder="Search by description.." oninput="showClient()"><i class="fa fa-search"></i>
-                          </div>
-                      </div>
-                  </div>
-                <div class="container">
-                <h1>Malfunctions</h1>
-                    <table width="100%" border="1" style="border-collapse:collapse; margin-top:4px;">
-                        <thead>
-                            <tr>
-                                <th style='text-align:center'><strong>Description</strong></th>
-                                <th style='text-align:center'><strong>Entry_By</strong></th>
-                                <th style='text-align:center'><strong>Date</strong></th>
-                                <th style='text-align:center'><strong>Status</strong></th>
-EOD;
-                    if(!empty($_GET['flag'])&&$_GET['flag']==true){
-    $str.=
-<<<EOD
-                                <th style='text-align:center'><strong>Create Entry</strong></th>
-                            </tr>
-
-EOD;
-                    }
-if ($entries) {
-  foreach ($entries as $entry) {
-    $str .= <<<EOD
-    <tr>
-    <td style='text-align:center'>$entry->description</td>
-    <td style='text-align:center'>$entry->entry_by</td>
-    <td style='text-align:center'>$entry->date</td>
-    <td style='text-align:center'>$entry->is_Archived</td>
-    EOD;
-    if(!empty($_GET['flag'])&&$_GET['flag']==true&&$entry->is_Archived=="Pending"){
-      $str.=<<<EOD
-      <td style='text-align:center'><a class="color"href="maintenance.php?action=addform&id=$entry->id"><i class="fa fa-plus-square"></i></a></td>
-      EOD;
-    }
-    else if(!empty($_GET['flag'])&&$_GET['flag']==true&&$entry->is_Archived=="Archived") {
-      $str.=<<<EOD
-      <td style='text-align:center'>Handled</td>
-      EOD;
-    }
-  }
-}
-else {
-  $str.=<<<EOD
-  <tr><td>No Results<td><tr>
+   $date = date('Y-m-d');
+   $nextdate = date('Y-m-d',strtotime($date."+7 days"));
+   $dateform = <<<EOD
+   <div class="col-6 bar">
+   <label>From: </label><input onchange="searchReservation()" type="date" id="date" name="from" class="data" value="$date">
+   <label>To: </label><input onchange="searchReservation()" type="date" id="date" name="to" class="data" value="$nextdate"">
+   </div>
+   EOD;
+  $str=<<<EOD
+  <body>
+  <div class="container">
+        <div class="row sidebar">
+            <div class="col-6 bar">
+            $dateform
+            </div>
+            <div class="col-6 searchbar">
+            <input type="text" id="bar" class="search"placeholder="Search by description.." oninput="showClient()"><i class="fa fa-search"></i>
+            </div>
+        </div>
+    </div>
+  <div class="container">
+  <h1>Malfunctions</h1>
+      <table width="100%" border="1" style="border-collapse:collapse; margin-top:4px;">
+          <thead>
+              <tr>
+                  <th style='text-align:center'><strong>Description</strong></th>
+                  <th style='text-align:center'><strong>Entry_By</strong></th>
+                  <th style='text-align:center'><strong>Date</strong></th>
+                  <th style='text-align:center'><strong>Status</strong></th>
   EOD;
-}
+  if(!empty($_GET['flag'])&&$_GET['flag']==true){
     $str.=<<<EOD
-                     </tr>
-                    </thead>
-                    <tbody id="rTable">
-                    </tbody>
-                </table>
-                </div>
-                </body>
-                <form>
-            <br>
-                <button type="submit" name="action" class="button add"value="addform">Add Malfunction</button>
-                </form>
+        <th style='text-align:center'><strong>Create Entry</strong></th>
+    </tr>
+    EOD;
+  }
+    $str .= $this->table();
+    $str.=<<<EOD
+         </tr>
+        </thead>
+        <tbody id="rTable">
+        </tbody>
+    </table>
+    </div>
+    </body>
+    <form>
+    <br>
+    <button type="submit" name="action" class="button add"value="addform">Add Malfunction</button>
+    </form>
     EOD;
 
     echo $str;
 }
+
+public function table($from="",$to="",$bar="")
+{
+  $str = <<<EOD
+  EOD;
+  $entries= $this->model->readMalfunctions();
+  if ($entries) {
+    foreach ($entries as $entry) {
+      $str .= <<<EOD
+      <tr>
+      <td style='text-align:center'>$entry->description</td>
+      <td style='text-align:center'>$entry->entry_by</td>
+      <td style='text-align:center'>$entry->date</td>
+      <td style='text-align:center'>$entry->is_Archived</td>
+      EOD;
+      if(!empty($_GET['flag'])&&$_GET['flag']==true&&$entry->is_Archived=="Pending"){
+        $str.=<<<EOD
+        <td style='text-align:center'><a class="color"href="maintenance.php?action=addform&id=$entry->id"><i class="fa fa-plus-square"></i></a></td>
+        EOD;
+      }
+      else if(!empty($_GET['flag'])&&$_GET['flag']==true&&$entry->is_Archived=="Archived") {
+        $str.=<<<EOD
+        <td style='text-align:center'>Handled</td>
+        EOD;
+      }
+    }
+  }
+  else {
+    $str.=<<<EOD
+    <tr><td>No Results<td><tr>
+    EOD;
+  }
+  return $str;
+}
+
 public function addForm($username){
    
     $date="";
