@@ -76,14 +76,15 @@ return false;
 }
  function validDate($date){
     
-    $test_date  = explode('/', $date);
-    if (checkdate($test_date[0], $test_date[1], $test_date[2])) {
-        return false;
+    $test_date  = explode('-', $date);
+   
+    if (checkdate($test_date[1], $test_date[2], $test_date[0])) {
+        return "";
     }
     else if($date=""){
         return "Date field can't be empty";
     }
-    else return "Invalid date";
+    else return "invalid date";
 
 }
  function validRoomNo($roomno){
@@ -126,8 +127,8 @@ function validPosition($position){
     }
  function validRoomType($roomtype){
 $check=false;
-    $roomtypes = array(0 => 'Single', 'Double', 'Triple','Suite','Family');
-for($i=0;$i<len($roomtypes);$i++){
+    $roomtypes = array(0 => 'Single',1=> 'Double', 2=>'Triple',3=>'Suite',4=>'Family');
+for($i=0;$i<count($roomtypes);$i++){
 if($roomtype==$roomtypes[$i]){
 $check=true;
 }
@@ -135,7 +136,7 @@ $check=true;
 if($check==false){
 return "Room type should be one of the five room types: Single,Double,Triple,Suite,Family";
 }
-else return false;
+else return "";
 
 
 
@@ -193,6 +194,19 @@ function validUsername($username){
 
     }
     else return "Username cannot contain symbols";
+}
+function validInt($int){
+    if(filter_var($int,FILTER_VALIDATE_INT)==false){
+        return "Invalid Integer";
+        
+            }
+            else if($int==""){
+                return "This field can't be empty";
+            }
+            else{
+        return false;
+            }
+
 }
 
 ?>
