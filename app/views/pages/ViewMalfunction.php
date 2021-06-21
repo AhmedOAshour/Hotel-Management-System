@@ -35,6 +35,11 @@
       position: relative;
       left:270px;
     }
+    #dates{
+      position:relative;
+      left:240px;
+      bottom:32px;
+    }
 </style>
 <?php
 class ViewMalfunction extends View{
@@ -44,7 +49,7 @@ public function output(){
    $dateform = <<<EOD
    <div class="col-6 bar">
    <label>From: </label><input onchange="searchReservation()" type="date" id="date" name="from" class="data" value="$date">
-   <label>To: </label><input onchange="searchReservation()" type="date" id="date" name="to" class="data" value="$nextdate"">
+   <label id="dates">To: </label><input onchange="searchReservation()" type="date" id="dates" name="to" class="data" value="$nextdate"">
    </div>
    EOD;
   $str=<<<EOD
@@ -154,10 +159,10 @@ $str=
                                     <div class="form">
                                         <h1 class="head">Malfunctions</h1>
                                         <input type="date"class="formE form-control  py-4 " name="date" required><br>
-                                        <h5 class="errors"$date</h5>
+                                        <h5 class="errors">$date</h5>
                                         <input type="text"class="formE form-control  py-4 " name="username" value="$username" placeholder="username" hidden><br>
                                         <textarea type="text"class="formE form-control mb-4 "id="fname" name="description" placeholder="Description.."required></textarea><br>
-                                        <h5 class="errors"$description</h5>
+                                        <h5 class="errors">$description</h5>
                                         <input type="submit"class="button2" value="Add" name="action">
                                     </div>
                                 </form>

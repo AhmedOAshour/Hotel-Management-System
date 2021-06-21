@@ -30,6 +30,11 @@
         top:15px;
         right:15px;
     }
+    .errors{
+      color:red;
+      position: relative;
+      left:270px;
+    }
 </style>
 <?php
 class ViewLostAndFound extends View{
@@ -123,7 +128,7 @@ public function addForm($username){
           <div class="form">
             <h1 class="head">Lost and Found</h1>
             <input type="date" value="$date" class="formE form-control mb-1 py-4 " name="date" required><br>
-            $dates
+            <h5 class="errors">$dates</h5>
             <select class="formE form-control mb-1 " name="room_number">
 EOD;
   foreach ($numbers as $room) {
@@ -134,10 +139,10 @@ EOD;
 
   $str.=<<<EOD
   </select>
-  $room_no
+  <h5 class="errors">$room_no</h5>
   <input type="text"class="formE form-control mb-1 py-4 " name="username" value="$username" placeholder="username" hidden><br>
   <textarea type="text"class="formE form-control mb-4 "id="fname" name="item_description" placeholder="Description.." required></textarea><br>
-  $description
+  <h5 class="errors">$description</h5>
   <input type="submit"class="button2" value="Add" name="action">
   </div>
   </form>
