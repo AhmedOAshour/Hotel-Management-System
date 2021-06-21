@@ -70,8 +70,12 @@
                             <input onchange="selectType(this)" type="checkbox" class="type" name="Type4" value="Suite" checked="true">
                             <label>Suite</label><br>
                         </li>
+    EOD;
+                        if ($_SESSION['position'] == 'front_clerk') {
+                        $str .= <<<EOD
                         <li><a href="reservations.php?action=checkin"> <button class="button5"> Check In </button> </a></li>
-      EOD;
+                        EOD;
+                      }
                         if ($_SESSION['position'] == 'admin') {
                           $str .= <<<EOD
                           <li><a href="rooms.php?action=manage"> <button class="button5"> Manage rooms </button> </a></li>

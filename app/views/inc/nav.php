@@ -63,9 +63,6 @@
                      <a class="nav-link" href="malfunctions.php">Malfunctions</a>
                  </li>
                  <li class="nav-item">
-                    <a class="nav-link" href="profile.php">Profile</a>
-                </li>
-                 <li class="nav-item">
                      <a class="nav-link" href="maintenance.php">Maintenance</a>
                  </li>
                  <li class="nav-item">
@@ -73,6 +70,9 @@
                  </li>
                  <li class="nav-item">
                      <a class="nav-link" href="followup.php">Follow Up</a>
+                 </li>
+                 <li class="nav-item">
+                   <a class="nav-link" href="profile.php">Profile</a>
                  </li>
                  <li class="nav-item">
                      <a class="nav-link" href="signout.php">Sign out</a>

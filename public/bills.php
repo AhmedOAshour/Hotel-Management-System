@@ -5,7 +5,7 @@
 	}
 </style>
 <?php
-require_once ('../app/views/inc/nav.php');<?php
+require_once ('../app/views/inc/nav.php');
 
 require_once("../app/bootapp.php");
 require_once(APPROOT."/models/Bill.php");

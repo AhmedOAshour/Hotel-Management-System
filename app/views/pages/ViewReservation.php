@@ -124,6 +124,11 @@
             $str .= $buttons;
           }
         }
+        else {
+          $str .= <<<EOD
+          <tr><td>No Results</td><tr>
+          EOD;
+        }
         return $str;
       }
 

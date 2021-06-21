@@ -31,14 +31,14 @@ if (isset($_SESSION['position'])) {
 				switch($_REQUEST['action']){
 					case 'delete':
 					$controller->delete($_REQUEST['id']);
-					$view->output(false);
+					header("Location: reservations.php");
 					break;
 					case 'edit':
 					$view2->editForm($_REQUEST['id'],$_REQUEST['quantity']);
 					break;
 					case 'editRes':
 					$controller->edit($_REQUEST['id']);
-					$view->output(false);
+					header("Location: reservations.php");
 					break;
 					case 'createReservation':
 					header("location:clients.php?flag=true");

@@ -1,12 +1,5 @@
-    <!DOCTYPE html>
-    <html lang="en" dir="ltr">
-      <head>
-        <meta charset="utf-8">
-        <title></title>
-        <script src="js/main.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      </head>
-      <body>
+<script src="js/main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
       .forgot{
         position: relative;
@@ -137,26 +130,26 @@
             <input type="text" name="first_name" id="Fname" onchange="checkfName()" class="formE form-control mb-4 border-0 py-4" placeholder="First Name" required><br>
             <div id="errorName1"></div>
             <h5 class="errors">$fname</h5>
-
+            
             <input type="text" name="last_name" id="Lname" onchange="checklName()" class="formE form-control mb-4 border-0 py-4" placeholder="Last Name" required><br>
             <div id="errorName2"></div>
             <h5 class="errors">$lname</h5>
-
+            
             <input type="text" name="username" id="username" onchange="checkUsername()" class="formE form-control mb-4 border-0 py-4" placeholder="Username" required><br>
             <div id="errorUsername"></div>
             <h5 class="errors">$uname</h5>
             <h5 class="errors">$username1</h5>
-
+            
             <input type="password" name="password" id="password" oninput="checkPassword()" class="formE form-control mb-4 border-0 py-4"placeholder="Password" required><br>
             <div id="errorPass"></div>
             <h5 class="errors">$password</h5>
-
+            
             <input type="text" name="sQuestion" id="sQuestion" class="formE form-control mb-4 border-0 py-4"placeholder="Security Question" required><br>
             <h5 class="errors">$squestion</h5>
-
+            
             <input type="text" name="sAnswer" id="sAnswer" class="formE form-control mb-4 border-0 py-4"placeholder="Security Answer" required><br>
             <h5 class="errors">$sanswer</h5>
-
+            
             <select id="position" name="position" class="formE form-control mb-2 border-0" required>
               <option hidden disabled selected value>Position</option>
               <option value='admin'>admin</option>
@@ -164,7 +157,7 @@
               <option value='HK_employee'>Housekeeping</option>
             </select><br>
             <h5 class="errors">$position</h5>
-
+            
             <input type="submit" class="submitEmployee button2" name="action" value="Add" id="submitBtn">
           </form>
         </div>

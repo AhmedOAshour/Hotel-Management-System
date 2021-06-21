@@ -81,16 +81,22 @@ public function checkout($id){
               </thead>
               <tbody>
   EOD;
-      foreach ($items as $item) {
-        $str .= <<<EOD
-        <tr>
-          <td style='text-align:center'>$item[Item]</td>
-          <td style='text-align:center'>$item[Price]</td>
-          <td style='text-align:center'><a class="color" href="bills.php?action=delete&itemid=$item[ID]&id=$id"><i class='fa fa-trash'></i></a></td>
-        </tr>
-        EOD;
-        $price+=$item['Price'];
-      }
+  foreach ($items as $item) {
+    $str .= <<<EOD
+    <tr>
+      <td style='text-align:center'>$item[Item]</td>
+      <td style='text-align:center'>$item[Price]</td>
+    EOD;
+    if (!$item['is_room']) {
+      $str.= <<<EOD
+      <td style='text-align:center'><a class="color" href="bills.php?action=delete&itemid=$item[ID]&id=$id"><i class='fa fa-trash'></i></a></td>
+      EOD;
+    }
+    $str .= <<<EOD
+    </tr>
+    EOD;
+    $price+=$item['Price'];
+  }
   $str .= <<<EOD
   <tr>
   <td style='text-align:center'>Total</td>
