@@ -39,8 +39,12 @@ function readRooms($type=""){
 
 function insertRoom($number, $type, $status, $comments){
   $sql = "INSERT INTO room (number, type, status, comments) VALUES ('$number', '$type', '$status', '$comments')";
-  $this->db->query($sql);
+  $result=$this->db->query($sql);
 
+  if($result==false){
+    return "Room number already in use.";
+  }
+  else return false;
 }
 
 function editRoom($number, $type, $status, $comments){

@@ -120,9 +120,6 @@ class ViewUser extends View{
         if(isset($errors['username1'])){
          $username1=$errors['username1'];
                                       }
-
-
-
     }
   unset($_SESSION['errors']);
     $str=<<<EOD

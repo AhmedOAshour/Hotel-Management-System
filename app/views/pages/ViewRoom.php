@@ -246,11 +246,27 @@
     }
 
     function addForm(){
+      $number="";
+      $type="";
+      $status="";
+
+      if(isset($_SESSION['errors'])){
+        $errors=$_SESSION['errors'];
+
+        if(isset($errors['number'])){
+          $number=$errors['number'];
+                                    }
+        if(isset($errors['status'])){
+        $status=$errors['status'];
+        }
+      }
+
       $str = <<<EOD
       <div class="container">
       <h1>Add Room</h1>
       <form method="POST">
         <h4 class="words">Room<br>Number</h4> <input class="formE form-control border-3" type="text" name="number" required><br>
+        <h5 class="errors">$number</h5>
         <h4 class="words">Type</h4>
         <select name="type" class="formE form-control border-3" required>
           <option value="single">Single</option>
@@ -259,11 +275,13 @@
           <option value="family">Family</option>
           <option value="suite">Suite</option>
         </select><br>
+        <h5 class="errors">$type</h5>
         <h4 class="words">Status</h4>
         <select name="status" class="formE form-control border-3" required>
           <option value="available">Available</option>
           <option value="unavailable">Unavailable</option>
         </select><br>
+        <h5 class="errors">$status</h5>
         <h4 class="words">Comments</h4> <textarea class="formE form-control border-3" name="comments" rows="2" cols="40"></textarea><br>
         <button type="submit" class="button2"name="action" value="add">Submit</button>
       </form>

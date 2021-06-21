@@ -83,14 +83,11 @@ class User extends Model
     $sql = "INSERT INTO user (username,first_name,last_name,password,position,security_question,security_answer) VALUES ('$username','$first_name','$last_name','$password','$position','$sQuestion','$sAnswer')";
     $result=$this->db->query($sql);
 
-   // echo $result;
     if($result==false){
       return "Username already exists";
     }
     else return false;
-
   }
-
 
   function editUser($first_name, $last_name, $password, $position, $username, $id, $sQuestion, $sAnswer){
     $password=password_hash($password,PASSWORD_DEFAULT);
@@ -101,7 +98,6 @@ class User extends Model
   function deleteUser($id){
     $sql = "DELETE FROM user WHERE ID = $id ";
     $this->db->query($sql);
-
   }
 
   function getQuestion($username){
