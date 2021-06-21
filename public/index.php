@@ -1,10 +1,20 @@
-<style>
-  .wrong{
-    position: relative;
-    left:475px;
-    color:red;
-  }
-</style>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+    .wrong{
+      position: relative;
+      left:475px;
+      color:red;
+    }
+    </style>
+  </head>
+  <body>
+
+  </body>
+</html>
 <?php
 require_once("../app/bootapp.php");
 require_once(APPROOT."/models/User.php");
@@ -13,6 +23,7 @@ require_once(APPROOT . "/views/pages/ViewUser.php");
 $model=new User();
 $controller=new UserController($model);
 $view=new ViewUser($controller,$model);
+
 
 if (isset($_GET['action']) && !empty($_GET['action'])) {
 	switch($_GET['action']){

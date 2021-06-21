@@ -5,6 +5,10 @@ ob_start();
     body{
         background-color: #DAE3EB;
     }
+    #access{
+  		text-align: center;
+  		color: red;
+  	}
     .search{
         width:250px;
         border-top: none;
@@ -61,62 +65,73 @@ ob_start();
   $controller=new RoomController($model);
   $view=new ViewRoom($controller,$model);
 
-  if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
-    switch($_REQUEST['action']){
-      case 'view_room':
-      echo $view->view_room($_GET['id']);
-      break;
-      case 'mark_available':
-      $model->changeStatus($_GET['id'],"available");
-      header("Location: rooms.php?action=view_room&id=$_GET[id]");
-      break;
-      case 'mark_unavailable':
-      $model->changeStatus($_GET['id'],"unavailable");
-      header("Location: rooms.php?action=view_room&id=$_GET[id]");
-      break;
-      case 'checkoutform':
-        $view->checkout($_GET['id']);
+if (isset($_SESSION['position'])) {
+  if ($_SESSION['position'] == "admin" || $_SESSION['position'] == "front_clerk") {
+    if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
+      switch($_REQUEST['action']){
+        case 'view_room':
+        echo $view->view_room($_GET['id']);
         break;
-        case 'checkout':
-        $model->checkout($_REQUEST['id']);
-        header("Location: rooms.php");
+        case 'mark_available':
+        $model->changeStatus($_GET['id'],"available");
+        header("Location: rooms.php?action=view_room&id=$_GET[id]");
         break;
-        case 'checkin':
-        $view->checkin($_GET['id']);
+        case 'mark_unavailable':
+        $model->changeStatus($_GET['id'],"unavailable");
+        header("Location: rooms.php?action=view_room&id=$_GET[id]");
         break;
-        case 'checkedin':
-        $model->checkin($_POST['rooms'],$_POST['id']);
-        $view->output();
-        break;
-        case 'manage':
-        $view->viewTable();
-        break;
-        case 'addform':
-          $view->addForm();
+        case 'checkoutform':
+          $view->checkout($_GET['id']);
           break;
-          case 'add':
-          if(!$temp=$controller->insert()){
-    				header("Location: rooms.php?action=manage");
-    				}
-    				else{
-    					$_SESSION['errors']=$temp;
-    					header("location:rooms.php?action=addform");
-    				}
+          case 'checkout':
+          $model->checkout($_REQUEST['id']);
+          header("Location: rooms.php");
           break;
-          case 'editform':
-            $view->editForm($_GET['number']);
+          case 'checkin':
+          $view->checkin($_GET['id']);
+          break;
+          case 'checkedin':
+          $model->checkin($_POST['rooms'],$_POST['id']);
+          $view->output();
+          break;
+          case 'manage':
+          $view->viewTable();
+          break;
+          case 'addform':
+            $view->addForm();
             break;
-            case 'edit':
-            $controller->edit();
-            header("Location: rooms.php?action=manage");
+            case 'add':
+            if(!$temp=$controller->insert()){
+      				header("Location: rooms.php?action=manage");
+      				}
+      				else{
+      					$_SESSION['errors']=$temp;
+      					header("location:rooms.php?action=addform");
+      				}
             break;
-            case 'delete':
-            $controller->delete();
-            header("Location: rooms.php?action=manage");
-            break;
+            case 'editform':
+              $view->editForm($_GET['number']);
+              break;
+              case 'edit':
+              $controller->edit();
+              header("Location: rooms.php?action=manage");
+              break;
+              case 'delete':
+              $controller->delete();
+              header("Location: rooms.php?action=manage");
+              break;
+            }
           }
-        }
-        else
-        $view->output();
+          else
+          $view->output();
+  }
+  else {
+    echo "<h2 id='access'>Access restricted.</h2>";
+  }
+
+}
+else {
+  echo "<h2 id='access'>Access restricted.</h2>";
+}
         ?>
 </body>

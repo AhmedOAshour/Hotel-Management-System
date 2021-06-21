@@ -36,6 +36,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="signout.php">Sign out</a>
                 </li>
+                <li class="nav-item">
+                   <a class="nav-link" href="profile.php">Profile</a>
+               </li>
                 <?php }
 
                 else if(!empty($_SESSION['position'])&& $_SESSION['position']=='admin'){ ?>
@@ -48,6 +51,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="signout.php">Sign out</a>
                 </li>
+                <li class="nav-item">
+                   <a class="nav-link" href="profile.php">Profile</a>
+               </li>
                 <?php }
                  else if(!empty($_SESSION['position'])&& $_SESSION['position']=='HK_employee'){ ?>
                  <li class="nav-item">
@@ -57,13 +63,16 @@
                      <a class="nav-link" href="malfunctions.php">Malfunctions</a>
                  </li>
                  <li class="nav-item">
+                    <a class="nav-link" href="profile.php">Profile</a>
+                </li>
+                 <li class="nav-item">
                      <a class="nav-link" href="maintenance.php">Maintenance</a>
                  </li>
                  <li class="nav-item">
                      <a class="nav-link" href="lost&found.php">Lost&Found</a>
                  </li>
                  <li class="nav-item">
-                     <a class="nav-link" href="followup.php">FollowUp</a>
+                     <a class="nav-link" href="followup.php">Follow Up</a>
                  </li>
                  <li class="nav-item">
                      <a class="nav-link" href="signout.php">Sign out</a>
