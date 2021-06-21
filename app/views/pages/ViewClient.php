@@ -45,6 +45,17 @@
         top:15px;
         right:15px;
     }
+    .errors{
+      color:red;
+      position: relative;
+      left:270px;
+    }
+    #errorName1,#errorName2,#errorUsername,#errorPass,#errorCPass,#errorEmail{
+    color:red;
+    position: relative;
+    left:260px;
+    top:0px;
+  }
 </style>
   </body>
 </html>
@@ -186,30 +197,32 @@ unset($_SESSION['errors']);
         <div id="createClient">
         <h1>Add client</h1>
         <form>
+
         <input class="formE form-control border-3" type="text" name="first_name" id="Fname" onchange="checkfName()" placeholder="First Name..." required>
-        $fname
-        <div id="errorName1">
-        
-        </div>
+        <h5 class="errors">$fname</h5>
+        <div id="errorName1"></div>
+
         <input class="formE form-control border-3" type="text" name="last_name" id="Lname" onchange="checklName()" placeholder="Last Name..."required>
-        $lname
-        <div id="errorName2">
-        
-        </div>
+        <h5 class="errors">$lname</h5>
+        <div id="errorName2"></div>
+
         <input class="formE form-control border-3" type="text" name="identification_no" placeholder="Identification Number..." required>
-        $idn
+        <h5 class="errors">$idn</h5>
+
         <input class="formE form-control border-3" type="text" name="nationality" placeholder="Nationality..." required>
-        $nationality
+        <h5 class="errors">$nationality</h5>
+
         <input class="formE form-control border-3" type="text" name="mobile" id="mobile" onchange="checkMobile()" placeholder="Mobile..." required>
-        <div id="errorMobile">
-        $mobile
-        </div>
+        <h5 class="errors">$mobile</h5>
+        <div id="errorMobile"></div>
+
         <input class="formE form-control border-3" type="text" name="email" id="email" onchange="checkEmail()" placeholder="E-mail..." required>
-        <div id="errorEmail">
-        $email
-        </div>
+        <h5 class="errors">$email</h5>
+        <div id="errorEmail"></div>
+
         <input class="formE form-control border-3" type="text" name="company" placeholder="Company..."required>
-        $company
+        <h5 class="errors">$company</h5>
+
         <input type="submit" class="button2" name="action" value="Add" id="submitBtn"">
         </form>
         </div>
@@ -267,7 +280,7 @@ if(!isset($_SESSION['quantity'])){
       <form>
       <h4 class="words nu">Number<br>of Rooms</h4>
       <input type="number"size="1" class="formE form-control border-3"name="quantity" id="counter" value=1 required></input>
-      $number_of_rooms
+      <h5 class="errors">$number_of_rooms</h5>
       <input type="text" name="id" value="$id" class="formE form-control border-3" id="id" hidden>
       <button type="submit" class="button3" name="action" value="resform">Add</button>
       </form>
@@ -285,14 +298,14 @@ if(!isset($_SESSION['quantity'])){
     }
   $str.= <<<EOD
    </select><br>
-   $room_type
+   <h5 class="errors">$room_type</h5>
   EOD;
    }
     $str.= <<<EOD
       <h4 class="words arr">Arrival</h4><input value="$date" min="$date" type='date'class="formE form-control border-3" name='arrival' required>
-      $arrival
+      <h5 class="errors">$arrival</h5>
       <h4 class="words">Departure</h4> <input type='date' value="$nextdate" min="$nextdate" class="formE form-control border-3" name='departure'required><br>
-      $departure
+      <h5 class="errors">$departure</h5>
       <textarea class="formE form-control border-3" name="comments" rows="2" cols="50" placeholder="Comments..."></textarea> <br>
       <input type="text" name="client_ID" value="$_SESSION[CID]" class="formE form-control border-3" id="client_ID" hidden>
       <input type="text" name="quantity" value="$_SESSION[quantity]" class="formE form-control border-3" id="quantity" hidden>
@@ -360,28 +373,32 @@ $_SESSION['CID']=$id;
             <h1>Edit Clients</h1>
             <form>
             <h5 class="words">First Name</h5><input class="formE form-control border-3" type="text" id="Fname" onchange="checkfName()" value="$client->first_name" name="first_name"  required>
-            <div id="errorFName">
-            $fname
-            </div>
+            <div id="errorName1"></div>
+            <h5 class="errors">$fname</h5>
+            
             <h5 class="words">Last Name</h5><input class="formE form-control border-3" type="text" name="last_name" id="Lname" onchange="checklName()" value="$client->last_name" required>
-            <div id="errorLName">
-            $lname
-            </div>
+            <div id="errorName2"></div>
+            <h5 class="errors">$lname</h5>
+            
             <h5 class="words down">Identification<br>number</h5><input class="formE form-control border-3" type="text" name="identification_no" value="$client->identification_no" required>
-            $idn
+            <h5 class="errors">$idn</h5>
+
             <h5 class="words">Nationality</h5><input class="formE form-control border-3" type="text" name="nationality" value="$client->nationality" required>
-            $nationality
+            <h5 class="errors">$nationality</h5>
+
             <h5 class="words down">Mobile<br>Number</h5><input class="formE form-control border-3" type="text" name="mobile" id="mobile" onchange="checkMobile()" value="$client->mobile" required>
-            $mobile
-            <div id="errorMobile">
-            </div>
+            <div id="errorMobile"></div>
+            <h5 class="errors">$mobile</h5>
+            
             <h5 class="words">Email</h5><input class="formE form-control border-3" type="text" name="email" id="email" onchange="checkEmail()" value="$client->email" required>
-            $email
-            <div id="errorEmail">
-            </div>
+            <div id="errorEmail"></div>
+            <h5 class="errors">$email</h5>
+            
             <h5 class="words">Company</h5><input class="formE form-control border-3" type="text" name="company"value="$client->company"  required>
-            $company
+            <h5 class="errors">$company</h5>
+
             <h5 class="words"></h5><input class="formE form-control border-3" type="text" name="id"value="$_SESSION[CID]" hidden  required>
+
             <button type="submit" class="button2" name="action" value="edit">Submit</button>
             </form>
         </div>

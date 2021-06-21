@@ -1,3 +1,10 @@
+<style>
+  .errors{
+      color:red;
+      position: relative;
+      left:270px;
+    }
+</style>
 <?php
 class ViewBill extends View{
 public function output(){
@@ -132,9 +139,9 @@ if(!isset($_SESSION['CID'])){
       <h1>Add bill item</h1>
       <form>
       <input class="formE form-control border-3" type="text" name="item" id="item"  placeholder="Item Name..." required>
-      $item
+      <h5 class="errors"$item</h5>
       <input class="formE form-control border-3" type="text" name="price" id="price"  placeholder="Price.."required>
-      $price
+      <h5 class="errors"$price</h5>
       <input class="formE form-control border-3" type="text" name="id" value='$_SESSION[CID]' hidden>
       <input type="submit" class="button2" name="action" value="add" id="submitBtn"">
       </form>

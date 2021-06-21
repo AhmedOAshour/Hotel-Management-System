@@ -30,6 +30,11 @@
         top:15px;
         right:15px;
     }
+    .errors{
+      color:red;
+      position: relative;
+      left:270px;
+    }
 </style>
 <?php
 class ViewMalfunction extends View{
@@ -136,10 +141,10 @@ $str=
                                     <div class="form">
                                         <h1 class="head">Malfunctions</h1>
                                         <input type="date"class="formE form-control  py-4 " name="date" required><br>
-                                        $date
+                                        <h5 class="errors"$date</h5>
                                         <input type="text"class="formE form-control  py-4 " name="username" value="$username" placeholder="username" hidden><br>
                                         <textarea type="text"class="formE form-control mb-4 "id="fname" name="description" placeholder="Description.."required></textarea><br>
-                                        $description
+                                        <h5 class="errors"$description</h5>
                                         <input type="submit"class="button2" value="Add" name="action">
                                     </div>
                                 </form>

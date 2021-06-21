@@ -30,6 +30,11 @@
         top:15px;
         right:15px;
     }
+    .errors{
+      color:red;
+      position: relative;
+      left:270px;
+    }
 </style>
 <?php
 class ViewMaintenance extends View{
@@ -132,16 +137,16 @@ $str=<<<EOD
     <form>
     <h1>Maintenance</h1>
     <textarea name='materials_bought' rows="1" cols="80" class="formE form-control  py-4 "placeholder="Materials bought seperated by ," required></textarea>
-    $materials_bought
+    <h5 class="errors">$materials_bought</h5>
     <textarea name="cost_of_materials" rows="1" cols="80" class="formE form-control  py-4 "placeholder="cost of materials seperate by  , respectively" required></textarea>
-    $cost_of_materials
+    <h5 class="errors">$cost_of_materials</h5>
     <input type='date' value="$date" class="formE form-control mb-1 py-4 "name='date'required>
-    $dates
+    <h5 class="errors">$dates</h5>
     <input type="text" name="malfunction_no" class="formE form-control mb-1 py-4 "value="$_SESSION[CID]"  id="malfunction_no" hidden>
     <input type="text" name="technician_name"  class="formE form-control mb-1 py-4 "placeholder="Please enter technician name" id="technician_no" required>
-    $technician_name
+    <h5 class="errors">$technician_name</h5>
     <input type="text" name="work_done"  class="formE form-control mb-1 py-4 "placeholder="Describe the work done" id="work_done" required>
-    $work_done
+    <h5 class="errors">$work_done</h5>
     <button type="submit" name="action" class="button2"value="insert">Insert Entry</button>
     </form>
     </div>

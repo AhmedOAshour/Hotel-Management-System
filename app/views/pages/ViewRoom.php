@@ -48,34 +48,23 @@
                     <ul class="nav flex-column left">
                         <h3>Status</h3>
                         <li class="nav-item">
-                            <input type="checkbox" id="status1" name="status1" value="Reserved">
-                            <label for="vehicle1">Reserved</label><br>
-                            <input type="checkbox" id="status2" name="status2" value="Occupied">
-                            <label for="vehicle1">Occupied</label><br>
-                            <input type="checkbox" id="status3" name="status3" value="Available">
+                            <input type="checkbox" class="status" name="status1" value="booked" checked="true">
+                            <label for="vehicle1">Booked</label><br>
+                            <input type="checkbox" class="status" name="status3" value="available" checked="true">
                             <label for="vehicle1">Available</label><br>
-                            <input type="checkbox" id="status3" name="status3" value="CheckedOut">
+                            <input type="checkbox" class="status" name="status3" value="checked_out" checked="true">
                             <label for="vehicle1">CheckedOut</label><br>
                         </li>
                         <h3>Type</h3>
                         <li class="nav-item">
-                            <input type="checkbox" id="Type1" name="Type1" value="Single">
+                            <input onchange="selectType(this)" type="checkbox" class="type" name="Type1" value="Single" checked="true">
                             <label for="vehicle1">Single</label><br>
-                            <input type="checkbox" id="Type2" name="Type2" value="Double">
+                            <input onchange="selectType(this)" type="checkbox" class="type" name="Type2" value="Double" checked="true">
                             <label for="vehicle1">Double</label><br>
-                            <input type="checkbox" id="Type3" name="Type3" value="Triple">
+                            <input onchange="selectType(this)" type="checkbox" class="type" name="Type3" value="Triple" checked="true">
                             <label for="vehicle1">Triple</label><br>
-                            <input type="checkbox" id="Type3" name="Type3" value="Family">
+                            <input onchange="selectType(this)" type="checkbox" class="type" name="Type3" value="Family" checked="true">
                             <label for="vehicle1">Family</label><br>
-                        </li>
-                        <h3>House Keeping</h3>
-                        <li class="nav-item">
-                            <input type="checkbox" id="HouseKeeping1" name="HouseKeeping1" value="Clean">
-                            <label for="vehicle1">Clean</label><br>
-                            <input type="checkbox" id="HouseKeeping2" name="HouseKeeping2" value="Notclean">
-                            <label for="vehicle1">Not clean</label><br>
-                            <input type="checkbox" id="HouseKeeping3" name="HouseKeeping3" value="Inprogress">
-                            <label for="vehicle1">In progress</label><br>
                         </li>
                         <li><a href="reservations.php?action=checkin"> <button class="button5"> Check In </button> </a></li>
                         <li><a href="rooms.php?action=manage"> <button class="button5"> Manage rooms </button> </a></li>
@@ -87,7 +76,7 @@
       foreach ($types as $type) {
         $rooms = $this->model->readRooms("$type");
         $str .= <<<EOD
-          <div class="col-9">
+          <div class="col-9" id="$type">
             <h3 class="title">$type</h3>
             <div class="row">
         EOD;
@@ -96,7 +85,7 @@
           $class = $this->getClass($room->status);
           $title = $this->getTitle($room);
           $str .= <<<EOD
-          <div onclick="view_room($room->number)" class="$room->number $title card text-black bg-$class mb-3 mx-3" style="width: 15rem;">
+          <div onclick="view_room($room->number)" class="$room->number $title $room->status  card text-black bg-$class mb-3 mx-3" style="width: 15rem;">
             <div class="card-header">Room $room->number</div>
                 <div class="card-body">
                     <h2 class="card-title">$title</h2>
