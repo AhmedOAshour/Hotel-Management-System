@@ -20,12 +20,14 @@ require_once("../app/bootapp.php");
 require_once(APPROOT."/models/User.php");
 require_once(APPROOT . "/controllers/UserController.php");
 require_once(APPROOT . "/views/pages/ViewUser.php");
-require_once ('../app/views/inc/nav.php');
+
 $model=new User();
 $controller=new UserController($model);
 $view=new ViewUser($controller,$model);
 
-
+if (isset($_SESSION['position'])) {
+  require_once ('../app/views/inc/nav.php');
+}
 if (isset($_GET['action']) && !empty($_GET['action'])) {
 	switch($_GET['action']){
 		case 'loginform':
