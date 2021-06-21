@@ -1,3 +1,10 @@
+<style>
+    .errors{
+      color:red;
+      position: relative;
+      left:270px;
+    }
+</style>
 <?php
 class ViewRoomPrices extends View{
   public function output(){
@@ -60,10 +67,10 @@ class ViewRoomPrices extends View{
         <option value="Family">Family</option>
         <option value="Suite">Suite</option>
       </select><br>
-      $room_type
+      <h5 class="errors">$room_type</h5>
       <h4 class="words arr">Price</h4>
       <input type="number" name="price" value="1.00" min="1" step="0.01" class="formE form-control border-3" required><br>
-      $price
+      <h5 class="errors">$price</h5>
       <button type="submit" name="action" class="button2" value="add">Submit</button>
     </form>
     EOD;
@@ -97,11 +104,11 @@ class ViewRoomPrices extends View{
       <select class="formE form-control border-3" name="room_type">
         <option value="$_SESSION[CID]">$_SESSION[CID]</option>
       </select><br>
-      $room_type
+      <h5 class="errors">$room_type</h5>
       <h4 class="words arr">Price</h4>
    
       <input type="number" class="formE form-control border-3" name="price" value="1.00" min="1" step="0.01" required><br>
-      $price
+      <h5 class="errors">$price</h5>
       <button type="submit" name="action" class="button2"value="edit">Submit</button>
     </form>
     EOD;
