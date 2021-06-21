@@ -43,16 +43,16 @@ public function output(){
   $str=<<<EOD
   <body>
   <div class="container">
-                      <div class="row sidebar">
-                          <div class="col-3 bar">
-                              <form action="/action_page.php">
-                              </form>
-                          </div>
-                          <div class="col-9 searchbar">
-                          <input type="text" id="bar" class="search"placeholder="Search by description.." oninput="showClient()"><i class="fa fa-search"></i>
-                          </div>
-                      </div>
-                  </div>
+    <div class="row sidebar">
+        <div class="col-3 bar">
+            <form action="/action_page.php">
+            </form>
+        </div>
+        <div class="col-9 searchbar">
+        <input type="text" id="bar" class="search"placeholder="Search by description.." oninput="searchMaintenance()"><i class="fa fa-search"></i>
+        </div>
+    </div>
+  </div>
   <div class="container">
   <h1>Maintenance</h1>
       <table width="100%" border="1" style="border-collapse:collapse; margin-top:4px;">

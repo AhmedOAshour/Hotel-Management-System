@@ -48,13 +48,8 @@ public function output(){
    $nextdate = date('Y-m-d',strtotime($date."-7 days"));
    $dateform = <<<EOD
    <div class="col-6 bar">
-<<<<<<< HEAD
-   <label>From: </label><input onchange="searchReservation()" type="date" id="date" name="from" class="data" value="$date">
-   <label id="dates">To: </label><input onchange="searchReservation()" type="date" id="dates" name="to" class="data" value="$nextdate"">
-=======
-   <label>From: </label><input onchange="searchMalfunction()" type="date" id="date" name="from" class="data" value="$nextdate">
-   <label>To: </label><input onchange="searchMalfunction()" type="date" id="date" name="to" class="data" value="$date"">
->>>>>>> 02e379d3e4426a2f88af66789099b3302f0538b6
+   <label>From: </label><input onchange="searchReservation()" type="date" id="date" name="from" class="data" value="$nextdate">
+   <label id="dates">To: </label><input onchange="searchReservation()" type="date" id="dates" name="to" class="data" value="$date">
    </div>
    EOD;
   $str=<<<EOD
