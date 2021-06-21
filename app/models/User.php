@@ -19,7 +19,6 @@ class User extends Model
         $this->sQuestion = $row['security_question'];
         $this->sAnswer = $row['security_answer'];
       }
-
     }
   }
 

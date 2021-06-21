@@ -260,6 +260,7 @@
         $status=$errors['status'];
         }
       }
+      unset($_SESSION['errors']);
 
       $str = <<<EOD
       <div class="container">

@@ -80,37 +80,19 @@ class ViewFollowup extends View{
   }
 
   public function followupForm(){
-    $date="";
-    $type="";
-    $file="";
-
-    if(isset($_SESSION['errors'])){
-      $errors=$_SESSION['errors'];
-
-      if(isset($errors['date'])){
-        $date=$errors['date'];
-     }
-      if(isset($errors['type'])){
-        $type=$errors['file'];
-    }
-  }
-
     $str=<<<EOD
     <div class="container">
     <h1>Add Followup</h1>
     <div id="followupForm">
     <form class="followupForm" method="post" enctype = "multipart/form-data">
         <input type="date" name="date" class="formE form-control mb-4 border-0 py-4" required><br>
-        <h5 class="errors">$date</h5>
         <input type="text" name="comment" placeholder="Reading..." class="formE form-control mb-4 border-0 py-4" required><br>
         <label class='followup' for='type'></label>
         <select class="formE form-control mb-4 border-0 " name="type" id="type" required>
         <option selected value="electricity">Electricity</option>
         <option value="water">Water</option>
         </select><br>
-        <h5 class="errors">$type</h5>
         <input class="formE form-control mb-4 border-0 py-4"type="file" id="myfile" name="myfile"style="height:65px" required><br>
-        <h5 class="errors">$file</h5>
         <button class="button2"type="submit" name="action" value="submitForm">Submit</button>
       </form>
     </div>

@@ -20,15 +20,15 @@ function validType($type){
   }
 }
 
-function validImage($image){
-  $pathparts = pathinfo($image);
-  if ($parthparts['extension'] != "jpg" && $pathparts['extension'] != "png" && $pathparts['extension'] != "jpeg") {
-    return "Unsupported extension.";
-  }
-  else {
-    return false;
-  }
-}
+// function validImage($image){
+//   $pathparts = pathinfo($image);
+//   if ($pathparts['extension'] != "jpg" && $pathparts['extension'] != "png" && $pathparts['extension'] != "jpeg") {
+//     return "Unsupported extension.";
+//   }
+//   else {
+//     return false;
+//   }
+// }
 
 function validPassword($password){
     $checkNumeric=true;
@@ -42,7 +42,7 @@ function validPassword($password){
       }
     }
 
-    if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $password))
+    if (preg_match('/[\'^£$%&*()}{@#~?><!>,|=_+¬-]/', $password))
         {
           $checkSpecial=false;
 
@@ -80,19 +80,18 @@ function validPassword($password){
             }
 
 else return false;
-
 }
+
  function validId($id){
     if(filter_var($id,FILTER_VALIDATE_INT)){
-return false;
-
+        return false;
     }
     else if($id==""){
         return "ID field can't be empty";
     }
     else return "IDs must be integers";
-
 }
+
  function validDate($date){
 
     $test_date  = explode('-', $date);
