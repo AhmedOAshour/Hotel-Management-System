@@ -49,6 +49,7 @@ ob_start();
         left:0px;
     }
     </style>
+    <script src="js/rooms.js"></script>
 <?php
 require_once("../app/bootapp.php");
 require_once(APPROOT."/models/Room.php");

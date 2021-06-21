@@ -6,7 +6,6 @@ require_once(APPROOT . "/views/pages/ViewFollowup.php");
 $model=new Followup();
 $controller=new followupController($model);
 $view=new ViewFollowup($controller,$model);
-
 if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 	switch($_REQUEST['action']){
 		case 'followupForm':
@@ -30,5 +29,5 @@ else {
   if (isset($_REQUEST['type'])) {
     $type1 = $_REQUEST['type'];
   }
-	echo$view->outputFollowups($type1);
+	$view->outputFollowups($type1);
 }

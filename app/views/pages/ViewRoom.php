@@ -25,7 +25,7 @@
     overflow-y: hidden;
   }
 
-  </style>
+</style>
 <?php
   class ViewRoom extends View
   {
@@ -38,7 +38,7 @@
                     </form>
                 </div>
                 <div class="col-9 searchbar">
-                    <input class="search"type="text" placeholder="Search by room or guest's name"><i class="fa fa-search"></i>
+                    <input onchange="search()" id="search" class="search" type="text" placeholder="Search by room or guest's name"><i class="fa fa-search"></i>
                 </div>
             </div>
         </div>
@@ -96,13 +96,13 @@
           $class = $this->getClass($room->status);
           $title = $this->getTitle($room);
           $str .= <<<EOD
-                        <div onclick="view_room($room->number)" class="card text-black bg-$class mb-3 mx-3" style="width: 15rem;">
-                            <div class="card-header">Room $room->number</div>
-                                <div class="card-body">
-                                    <h2 class="card-title">$title</h2>
-                                    <p class="card-text"></p>
-                                </div>
-                        </div>
+          <div onclick="view_room($room->number)" class="$room->number $title card text-black bg-$class mb-3 mx-3" style="width: 15rem;">
+            <div class="card-header">Room $room->number</div>
+                <div class="card-body">
+                    <h2 class="card-title">$title</h2>
+                    <p class="card-text"></p>
+                </div>
+            </div>
           EOD;
         }
         $str .= <<<EOD
