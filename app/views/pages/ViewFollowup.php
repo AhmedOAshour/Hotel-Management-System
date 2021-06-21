@@ -101,7 +101,6 @@ class ViewFollowup extends View{
   }
 
   public function viewFollowup($id, $type){
-    $this->model->test();
     $followup = $this->model->readFollowup($id, $type);
     $str=<<<EOD
       <div class="container">
