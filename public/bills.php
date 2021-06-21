@@ -17,11 +17,29 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
       header("Location: bills.php?action=read&id=$_GET[id]");
        break;
 		case 'addform':
-			echo $view->addForm($_GET['id']);
-			break;
+			if(isset($_SESSION['CID'])){
+				$view->addform($_SESSION['CID']);
+			   
+		   
+		   }
+		   else{
+			   $view->addform($_GET['id']);
+			   
+		   }
+	
+		break;
+			
 		case 'add':
-			$controller->insertItem($_GET['id']);
-			header("Location: bills.php?action=read&id=$_GET[id]");
+			if(!$temp=$controller->insertItem($_GET['id'])){
+				header("Location: bills.php?action=read&id=$_GET[id]");
+				}
+				else{ 
+					$_SESSION['errors']=$temp;
+					
+					header("location:bills.php?action=addform");
+				}
+				break;
+			
 		case 'checkoutview':
 			echo $view->checkout($_GET['id']);
 	}

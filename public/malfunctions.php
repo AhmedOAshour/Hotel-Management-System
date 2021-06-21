@@ -16,9 +16,16 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 			$view->addForm($_SESSION['username']);
 			break;
 			case 'Add':
-			$controller->insert($_SESSION['username']);
-			$view->output();
-			break;	
+				if(!$temp=$controller->insert($_SESSION['username'])){
+					header("location:malfunctions.php");
+					}
+					else{ 
+						$_SESSION['errors']=$temp;
+						
+						header("location:malfunctions.php?action=addform");
+					}
+					break;
+		
 	
 	}
 }

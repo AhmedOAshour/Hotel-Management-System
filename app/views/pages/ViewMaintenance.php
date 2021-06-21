@@ -95,22 +95,59 @@ public function output(){
     echo $str;
 }
 public function addform($malfunction_no){
+    $materials_bought="";
+    $cost_of_materials="";
+  $dates="";
+  $technician_name="";
+  $work_done="";
+    if(isset($_SESSION['errors'])){
+      $errors=$_SESSION['errors'];
+    
+     
+        if(isset($errors['date'])){
+            $dates=$errors['date'];
+                                    }
+          if(isset($errors['materials_bought'])){
+            $materials_bought=$errors['materials_bought'];
+                  }
+            if(isset($errors['work_done'])){
+                    $work_done=$errors['work_done'];
+                                             }
+             if(isset($errors['technician_name'])){
+               $technician_name=$errors['technician_name'];
+                                                  }
+                   if(isset($errors['cost_of_materials'])){
+                    $cost_of_materials=$errors['cost_of_mateirals'];
+                            }
+  
+  
+    }
+  unset($_SESSION['errors']);
+  if(!isset($_SESSION['CID'])){
+    $_SESSION['CID']=$malfunction_no;
+    }
   $date=date('Y-m-d');
 $str=<<<EOD
     <div class="container">
     <form>
     <h1>Maintenance</h1>
     <textarea name='materials_bought' rows="1" cols="80" class="formE form-control  py-4 "placeholder="Materials bought seperated by ," required></textarea>
+    $materials_bought
     <textarea name="cost_of_materials" rows="1" cols="80" class="formE form-control  py-4 "placeholder="cost of materials seperate by  , respectively" required></textarea>
+    $cost_of_materials
     <input type='date' value="$date" class="formE form-control mb-1 py-4 "name='date'required>
-    <input type="text" name="malfunction_no" class="formE form-control mb-1 py-4 "value="$malfunction_no"  id="malfunction_no" hidden>
+    $dates
+    <input type="text" name="malfunction_no" class="formE form-control mb-1 py-4 "value="$_SESSION[CID]"  id="malfunction_no" hidden>
     <input type="text" name="technician_name"  class="formE form-control mb-1 py-4 "placeholder="Please enter technician name" id="technician_no" required>
+    $technician_name
     <input type="text" name="work_done"  class="formE form-control mb-1 py-4 "placeholder="Describe the work done" id="work_done" required>
+    $work_done
     <button type="submit" name="action" class="button2"value="insert">Insert Entry</button>
     </form>
     </div>
     EOD;
     echo $str;
+   // unset($_SESSION['CID']);
 }
 
 

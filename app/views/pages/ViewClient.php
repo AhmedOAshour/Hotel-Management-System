@@ -162,6 +162,7 @@ public function addForm(){
 
   if(isset($_SESSION['errors'])){
     $errors=$_SESSION['errors'];
+   
     if(isset($errors['fname'])){
       $fname=$errors['fname'];
                                 }
@@ -232,6 +233,43 @@ echo $str;
 
 }
 public function resForm($id,$quantity){
+  $number_of_rooms="";
+  $room_type="";
+  $arrival="";
+  $departure="";
+  
+  if(isset($_SESSION['errors'])){
+    $errors=$_SESSION['errors'];
+    
+    if(isset($errors['room_type'])){
+      $room_type=$errors['room_type'];
+                                }
+    if(isset($errors['departure'])){
+    $departure=$errors['departure'];
+
+    }
+    if(isset($errors['arrival'])){
+      $arrival=$errors['arrival'];
+  
+      }
+      if(isset($errors['number_of_rooms'])){
+        $number_of_rooms=$errors['number_of_rooms'];
+    
+        }
+      
+    
+   
+
+
+  }
+unset($_SESSION['errors']);
+
+if(!isset($_SESSION['CID'])){
+$_SESSION['CID']=$id;
+}
+if(!isset($_SESSION['quantity'])){
+  $_SESSION['quantity']=$quantity;
+  }
   $roomtypes=$this->model->getRoomTypes();
   $date = date('Y-m-d');
   $nextdate = date('Y-m-d',strtotime($date."+1 days"));
@@ -242,13 +280,14 @@ public function resForm($id,$quantity){
       <form>
       <h4 class="words nu">Number<br>of Rooms</h4>
       <input type="number"size="1" class="formE form-control border-3"name="quantity" id="counter" value=1 required></input>
+      $number_of_rooms
       <input type="text" name="id" value="$id" class="formE form-control border-3" id="id" hidden>
       <button type="submit" class="button3" name="action" value="resform">Add</button>
       </form>
       <form>
       <h4 class="words" for="room_type">Room Type</h4>
    EOD;
-   for($i=0;$i<$quantity;$i++){
+   for($i=0;$i< $_SESSION['quantity'];$i++){
      $str.=<<<EOD
      <select class="formE form-control border-3" name="room_type[]">
      EOD;
@@ -259,14 +298,17 @@ public function resForm($id,$quantity){
     }
   $str.= <<<EOD
    </select><br>
+   $room_type
   EOD;
    }
     $str.= <<<EOD
       <h4 class="words arr">Arrival</h4><input value="$date" min="$date" type='date'class="formE form-control border-3" name='arrival' required>
+      $arrival
       <h4 class="words">Departure</h4> <input type='date' value="$nextdate" min="$nextdate" class="formE form-control border-3" name='departure'required><br>
+      $departure
       <textarea class="formE form-control border-3" name="comments" rows="2" cols="50" placeholder="Comments..."></textarea> <br>
-      <input type="text" name="client_ID" value="$id" class="formE form-control border-3" id="client_ID" hidden>
-      <input type="text" name="quantity" value="$quantity" class="formE form-control border-3" id="quantity" hidden>
+      <input type="text" name="client_ID" value="$_SESSION[CID]" class="formE form-control border-3" id="client_ID" hidden>
+      <input type="text" name="quantity" value="$_SESSION[quantity]" class="formE form-control border-3" id="quantity" hidden>
       <button type="submit" name="action" class="button2"value="createRes">Create Reservation</button>
       </form>
       </div>
@@ -275,6 +317,8 @@ public function resForm($id,$quantity){
       </html>
     EOD;
       echo $str;
+      unset($_SESSION['CID']);
+      unset($_SESSION['quantity']);
 }
 public function editForm($id){
   

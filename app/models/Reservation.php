@@ -76,12 +76,12 @@ public function editReservation($id,$client_ID,$room_type,$number_of_rooms,$arri
 }
 function deleteReservation($id){
     $sql = "DELETE FROM reservation WHERE ID = $id ";
-    echo "$sql";
     $sql2="DELETE from reservedrooms where RID = $id";
     $sql3 = "DELETE from bill where reservation_ID = $id";
     $this->db->query($sql3);
     $this->db->query($sql2);
     $this->db->query($sql);
+    
   }
     }
 ?>
