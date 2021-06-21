@@ -40,11 +40,11 @@
 class ViewMalfunction extends View{
 public function output(){
    $date = date('Y-m-d');
-   $nextdate = date('Y-m-d',strtotime($date."+7 days"));
+   $nextdate = date('Y-m-d',strtotime($date."-7 days"));
    $dateform = <<<EOD
    <div class="col-6 bar">
-   <label>From: </label><input onchange="searchReservation()" type="date" id="date" name="from" class="data" value="$date">
-   <label>To: </label><input onchange="searchReservation()" type="date" id="date" name="to" class="data" value="$nextdate"">
+   <label>From: </label><input onchange="searchMalfunction()" type="date" id="date" name="from" class="data" value="$nextdate">
+   <label>To: </label><input onchange="searchMalfunction()" type="date" id="date" name="to" class="data" value="$date"">
    </div>
    EOD;
   $str=<<<EOD
@@ -55,7 +55,7 @@ public function output(){
             $dateform
             </div>
             <div class="col-6 searchbar">
-            <input type="text" id="bar" class="search"placeholder="Search by description.." oninput="showClient()"><i class="fa fa-search"></i>
+            <input type="text" id="bar" class="search"placeholder="Search by description.." oninput="searchMalfunction()"><i class="fa fa-search"></i>
             </div>
         </div>
     </div>
@@ -75,11 +75,12 @@ public function output(){
     </tr>
     EOD;
   }
-    $str .= $this->table();
+  $str1 = $this->table();
     $str.=<<<EOD
          </tr>
         </thead>
         <tbody id="rTable">
+        $str1
         </tbody>
     </table>
     </div>
@@ -97,7 +98,7 @@ public function table($from="",$to="",$bar="")
 {
   $str = <<<EOD
   EOD;
-  $entries= $this->model->readMalfunctions();
+  $entries= $this->model->readMalfunctions($from,$to,$bar);
   if ($entries) {
     foreach ($entries as $entry) {
       $str .= <<<EOD
@@ -146,25 +147,21 @@ public function addForm($username){
   
     }
   unset($_SESSION['errors']);
-$str=
-<<<EOD
-            <body>
-                    <div class="container">
-                                <form>
-                                    <div class="form">
-                                        <h1 class="head">Malfunctions</h1>
-                                        <input type="date"class="formE form-control  py-4 " name="date" required><br>
-                                        <h5 class="errors"$date</h5>
-                                        <input type="text"class="formE form-control  py-4 " name="username" value="$username" placeholder="username" hidden><br>
-                                        <textarea type="text"class="formE form-control mb-4 "id="fname" name="description" placeholder="Description.."required></textarea><br>
-                                        <h5 class="errors"$description</h5>
-                                        <input type="submit"class="button2" value="Add" name="action">
-                                    </div>
-                                </form>
-                            </div>
-            </body>
-            </html>
-
+  $date = date('Y-m-d');
+$str=<<<EOD
+  <div class="container">
+              <form>
+                  <div class="form">
+                      <h1 class="head">Malfunctions</h1>
+                      <input type="date"class="formE form-control  py-4 " name="date" value="$date" required><br>
+                      <h5 class="errors"$date</h5>
+                      <input type="text"class="formE form-control  py-4 " name="username" value="$username" placeholder="username" hidden><br>
+                      <textarea type="text"class="formE form-control mb-4 "id="fname" name="description" placeholder="Description.."required></textarea><br>
+                      <h5 class="errors"$description</h5>
+                      <input type="submit"class="button2" value="Add" name="action">
+                  </div>
+              </form>
+          </div>
 EOD;
 echo $str;
 

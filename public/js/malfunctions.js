@@ -1,5 +1,5 @@
-function searchReservation() {
-  var bar = document.getElementById("search").value;
+function searchMalfunction() {
+  var bar = document.getElementById("bar").value;
   var elements = document.getElementsByClassName("data");
   var formData = new FormData();
   for (var i = 0; i < elements.length; i++) {
