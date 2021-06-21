@@ -5,7 +5,7 @@ class UserController extends Controller{
    $errors=array();
    if($temp=validName($first_name)){
     $errors['fname']=$temp;
-    
+
             }
   if($temp=validName($last_name)){
     $errors['lname']=$temp;
@@ -24,8 +24,8 @@ $errors['password']=$temp;
                                  }
       if($temp=notEmpty($sAnswer)){
            $errors['sanswer']=$temp;
-                                 }   
-        return $errors;    
+                                 }
+        return $errors;
 
 
  }
@@ -37,24 +37,18 @@ $errors['password']=$temp;
     $username = $_REQUEST['username'];
     $sQuestion = $_REQUEST['sQuestion'];
     $sAnswer= $_REQUEST['sAnswer'];
-    
+
     $errors=$this->Validate($first_name, $last_name, $password, $position, $username, $sQuestion, $sAnswer);
     if(count($errors)==0){
-     
       if($temp=$this->model->insertUser($first_name, $last_name, $password, $position, $username, $sQuestion, $sAnswer)){
-            $errors['username1']=$temp;
-            
-            return $errors;
+          $errors['username1']=$temp;
+          return $errors;
       }
-      
       return false;
           }
           else{
-           
             return $errors;
           }
-
-	
 	}
 
 	public function edit() {
@@ -72,22 +66,22 @@ $errors['password']=$temp;
       return false;
           }
           else{
-           
+
             return $errors;
           }
 
-		
+
 	}
 
   public function login() {
     $errors=array();
     $username = $_REQUEST['username'];
     $password = $_REQUEST['password'];
-    
+
      $this->model->login($username, $password);
-     
-       
-		
+
+
+
 	}
 
 	public function delete(){

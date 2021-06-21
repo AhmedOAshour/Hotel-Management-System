@@ -1,17 +1,36 @@
 <?php
 function validEmail($email){
     if(filter_var($email,FILTER_VALIDATE_EMAIL)==false){
-return "invalid email";
-
+       return "invalid email";
     }
     else if($email==""){
-        return "Email field can't be empty";
+       return "Email field can't be empty";
     }
     else{
-return false;
+       return false;
     }
 }
- function validPassword($password){
+
+function validType($type){
+  if ($type != "electricity" && $type != "water") {
+    return "Invalid type.";
+  }
+  else {
+    return false;
+  }
+}
+
+function validImage($image){
+  $pathparts = pathinfo($image);
+  if ($parthparts['extension'] != "jpg" && $pathparts['extension'] != "png" && $pathparts['extension'] != "jpeg") {
+    return "Unsupported extension.";
+  }
+  else {
+    return false;
+  }
+}
+
+function validPassword($password){
     $checkNumeric=true;
     $checkSpecial=true;
     $checkEmpty=true;
@@ -22,11 +41,11 @@ return false;
         $checkNumeric=false;
       }
     }
-  
+
     if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $password))
         {
           $checkSpecial=false;
-         
+
         }
         if($password!=""){
             $checkEmpty=false;
@@ -43,11 +62,11 @@ return false;
  function validName($name){
     if($name==""){
         return "Name field can't be empty";
-        
+
         }
         $checkNumeric=true;
-   
-        
+
+
         for($i=0;$i<strlen($name);$i++)
             {
               if(is_numeric($name[$i]))
@@ -57,7 +76,7 @@ return false;
             }
             if($checkNumeric==false){
       return "Names cannot contain numbers";
-        
+
             }
 
 else return false;
@@ -75,9 +94,9 @@ return false;
 
 }
  function validDate($date){
-    
+
     $test_date  = explode('-', $date);
-   
+
     if (checkdate($test_date[1], $test_date[2], $test_date[0])) {
         return "";
     }
@@ -106,11 +125,11 @@ return false;
     }
     else return false;
 
-
 }
+
 function validPosition($position){
     $check=false;
-        $positions = array(0 => 'front_clerk', 'admin', 'HK_employee');
+    $positions = array(0 => 'front_clerk', 'admin', 'HK_employee');
     for($i=0;$i<count($positions);$i++){
     if($position==$positions[$i]){
     $check=true;
@@ -120,12 +139,9 @@ function validPosition($position){
     return "Enter valid position";
     }
     else return false;
-    
-    
-    
-    
     }
- function validRoomType($roomtype){
+
+function validRoomType($roomtype){
 $check=false;
     $roomtypes = array(0 => 'Single',1=> 'Double', 2=>'Triple',3=>'Suite',4=>'Family');
 for($i=0;$i<count($roomtypes);$i++){
@@ -137,11 +153,8 @@ if($check==false){
 return "Room type should be one of the five room types: Single,Double,Triple,Suite,Family";
 }
 else return "";
-
-
-
-
 }
+
  function validRoomStatus($status){
 $check=false;
 $roomstatus=array(0=>'Available','Unavailable');
@@ -157,7 +170,7 @@ for($i=0;$i<len($roomtypes);$i++){
 
 }
  function validMobileNo($mobileno){
-     
+
 if(strlen($mobileno)!=11){
 return "Invalid Mobile number , must be 11 digits";
 
@@ -168,7 +181,7 @@ else if($mobileno[0]!='0'||$mobileno[1]!='1'){
 else if(!preg_match('/^[0,1,2,5]*$/', $mobileno[2])) {
 
     return "Invalid number";
-    
+
     }
     else if($mobileno==""){
 
@@ -188,25 +201,21 @@ else return "";
 
 }
 function validUsername($username){
-
-    if(preg_match('/^[a-zA-Z0-9]+/', $username)){
-        return "";
-
-    }
-    else return "Username cannot contain symbols";
+  if(preg_match('/^[a-zA-Z0-9]+/', $username)){
+      return "";
+  }
+  else return "Username cannot contain symbols";
 }
 function validInt($int){
-    if(filter_var($int,FILTER_VALIDATE_INT)==false){
-        return "Invalid Integer";
-        
-            }
-            else if($int==""){
-                return "This field can't be empty";
-            }
-            else{
+  if(filter_var($int,FILTER_VALIDATE_INT)==false){
+      return "Invalid Integer";
+      }
+      else if($int==""){
+          return "This field can't be empty";
+      }
+      else{
         return false;
-            }
-
+     }
 }
 
 ?>
