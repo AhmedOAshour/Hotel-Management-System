@@ -50,9 +50,9 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 					header("location:employees.php?action=addform");
 				}
 				break;
-			$controller->insert();
+			
 		
-			break;
+			
 	}
 }
 else

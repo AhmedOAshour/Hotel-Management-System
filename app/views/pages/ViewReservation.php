@@ -116,6 +116,43 @@ EOD;
 echo $str;
 }
 public function editForm($id,$quantity){
+  $number_of_rooms="";
+  $room_type="";
+  $arrival="";
+  $departure="";
+  
+  if(isset($_SESSION['errors'])){
+    $errors=$_SESSION['errors'];
+    
+    if(isset($errors['room_type'])){
+      $room_type=$errors['room_type'];
+                                }
+    if(isset($errors['departure'])){
+    $departure=$errors['departure'];
+
+    }
+    if(isset($errors['arrival'])){
+      $arrival=$errors['arrival'];
+  
+      }
+      if(isset($errors['number_of_rooms'])){
+        $number_of_rooms=$errors['number_of_rooms'];
+    
+        }
+      
+    
+   
+
+
+  }
+unset($_SESSION['errors']);
+
+if(!isset($_SESSION['CID'])){
+$_SESSION['CID']=$id;
+}
+if(!isset($_SESSION['quantity'])){
+  $_SESSION['quantity']=$quantity;
+  }
   $reservations=new Reservation($id);
   $roomtypes=$this->model->getRoomTypes();
     $str=<<<EOD
@@ -125,13 +162,13 @@ public function editForm($id,$quantity){
                 <form>
                 <h4 class="words nu">Number<br>of Rooms</h4>
                 <input type="number"size="1" class="formE form-control border-3" name="quantity" id="counter" value=1></input>
-                <input type="text" name="id" value="$id" class="formE form-control border-3" id="id" hidden>
+                <input type="text" name="id" value="$_SESSION[CID]" class="formE form-control border-3" id="id" hidden>
                 <button type="submit" class="button3" name="action" value="edit">Add</button>
                 </form>
                 <form>
                 <h4 class="words" for="room_type">Room Type</h4>
                 EOD;
-                for($i=0;$i<$quantity;$i++){
+                for($i=0;$i<$_SESSION['quantity'];$i++){
                   $str.=<<<EOD
                   <select class="formE form-control border-3" name="room_type[]">
                   EOD;
@@ -153,8 +190,8 @@ public function editForm($id,$quantity){
       value="$nextdate" min="$nextdate" class="formE form-control border-3"value='$reservations->departure' name='departure' required><br>
       <h4 class="words">Comments</h4><textarea name="comments"  rows="2" cols="50" class="formE form-control border-3"placeholder="Comments..." >$reservations->comments</textarea> <br>
       <input type="text" name="client_ID" value="$reservations->client_id"  id="client_ID" hidden>
-      <input type="text" name="id" value="$_GET[id]"  id="ID" hidden>
-      <input type="text" name="quantity" value="$quantity"  id="quantity" hidden>
+      <input type="text" name="id" value="$_SESSION[CID]"  id="ID" hidden>
+      <input type="text" name="quantity" value="$_SESSION[quantity]"  id="quantity" hidden>
       <button type="submit" name="action" class="button2" value="editRes">Edit Reservation </button>
       </form>
       </div>
@@ -163,6 +200,8 @@ public function editForm($id,$quantity){
       </html>
       EOD;
       echo $str;
+      unset($_SESSION['CID']);
+      unset($_SESSION['quantity']);
 }
 }
 

@@ -110,6 +110,24 @@ else {
     echo $str;
 }
 public function addForm($username){
+   
+    $date="";
+    $description="";
+  
+    if(isset($_SESSION['errors'])){
+      $errors=$_SESSION['errors'];
+    
+     
+        if(isset($errors['date'])){
+            $date=$errors['date'];
+                                    }
+          if(isset($errors['description'])){
+            $description=$errors['description'];
+                  }
+  
+  
+    }
+  unset($_SESSION['errors']);
 $str=
 <<<EOD
             <body>
@@ -118,8 +136,10 @@ $str=
                                     <div class="form">
                                         <h1 class="head">Malfunctions</h1>
                                         <input type="date"class="formE form-control  py-4 " name="date" required><br>
+                                        $date
                                         <input type="text"class="formE form-control  py-4 " name="username" value="$username" placeholder="username" hidden><br>
                                         <textarea type="text"class="formE form-control mb-4 "id="fname" name="description" placeholder="Description.."required></textarea><br>
+                                        $description
                                         <input type="submit"class="button2" value="Add" name="action">
                                     </div>
                                 </form>

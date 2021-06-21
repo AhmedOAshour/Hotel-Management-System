@@ -16,12 +16,28 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 			header("location:malfunctions.php?flag=true");
 			break;
 			case 'addform':
-			$view->addform($_GET['id']);
+				if(isset($_SESSION['CID'])){
+					$view->addform($_SESSION['CID']);
+				   
+			   
+			   }
+			   else{
+				   $view->addform($_GET['id']);
+				   
+			   }
+		
 			break;
 			case 'insert':
-			$controller->insert();
-			//$controller->insert($_SESSION['username']);
-			$view->output();
+				if(!$temp=$controller->insert()){
+					header("location:maintenance.php");
+					}
+					else{ 
+						$_SESSION['errors']=$temp;
+						
+						header("location:maintenance.php?action=addform");
+					}
+					break;
+			
 			
 	
 	}

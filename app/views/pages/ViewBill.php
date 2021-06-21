@@ -103,6 +103,27 @@ public function checkout($id){
 }
 
 public function addForm($id){
+ 
+  $item="";
+  $price="";
+  
+
+  if(isset($_SESSION['errors'])){
+    $errors=$_SESSION['errors'];
+   
+      if(isset($errors['item'])){
+          $item=$errors['item'];
+                                  }
+        if(isset($errors['price'])){
+          $price=$errors['price'];
+                }
+
+
+  }
+unset($_SESSION['errors']);
+if(!isset($_SESSION['CID'])){
+  $_SESSION['CID']=$id;
+  }
 
   $str=
   <<<EOD
@@ -111,8 +132,10 @@ public function addForm($id){
       <h1>Add bill item</h1>
       <form>
       <input class="formE form-control border-3" type="text" name="item" id="item"  placeholder="Item Name..." required>
+      $item
       <input class="formE form-control border-3" type="text" name="price" id="price"  placeholder="Price.."required>
-      <input class="formE form-control border-3" type="text" name="id" value='$id' hidden>
+      $price
+      <input class="formE form-control border-3" type="text" name="id" value='$_SESSION[CID]' hidden>
       <input type="submit" class="button2" name="action" value="add" id="submitBtn"">
       </form>
       </div>

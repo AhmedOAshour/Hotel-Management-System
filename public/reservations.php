@@ -16,7 +16,7 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 	switch($_GET['action']){
 		case 'delete':
 			$controller->delete($_GET['id']);
-			echo $view->output(false);
+			 $view->output(false);
             break;
 		case 'edit':
 			$view2->editForm($_GET['id'],$_GET['quantity']);
