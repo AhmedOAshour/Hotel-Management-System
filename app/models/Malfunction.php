@@ -13,20 +13,20 @@ function __construct($id=""){
         $this->entry_by = $row['entry_by'];
         $this->is_Archived = $row['is_Archived'];
         $this->date= $row['date'];
-        
       }
-
     }
   }
   function insert($description,$entry_by,$date){
     $is_Archived="Pending";
     $sql = "INSERT INTO malfunction (description,entry_by,is_Archived,date) VALUES ('$description','$entry_by','$is_Archived','$date')";
     $this->db->query($sql);
-
   }
-  function readMalfunctions(){
+  function readMalfunctions($from="",$to="",$bar=""){
     $malfunctions = array();
     $sql = "SELECT ID FROM malfunction";
+    if ($from!=""&&$to!=""&&$bar!="") {
+      $sql .= " WHERE description LIKE '%$bar%' AND date BETWEEN '$from' AND '$to'";
+    }
     $result = $this->db->query($sql);
     if ($result->num_rows > 0){
       while($row = $this->db->fetchRow()){
@@ -38,10 +38,6 @@ function __construct($id=""){
       return null;
     }
   }
-
-
-
-
 }
 
 ?>
