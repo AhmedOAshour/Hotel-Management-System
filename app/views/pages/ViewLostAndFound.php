@@ -92,6 +92,27 @@ else {
     echo $str;
 }
 public function addForm($username){
+  $room_no="";
+    $description="";
+  $dates="";
+    if(isset($_SESSION['errors'])){
+      $errors=$_SESSION['errors'];
+    
+     
+        if(isset($errors['date'])){
+            $dates=$errors['date'];
+                                    }
+          if(isset($errors['room_number'])){
+            $room_no=$errors['room_number'];
+                  }
+            if(isset($errors['item_description'])){
+                    $description=$errors['item_description'];
+                                             }
+             
+  
+  
+    }
+  unset($_SESSION['errors']);
     $rooms=new Room();
     $numbers=$rooms->readRooms();
     $date=date('Y-m-d');
@@ -102,6 +123,7 @@ public function addForm($username){
           <div class="form">
             <h1 class="head">Lost and Found</h1>
             <input type="date" value="$date" class="formE form-control mb-1 py-4 " name="date" required><br>
+            $dates
             <select class="formE form-control mb-1 " name="room_number">
 EOD;
   foreach ($numbers as $room) {
@@ -112,8 +134,10 @@ EOD;
 
   $str.=<<<EOD
   </select>
+  $room_no
   <input type="text"class="formE form-control mb-1 py-4 " name="username" value="$username" placeholder="username" hidden><br>
   <textarea type="text"class="formE form-control mb-4 "id="fname" name="item_description" placeholder="Description.." required></textarea><br>
+  $description
   <input type="submit"class="button2" value="Add" name="action">
   </div>
   </form>

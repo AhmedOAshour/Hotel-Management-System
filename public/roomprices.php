@@ -14,15 +14,36 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 			$view->addForm();
 			break;
     case 'add':
-      $controller->insert();
-      header("Location: roomprices.php");
-      break;
+      if(!$temp=$controller->insert()){
+        header("location:roomprices.php");
+        }
+        else{ 
+          $_SESSION['errors']=$temp;
+          
+          header("location:roomprices.php?action=addform");
+        }
+        break;
     case 'editform':
-      $view->editForm($_REQUEST['type']);
-      break;
+      if(isset($_SESSION['CID'])){
+			$view->editForm($_SESSION['CID']);
+			}
+			else{
+			$view->editForm($_REQUEST['type']);
+			}
+			break;
+    
     case 'edit':
-      $controller->edit();
-      header("Location: roomprices.php");
+      if(!$temp=$controller->edit()){
+        header("Location:roomprices.php");
+				}
+			else{ 
+					$_SESSION['errors']=$temp;
+					
+					header("location:roomprices.php?action=editform");
+				}
+			
+			break;
+     
 	}
 }
 else
