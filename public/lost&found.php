@@ -17,7 +17,7 @@ $controller=new LostAndFoundController($model);
 $view=new ViewLostAndFound($controller,$model);
 
 if (isset($_SESSION['position'])) {
-	if ($_SESSION['position'] == "HK_employee") {
+	if ($_SESSION['position'] == "HK_employee" || $_SESSION['position'] == "front_clerk") {
 		if (isset($_GET['action']) && !empty($_GET['action'])) {
 			switch($_GET['action']){
 				case 'addform':
@@ -44,7 +44,7 @@ if (isset($_SESSION['position'])) {
 	}
 }
 else {
-	echo "<h2 id='access'>Access restricted.</h2>";
+	header("location:index.php");
 }
 
 ?>

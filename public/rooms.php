@@ -128,10 +128,9 @@ if (isset($_SESSION['position'])) {
   else {
     echo "<h2 id='access'>Access restricted.</h2>";
   }
-
 }
 else {
   echo "<h2 id='access'>Access restricted.</h2>";
 }
-        ?>
+?>
 </body>

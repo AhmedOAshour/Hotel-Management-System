@@ -10,12 +10,13 @@ require_once(APPROOT."/models/RoomPrices.php");
 require_once(APPROOT . "/controllers/RoomPricesController.php");
 require_once(APPROOT . "/views/pages/ViewRoomPrices.php");
 require_once ('../app/views/inc/nav.php');
+
 $model=new RoomPrices();
 $controller=new RoomPricesController($model);
 $view=new ViewRoomPrices($controller,$model);
 
 if (isset($_SESSION['position'])) {
-	if ($_SESSION['position'] == "front_clerk") {
+	if ($_SESSION['position'] == "admin") {
 		if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 			switch($_REQUEST['action']){
 		    case 'addform':
@@ -27,7 +28,6 @@ if (isset($_SESSION['position'])) {
 		        }
 		        else{
 		          $_SESSION['errors']=$temp;
-
 		          header("location:roomprices.php?action=addform");
 		        }
 		        break;

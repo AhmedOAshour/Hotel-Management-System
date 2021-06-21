@@ -47,5 +47,5 @@ else {
 }
 }
 else {
-	echo "<h2 id='access'>Access restricted.</h2>";
+	header("location:index.php");
 }
