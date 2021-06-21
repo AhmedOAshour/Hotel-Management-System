@@ -74,7 +74,7 @@ class ViewUser extends View{
     echo $str;
   }
   public function addForm(){
-    
+
     $fname="";
     $lname="";
     $uname="";
@@ -83,19 +83,19 @@ class ViewUser extends View{
     $sanswer="";
     $position="";
     $username1="";
-    
-  
+
+
     if(isset($_SESSION['errors'])){
       $errors=$_SESSION['errors'];
-      
+
       if(isset($errors['fname'])){
         $fname=$errors['fname'];
                                   }
       if(isset($errors['uname'])){
       $uname=$errors['username'];
-  
+
       }
-      
+
       if(isset($errors['lname'])){
          $lname=$errors['lname'];
                                   }
@@ -114,9 +114,9 @@ class ViewUser extends View{
         if(isset($errors['username1'])){
          $username1=$errors['username1'];
                                       }
-        
-  
-  
+
+
+
     }
   unset($_SESSION['errors']);
     $str=<<<EOD
@@ -132,7 +132,6 @@ class ViewUser extends View{
         $lname
         <div id="errorName2">
         </div>
-
         <input type="text" name="username" id="username" onchange="checkUsername()" class="formE form-control mb-4 border-0 py-4" placeholder="Username" required><br>
         $uname
         $username1
@@ -169,19 +168,19 @@ class ViewUser extends View{
     $sanswer="";
     $position="";
     $username1="";
-    
-  
+
+
     if(isset($_SESSION['errors'])){
       $errors=$_SESSION['errors'];
-      
+
       if(isset($errors['fname'])){
         $fname=$errors['fname'];
                                   }
       if(isset($errors['uname'])){
       $uname=$errors['username'];
-  
+
       }
-      
+
       if(isset($errors['lname'])){
          $lname=$errors['lname'];
                                   }
@@ -200,19 +199,19 @@ class ViewUser extends View{
         if(isset($errors['username1'])){
          $username1=$errors['username1'];
                                       }
-        
-  
-  
+
+
+
     }
   unset($_SESSION['errors']);
   $user = new User($id);
- 
+
   if(!isset($_SESSION['CID'])){
 $_SESSION['CID']=$id;
 
   }
   echo $id;
-  
+
       $str=<<<EOD
       <div class="container">
       <h1>Edit Employees</h1>
@@ -226,8 +225,6 @@ $_SESSION['CID']=$id;
         $lname
         <div id="errorName2">
         </div>
-       
-       
         <label class='names' for='username'>Username</label><input type='text' required name='username' id='username' onchange="checkUsername()" class='formE form-control mb-4 border-0' value='$user->username' '> <br><br>
         $uname
         $username1
@@ -237,7 +234,6 @@ $_SESSION['CID']=$id;
         $password
         <div id="errorPass">
         </div>
-       
         <label class='names' for='sQuestion'>Security Question</label><input type='text' required name='sQuestion' id='sQuestion' class='formE form-control mb-4 border-0 py-4' value='$user->sQuestion' '> <br><br>
        $squestion
         <label class='names' for='sAnswer'>Security Answer</label><input type='text' required name='sAnswer' id='sAnswer' class='formE form-control mb-4 border-0 py-4' value='$user->sAnswer' '> <br><br>
