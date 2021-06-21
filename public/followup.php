@@ -3,7 +3,7 @@ require_once("../app/bootapp.php");
 require_once(APPROOT."/models/Followup.php");
 require_once(APPROOT . "/controllers/FollowupController.php");
 require_once(APPROOT . "/views/pages/ViewFollowup.php");
-
+require_once ('../app/views/inc/nav.php');
 $model=new Followup();
 $controller=new followupController($model);
 $view=new ViewFollowup($controller,$model);

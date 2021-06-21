@@ -1,10 +1,10 @@
-<?php
+require_once ('../app/views/inc/nav.php');<?php
 require_once("../app/bootapp.php");
 require_once(APPROOT."/models/Bill.php");
 require_once(APPROOT . "/controllers/BillController.php");
 require_once(APPROOT . "/views/pages/ViewBill.php");
 $model=new Bill();
-
+require_once ('../app/views/inc/nav.php');
 $controller=new BillController($model);
 $view=new ViewBill($controller,$model);
 if (isset($_GET['action']) && !empty($_GET['action'])) {

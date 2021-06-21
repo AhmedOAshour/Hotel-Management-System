@@ -56,7 +56,7 @@ ob_start();
   require_once(APPROOT."/models/Room.php");
   require_once(APPROOT . "/controllers/RoomController.php");
   require_once(APPROOT . "/views/pages/ViewRoom.php");
-
+  require_once ('../app/views/inc/nav.php');
   $model=new Room();
   $controller=new RoomController($model);
   $view=new ViewRoom($controller,$model);

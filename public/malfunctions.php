@@ -1,10 +1,9 @@
 <?php
 require_once("../app/bootapp.php");
 require_once(APPROOT."/models/Malfunction.php");
-
 require_once(APPROOT . "/controllers/MalfunctionController.php");
-
 require_once(APPROOT . "/views/pages/ViewMalfunction.php");
+require_once ('../app/views/inc/nav.php');
 $model=new Malfunction();
 
 $controller=new MalfunctionController($model);
