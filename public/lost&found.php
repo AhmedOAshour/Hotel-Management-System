@@ -13,9 +13,16 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 		$view->addForm($_SESSION['username']);
 		break;
 		case 'Add':
-		$controller->insert($_SESSION['username']);
-		$view->output();
-		break;
+			if(!$temp=$controller->insert($_SESSION['username'])){
+				header("location:lost&found.php");
+				}
+				else{ 
+					$_SESSION['errors']=$temp;
+					
+					header("location:lost&found.php?action=addform");
+				}
+				break;
+		
 	}
 }
 else

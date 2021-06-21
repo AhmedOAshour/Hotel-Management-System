@@ -18,6 +18,12 @@
     text-decoration:none;
     color:blue;
   }
+  .errors{
+      color:red;
+      position: relative;
+      left:270px;
+      bottom:45px;
+    }
 </style>
   </body>
 </html>
@@ -125,33 +131,36 @@ class ViewUser extends View{
     <form class="addE">
     <div id="addEmployees" class="addEmployees">
         <input type="text" name="first_name" id="Fname" onchange="checkfName()" class="formE form-control mb-4 border-0 py-4" placeholder="First Name" required><br>
-        $fname
-        <div id="errorName1">
-        </div>
+        <div id="errorName1"></div>
+        <h5 class="errors">$fname</h5>
+
         <input type="text" name="last_name" id="Lname" onchange="checklName()" class="formE form-control mb-4 border-0 py-4" placeholder="Last Name" required><br>
-        $lname
-        <div id="errorName2">
-        </div>
+        <div id="errorName2"></div>
+        <h5 class="errors">$lname</h5>
+
         <input type="text" name="username" id="username" onchange="checkUsername()" class="formE form-control mb-4 border-0 py-4" placeholder="Username" required><br>
-        $uname
-        $username1
-        <div id="errorUsername">
-        </div>
+        <div id="errorUsername"></div>
+        <h5 class="errors">$uname</h5>
+        <h5 class="errors">$username1</h5>
+
         <input type="password" name="password" id="password" oninput="checkPassword()" class="formE form-control mb-4 border-0 py-4"placeholder="Password" required><br>
-        $password
-        <div id="errorPass">
-        </div>
+        <div id="errorPass"></div>
+        <h5 class="errors">$password</h5>
+
         <input type="text" name="sQuestion" id="sQuestion" class="formE form-control mb-4 border-0 py-4"placeholder="Security Question" required><br>
-        $squestion
+        <h5 class="errors">$squestion</h5>
+
         <input type="text" name="sAnswer" id="sAnswer" class="formE form-control mb-4 border-0 py-4"placeholder="Security Answer" required><br>
-        $sanswer
+        <h5 class="errors">$sanswer</h5>
+
         <select id="position" name="position" class="formE form-control mb-2 border-0" required>
           <option hidden disabled selected value>Position</option>
           <option value='admin'>admin</option>
           <option value='front_clerk'>Front Clerk</option>
           <option value='HK_employee'>Housekeeping</option>
         </select><br>
-        $position
+        <h5 class="errors">$position</h5>
+
         <input type="submit" class="submitEmployee button2" name="action" value="Add" id="submitBtn">
       </form>
     </div>
@@ -217,34 +226,37 @@ $_SESSION['CID']=$id;
       <h1>Edit Employees</h1>
       <form class="editE">
         <input type="text" name="id" value="$_SESSION[CID]" style="display:none">
-        <label class='names' for='first_name'>First Name</label><input type='text' required name='first_name' id='Fname' onchange="checkfName()" class='formE form-control mb-4 border-0' value='$user->first_name' '> <br><br>
-        $fname
-        <div id="errorName1">
-        </div>
-        <label class='names' for='last_name'>Last Name</label><input type='text' required name='last_name' id='Lname' onchange="checklName()" class='formE form-control mb-4 border-0' value='$user->last_name' '> <br><br>
-        $lname
-        <div id="errorName2">
-        </div>
-        <label class='names' for='username'>Username</label><input type='text' required name='username' id='username' onchange="checkUsername()" class='formE form-control mb-4 border-0' value='$user->username' '> <br><br>
-        $uname
-        $username1
-        <div id="errorUsername">
-        </div>
-        <label class='names' for='password'>Password</label><input type='password' required name='password' id='password' oninput="checkPassword()" class='formE form-control mb-4 border-0' value='' '> <br><br>
-        $password
-        <div id="errorPass">
-        </div>
-        <label class='names' for='sQuestion'>Security Question</label><input type='text' required name='sQuestion' id='sQuestion' class='formE form-control mb-4 border-0 py-4' value='$user->sQuestion' '> <br><br>
-       $squestion
-        <label class='names' for='sAnswer'>Security Answer</label><input type='text' required name='sAnswer' id='sAnswer' class='formE form-control mb-4 border-0 py-4' value='$user->sAnswer' '> <br><br>
-        $sanswer
-        <h4 class='names'  for='position'>Position</h4>
-        $position
+        <h5 class='words' for='first_name'>First Name</h5><input type='text' required name='first_name' id='Fname' onchange="checkfName()" class='formE form-control mb-4 border-0' value='$user->first_name' '> <br><br>
+        <div id="errorName1"></div>
+        <h5 class="errors">$fname</h5>
+
+        <h5 class='words' for='last_name'>Last Name</h5><input type='text' required name='last_name' id='Lname' onchange="checklName()" class='formE form-control mb-4 border-0' value='$user->last_name' '> <br><br>
+        <div id="errorName2"></div>
+        <h5 class="errors">$lname</h5>
+       
+       
+        <h5 class='words' for='username'>Username</h5><input type='text' required name='username' id='username' onchange="checkUsername()" class='formE form-control mb-4 border-0' value='$user->username' '> <br><br>
+        <div id="errorUsername"></div>
+        <h5 class="errors">$uname</h5>
+        <h5 class="errors">$username1</h5>
+
+        <h5 class='words' for='password'>Password</h5><input type='password' required name='password' id='password' oninput="checkPassword()" class='formE form-control mb-4 border-0' value='' '> <br><br>
+        <h5 class="errors">$password</h5>
+        <div id="errorPass"></div>
+       
+        <h5 class='words arr' for='sQuestion'>Security<br>Question</h5><input type='text' required name='sQuestion' id='sQuestion' class='formE form-control mb-4 border-0 py-4' value='$user->sQuestion' '> <br><br>
+        <h5 class="errors">$squestion</h5>
+
+        <h5 class='words' for='sAnswer'>Security Answer</h5><input type='text' required name='sAnswer' id='sAnswer' class='formE form-control mb-4 border-0 py-4' value='$user->sAnswer' '> <br><br>
+        <h5 class="errors">$sanswer</h5>
+
+        <h5 class='words' for='position'>Position</h5>
+        <h5 class="errors">$position</h5>
         <select id='position' name='position' class='formE form-control mb-4 border-0 py-2'>
         <option value='front_clerk'>Front Clerk</option>
         <option value='reservation_clerk'>Reservation Clerk</option>
         <option value='HK_employee'>HouseKeeping Clerk</option>
-        </select> <br><br>
+        </select> <br>
         <input type='submit'  name='action' value="edit" class='button2'>
       </form>
       EOD;
