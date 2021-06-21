@@ -80,7 +80,7 @@ class ViewUser extends View{
     echo $str;
   }
   public function addForm(){
-    
+
     $fname="";
     $lname="";
     $uname="";
@@ -89,19 +89,19 @@ class ViewUser extends View{
     $sanswer="";
     $position="";
     $username1="";
-    
-  
+
+
     if(isset($_SESSION['errors'])){
       $errors=$_SESSION['errors'];
-      
+
       if(isset($errors['fname'])){
         $fname=$errors['fname'];
                                   }
       if(isset($errors['uname'])){
       $uname=$errors['username'];
-  
+
       }
-      
+
       if(isset($errors['lname'])){
          $lname=$errors['lname'];
                                   }
@@ -120,9 +120,9 @@ class ViewUser extends View{
         if(isset($errors['username1'])){
          $username1=$errors['username1'];
                                       }
-        
-  
-  
+
+
+
     }
   unset($_SESSION['errors']);
     $str=<<<EOD
@@ -177,19 +177,19 @@ class ViewUser extends View{
     $sanswer="";
     $position="";
     $username1="";
-    
-  
+
+
     if(isset($_SESSION['errors'])){
       $errors=$_SESSION['errors'];
-      
+
       if(isset($errors['fname'])){
         $fname=$errors['fname'];
                                   }
       if(isset($errors['uname'])){
       $uname=$errors['username'];
-  
+
       }
-      
+
       if(isset($errors['lname'])){
          $lname=$errors['lname'];
                                   }
@@ -208,19 +208,19 @@ class ViewUser extends View{
         if(isset($errors['username1'])){
          $username1=$errors['username1'];
                                       }
-        
-  
-  
+
+
+
     }
   unset($_SESSION['errors']);
   $user = new User($id);
- 
+
   if(!isset($_SESSION['CID'])){
 $_SESSION['CID']=$id;
 
   }
   echo $id;
-  
+
       $str=<<<EOD
       <div class="container">
       <h1>Edit Employees</h1>
