@@ -85,8 +85,7 @@ class User extends Model
 
    // echo $result;
     if($result==false){
-
- return "Username already exists";
+      return "Username already exists";
     }
     else return false;
 

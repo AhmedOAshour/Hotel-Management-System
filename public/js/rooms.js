@@ -20,13 +20,25 @@ function search(){
 }
 
 function selectType(element){
-  console.log(element.value);
   var div = document.getElementById(element.value);
   if (div.style.display == "none") {
     div.style.display = "block";
   }
   else {
     div.style.display = "none";
+  }
+}
+
+function selectStatus(element){
+  console.log(element);
+  var card = document.getElementsByClassName(element.value);
+  for (var i = 0; i < card.length; i++) {
+    if (element.checked) {
+      card[i].style.display = "block";
+    }
+    else {
+      card[i].style.display = "none";
+    }
   }
 
 }

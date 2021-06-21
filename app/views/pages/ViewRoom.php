@@ -48,23 +48,27 @@
                     <ul class="nav flex-column left">
                         <h3>Status</h3>
                         <li class="nav-item">
-                            <input type="checkbox" class="status" name="status1" value="booked" checked="true">
+                            <input onclick="selectStatus(this)" type="checkbox" class="status" name="status1" value="booked" checked="true">
                             <label for="vehicle1">Booked</label><br>
-                            <input type="checkbox" class="status" name="status3" value="available" checked="true">
+                            <input onclick="selectStatus(this)" type="checkbox" class="status" name="status3" value="available" checked="true">
                             <label for="vehicle1">Available</label><br>
-                            <input type="checkbox" class="status" name="status3" value="checked_out" checked="true">
+                            <input onclick="selectStatus(this)" type="checkbox" class="status" name="status3" value="unavailable" checked="true">
+                            <label for="vehicle1">Unavailable</label><br>
+                            <input onclick="selectStatus(this)" type="checkbox" class="status" name="status4" value="checked_out" checked="true">
                             <label for="vehicle1">CheckedOut</label><br>
                         </li>
                         <h3>Type</h3>
                         <li class="nav-item">
                             <input onchange="selectType(this)" type="checkbox" class="type" name="Type1" value="Single" checked="true">
-                            <label for="vehicle1">Single</label><br>
+                            <label>Single</label><br>
                             <input onchange="selectType(this)" type="checkbox" class="type" name="Type2" value="Double" checked="true">
-                            <label for="vehicle1">Double</label><br>
+                            <label>Double</label><br>
                             <input onchange="selectType(this)" type="checkbox" class="type" name="Type3" value="Triple" checked="true">
-                            <label for="vehicle1">Triple</label><br>
+                            <label>Triple</label><br>
                             <input onchange="selectType(this)" type="checkbox" class="type" name="Type3" value="Family" checked="true">
-                            <label for="vehicle1">Family</label><br>
+                            <label>Family</label><br>
+                            <input onchange="selectType(this)" type="checkbox" class="type" name="Type4" value="Suite" checked="true">
+                            <label>Suite</label><br>
                         </li>
                         <li><a href="reservations.php?action=checkin"> <button class="button5"> Check In </button> </a></li>
                         <li><a href="rooms.php?action=manage"> <button class="button5"> Manage rooms </button> </a></li>
@@ -85,7 +89,7 @@
           $class = $this->getClass($room->status);
           $title = $this->getTitle($room);
           $str .= <<<EOD
-          <div onclick="view_room($room->number)" class="$room->number $title $room->status  card text-black bg-$class mb-3 mx-3" style="width: 15rem;">
+          <div onclick="view_room($room->number)" class="$room->number $title $room->status card text-black bg-$class mb-3 mx-3" style="width: 15rem;">
             <div class="card-header">Room $room->number</div>
                 <div class="card-body">
                     <h2 class="card-title">$title</h2>
