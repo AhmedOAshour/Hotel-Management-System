@@ -95,8 +95,13 @@ ob_start();
           $view->addForm();
           break;
           case 'add':
-          $controller->insert();
-          header("Location: rooms.php?action=manage");
+          if(!$temp=$controller->insert()){
+    				header("Location: rooms.php?action=manage");
+    				}
+    				else{
+    					$_SESSION['errors']=$temp;
+    					header("location:rooms.php?action=addform");
+    				}
           break;
           case 'editform':
             $view->editForm($_GET['number']);

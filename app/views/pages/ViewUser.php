@@ -120,9 +120,6 @@ class ViewUser extends View{
         if(isset($errors['username1'])){
          $username1=$errors['username1'];
                                       }
-
-
-
     }
   unset($_SESSION['errors']);
     $str=<<<EOD
@@ -233,8 +230,8 @@ $_SESSION['CID']=$id;
         <h5 class='words' for='last_name'>Last Name</h5><input type='text' required name='last_name' id='Lname' onchange="checklName()" class='formE form-control mb-4 border-0' value='$user->last_name' '> <br><br>
         <div id="errorName2"></div>
         <h5 class="errors">$lname</h5>
-       
-       
+
+
         <h5 class='words' for='username'>Username</h5><input type='text' required name='username' id='username' onchange="checkUsername()" class='formE form-control mb-4 border-0' value='$user->username' '> <br><br>
         <div id="errorUsername"></div>
         <h5 class="errors">$uname</h5>
@@ -243,7 +240,7 @@ $_SESSION['CID']=$id;
         <h5 class='words' for='password'>Password</h5><input type='password' required name='password' id='password' oninput="checkPassword()" class='formE form-control mb-4 border-0' value='' '> <br><br>
         <h5 class="errors">$password</h5>
         <div id="errorPass"></div>
-       
+
         <h5 class='words arr' for='sQuestion'>Security<br>Question</h5><input type='text' required name='sQuestion' id='sQuestion' class='formE form-control mb-4 border-0 py-4' value='$user->sQuestion' '> <br><br>
         <h5 class="errors">$squestion</h5>
 

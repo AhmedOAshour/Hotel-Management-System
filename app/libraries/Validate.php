@@ -148,14 +148,17 @@ for($i=0;$i<count($roomtypes);$i++){
 if($roomtype==$roomtypes[$i]){
 $check=true;
 }
+echo $roomtype;
+echo $roomtypes[$i];
 }
 if($check==false){
 return "Room type should be one of the five room types: Single,Double,Triple,Suite,Family";
 }
-else return "";
+else return false;
+
 }
 
- function validRoomStatus($status){
+function validRoomStatus($status){
 $check=false;
 $roomstatus=array(0=>'Available','Unavailable');
 for($i=0;$i<len($roomtypes);$i++){
@@ -169,8 +172,8 @@ for($i=0;$i<len($roomtypes);$i++){
     else return false;
 
 }
- function validMobileNo($mobileno){
 
+function validMobileNo($mobileno){
 if(strlen($mobileno)!=11){
 return "Invalid Mobile number , must be 11 digits";
 
@@ -216,6 +219,23 @@ function validInt($int){
       else{
         return false;
      }
+}
+
+function validNumeric($int){
+    $checkNumeric=true;
+    for($i=0;$i<strlen($int);$i++)
+    {
+      if(is_numeric($int[$i]))
+      {
+        $checkNumeric=false;
+      }
+    }
+    if($checkNumeric==true){
+return "Value should be numeric";
+
+    }
+    else return false;
+
 }
 
 ?>
