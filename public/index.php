@@ -24,10 +24,8 @@ require_once(APPROOT . "/views/pages/ViewUser.php");
 $model=new User();
 $controller=new UserController($model);
 $view=new ViewUser($controller,$model);
+require_once ('../app/views/inc/nav.php');
 
-if (isset($_SESSION['position'])) {
-  require_once ('../app/views/inc/nav.php');
-}
 if (isset($_GET['action']) && !empty($_GET['action'])) {
 	switch($_GET['action']){
 		case 'loginform':
