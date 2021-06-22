@@ -66,8 +66,6 @@ class ViewFollowup extends View{
             EOD;
           }
         }
-
-
     $str .= <<<EOD
         </tbody>
       </table>
