@@ -78,6 +78,8 @@
                      <a class="nav-link" href="signout.php">Sign out</a>
                  </li>
                  <?php }
+                 else {
+                 }
                  ?>
             </ul>
             </div>
