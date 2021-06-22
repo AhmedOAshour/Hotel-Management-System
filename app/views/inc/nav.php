@@ -68,9 +68,9 @@
                  <li class="nav-item">
                      <a class="nav-link" href="lost&found.php">Lost&Found</a>
                  </li>
-                 <li class="nav-item">
+                 <!-- <li class="nav-item">
                      <a class="nav-link" href="followup.php">Follow Up</a>
-                 </li>
+                 </li> -->
                  <li class="nav-item">
                    <a class="nav-link" href="profile.php">Profile</a>
                  </li>
