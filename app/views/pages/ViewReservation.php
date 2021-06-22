@@ -14,7 +14,6 @@
             position: relative;
             left:270px;
           }
-
       </style>
       <?php
       class ViewReservation extends View{

@@ -1,6 +1,7 @@
 body{
+    
     overflow-x: hidden;
-    background-color:whitesmoke;
+    background-color:red;
   }
   table,th,td,tr{
     border:1px solid black;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 22, 2021 at 01:51 AM
+-- Generation Time: Jun 22, 2021 at 09:09 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -33,6 +33,15 @@ CREATE TABLE `bill` (
   `reservation_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `bill`
+--
+
+INSERT INTO `bill` (`ID`, `reservation_ID`) VALUES
+(16, 16),
+(17, 17),
+(18, 18);
+
 -- --------------------------------------------------------
 
 --
@@ -47,6 +56,18 @@ CREATE TABLE `bill_items` (
   `price` double(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `bill_items`
+--
+
+INSERT INTO `bill_items` (`ID`, `bill_ID`, `item`, `is_Room`, `price`) VALUES
+(21, 16, 'Double', 1, 70.00),
+(22, 16, 'Triple', 1, 80.00),
+(23, 17, 'Double', 1, 70.00),
+(24, 17, 'Family', 1, 90.00),
+(25, 17, 'Suite', 1, 100.00),
+(26, 18, 'Double', 1, 70.00);
+
 -- --------------------------------------------------------
 
 --
@@ -57,6 +78,13 @@ CREATE TABLE `checked_in` (
   `reservation_ID` int(11) NOT NULL,
   `room_no` varchar(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `checked_in`
+--
+
+INSERT INTO `checked_in` (`reservation_ID`, `room_no`) VALUES
+(18, '102');
 
 -- --------------------------------------------------------
 
@@ -185,6 +213,15 @@ CREATE TABLE `reservation` (
   `comments` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `reservation`
+--
+
+INSERT INTO `reservation` (`ID`, `client_ID`, `bill_ID`, `number_of_rooms`, `price`, `arrival`, `departure`, `check_in`, `check_out`, `comments`) VALUES
+(16, 3, 16, 2, 0, '2021-06-22', '2021-06-23', NULL, NULL, ''),
+(17, 4, 17, 3, 0, '2021-06-22', '2021-06-28', NULL, NULL, ''),
+(18, 5, 18, 1, 0, '2021-06-22', '2021-06-23', '2021-06-22 08:55:55', NULL, '');
+
 -- --------------------------------------------------------
 
 --
@@ -195,6 +232,18 @@ CREATE TABLE `reservedrooms` (
   `RID` int(11) NOT NULL,
   `room_type` enum('Single','Double','Triple','Family','Suite') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `reservedrooms`
+--
+
+INSERT INTO `reservedrooms` (`RID`, `room_type`) VALUES
+(16, 'Double'),
+(16, 'Triple'),
+(17, 'Double'),
+(17, 'Family'),
+(17, 'Suite'),
+(18, 'Double');
 
 -- --------------------------------------------------------
 
@@ -215,7 +264,7 @@ CREATE TABLE `room` (
 
 INSERT INTO `room` (`number`, `type`, `status`, `comments`) VALUES
 ('101', 'Single', 'available', ''),
-('102', 'Double', 'available', ''),
+('102', 'Double', 'booked', ''),
 ('103', 'Triple', 'available', ''),
 ('104', 'Family', 'available', ''),
 ('105', 'Suite', 'available', ''),
@@ -406,13 +455,13 @@ ALTER TABLE `water_followup`
 -- AUTO_INCREMENT for table `bill`
 --
 ALTER TABLE `bill`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `bill_items`
 --
 ALTER TABLE `bill_items`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `client`
@@ -448,7 +497,7 @@ ALTER TABLE `malfunction`
 -- AUTO_INCREMENT for table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `user`
