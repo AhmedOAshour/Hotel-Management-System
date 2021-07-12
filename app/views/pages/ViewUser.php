@@ -132,6 +132,10 @@
             <div id="errorName1"></div>
             <h5 class="errors">$fname</h5>
             
+            <input type="text" name="DOB" id="Fname"  class="formE form-control mb-4 border-0 py-4" placeholder="Date of birth" required><br>
+            <div id="DOB"></div>
+            <h5 class="errors">$DOB</h5>
+            
             <input type="text" name="last_name" id="Lname" onchange="checklName()" class="formE form-control mb-4 border-0 py-4" placeholder="Last Name" required><br>
             <div id="errorName2"></div>
             <h5 class="errors">$lname</h5>
